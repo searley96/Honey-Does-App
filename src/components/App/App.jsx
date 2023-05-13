@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
+import BottomNav from '../Footer/BottomNav';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
@@ -46,6 +47,7 @@ function App() {
             path="/about"
           >
             <AboutPage />
+            <BottomNav />
           </Route>
 
           {/* For protected routes, the view could show one of several things on the same route.
