@@ -30,7 +30,8 @@ export default function BottomAppBar() {
           <IconButton color="inherit" aria-label="open drawer">
             <HomeIcon fontSize='large' />
           </IconButton>
-          <StyledFab color="secondary" aria-label="add">
+          {/* <StyledFab sx={{backgroundColor: 'rgb(252,228,62)'}} aria-label="new clean request"> */}
+          <StyledFab color='white' aria-label="new clean request">
             <CleaningServicesIcon />
           </StyledFab>
           <Box sx={{ flexGrow: 1 }} />
