@@ -119,6 +119,7 @@ function App() {
           <Route
             exact path="/profile">
               <ProfilePage />
+              <BottomNav />
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
