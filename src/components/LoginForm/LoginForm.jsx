@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
+import {TextField} from '@mui/material';
 
 function LoginForm() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const errors = useSelector(store => store.errors);
   const dispatch = useDispatch();
@@ -11,11 +12,11 @@ function LoginForm() {
   const login = (event) => {
     event.preventDefault();
 
-    if (username && password) {
+    if (email && password) {
       dispatch({
         type: 'LOGIN',
         payload: {
-          username: username,
+          username: email,
           password: password,
         },
       });
@@ -32,19 +33,25 @@ function LoginForm() {
           {errors.loginMessage}
         </h3>
       )}
-      <div>
-        <label htmlFor="username">
-          Username:
+      {/* <div>
+        <label htmlFor="email">
+          Email:
           <input
             type="text"
-            name="username"
+            name="email"
             required
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
           />
         </label>
-      </div>
+      </div> */}
+      {/* EMAIL INPUT */}
       <div>
+        <TextField size="small" label="email" value={email} required
+          onChange={(event) => setEmail(event.target.value)}
+        />
+      </div>
+      {/* <div>
         <label htmlFor="password">
           Password:
           <input
@@ -55,6 +62,13 @@ function LoginForm() {
             onChange={(event) => setPassword(event.target.value)}
           />
         </label>
+      </div> */}
+      {/* PASSWORD INPUT */}
+      <div>
+        <TextField size="small" label="password" value={password} required
+          type='password'
+          onChange={(event) => setPassword(event.target.value)}
+        />
       </div>
       <div>
         <input className="btn" type="submit" name="submit" value="Log In" />
