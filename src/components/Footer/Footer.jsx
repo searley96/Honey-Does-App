@@ -8,7 +8,7 @@ import './Footer.css';
 
 function Footer() {
   return <footer>
-            <div style={{marginBottom: '20%'}}>&copy; Prime Digital Academy</div>
+            <div style={{marginBottom: '20%'}}>&copy; Honey Does LLC</div>
          </footer>;
 }
 
