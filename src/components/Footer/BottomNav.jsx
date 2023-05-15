@@ -9,7 +9,7 @@ import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-function BottomAppBar() {
+function BottomNav() {
 
   const history = useHistory();
 
@@ -88,4 +88,4 @@ function BottomAppBar() {
   );
 }
 
-export default BottomAppBar;
+export default BottomNav;
