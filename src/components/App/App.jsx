@@ -9,7 +9,9 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
+import NewNav from '../Nav/NewNav';
 import Footer from '../Footer/Footer';
+import BottomNav from '../Footer/BottomNav';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
@@ -35,7 +37,8 @@ function App() {
   return (
     <Router>
       <div>
-        <Nav />
+        {/* <Nav /> */}
+        <NewNav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -47,6 +50,7 @@ function App() {
             path="/about"
           >
             <AboutPage />
+            <BottomNav />
           </Route>
 
           {/* For protected routes, the view could show one of several things on the same route.
@@ -59,6 +63,7 @@ function App() {
             path="/user"
           >
             <UserPage />
+            <BottomNav />
           </ProtectedRoute>
 
           <ProtectedRoute
