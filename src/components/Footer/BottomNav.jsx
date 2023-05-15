@@ -7,8 +7,11 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
 
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function BottomAppBar() {
+
+  const history = useHistory();
 
   const StyledFab = styled(Fab)({
     position: 'absolute',
@@ -19,6 +22,7 @@ function BottomAppBar() {
     margin: '0 auto',
   });
   
+  // handles the account icon menu
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -28,16 +32,31 @@ function BottomAppBar() {
     setAnchorEl(null);
   };
 
+  // navigation
+  const toHome = () => {
+    history.push('/home');
+  }
+
+  const toProfile = () => {
+    history.push('/profile');
+    setAnchorEl(null);
+  }
+
+  const logout = () => {
+    dispatch({ type: 'LOGOUT' })
+    setAnchorEl(null);
+  }
+
   return (
     <React.Fragment>
       <CssBaseline />
       <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 , px: 3.2}}>
         <Toolbar>
-          <IconButton color="inherit" aria-label="open drawer">
+          <IconButton color="inherit" aria-label="open drawer" onClick={toHome}>
             <HomeIcon fontSize='large' />
           </IconButton>
           {/* <StyledFab sx={{backgroundColor: 'rgb(252,228,62)'}} aria-label="new clean request"> */}
-          <StyledFab color='white' aria-label="new clean request">
+          <StyledFab color='secondary' aria-label="new clean request">
             <CleaningServicesIcon />
           </StyledFab>
           <Box sx={{ flexGrow: 1 }} />
@@ -60,8 +79,8 @@ function BottomAppBar() {
             MenuListProps={{
               'aria-labelledby': 'basic-button',
             }}>
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
+            <MenuItem onClick={toProfile}>Profile</MenuItem>
+            <MenuItem onClick={logout}>Logout</MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>
