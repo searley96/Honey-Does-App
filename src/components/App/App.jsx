@@ -62,6 +62,7 @@ function App() {
             path="/user"
           >
             <UserPage />
+            <BottomNav />
           </ProtectedRoute>
 
           <ProtectedRoute
