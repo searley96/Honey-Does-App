@@ -31,5 +31,46 @@ menu ul li {
 
 menu ul li a {
   font-size: 24px;
-  ''
+  color: #3291b9;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+menu ul li a:before {
+  position: absolute;
+  content: "";
+  top: -5px;
+  left: -10px;
+  width: 20px;
+  height: 20px;
+  background-color: yellow;
+  border-radius: 50%;
+}
+
+menu ul li:hover a {
+  color: yellow;
+}
+
+menu ul li:hover a::before {
+  width: 20px trasnition 0.3s;
+}
+
+menu ul li.active a {
+  color: yellow;
+}
+
+menu ul li.active a::before {
+  width: 20px;
+  transition: all 0.3s;
+}
+
+.lastMenu {
+  margin-top: auto;
+}
+
+@media only screen and (max-width: 525px) {
+  menu {
+    min-width: 68px;
+    width: 68px;
+  }
 }

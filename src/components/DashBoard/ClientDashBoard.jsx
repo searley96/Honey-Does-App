@@ -1,2 +1,2 @@
-import "./Dashboard.css";
+import "./DashBoard.css";
 import Menu from "./Menu";

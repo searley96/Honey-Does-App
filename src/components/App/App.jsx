@@ -7,14 +7,14 @@ import {
 } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-
+// import Container from "../DashBoard/Container";
 import Nav from "../Nav/Nav";
 import NewNav from "../Nav/NewNav";
 import Footer from "../Footer/Footer";
 import BottomNav from "../Footer/BottomNav";
-
+import Menu from "../DashBoard/Menu";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-
+// import Dashboard from "../DashBoard/ClientDashBoard";
 import AboutPage from "../AboutPage/AboutPage";
 import UserPage from "../UserPage/UserPage";
 import InfoPage from "../InfoPage/InfoPage";
@@ -111,6 +111,8 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
+        {/* <Menu />
+        <Container /> */}
         <Footer />
       </div>
     </Router>
