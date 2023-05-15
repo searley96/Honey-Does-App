@@ -71,6 +71,7 @@ function RegisterForm() {
       {/* PASSWORD INPUT */}
       <div>
         <TextField size="small" label="password" value={password} required
+          type='password'
           onChange={(event) => setPassword(event.target.value)}
         />
       </div>
