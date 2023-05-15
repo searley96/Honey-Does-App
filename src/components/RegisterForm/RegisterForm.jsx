@@ -40,18 +40,13 @@ function RegisterForm() {
         </h3>
       )}
       {/* USERNAME INPUT */}
-      <div>
+      {/* <div>
         <TextField size="small" label="username" value={username} required
           onChange={(event) => setUsername(event.target.value)}
         />
-      </div>
+      </div> */}
       
-      {/* PASSWORD INPUT */}
-      <div>
-        <TextField size="small" label="password" value={password} required
-          onChange={(event) => setPassword(event.target.value)}
-        />
-      </div>
+      
 
       {/* FIRST NAME INPUT */}
       <div>
@@ -71,6 +66,13 @@ function RegisterForm() {
       <div>
         <TextField size="small" label="email" value={email} required
           onChange={(event) => setEmail(event.target.value)}
+        />
+      </div>
+
+      {/* PASSWORD INPUT */}
+      <div>
+        <TextField size="small" label="password" value={password} required
+          onChange={(event) => setPassword(event.target.value)}
         />
       </div>
 
