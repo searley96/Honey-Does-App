@@ -19,11 +19,10 @@ function RegisterForm() {
     dispatch({
       type: 'REGISTER',
       payload: {
-        username: username,
+        username: email,
         password: password,
         firstName: firstName,
         lastName: lastName,
-        email: email,
         phoneNumber: phoneNumber,
         address: address,
         role: 'client'
