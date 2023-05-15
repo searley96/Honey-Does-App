@@ -47,6 +47,10 @@ function BottomNav() {
     setAnchorEl(null);
   }
 
+  const toBathroomForm = () => {
+    history.push('/bathroomForm');
+  }
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -55,8 +59,8 @@ function BottomNav() {
           <IconButton color="inherit" aria-label="open drawer" onClick={toHome}>
             <HomeIcon fontSize='large' />
           </IconButton>
-          {/* <StyledFab sx={{backgroundColor: 'rgb(252,228,62)'}} aria-label="new clean request"> */}
-          <StyledFab color='secondary' aria-label="new clean request">
+          
+          <StyledFab color='secondary' onClick={toBathroomForm} aria-label="new clean request">
             <CleaningServicesIcon />
           </StyledFab>
           <Box sx={{ flexGrow: 1 }} />
