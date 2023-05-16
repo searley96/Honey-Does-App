@@ -156,6 +156,7 @@ function ProfilePage () {
                 payload: {newPassword: editPasswordValue},
                 id: user.id
             });
+            setUserRefresh(!userRefresh);
             setOpenModal(false);
         } else {
             console.log('this is userInfoUpdate', userInfoUpdate);
