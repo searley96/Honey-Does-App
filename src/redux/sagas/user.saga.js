@@ -24,6 +24,7 @@ function* fetchUser() {
   }
 }
 
+// handles both updating Client Info and Client Password requests
 function* updateClientInfo(action) {
   try {
     console.log('this is action.payload in updateClientInfo', action.payload);

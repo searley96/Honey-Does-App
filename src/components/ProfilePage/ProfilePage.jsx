@@ -47,12 +47,16 @@ function ProfilePage () {
 
     const modalStyle = {
         position: 'absolute',
+        display: 'flex',
+        flexDirection: 'column',
+        textAlign: 'center',
+        alignItems: 'center',
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 400,
+        width: '90%',
         bgcolor: 'background.paper',
-        border: '2px solid #000',
+        border: '1px solid black',
         boxShadow: 24,
         p: 4,
       };
@@ -113,52 +117,56 @@ function ProfilePage () {
         func;
     }
 
-    const submitPasswordUpdate = (event) => {
-        console.log('this is editPasswordValue', editPasswordValue);
-        dispatch({
-            type: 'UPDATE_CLIENT_INFO',
-            payload: {newPassword: editPasswordValue},
-            id: user.id
-        });
+    const confirmPasswordEdit = () => {
+        const updateText = 'password';
+        confirmationModal(updateText, editPasswordValue);
+        setEditPasswordBtn(false)
     }
 
-    // // test input value capture
-    //     // need better solution to allow for dynamic modal text
-    const submitUpdate = (event) => {
-        console.log('this is userInfoUpdate', userInfoUpdate);
-        dispatch({
-            type: 'UPDATE_CLIENT_INFO',
-            payload: userInfoUpdate,
-            id: user.id
-        });
-        setUserRefresh(!userRefresh);
-
+    const confirmEdit = (number) => {
         // swaps the information back to display mode instead of edit mode
-        // if (userInfoUpdate.first_name !== user.first_name) {
-        //     const updateText = 'first name';
-        //     confirmationModal(updateText, userInfoUpdate.first_name)
-        //     setEditFirstNameBtn(false);
-        // }
-        // if (userInfoUpdate.last_name !== user.last_name) {
-        //     const updateText = 'last name';
-        //     confirmationModal(updateText, userInfoUpdate.last_name)
-        //     setEditLastNameBtn(false);
-        // }
-        // if (userInfoUpdate.username !== user.username) {
-        //     const updateText = 'email';
-        //     confirmationModal(updateText, userInfoUpdate.username)
-        //     setEditEmailBtn(false);
-        // }
-        // if (userInfoUpdate.phone_number !== user.phone_number) {
-        //     const updateText = 'phone number';
-        //     confirmationModal(updateText, userInfoUpdate.phone_number)
-        //     setEditPhoneNumberBtn(false);
-        // }
-        // if (userInfoUpdate.address !== user.address) {
-        //     const updateText = 'address';
-        //     confirmationModal(updateText, userInfoUpdate.address)
-        //     setEditAddressBtn(false);
-        // }
+        if(number === 1) {
+            const updateText = 'first name';
+            confirmationModal(updateText, userInfoUpdate.first_name)
+            setEditFirstNameBtn(false);
+        } else if(number === 2) {
+            const updateText = 'last name';
+            confirmationModal(updateText, userInfoUpdate.last_name)
+            setEditLastNameBtn(false);
+        } else if(number === 3) {
+            const updateText = 'email';
+            confirmationModal(updateText, userInfoUpdate.username)
+            setEditEmailBtn(false);
+        } else if(number === 4) {
+            const updateText = 'phone number';
+            confirmationModal(updateText, userInfoUpdate.phone_number)
+            setEditPhoneNumberBtn(false);
+        } else if(number === 5) {
+            const updateText = 'address';
+            confirmationModal(updateText, userInfoUpdate.address)
+            setEditAddressBtn(false);
+        }
+    }
+
+    const handleUpdateSubmit = () => {
+        if(editPasswordValue !== '') {
+            console.log('this is editPasswordValue', editPasswordValue);
+            dispatch({
+                type: 'UPDATE_CLIENT_INFO',
+                payload: {newPassword: editPasswordValue},
+                id: user.id
+            });
+            setOpenModal(false);
+        } else {
+            console.log('this is userInfoUpdate', userInfoUpdate);
+            dispatch({
+                type: 'UPDATE_CLIENT_INFO',
+                payload: userInfoUpdate,
+                id: user.id
+            });
+            setUserRefresh(!userRefresh);
+            setOpenModal(false);
+        }
     }
 
     return(
@@ -188,7 +196,7 @@ function ProfilePage () {
                             <Button onClick={() => setEditFirstNameBtn(false)} sx={{border: 'solid 1px red', mr: 1, px: 0}}>
                                 <CloseIcon sx={{color: 'red'}}/>
                             </Button>
-                            <Button sx={{border: 'solid 1px green'}} onClick={submitUpdate}>
+                            <Button sx={{border: 'solid 1px green'}} onClick={() => confirmEdit(1)}>
                                 <CheckIcon sx={{color: 'green'}}/>
                             </Button>
                         </Box>   
@@ -217,7 +225,7 @@ function ProfilePage () {
                             <Button onClick={() => setEditLastNameBtn(false)} sx={{border: 'solid 1px red', mr: 1, px: 0}}>
                                 <CloseIcon sx={{color: 'red'}}/>
                             </Button>
-                            <Button sx={{border: 'solid 1px green'}} onClick={submitUpdate}>
+                            <Button sx={{border: 'solid 1px green'}} onClick={() => confirmEdit(2)}>
                                 <CheckIcon sx={{color: 'green'}}/>
                             </Button>
                         </Box>
@@ -246,7 +254,7 @@ function ProfilePage () {
                             <Button onClick={() => setEditEmailBtn(false)} sx={{border: 'solid 1px red', mr: 1, px: 0}}>
                                 <CloseIcon sx={{color: 'red'}}/>
                             </Button>
-                            <Button sx={{border: 'solid 1px green'}} onClick={submitUpdate}>
+                            <Button sx={{border: 'solid 1px green'}} onClick={() => confirmEdit(3)}>
                                 <CheckIcon sx={{color: 'green'}}/>
                             </Button>
                         </Box>
@@ -274,7 +282,7 @@ function ProfilePage () {
                             <Button onClick={() => setEditPasswordBtn(false)} sx={{border: 'solid 1px red', mr: 1, px: 0}}>
                                 <CloseIcon sx={{color: 'red'}}/>
                             </Button>
-                            <Button sx={{border: 'solid 1px green'}} onClick={submitPasswordUpdate}>
+                            <Button sx={{border: 'solid 1px green'}} onClick={confirmPasswordEdit}>
                                 <CheckIcon sx={{color: 'green'}}/>
                             </Button>
                         </Box>
@@ -303,7 +311,7 @@ function ProfilePage () {
                             <Button onClick={() => setEditPhoneNumberBtn(false)} sx={{border: 'solid 1px red', mr: 1, px: 0}}>
                                 <CloseIcon sx={{color: 'red'}}/>
                             </Button>
-                            <Button sx={{border: 'solid 1px green'}} onClick={submitUpdate}>
+                            <Button sx={{border: 'solid 1px green'}} onClick={() => confirmEdit(4)}>
                                 <CheckIcon sx={{color: 'green'}}/>
                             </Button>
                         </Box>
@@ -333,7 +341,7 @@ function ProfilePage () {
                                 <Button onClick={() => setEditAddressBtn(false)} sx={{border: 'solid 1px red', px: 0}}>
                                     <CloseIcon sx={{color: 'red'}}/>
                                 </Button>
-                                <Button sx={{border: 'solid 1px green'}} onClick={submitUpdate}>
+                                <Button sx={{border: 'solid 1px green'}} onClick={() => confirmEdit(5)}>
                                     <CheckIcon sx={{color: 'green'}}/>
                                 </Button>
                             </Stack>
@@ -356,12 +364,14 @@ function ProfilePage () {
                         <Typography id="modal-modal-title" variant="h6" component="h2">
                             {modalText}
                         </Typography>
-                        <Button onClick={handleClose} sx={{border: 'solid 1px red', px: 0}}>
-                            <CloseIcon sx={{color: 'red'}}/>
-                        </Button>
-                        <Button sx={{border: 'solid 1px green'}} onClick={() => {console.log('Yay!')}}>
-                            <CheckIcon sx={{color: 'green'}}/>
-                        </Button>
+                        <Stack direction="row" spacing={12} sx={{}}>
+                            <Button onClick={handleClose} sx={{border: 'solid 1px red', px: 0}}>
+                                <CloseIcon sx={{color: 'red'}}/>
+                            </Button>
+                            <Button sx={{border: 'solid 1px green'}} onClick={handleUpdateSubmit}>
+                                <CheckIcon sx={{color: 'green'}}/>
+                            </Button>
+                        </Stack>
                     </Box>
                 </Modal>
             </Box>
