@@ -6,12 +6,22 @@ import CheckIcon from '@mui/icons-material/Check';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 
 function ProfilePage () {
 
     const user = useSelector(store => store.user);
     const dispatch = useDispatch();
+
+    const [userRefresh, setUserRefresh] = useState(false);
+    useEffect(() => {
+        dispatch({
+            // grabs the info on the current logged in user again
+                // lets the data on the page remain current
+            type: 'FETCH_USER'
+        })
+    },[userRefresh])
 
     const cardStyle = {
         display: 'flex',
@@ -91,6 +101,17 @@ function ProfilePage () {
         setOpenModal(true);
     }
 
+    const cancelEdit = (func) => {
+        setUserInfoUpdate({
+            first_name: user.first_name,
+            last_name: user.last_name,
+            username: user.username,
+            phone_number: user.phone_number,
+            address: user.address
+        })
+        func;
+    }
+
     // // test input value capture
     //     // need better solution to allow for dynamic modal text
     const submitUpdate = (event) => {
@@ -100,6 +121,8 @@ function ProfilePage () {
             payload: userInfoUpdate,
             id: user.id
         });
+        setUserRefresh(!userRefresh);
+
         // swaps the information back to display mode instead of edit mode
         // if (userInfoUpdate.first_name !== user.first_name) {
         //     const updateText = 'first name';
@@ -163,7 +186,7 @@ function ProfilePage () {
                         :
                         <>
                             <Typography sx={{display: 'inline-flex', mx: 2.5}}>{user.first_name}</Typography>
-                            <Button variant='outlined' onClick={() => setEditFirstNameBtn(true)} sx={{display: 'inline-flex', mr: 1.5}}>Edit</Button>
+                            <Button variant='outlined' onClick={() => cancelEdit(setEditFirstNameBtn(true))} sx={{display: 'inline-flex', mr: 1.5}}>Edit</Button>
                         </>
                     }
                 </Card>
@@ -192,7 +215,7 @@ function ProfilePage () {
                     :
                     <>
                         <Typography sx={{display: 'inline-flex', mx: 2.5}}>{user.last_name}</Typography>
-                        <Button variant='outlined' onClick={() => setEditLastNameBtn(true)} sx={{display: 'inline-flex', mr: 1.5}}>Edit</Button>
+                        <Button variant='outlined' onClick={() => cancelEdit(setEditLastNameBtn(true))} sx={{display: 'inline-flex', mr: 1.5}}>Edit</Button>
                     </>
                     }
                 </Card>
@@ -221,7 +244,7 @@ function ProfilePage () {
                     :
                     <>
                         <Typography sx={{display: 'inline-flex', mx: 2.5}}>{user.username}</Typography>
-                        <Button variant='outlined' onClick={() => setEditEmailBtn(true)} sx={{display: 'inline-flex', mr: 1.5}}>Edit</Button>
+                        <Button variant='outlined' onClick={() => cancelEdit(setEditEmailBtn(true))} sx={{display: 'inline-flex', mr: 1.5}}>Edit</Button>
                     </>
                     }
                 </Card>
@@ -277,7 +300,7 @@ function ProfilePage () {
                     :
                     <>
                         <Typography sx={{display: 'inline-flex', mx: 2.5}}>{user.phone_number}</Typography>
-                        <Button variant='outlined' onClick={() => setEditPhoneNumberBtn(true)} sx={{display: 'inline-flex', mr: 1.5}}>Edit</Button>
+                        <Button variant='outlined' onClick={() => cancelEdit(setEditPhoneNumberBtn(true))} sx={{display: 'inline-flex', mr: 1.5}}>Edit</Button>
                     </>
                     }
                 </Card>
@@ -309,7 +332,7 @@ function ProfilePage () {
                     :
                     <>
                         <Typography sx={{display: 'inline-flex', mx: 2.5}}>{user.address}</Typography>
-                        <Button onClick={() => setEditAddressBtn(true)} variant='outlined' sx={{display: 'inline-flex', mr: 1.5}}>Edit</Button>
+                        <Button variant='outlined' onClick={() => cancelEdit(setEditAddressBtn(true))}  sx={{display: 'inline-flex', mr: 1.5}}>Edit</Button>
                     </>
                     }
                 </Card>
