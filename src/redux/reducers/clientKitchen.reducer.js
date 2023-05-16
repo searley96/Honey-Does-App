@@ -21,7 +21,7 @@ const clientKitchenReducer = (state = {}, action) => {
         case 'SET_DISHWASHER_SS':
             return { ...state, dishwasher_stainless_steel: action.payload };
         case 'SET_WIPE_DEEP_FREEZER':
-            return { ...state, wipe_dishwasher: action.payload };
+            return { ...state, wipe_deep_freezer: action.payload };
         case 'SET_MICROWAVE':
             return { ...state, clean_microwave: action.payload };
         case 'SET_STOVE_TOP':
@@ -59,4 +59,4 @@ const clientKitchenReducer = (state = {}, action) => {
 
 // user will be on the redux state at:
 // state.user
-export default userReducer;
+export default clientKitchenReducer;
