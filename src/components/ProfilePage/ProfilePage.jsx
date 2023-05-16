@@ -41,12 +41,35 @@ function ProfilePage () {
     const [editPhoneNumberBtn, setEditPhoneNumberBtn] = useState(false);
     const [editAddressBtn, setEditAddressBtn] = useState(false);
 
-    const [editFirstNameValue, setEditFirstNameValue] = useState();
-    const [editLastNameValue, setEditLastNameValue] = useState();
-    const [editEmailValue, setEmailValue] = useState('');
-    const [editPasswordValue, setPasswordValue] = useState();
-    const [editPhoneNumberValue, setEditPhoneNumberValue] = useState();
-    const [editAddressValue, setEditAddressValue] = useState();
+    // const [editFirstNameValue, setEditFirstNameValue] = useState(user.first_name);
+    // const [editLastNameValue, setEditLastNameValue] = useState(user.last_name);
+    // const [editEmailValue, setEmailValue] = useState(user.username);
+    const [editPasswordValue, setPasswordValue] = useState('');
+    // const [editPhoneNumberValue, setEditPhoneNumberValue] = useState(user.phone_number);
+    // const [editAddressValue, setEditAddressValue] = useState(user.address);
+
+    const [userInfoUpdate, setUserInfoUpdate] = useState({
+        first_name: user.first_name,
+        last_name: user.last_name,
+        username: user.username,
+        phone_number: user.phone_number,
+        address: user.address
+    })
+
+    // handle input changes (except password)
+    const handleInputChange = (event) => {
+        console.log("this is event.target:", event.target);
+        const {name, value} = event.target;
+        setUserInfoUpdate({
+          ...userInfoUpdate,
+          [name] : value,
+        })
+    }
+
+    // test input value capture
+    const submitUpdate = () => {
+        console.log('this is userInfoUpdate', userInfoUpdate);
+    }
 
     return(
         <>
@@ -64,12 +87,18 @@ function ProfilePage () {
                 <Card sx={cardStyle}>
                     {editFirstNameBtn ?
                         <>
-                            <TextField variant='standard' size='small' value={user.first_name} sx={{display: 'inline-flex', mx: 2.5}}/>
+                            <TextField
+                                variant='standard'
+                                size='small'
+                                name='first_name'
+                                value={userInfoUpdate.first_name}
+                                onChange={handleInputChange}
+                                sx={{display: 'inline-flex', mx: 2.5}}/>
                             <Box sx={{display: 'inline-flex', mr: 1.5}}>
                                 <Button onClick={() => setEditFirstNameBtn(false)} sx={{border: 'solid 1px red', mr: 1, px: 0}}>
                                     <CloseIcon sx={{color: 'red'}}/>
                                 </Button>
-                                <Button sx={{border: 'solid 1px green'}}>
+                                <Button sx={{border: 'solid 1px green'}} onClick={submitUpdate}>
                                     <CheckIcon sx={{color: 'green'}}/>
                                 </Button>
                             </Box>   
@@ -87,12 +116,18 @@ function ProfilePage () {
                 <Card sx={cardStyle}>
                     {editLastNameBtn ?
                     <>
-                        <TextField variant='standard' size='small' value={user.last_name} sx={{display: 'inline-flex', mx: 2.5}}/>
+                        <TextField
+                            variant='standard'
+                            size='small'
+                            name='last_name'
+                            value={userInfoUpdate.last_name}
+                            onChange={handleInputChange}
+                            sx={{display: 'inline-flex', mx: 2.5}}/>
                         <Box sx={{display: 'inline-flex', mr: 1.5}}>
                             <Button onClick={() => setEditLastNameBtn(false)} sx={{border: 'solid 1px red', mr: 1, px: 0}}>
                                 <CloseIcon sx={{color: 'red'}}/>
                             </Button>
-                            <Button sx={{border: 'solid 1px green'}}>
+                            <Button sx={{border: 'solid 1px green'}} onClick={submitUpdate}>
                                 <CheckIcon sx={{color: 'green'}}/>
                             </Button>
                         </Box>
@@ -110,12 +145,18 @@ function ProfilePage () {
                 <Card sx={cardStyle}>
                     {editEmailBtn ? 
                     <>
-                        <TextField variant='standard' size='small' value={user.username} sx={{display: 'inline-flex', mx: 2.5}}/>
+                        <TextField
+                            variant='standard'
+                            size='small'
+                            name='username'
+                            value={userInfoUpdate.username}
+                            onChange={handleInputChange}
+                            sx={{display: 'inline-flex', mx: 2.5}}/>
                         <Box sx={{display: 'inline-flex', mr: 1.5}}>
                             <Button onClick={() => setEditEmailBtn(false)} sx={{border: 'solid 1px red', mr: 1, px: 0}}>
                                 <CloseIcon sx={{color: 'red'}}/>
                             </Button>
-                            <Button sx={{border: 'solid 1px green'}}>
+                            <Button sx={{border: 'solid 1px green'}} onClick={submitUpdate}>
                                 <CheckIcon sx={{color: 'green'}}/>
                             </Button>
                         </Box>
@@ -133,7 +174,11 @@ function ProfilePage () {
                 <Card sx={cardStyle}>
                     {editPasswordBtn ?
                     <>
-                        <TextField variant='standard' size='small' value={editPasswordValue} sx={{display: 'inline-flex', mx: 2.5}}/>
+                        <TextField
+                            variant='standard'
+                            size='small'
+                            value={editPasswordValue}
+                            sx={{display: 'inline-flex', mx: 2.5}}/>
                         <Box sx={{display: 'inline-flex', mr: 1.5}}>
                             <Button onClick={() => setEditPasswordBtn(false)} sx={{border: 'solid 1px red', mr: 1, px: 0}}>
                                 <CloseIcon sx={{color: 'red'}}/>
@@ -145,7 +190,7 @@ function ProfilePage () {
                     </> 
                     :
                     <>
-                        <Typography sx={{display: 'inline-flex', mx: 2.5}}>User Password Text</Typography>
+                        <Typography sx={{display: 'inline-flex', mx: 2.5}}>Enter a New Password</Typography>
                         <Button variant='outlined' onClick={() => setEditPasswordBtn(true)} sx={{display: 'inline-flex', mr: 1.5}}>Edit</Button>
                     </>
                     }
@@ -156,12 +201,18 @@ function ProfilePage () {
                 <Card sx={cardStyle}>
                     {editPhoneNumberBtn ?
                     <>
-                        <TextField variant='standard' size='small' value={user.phone_number} sx={{display: 'inline-flex', mx: 2.5}}/>
+                        <TextField
+                            variant='standard'
+                            size='small'
+                            name='phone_number'
+                            value={userInfoUpdate.phone_number}
+                            onChange={handleInputChange}
+                            sx={{display: 'inline-flex', mx: 2.5}}/>
                         <Box sx={{display: 'inline-flex', mr: 1.5}}>
                             <Button onClick={() => setEditPhoneNumberBtn(false)} sx={{border: 'solid 1px red', mr: 1, px: 0}}>
                                 <CloseIcon sx={{color: 'red'}}/>
                             </Button>
-                            <Button sx={{border: 'solid 1px green'}}>
+                            <Button sx={{border: 'solid 1px green'}} onClick={submitUpdate}>
                                 <CheckIcon sx={{color: 'green'}}/>
                             </Button>
                         </Box>
@@ -179,13 +230,19 @@ function ProfilePage () {
                 <Card sx={addressCardStyle}>
                     {editAddressBtn ?
                     <>
-                        <TextField multiline variant='standard' size='small' value={user.address} sx={{display: 'inline-flex', mx: 2.5, width: 250}}/>
+                        <TextField
+                            multiline variant='standard'
+                            size='small'
+                            name='address'
+                            value={userInfoUpdate.address}
+                            onChange={handleInputChange}
+                            sx={{display: 'inline-flex', mx: 2.5, width: 250}}/>
                         <Box sx={{display: 'inline-flex', mr: 1.5}}>
                             <Stack spacing={1}>
                                 <Button onClick={() => setEditAddressBtn(false)} sx={{border: 'solid 1px red', px: 0}}>
                                     <CloseIcon sx={{color: 'red'}}/>
                                 </Button>
-                                <Button sx={{border: 'solid 1px green'}}>
+                                <Button sx={{border: 'solid 1px green'}} onClick={submitUpdate}>
                                     <CheckIcon sx={{color: 'green'}}/>
                                 </Button>
                             </Stack>
