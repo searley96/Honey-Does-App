@@ -1,4 +1,4 @@
-import { Box, Button, Card, IconButton, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, Card, Modal, Stack, TextField, Typography } from '@mui/material';
 
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
@@ -33,6 +33,18 @@ function ProfilePage () {
         height: '100px'
     }
 
+    const modalStyle = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+      };
+
     // edit information switches
     const [editFirstNameBtn, setEditFirstNameBtn] = useState(false);
     const [editLastNameBtn, setEditLastNameBtn] = useState(false);
@@ -63,23 +75,48 @@ function ProfilePage () {
         })
     }
 
+    // Confirmation modal
+    const [openModal, setOpenModal] = useState(false);
+    const [modalText, setModalText] = useState('');
+    const handleClose = () => {
+        setOpenModal(false)
+        setModalText('');
+    };
+
+    // dynamically updates the modal text and opens it on update info submit
+    const confirmationModal = (text, updatedValue) => {
+        setModalText(`Are you sure you want to update your ${text} to ${updatedValue}?`);
+        setOpenModal(true);
+    }
+
     // test input value capture
+        // need better solution to allow for dynamic modal text
     const submitUpdate = (event) => {
         console.log('this is userInfoUpdate', userInfoUpdate);
         // swaps the information back to display mode instead of edit mode
-        if(userInfoUpdate.first_name !== user.first_name) {
+        if (userInfoUpdate.first_name !== user.first_name) {
+            const updateText = 'first name';
+            confirmationModal(updateText, userInfoUpdate.first_name)
             setEditFirstNameBtn(false);
         }
         if (userInfoUpdate.last_name !== user.last_name) {
+            const updateText = 'last name';
+            confirmationModal(updateText, userInfoUpdate.last_name)
             setEditLastNameBtn(false);
         }
         if (userInfoUpdate.username !== user.username) {
+            const updateText = 'email';
+            confirmationModal(updateText, userInfoUpdate.username)
             setEditEmailBtn(false);
         }
         if (userInfoUpdate.phone_number !== user.phone_number) {
+            const updateText = 'phone number';
+            confirmationModal(updateText, userInfoUpdate.phone_number)
             setEditPhoneNumberBtn(false);
         }
         if (userInfoUpdate.address !== user.address) {
+            const updateText = 'address';
+            confirmationModal(updateText, userInfoUpdate.address)
             setEditAddressBtn(false);
         }
     }
@@ -269,6 +306,24 @@ function ProfilePage () {
                     </>
                     }
                 </Card>
+                <Modal
+                    open={openModal}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box sx={modalStyle}>
+                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                            {modalText}
+                        </Typography>
+                        <Button onClick={handleClose} sx={{border: 'solid 1px red', px: 0}}>
+                            <CloseIcon sx={{color: 'red'}}/>
+                        </Button>
+                        <Button sx={{border: 'solid 1px green'}} onClick={() => {console.log('Yay!')}}>
+                            <CheckIcon sx={{color: 'green'}}/>
+                        </Button>
+                    </Box>
+                </Modal>
             </Box>
         </>
     )
