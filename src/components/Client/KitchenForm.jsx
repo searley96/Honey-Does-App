@@ -12,21 +12,181 @@ function KitchenForm() {
         [fridgeSS, setFridgeSS] = useState(''),
         [wipeDishwasher, setWipeDishwasher] = useState(''),
         [dishwasherSS, setDishwasherSS] = useState(''),
-        [wipeDeepFreeze, setDeepFreeze] = useState('');
+        [wipeDeepFreeze, setDeepFreeze] = useState(''),
+        [cleanMicrowave, setCleanMicrowave] = useState('yes'),
+        [cleanStove, setCleanStove] = useState('yes'),
+        [stoveType, setStoveType] = useState(''),
+        [hoodVent, setHoodVent] = useState(''),
+        [hoodVentInstructions, setHoodVentInstructions] = useState('');
 
+
+        const handleCleanStove = event => {
+            setCleanStove(event.target.value);
+            setStoveType('');
+            setHoodVent('');
+        }
+
+        const handleStoveType = event => {
+            setStoveType(event.target.value);
+        }
+
+        const handleHoodVent = event => {
+            setHoodVent(event.target.value);
+        }
+
+        const handleHoodVentInstructions = event => {
+            
+            setHoodVentInstructions(event.target.value);
+            console.log(hoodVentInstructions)
+        }
+        
 
     return (
 
         <>
+
             <CabinetGroup />
             <ApplianceGroup />
+            <MicrowaveGroup />
+            {/* <StoveGroup /> */}
+            <>
+                <h3>Stove</h3>
+                <FormGroup>
+                    <FormControl>
+                        {/* CLEAN STOVE */}
+                        <FormLabel>Do you want us to clean the top of the stove?</FormLabel>
+                        <RadioGroup aria-labelledby="clean_stove" name="clean_stove"
+                            row defaultValue="yes" value={cleanStove}
+                            onChange={handleCleanStove}>
+                            <FormControlLabel value="yes" control={<Radio />} label="yes" />
+                            <FormControlLabel value="no" control={<Radio />} label="no" />
+                        </RadioGroup>
+
+                        {/* if cleanStove is set to yes, display specific appliances to be cleaned */}
+                        {cleanStove === 'yes' &&
+                            <>
+                                {/* STOVE TYPE */}
+                                <FormLabel>What kind of stove do you have?</FormLabel>
+                                <RadioGroup aria-labelledby="stove_type" name="stove_type"
+                                    value={stoveType}
+                                    onChange={handleStoveType}>
+                                    <FormControlLabel value="flat top / glass top" control={<Radio />} label="flat top / glass top" />
+                                    <FormControlLabel value="drip pans with removable burners" control={<Radio />} label="drip pans with removable burners" />
+                                    <FormControlLabel value="industrial stove with removable grates" control={<Radio />} label="industrial stove with removable grates" />
+                                </RadioGroup>
+                            </>
+                        }
+                        {cleanStove === 'yes' &&
+                            <>
+                                {/* HOOD VENT */}
+                                <FormLabel>Do you want us to clean the hood vent?</FormLabel>
+                                <RadioGroup aria-labelledby="clean_hood_vent" name="clean_hood_vent"
+                                    value={hoodVent}
+                                    onChange={handleHoodVent}>
+                                    <FormControlLabel value="yes" control={<Radio />} label="yes" />
+                                    <FormControlLabel value="no" control={<Radio />} label="no" />
+                                </RadioGroup>
+                            </>
+                        }
+                        {hoodVent === 'yes' &&
+                            <>
+                                {/* HOOD VENT SPECIAL INSTRUCTIONS */}
+                                <FormLabel>Any special instructions for cleaning the hood vent?</FormLabel>
+                                <input value={hoodVentInstructions} onChange={handleHoodVentInstructions} />
+                            </>
+                        }
+                    </FormControl>
+                </FormGroup>
+            </>
         </>
     );
+
+    // function StoveGroup() {
+
+        
+
+    //     return (
+    //         <>
+    //             <h3>Stove</h3>
+    //             <FormGroup>
+    //                 <FormControl>
+    //                     {/* CLEAN STOVE */}
+    //                     <FormLabel>Do you want us to clean the top of the stove?</FormLabel>
+    //                     <RadioGroup aria-labelledby="clean_stove" name="clean_stove"
+    //                         row defaultValue="yes" value={cleanStove}
+    //                         onChange={handleCleanStove}>
+    //                         <FormControlLabel value="yes" control={<Radio />} label="yes" />
+    //                         <FormControlLabel value="no" control={<Radio />} label="no" />
+    //                     </RadioGroup>
+
+    //                     {/* if cleanStove is set to yes, display specific appliances to be cleaned */}
+    //                     {cleanStove === 'yes' &&
+    //                         <>
+    //                             {/* STOVE TYPE */}
+    //                             <FormLabel>What kind of stove do you have?</FormLabel>
+    //                             <RadioGroup aria-labelledby="stove_type" name="stove_type"
+    //                                 value={stoveType}
+    //                                 onChange={handleStoveType}>
+    //                                 <FormControlLabel value="flat top / glass top" control={<Radio />} label="flat top / glass top" />
+    //                                 <FormControlLabel value="drip pans with removable burners" control={<Radio />} label="drip pans with removable burners" />
+    //                                 <FormControlLabel value="industrial stove with removable grates" control={<Radio />} label="industrial stove with removable grates" />
+    //                             </RadioGroup>
+    //                         </>
+    //                     }
+    //                     {cleanStove === 'yes' &&
+    //                         <>
+    //                             {/* HOOD VENT */}
+    //                             <FormLabel>Do you want us to clean the hood vent?</FormLabel>
+    //                             <RadioGroup aria-labelledby="clean_hood_vent" name="clean_hood_vent"
+    //                                 value={hoodVent}
+    //                                 onChange={handleHoodVent}>
+    //                                 <FormControlLabel value="yes" control={<Radio />} label="yes" />
+    //                                 <FormControlLabel value="no" control={<Radio />} label="no" />
+    //                             </RadioGroup>
+    //                         </>
+    //                     }
+    //                     {hoodVent === 'yes' &&
+    //                         <>
+    //                             {/* HOOD VENT SPECIAL INSTRUCTIONS */}
+    //                             <FormLabel>Any special instructions for cleaning the hood vent?</FormLabel>
+    //                             <input value={hoodVentInstructions} onChange={handleHoodVentInstructions} />
+    //                         </>
+    //                     }
+    //                 </FormControl>
+    //             </FormGroup>
+    //         </>
+    //     )
+    // }
+    function MicrowaveGroup() {
+
+        const handleMicrowave = event => {
+            setCleanMicrowave(event.target.value);
+        }
+
+        return (
+            <>
+                <h3>Microwave</h3>
+                <FormGroup>
+                    <FormControl>
+                        {/* CLEAN MICROWAVE */}
+                        <FormLabel>Do you want us to clean your microwave?</FormLabel>
+                        <RadioGroup aria-labelledby="clean_microwave" name="clean_microwave"
+                            row defaultValue="yes" value={cleanMicrowave}
+                            onChange={handleMicrowave}>
+                            <FormControlLabel value="yes" control={<Radio />} label="yes" />
+                            <FormControlLabel value="no" control={<Radio />} label="no" />
+                        </RadioGroup>
+                    </FormControl>
+                </FormGroup>
+            </>
+        )
+    }
+
     function ApplianceGroup() {
 
         const cleanAppliancesChange = event => {
-            setCleanAppliances(event.target.value);
-            setWipeFridge('');
+            setCleanAppliances(event.target.value); `
+            setWipeFridge('');`
             setWipeDishwasher('');
             setFridgeSS('');
         }
