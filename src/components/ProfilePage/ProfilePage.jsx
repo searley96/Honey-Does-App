@@ -41,13 +41,10 @@ function ProfilePage () {
     const [editPhoneNumberBtn, setEditPhoneNumberBtn] = useState(false);
     const [editAddressBtn, setEditAddressBtn] = useState(false);
 
-    // const [editFirstNameValue, setEditFirstNameValue] = useState(user.first_name);
-    // const [editLastNameValue, setEditLastNameValue] = useState(user.last_name);
-    // const [editEmailValue, setEmailValue] = useState(user.username);
+    // password update is separated from other fields due to special processing
     const [editPasswordValue, setPasswordValue] = useState('');
-    // const [editPhoneNumberValue, setEditPhoneNumberValue] = useState(user.phone_number);
-    // const [editAddressValue, setEditAddressValue] = useState(user.address);
 
+    // this object will contain all of a user's information
     const [userInfoUpdate, setUserInfoUpdate] = useState({
         first_name: user.first_name,
         last_name: user.last_name,
@@ -67,8 +64,24 @@ function ProfilePage () {
     }
 
     // test input value capture
-    const submitUpdate = () => {
+    const submitUpdate = (event) => {
         console.log('this is userInfoUpdate', userInfoUpdate);
+        // swaps the information back to display mode instead of edit mode
+        if(userInfoUpdate.first_name !== user.first_name) {
+            setEditFirstNameBtn(false);
+        }
+        if (userInfoUpdate.last_name !== user.last_name) {
+            setEditLastNameBtn(false);
+        }
+        if (userInfoUpdate.username !== user.username) {
+            setEditEmailBtn(false);
+        }
+        if (userInfoUpdate.phone_number !== user.phone_number) {
+            setEditPhoneNumberBtn(false);
+        }
+        if (userInfoUpdate.address !== user.address) {
+            setEditAddressBtn(false);
+        }
     }
 
     return(
