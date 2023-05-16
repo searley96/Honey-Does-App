@@ -21,7 +21,6 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import OtherRoomForm from '../Client/OtherRoomForm';
 
 import './App.css';
 import OtherRoomForm from '../Client/OtherRoomForm';
@@ -114,20 +113,6 @@ function App() {
           <Route
             exact
             path="/home"
-          >
-            {user.id ?
-              // If the user is already logged in, 
-              // redirect them to the /user page
-              <Redirect to="/user" />
-              :
-              // Otherwise, show the Landing page
-              <LandingPage />
-            }
-          </Route>
-
-          <Route
-            exact
-            path="/otherRoom"
           >
             {user.id ?
               // If the user is already logged in, 
