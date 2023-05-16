@@ -66,7 +66,7 @@ function ProfilePage () {
     const [editAddressBtn, setEditAddressBtn] = useState(false);
 
     // password update is separated from other fields due to special processing
-    const [editPasswordValue, setPasswordValue] = useState('');
+    const [editPasswordValue, setEditPasswordValue] = useState('');
 
     // this object will contain all of a user's information
     const [userInfoUpdate, setUserInfoUpdate] = useState({
@@ -74,7 +74,7 @@ function ProfilePage () {
         last_name: user.last_name,
         username: user.username,
         phone_number: user.phone_number,
-        address: user.address
+        address: user.address,
     })
 
     // handle input changes (except password)
@@ -109,7 +109,17 @@ function ProfilePage () {
             phone_number: user.phone_number,
             address: user.address
         })
+        setEditPasswordValue('');
         func;
+    }
+
+    const submitPasswordUpdate = (event) => {
+        console.log('this is editPasswordValue', editPasswordValue);
+        dispatch({
+            type: 'UPDATE_CLIENT_INFO',
+            payload: {newPassword: editPasswordValue},
+            id: user.id
+        });
     }
 
     // // test input value capture
@@ -166,28 +176,28 @@ function ProfilePage () {
                 </Typography>
                 <Card sx={cardStyle}>
                     {editFirstNameBtn ?
-                        <>
-                            <TextField
-                                variant='standard'
-                                size='small'
-                                name='first_name'
-                                value={userInfoUpdate.first_name}
-                                onChange={handleInputChange}
-                                sx={{display: 'inline-flex', mx: 2.5}}/>
-                            <Box sx={{display: 'inline-flex', mr: 1.5}}>
-                                <Button onClick={() => setEditFirstNameBtn(false)} sx={{border: 'solid 1px red', mr: 1, px: 0}}>
-                                    <CloseIcon sx={{color: 'red'}}/>
-                                </Button>
-                                <Button sx={{border: 'solid 1px green'}} onClick={submitUpdate}>
-                                    <CheckIcon sx={{color: 'green'}}/>
-                                </Button>
-                            </Box>   
-                        </>
-                        :
-                        <>
-                            <Typography sx={{display: 'inline-flex', mx: 2.5}}>{user.first_name}</Typography>
-                            <Button variant='outlined' onClick={() => cancelEdit(setEditFirstNameBtn(true))} sx={{display: 'inline-flex', mr: 1.5}}>Edit</Button>
-                        </>
+                    <>
+                        <TextField
+                            variant='standard'
+                            size='small'
+                            name='first_name'
+                            value={userInfoUpdate.first_name}
+                            onChange={handleInputChange}
+                            sx={{display: 'inline-flex', mx: 2.5}}/>
+                        <Box sx={{display: 'inline-flex', mr: 1.5}}>
+                            <Button onClick={() => setEditFirstNameBtn(false)} sx={{border: 'solid 1px red', mr: 1, px: 0}}>
+                                <CloseIcon sx={{color: 'red'}}/>
+                            </Button>
+                            <Button sx={{border: 'solid 1px green'}} onClick={submitUpdate}>
+                                <CheckIcon sx={{color: 'green'}}/>
+                            </Button>
+                        </Box>   
+                    </>
+                    :
+                    <>
+                        <Typography sx={{display: 'inline-flex', mx: 2.5}}>{user.first_name}</Typography>
+                        <Button variant='outlined' onClick={() => cancelEdit(setEditFirstNameBtn(true))} sx={{display: 'inline-flex', mr: 1.5}}>Edit</Button>
+                    </>
                     }
                 </Card>
                 <Typography align='center' variant='h7'>
@@ -258,20 +268,21 @@ function ProfilePage () {
                             variant='standard'
                             size='small'
                             value={editPasswordValue}
+                            onChange={(event) => setEditPasswordValue(event.target.value)}
                             sx={{display: 'inline-flex', mx: 2.5}}/>
                         <Box sx={{display: 'inline-flex', mr: 1.5}}>
                             <Button onClick={() => setEditPasswordBtn(false)} sx={{border: 'solid 1px red', mr: 1, px: 0}}>
                                 <CloseIcon sx={{color: 'red'}}/>
                             </Button>
-                            <Button sx={{border: 'solid 1px green'}}>
+                            <Button sx={{border: 'solid 1px green'}} onClick={submitPasswordUpdate}>
                                 <CheckIcon sx={{color: 'green'}}/>
                             </Button>
                         </Box>
                     </> 
                     :
                     <>
-                        <Typography sx={{display: 'inline-flex', mx: 2.5}}>Enter a New Password</Typography>
-                        <Button variant='outlined' onClick={() => setEditPasswordBtn(true)} sx={{display: 'inline-flex', mr: 1.5}}>Edit</Button>
+                        <Typography sx={{display: 'inline-flex', mx: 2.5}}>Would you like to change your password?</Typography>
+                        <Button variant='outlined' onClick={() => cancelEdit(setEditPasswordBtn(true))} sx={{display: 'inline-flex', mr: 1.5}}>Edit</Button>
                     </>
                     }
                 </Card>
@@ -328,7 +339,6 @@ function ProfilePage () {
                             </Stack>
                         </Box>
                     </>                     
-
                     :
                     <>
                         <Typography sx={{display: 'inline-flex', mx: 2.5}}>{user.address}</Typography>
