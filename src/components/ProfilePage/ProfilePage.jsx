@@ -5,11 +5,13 @@ import CheckIcon from '@mui/icons-material/Check';
 
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 
 function ProfilePage () {
 
     const user = useSelector(store => store.user);
+    const dispatch = useDispatch();
 
     const cardStyle = {
         display: 'flex',
@@ -89,36 +91,41 @@ function ProfilePage () {
         setOpenModal(true);
     }
 
-    // test input value capture
-        // need better solution to allow for dynamic modal text
+    // // test input value capture
+    //     // need better solution to allow for dynamic modal text
     const submitUpdate = (event) => {
         console.log('this is userInfoUpdate', userInfoUpdate);
+        dispatch({
+            type: 'UPDATE_CLIENT_INFO',
+            payload: userInfoUpdate,
+            id: user.id
+        });
         // swaps the information back to display mode instead of edit mode
-        if (userInfoUpdate.first_name !== user.first_name) {
-            const updateText = 'first name';
-            confirmationModal(updateText, userInfoUpdate.first_name)
-            setEditFirstNameBtn(false);
-        }
-        if (userInfoUpdate.last_name !== user.last_name) {
-            const updateText = 'last name';
-            confirmationModal(updateText, userInfoUpdate.last_name)
-            setEditLastNameBtn(false);
-        }
-        if (userInfoUpdate.username !== user.username) {
-            const updateText = 'email';
-            confirmationModal(updateText, userInfoUpdate.username)
-            setEditEmailBtn(false);
-        }
-        if (userInfoUpdate.phone_number !== user.phone_number) {
-            const updateText = 'phone number';
-            confirmationModal(updateText, userInfoUpdate.phone_number)
-            setEditPhoneNumberBtn(false);
-        }
-        if (userInfoUpdate.address !== user.address) {
-            const updateText = 'address';
-            confirmationModal(updateText, userInfoUpdate.address)
-            setEditAddressBtn(false);
-        }
+        // if (userInfoUpdate.first_name !== user.first_name) {
+        //     const updateText = 'first name';
+        //     confirmationModal(updateText, userInfoUpdate.first_name)
+        //     setEditFirstNameBtn(false);
+        // }
+        // if (userInfoUpdate.last_name !== user.last_name) {
+        //     const updateText = 'last name';
+        //     confirmationModal(updateText, userInfoUpdate.last_name)
+        //     setEditLastNameBtn(false);
+        // }
+        // if (userInfoUpdate.username !== user.username) {
+        //     const updateText = 'email';
+        //     confirmationModal(updateText, userInfoUpdate.username)
+        //     setEditEmailBtn(false);
+        // }
+        // if (userInfoUpdate.phone_number !== user.phone_number) {
+        //     const updateText = 'phone number';
+        //     confirmationModal(updateText, userInfoUpdate.phone_number)
+        //     setEditPhoneNumberBtn(false);
+        // }
+        // if (userInfoUpdate.address !== user.address) {
+        //     const updateText = 'address';
+        //     confirmationModal(updateText, userInfoUpdate.address)
+        //     setEditAddressBtn(false);
+        // }
     }
 
     return(
