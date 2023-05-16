@@ -4,7 +4,8 @@ import './LandingPage.css';
 
 // CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
+import { border, Stack } from '@mui/system';
 
 function LandingPage() {
 
@@ -13,9 +14,10 @@ function LandingPage() {
   };
 
   const imgStyle = {
-    width: '80%',
-    height: '120px'
-
+    width: '84%',
+    height: '110px',
+    border: 'solid 6px #1769aa',
+    padding: '2%'
   }
 
   const boxStyle = {
@@ -28,9 +30,17 @@ function LandingPage() {
   return (
     <>
       <Box sx={boxStyle}>
-        <div style={{display: 'flex', justifyContent: 'center'}}>
+        <div style={{display: 'flex', justifyContent: 'center', marginTop: '20%', marginBottom: '20%'}}>
           <img style={imgStyle} src='./images/Honey-Does-Inline-Logo.png'/>
         </div>
+        <Stack spacing={3}>
+          <Button variant='contained'>
+            Get an Estimate
+          </Button>
+          <Button variant='contained'>
+            Login
+          </Button>
+        </Stack>
       </Box>
     </>
   );
