@@ -8,8 +8,6 @@ function OtherRoomForm() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    // what is the best way to go about this? do we want each input to have its own state or 
-    // can all the inputs get captured in one?
     let [otherRoomForm, setOtherRoomForm] = useState({
         room_type: '',
         floor_type: '',
@@ -29,6 +27,7 @@ function OtherRoomForm() {
         }
     }
 
+    // capture user inputs and set in to "otherRoomForm"
     const setOtherRoomForm = (event) => {
         let targetInputField = event.target.id;
         switch (targetInputField) {
@@ -36,22 +35,26 @@ function OtherRoomForm() {
                 setOtherRoomForm({ ...otherRoomForm, room_type: event.target.value })
                 break;
             case '2':
-                setOtherRoomForm({ ...otherRoomForm, room_type: event.target.value })
+                setOtherRoomForm({ ...otherRoomForm, floor_type: event.target.value })
                 break;
             case '3':
-                setOtherRoomForm({ ...otherRoomForm, room_type: event.target.value })
+                setOtherRoomForm({ ...otherRoomForm, wipe_surfaces: event.target.value })
                 break;
             case '4':
-                setOtherRoomForm({ ...otherRoomForm, room_type: event.target.value })
+                setOtherRoomForm({ ...otherRoomForm, clean_floor: event.target.value })
                 break;
             case '5':
-                setOtherRoomForm({ ...otherRoomForm, room_type: event.target.value })
+                setOtherRoomForm({ ...otherRoomForm, sq_ft: event.target.value })
                 break;
         }
     }
 
     return (
-        
+        <FormGroup>
+            <FormControl>
+                <FormLabel></FormLabel>
+            </FormControl>
+        </FormGroup>
     )
 }
 
