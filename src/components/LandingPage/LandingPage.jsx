@@ -4,32 +4,35 @@ import './LandingPage.css';
 
 // CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
+import { Box } from '@mui/material';
 
 function LandingPage() {
-  const [heading, setHeading] = useState('Welcome');
-  const history = useHistory();
 
   const onLogin = (event) => {
     history.push('/login');
   };
 
+  const imgStyle = {
+    width: '80%',
+    height: '120px'
+
+  }
+
+  const boxStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+
+  }
+
   return (
-    <div className="container">
-      <h2>{heading}</h2>
-
-      <div className="grid">
-        <div className="grid-col grid-col_12">
-          <RegisterForm />
-
-          <center>
-            <h4>Already a Member?</h4>
-            <button className="btn btn_sizeSm" onClick={onLogin}>
-              Login
-            </button>
-          </center>
+    <>
+      <Box sx={boxStyle}>
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+          <img style={imgStyle} src='./images/Honey-Does-Inline-Logo.png'/>
         </div>
-      </div>
-    </div>
+      </Box>
+    </>
   );
 }
 
