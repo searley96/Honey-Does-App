@@ -1,5 +1,5 @@
 import React from 'react';
-import KitchenForm from '../Client/KitchenForm';
+import KitchenForm from '../Client/Kitchen/KitchenForm';
 
 // This is one of our simplest components
 // It doesn't have local state,
