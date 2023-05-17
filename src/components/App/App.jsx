@@ -24,7 +24,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import ProfilePage from '../ProfilePage/ProfilePage';
 
 import './App.css';
-import OtherRoomForm from '../Client/OtherRoomForm';
+import OtherRoomForm from '../Client/OtherRoom/OtherRoomForm';
 
 function App() {
   const dispatch = useDispatch();
