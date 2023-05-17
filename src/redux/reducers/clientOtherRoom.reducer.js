@@ -1,5 +1,6 @@
 const clientOtherRoomReducer = (state = {
     job_id: '',
+    clean_other_room: 'no',
     room_type: '',
     floor_type: '',
     wipe_surfaces: 'yes',
