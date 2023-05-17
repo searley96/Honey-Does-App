@@ -5,14 +5,24 @@ import './LandingPage.css';
 // CUSTOM COMPONENTS
 import { Box, Button, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
+import { useDispatch } from 'react-redux';
 
 function LandingPage() {
 
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const toLogin = (event) => {
     history.push('/login');
   };
+
+  const toForm = (event) => {
+    // history.push('/form');
+    
+    dispatch({
+      type: 'CREATE_JOB_ID'
+    })
+  }
 
   const imgStyle = {
     width: '190px',
@@ -42,7 +52,7 @@ function LandingPage() {
           </Typography>
         </div>
         <Stack spacing={3} sx={{width: '80%'}}>
-          <Button variant='contained' sx={{padding: 1.5}}>
+          <Button variant='contained' sx={{padding: 1.5}} onClick={toForm}>
             Get an Estimate
           </Button>
           <Button variant='contained' sx={{padding: 1.5}} onClick={toLogin}>

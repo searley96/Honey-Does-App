@@ -1,5 +1,8 @@
 import React from 'react';
 import KitchenForm from '../Client/Kitchen/KitchenForm';
+import Message from '../Chat/Message';
+import Chat from '../Chat/Chat';
+
 
 // This is one of our simplest components
 // It doesn't have local state,
@@ -14,6 +17,7 @@ function AboutPage() {
       </div>
       <div>
         <KitchenForm />
+        {/* <Chat /> */}
       </div>
     </div>
   );
