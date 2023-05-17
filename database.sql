@@ -4,6 +4,7 @@
 -- ex. SELECT * FROM "user";
 -- Otherwise you will have errors!
 -- Phone number - string or int
+-- TEMPORARY USER
 CREATE TABLE "user" (
   "id" SERIAL PRIMARY KEY,
    "password" VARCHAR (1000) NOT NULL,
@@ -59,10 +60,10 @@ CREATE TABLE "user_kitchen"(
 	"clean_microwave" BOOLEAN NOT NULL,
 	"clean_stove_top" BOOLEAN NOT NULL,
 	"type_of_stove" VARCHAR(100),
-	"clean_hood_vent" BOOLEAN NOT NULL,
+	"clean_hood_vent" BOOLEAN,
 	"hood_vent_special_instructions" VARCHAR(255),
-	"back_splash" BOOLEAN NOT NULL,
-	"clean_stove_front" BOOLEAN NOT NULL,
+	"back_splash" BOOLEAN,
+	"clean_stove_front" BOOLEAN,
 	"stove_stainless_steel" BOOLEAN,
 	"wipe_counters_sink" BOOLEAN NOT NULL,
 	"granite_counter_tops" BOOLEAN,
@@ -70,7 +71,8 @@ CREATE TABLE "user_kitchen"(
 	"shake_rugs" BOOLEAN,
 	"hardwood_floors" BOOLEAN,
 	"specialty_flooring" BOOLEAN,
-	"specialty_flooring_instructions" VARCHAR(500)
+	"specialty_flooring_instructions" VARCHAR(500),
+	"mop_location" VARCHAR(500)
 );
 
 CREATE TABLE "user_bathroom" (
