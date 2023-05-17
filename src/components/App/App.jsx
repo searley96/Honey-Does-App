@@ -75,13 +75,14 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
 
-          <ProtectedRoute
+          <Route
             // logged in shows OtherRoomForm else shows LoginPage
             exact
             path="/otherRoomForm"
           >
             <OtherRoomForm />
-          </ProtectedRoute>
+            <BottomNav />
+          </Route>
 
           <Route
             exact
