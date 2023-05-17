@@ -15,7 +15,6 @@ import BottomNav from "../Footer/BottomNav";
 import Menu from "../DashBoard/Menu";
 import JobHistory from "../JobHistory/JobHistory";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-// import Dashboard from "../DashBoard/ClientDashBoard";
 import AboutPage from "../AboutPage/AboutPage";
 import UserPage from "../UserPage/UserPage";
 import InfoPage from "../InfoPage/InfoPage";
