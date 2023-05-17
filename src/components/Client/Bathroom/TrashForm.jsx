@@ -42,7 +42,9 @@ function TrashForm() {
           {bathroom.take_out_trash === "Yes" && 
           <>
           {/* Trash removal instructions */}
-          <FormLabel>Please enter trash removal instructions.</FormLabel>
+          <FormLabel>Please enter trash removal instructions.<br />
+          (Add to kitchen trash, take outside to dumpster, etc.)
+          </FormLabel>
           <TextField size='small' value={bathroom.take_out_trash_instructions}
               onChange={(event) =>
                   dispatch({
