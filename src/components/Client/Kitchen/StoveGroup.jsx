@@ -7,7 +7,7 @@ function StoveGroup() {
 
     const kitchen = useSelector(store => store.clientKitchen)
     const dispatch = useDispatch();
-    
+
     return (
         <>
             <h3>Stove</h3>
@@ -55,6 +55,42 @@ function StoveGroup() {
                             <input value={kitchen.hood_vent_special_instructions}
                                 onChange={e => dispatch({ type: 'SET_HOOD_VENT_INSTRUCTIONS', payload: event.target.value })
                                 } />
+                        </>
+                    }
+                    {kitchen.clean_stove_top === 'yes' &&
+                        <>
+                            {/* BACKSPLASH */}
+                            <FormLabel>Do you want us to clean the backsplash behind the stove?</FormLabel>
+                            <RadioGroup aria-labelledby="clean_backsplash" name="clean_backsplash"
+                                value={kitchen.back_splash}
+                                onChange={e => dispatch({ type: 'SET_BACK_SPLASH', payload: event.target.value })}>
+                                <FormControlLabel value="yes" control={<Radio />} label="yes" />
+                                <FormControlLabel value="no" control={<Radio />} label="no" />
+                            </RadioGroup>
+                        </>
+                    }
+                    {kitchen.clean_stove_top === 'yes' &&
+                        <>
+                            {/* STOVE FRONT */}
+                            <FormLabel>Do you want us to clean the front of the stove?</FormLabel>
+                            <RadioGroup aria-labelledby="clean_stove_front" name="clean_stove_front"
+                                value={kitchen.clean_stove_front}
+                                onChange={e => dispatch({ type: 'SET_STOVE_FRONT', payload: event.target.value })}>
+                                <FormControlLabel value="yes" control={<Radio />} label="yes" />
+                                <FormControlLabel value="no" control={<Radio />} label="no" />
+                            </RadioGroup>
+                        </>
+                    }
+                    {kitchen.clean_stove_front === 'yes' &&
+                        <>
+                            {/* IS STOVE FRONT STAINLESS STEEL */}
+                            <FormLabel>Is the stove front stainless steel?</FormLabel>
+                            <RadioGroup aria-labelledby="stove_front_ss" name="stove_front_ss"
+                                value={kitchen.stove_stainless_steel}
+                                onChange={e => dispatch({ type: 'SET_STOVE_SS', payload: event.target.value })}>
+                                <FormControlLabel value="yes" control={<Radio />} label="yes" />
+                                <FormControlLabel value="no" control={<Radio />} label="no" />
+                            </RadioGroup>
                         </>
                     }
                 </FormControl>

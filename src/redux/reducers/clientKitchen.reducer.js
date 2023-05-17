@@ -17,7 +17,6 @@ const clientKitchenReducer = (state =
         clean_hood_vent: '',
         hood_vent_special_instructions: '',
         back_splash: '',
-        back_splash: '',
         clean_stove_front: '',
         stove_stainless_steel: '',
         wipe_counters_sink: '',
