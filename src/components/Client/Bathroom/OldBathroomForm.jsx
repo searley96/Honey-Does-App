@@ -120,7 +120,7 @@ function OldBathroomForm() {
           )}
         </FormGroup>
 
-        <FormLabel id="mirror-type">Clean Mirror?</FormLabel>
+        {/* <FormLabel id="mirror-type">Clean Mirror?</FormLabel>
         <RadioGroup
           row
           aria-labelledby="mirror-type"
@@ -148,7 +148,7 @@ function OldBathroomForm() {
               <FormControlLabel value="4" control={<Radio />} label="4" />
             </RadioGroup>
           </>
-        )}
+        )} */}
 
         <FormLabel id="sink-clean">Clean sinks/counters?</FormLabel>
         <RadioGroup row aria-labelledby="sink-clean" name="sink-clean-group">

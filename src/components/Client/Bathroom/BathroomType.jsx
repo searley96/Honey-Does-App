@@ -13,7 +13,7 @@ import {
 function BathroomType() {
   const bathroom = useSelector((store) => store.clientBathroomReducer);
   const dispatch = useDispatch();
-//   console.log('bathroom', bathroom)
+  //   console.log('bathroom', bathroom)
 
   return (
     <>
@@ -27,11 +27,9 @@ function BathroomType() {
             row
             value={bathroom.bathroom_type}
             onChange={event =>
-               
               dispatch({
                 type: "SET_BATHROOM_TYPE",
                 payload: event.target.value,
-        
               })
             }
           >
@@ -43,7 +41,8 @@ function BathroomType() {
             <FormControlLabel
               value="Half Bath"
               control={<Radio />}
-              label="Half Bath" aria-checked={true}
+              label="Half Bath"
+              aria-checked={true}
             />
             <FormControlLabel
               value="Don't Clean"
