@@ -21,6 +21,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import ProfilePage from '../ProfilePage/ProfilePage';
 
 import './App.css';
 import OtherRoomForm from '../Client/OtherRoomForm';
@@ -122,6 +123,18 @@ function App() {
               // Otherwise, show the Landing page
               <LandingPage />
             }
+          </Route>
+
+          <Route
+            exact path="/profile">
+              {user.id ?
+              <>
+                <ProfilePage />
+                <BottomNav />
+              </>
+              :
+              <LoginPage />
+              }
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
