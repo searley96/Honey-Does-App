@@ -16,7 +16,6 @@ function* createJobId() {
     }
 }
 
-
 function* jobSaga() {
     yield takeLatest('CREATE_JOB_ID', createJobId);
   }
