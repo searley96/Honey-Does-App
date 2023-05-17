@@ -24,7 +24,7 @@ CREATE TABLE "job" (
 	"job_id" INT UNIQUE NOT NULL,
     "client_id" INT NOT NULL,
     "manager_id" INT,
-    "cleaner_id" VARCHAR(50),
+    "cleaner_id" INT,
     "job_status" VARCHAR(50) NOT NULL,
     "feedback" VARCHAR(500),
     "date" DATE,
@@ -104,3 +104,9 @@ CREATE TABLE "user_other_room"(
 	"clean_floor" BOOLEAN NOT NULL,
 	"sq_ft" INT NOT NULL
 );
+
+-- Job Table Mock Data
+INSERT INTO "job" ("job_id", "client_id", "manager_id", "cleaner_id", "job_status", "feedback", "date", "start_time", "end_time")
+VALUES (123456, 1, 2, 3, 'active', 'I am very happy with the clean your company provided, thank you!', '03-04-2023', '12:00', '4:00'),
+(456789, 4, 2, 3, 'active', 'My cleaner did such a great job, and she was so communicative!', '04-10-2023', '10:00', '2:00'),
+(135791, 5, 2, 3, 'active', 'The cleaner was very friendly', '04-24-2023', '9:00', '1:00');
