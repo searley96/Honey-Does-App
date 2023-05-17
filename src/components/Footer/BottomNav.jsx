@@ -44,6 +44,14 @@ function BottomNav() {
     setAnchorEl(null);
   }
 
+  const toClientForm = () => {
+    // ADJUST WHEN FORMS ARE READY
+    // history.push('/form')
+    dispatch({
+      type: 'CREATE_JOB_ID'
+    })
+  }
+
   const logout = () => {
     dispatch({ type: 'LOGOUT' })
     setAnchorEl(null);
@@ -58,7 +66,7 @@ function BottomNav() {
             <HomeIcon fontSize='large' />
           </IconButton>
           {/* <StyledFab sx={{backgroundColor: 'rgb(252,228,62)'}} aria-label="new clean request"> */}
-          <StyledFab color='secondary' aria-label="new clean request">
+          <StyledFab color='secondary' aria-label="new clean request" onClick={toClientForm}>
             <CleaningServicesIcon />
           </StyledFab>
           <Box sx={{ flexGrow: 1 }} />

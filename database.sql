@@ -23,9 +23,9 @@ CREATE TABLE "user" (
 CREATE TABLE "job" (
 	"id" SERIAL PRIMARY KEY,
 	"job_id" INT UNIQUE NOT NULL,
-    "client_id" INT NOT NULL,
-    "manager_id" INT,
-    "cleaner_id" INT,
+    "client_id" INT NOT NULL REFERENCES "user",
+    "manager_id" INT REFERENCES "user",
+    "cleaner_id" INT REFERENCES "user",
     "job_status" VARCHAR(50) NOT NULL,
     "feedback" VARCHAR(500),
     "date" DATE,
@@ -109,6 +109,6 @@ CREATE TABLE "user_other_room"(
 
 -- Job Table Mock Data
 INSERT INTO "job" ("job_id", "client_id", "manager_id", "cleaner_id", "job_status", "feedback", "date", "start_time", "end_time")
-VALUES (123456, 1, 2, 3, 'active', 'I am very happy with the clean your company provided, thank you!', '03-04-2023', '12:00', '4:00'),
-(456789, 4, 2, 3, 'active', 'My cleaner did such a great job, and she was so communicative!', '04-10-2023', '10:00', '2:00'),
-(135791, 5, 2, 3, 'active', 'The cleaner was very friendly', '04-24-2023', '9:00', '1:00');
+VALUES (123456, 1, 6, 3, 'active', 'I am very happy with the clean your company provided, thank you!', '03-04-2023', '12:00', '4:00'),
+(456789, 2, 6, 5, 'active', 'My cleaner did such a great job, and she was so communicative!', '04-10-2023', '10:00', '2:00'),
+(135791, 4, 6, 5, 'active', 'The cleaner was very friendly', '04-24-2023', '9:00', '1:00');
