@@ -3,13 +3,14 @@ import { useHistory } from 'react-router-dom';
 import './LandingPage.css';
 
 // CUSTOM COMPONENTS
-import RegisterForm from '../RegisterForm/RegisterForm';
 import { Box, Button, Typography } from '@mui/material';
-import { border, Stack } from '@mui/system';
+import { Stack } from '@mui/system';
 
 function LandingPage() {
 
-  const onLogin = (event) => {
+  const history = useHistory();
+
+  const toLogin = (event) => {
     history.push('/login');
   };
 
@@ -44,7 +45,7 @@ function LandingPage() {
           <Button variant='contained' sx={{padding: 1.5}}>
             Get an Estimate
           </Button>
-          <Button variant='contained' sx={{padding: 1.5}}>
+          <Button variant='contained' sx={{padding: 1.5}} onClick={toLogin}>
             Login
           </Button>
         </Stack>
