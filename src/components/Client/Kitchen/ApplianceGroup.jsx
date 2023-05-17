@@ -37,7 +37,7 @@ function ApplianceGroup() {
                             </RadioGroup>
                         </>
                     }
-                    {kitchen.wipe_fridge === 'yes' &&
+                    {(kitchen.wipe_fridge === 'yes' && kitchen.wipe_appliances === 'yes') &&
                         <>
                             {/* CHECK IF FRIDGE IS STAINLESS STEEL */}
                             <FormLabel>Is the fridge stainless steel?</FormLabel>
@@ -63,7 +63,7 @@ function ApplianceGroup() {
                             </RadioGroup>
                         </>
                     }
-                    {kitchen.wipe_dishwasher === 'yes' &&
+                    {(kitchen.wipe_dishwasher === 'yes' && kitchen.wipe_appliances === 'yes') &&
                         <>
                             {/* CHECK IF DISHWASHER IS STAINLESS STEEL */}
                             <FormLabel>Is the dishwasher stainless steel?</FormLabel>
