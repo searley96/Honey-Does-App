@@ -14,19 +14,20 @@ import {
 
 function BathroomForm() {
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
+  // Bathtub Type section
+  const [isOtherChecked, setIsOtherChecked] = useState(false);
+  const [otherInputValue, setOtherInputValue] = useState("");
 
-  //conditional rendering for input box when 'other' is checked on bathtub type section
+  // Event handler for 'Other' checkbox
   const handleBathtubCheckboxChange = (event) => {
     setIsOtherChecked(event.target.checked);
   };
 
-  //collect text input value for 'other'
+  // Event handler for 'Other' input
   const handleBathtubInputChange = (event) => {
     setOtherInputValue(event.target.value);
+    console.log("other tub info:", event.target.value);
   };
-  console.log("other tub info:", event.target.value);
-  const [isOtherChecked, setIsOtherChecked] = useState(false);
-  const [otherInputValue, setOtherInputValue] = useState("");
 
   //conditional rendering to show number of mirrors when 'yes' is clicked on clean mirror
   const [mirror, setMirror] = useState("yes");
@@ -44,19 +45,20 @@ function BathroomForm() {
   const [cleanFloors, setCleanFloors] = useState("yes");
   const [showCleanRugs, setShowCleanRugs] = useState(false);
 
-  //conditional rendering for input box when 'yes' is selected on trash section
+  // Trash Instructions section
+  const [isYesChecked, setIsYesChecked] = useState(false);
+  const [trashInputValue, setTrashInputValue] = useState("");
+
+  // Event handler for 'Yes' radio button
   const handleTrashCheckboxChange = (event) => {
     setIsYesChecked(event.target.checked);
   };
 
-  //collect text input value for trash instructions
+  // Event handler for trash input
   const handleTrashInputChange = (event) => {
     setTrashInputValue(event.target.value);
+    console.log("trash instructions:", event.target.value);
   };
-  console.log("trash instructions:", event.target.value);
-
-  const [isYesChecked, setIsYesChecked] = useState(false);
-  const [trashInputValue, setTrashInputValue] = useState("");
 
   return (
     <>
@@ -250,26 +252,22 @@ function BathroomForm() {
 
         <FormLabel id="trash">Do you want us to take out the trash?</FormLabel>
         <RadioGroup row aria-labelledby="trash" name="trash-group">
-          <FormControlLabel
-            control={<Radio onChange={handleTrashCheckboxChange} />}
-            label="Yes"
-            value="yes"
-          />
-          <FormControlLabel
-            control={<Radio  />}
-            label="No"
-            value="no"
-          />
-
-          {isYesChecked && (
-            <input
-              type="text"
-              placeholder="Removal instructions."
-              value={trashInputValue}
-              onChange={handleTrashInputChange}
-            />
-          )}
+        <FormControlLabel
+          control={<Radio onChange={handleTrashCheckboxChange} />}
+          label="Yes"
+          value="yes"
+        />
+        <FormControlLabel control={<Radio />} label="No" value="no" />
         </RadioGroup>
+        {isYesChecked && (
+          <input
+            type="text"
+            placeholder="Removal instructions."
+            value={trashInputValue}
+            onChange={handleTrashInputChange}
+          />
+         
+        )}
 
         <FormLabel id="floors">
           Do you want us to sweep and mop the floors?
