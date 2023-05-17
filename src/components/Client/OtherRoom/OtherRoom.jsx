@@ -13,7 +13,7 @@ function OtherRoom() {
                 <FormControl>
 
                     {/* CLEAN OTHER ROOMS? */}
-                    <FormLabel>Do you want us to clean other rooms?</FormLabel>
+                    <FormLabel>Do you want us to clean another room?</FormLabel>
                     <RadioGroup aria-labelledby="clean_other_room" name="clean_other_room"
                         row value={kitchen.clean_other_room} // **** NEED TO ADD THIS COLUMN TO THE TABLE IN THE DATABASE!!! ****
                         onChange={e => dispatch({ type: 'SET_CLEAN_OTHER_ROOM', payload: event.target.value })}>
@@ -49,7 +49,7 @@ function OtherRoom() {
                     <FormLabel>Do surfaces need to be wiped?</FormLabel>
                     <RadioGroup aria-labelledby="wipe_surfaces" name="wipe_surfaces"
                         row value={otherRoom.wipe_surfaces}
-                        onChange={e => dispatch({ type: 'WIPE_SURFACES', payload: event.target.value })}>
+                        onChange={e => dispatch({ type: 'SET_WIPE_SURFACES', payload: event.target.value })}>
                         <FormControlLabel value="yes" control={<Radio />} label="Yes" />
                         <FormControlLabel value="no" control={<Radio />} label="No" />
                     </RadioGroup>
