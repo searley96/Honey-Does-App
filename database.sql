@@ -107,6 +107,22 @@ CREATE TABLE "user_other_room"(
 	"sq_ft" INT NOT NULL
 );
 
+CREATE TABLE "user_wipe_dust"(
+	"id" SERIAL PRIMARY KEY,
+	"job_id" INT NOT NULL REFERENCES "job",
+	"wipe_clean_glass" BOOLEAN NOT NULL,
+	"glass_door" BOOLEAN,
+	"glass_door_number" INT,
+	"inside_glass_door" BOOLEAN,
+	"outside_glass_door" BOOLEAN,
+	"glass_door_location" VARCHAR(500),
+	"other_mirrors" BOOLEAN,
+	"other_mirrors_number" INT,
+	"other_mirrors_location" VARCHAR(500),
+	
+
+);
+
 -- Job Table Mock Data
 INSERT INTO "job" ("job_id", "client_id", "manager_id", "cleaner_id", "job_status", "feedback", "date", "start_time", "end_time")
 VALUES (123456, 1, 6, 3, 'active', 'I am very happy with the clean your company provided, thank you!', '03-04-2023', '12:00', '4:00'),
