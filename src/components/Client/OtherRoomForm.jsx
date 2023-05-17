@@ -102,10 +102,8 @@ function OtherRoomForm() {
                     <FormControlLabel value="na" control={<Radio />} label="N/A" />
                 </RadioGroup>
                 {/* Maybe have a textbox here for the client to type in the type of floor that's not listed here */}
-
-
-
             </FormControl>
+            {/* Need to create a Next button here that will also act as a submit button */}
         </FormGroup>
     )
 }
