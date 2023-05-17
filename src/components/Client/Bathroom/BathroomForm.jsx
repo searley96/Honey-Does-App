@@ -262,7 +262,7 @@ function BathroomForm() {
         {isYesChecked && (
           <input
             type="text"
-            placeholder="Removal instructions."
+            placeholder="Enter trash removal instructions."
             value={trashInputValue}
             onChange={handleTrashInputChange}
           />
