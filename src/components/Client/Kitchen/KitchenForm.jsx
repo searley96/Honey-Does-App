@@ -3,6 +3,7 @@ import StoveGroup from './StoveGroup';
 import ApplianceGroup from './ApplianceGroup';
 import MicrowaveGroup from './MicrowaveGroup';
 import CountersSinksGroup from './CountersSinksGroup';
+import KitchenFloors from './KitchenFloors';
 
 function KitchenForm() {
 
@@ -15,6 +16,7 @@ function KitchenForm() {
             <MicrowaveGroup />
             <StoveGroup />
             <CountersSinksGroup />
+            <KitchenFloors />
             
         </>
     );

@@ -71,7 +71,8 @@ CREATE TABLE "user_kitchen"(
 	"shake_rugs" BOOLEAN,
 	"hardwood_floors" BOOLEAN,
 	"specialty_flooring" BOOLEAN,
-	"specialty_flooring_instructions" VARCHAR(500)
+	"specialty_flooring_instructions" VARCHAR(500),
+	"mop_location" VARCHAR(500)
 );
 
 CREATE TABLE "user_bathroom" (

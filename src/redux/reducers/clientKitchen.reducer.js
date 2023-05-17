@@ -1,4 +1,4 @@
-const clientKitchenReducer = (state = 
+const clientKitchenReducer = (state =
     {
         job_id: '',
         room_type: '',
@@ -25,8 +25,9 @@ const clientKitchenReducer = (state =
         shake_rugs: '',
         hardwood_floors: '',
         specialty_flooring: '',
-        specialty_flooring_instructions: ''
-    
+        specialty_flooring_instructions: '',
+        mop_location: ''
+
     }, action) => {
     switch (action.type) {
         case 'JOB_ID':
@@ -81,6 +82,8 @@ const clientKitchenReducer = (state =
             return { ...state, specialty_flooring: action.payload };
         case 'SET_SPECIALTY_FLOORING_INSTRUCTIONS':
             return { ...state, specialty_flooring_instructions: action.payload };
+        case 'SET_MOP_LOCATION':
+            return { ...state, mop_location: action.payload };
         default:
             return state;
     }
