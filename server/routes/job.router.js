@@ -22,7 +22,7 @@ const router = express.Router();
             console.log('duplicate found, creating new number');
             checkRandomNumberDupes(jobIDGenerator(0, 9), number2, array1, array2);
         } else {
-            if(!array1.includes(number1)) {
+            if(!array1.includes(number1) && !array2.includes(number1)) {
                 array2.push(number1)
             }
         }
@@ -39,7 +39,7 @@ const router = express.Router();
         })
         console.log(jobIdArray);
         jobIdArray.forEach(id => {
-            checkRandomNumberDupes(456789, id, jobIdArray, approvedJobIdArray);
+            checkRandomNumberDupes(jobId, id, jobIdArray, approvedJobIdArray);
         });
         console.log(approvedJobIdArray);
         const approvedJobID = approvedJobIdArray[0];
