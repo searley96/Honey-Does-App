@@ -14,6 +14,8 @@ function OtherRoomForm() {
     return (
         <>
             <OtherRoom />
+            <button>Back</button>
+            <button>Next</button>
         </>
     )
 }

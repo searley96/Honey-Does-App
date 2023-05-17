@@ -1,107 +1,89 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { TextField, FormControl, FormGroup, RadioGroup, Checkbox, FormLabel, FormControlLabel, InputLabel, Input, Radio } from '@mui/material';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { TextField, FormControl, FormGroup, RadioGroup, Checkbox, FormLabel, FormControlLabel, Radio } from '@mui/material';
 
 function OtherRoom() {
     const dispatch = useDispatch();
-    const history = useHistory();
-
-    let [otherRoomForm, setOtherRoomForm] = useState({
-        room_type: '',
-        floor_type: '',
-        wipe_surfaces: '',
-        clean_floor: '',
-        sq_ft: ''
-    });
-
-    const setForm = (event) => {
-        let targetInputField = event.target.id;
-        switch (targetInputField) {
-            case '1':
-                setOtherRoomForm({ ...otherRoomForm, room_type: event.target.value })
-                break;
-            case '2':
-                setOtherRoomForm({ ...otherRoomForm, floor_type: event.target.value })
-                break;
-            case '3':
-                setOtherRoomForm({ ...otherRoomForm, wipe_surfaces: event.target.value })
-                break;
-            case '4':
-                setOtherRoomForm({ ...otherRoomForm, clean_floor: event.target.value })
-                break;
-            case '5':
-                setOtherRoomForm({ ...otherRoomForm, sq_ft: event.target.value })
-                break;
-        }
-    }
-
-    // this function is called when the Next button is clicked
-    const submitHandler = (event) => {
-        event.preventDefault();
-        // if form is filled, post form to db
-        if (otherRoomForm.room_type && otherRoomForm.floor_type && otherRoomForm.wipe_surfaces && otherRoomForm.clean_floor && otherRoomForm.sq_ft) {
-            dispatch({ type: 'ADD_OTHERROOMFORM', payload: otherRoomForm })
-            // and go to the Price Estimate Result page
-            history.push('/whateverTheNameofThePriceEstimateResultPageIs');
-        }
-    }
+    const otherRoom = useSelector(store => store.clientOtherRoom)
 
     return (
-        <FormGroup>
-            <FormControl>
-                {/* What if the client has multiple other rooms that needs a cleaning? For ex: bedroom, office, living room, etc. 
-                How do we capture that to store in the db? So for now, I'm building the form so that it's only taking one room. */}
-                <FormLabel>Would you like to request a cleaning for another room? If so, select the type of room.</FormLabel>
-                <RadioGroup aria-labelledby="room_type" name="room_type"
-                    row defaultValue="yes" value={otherRoomForm.room_type}
-                    onChange={setForm}>
-                    <FormControlLabel value="bedroom" control={<Radio />} label="Bedroom" />
-                    <FormControlLabel value="livingRoom" control={<Radio />} label="Living Room" />
-                    <FormControlLabel value="diningRoom" control={<Radio />} label="Dining Room" />
-                    <FormControlLabel value="office" control={<Radio />} label="Office" />
-                    <FormControlLabel value="laundry" control={<Radio />} label="Laundry" />
-                    <FormControlLabel value="other" control={<Radio />} label="Other" />
-                </RadioGroup>
-                {/* Maybe have a textbox here for the client to type in the type of room that's not listed here */}
+        <>
+            <h3>Other Rooms</h3>
+            <FormGroup>
+                <FormControl>
 
-                {/* The input isn't in the place I want it to be. */}
-                <FormLabel>What is the square footage of the room?</FormLabel>
-                <TextField size='small' />
+                    {/* CLEAN OTHER ROOMS? */}
+                    <FormLabel>Do you want us to clean other rooms?</FormLabel>
+                    <RadioGroup aria-labelledby="clean_other_room" name="clean_other_room"
+                        row value={kitchen.clean_other_room} // **** NEED TO ADD THIS COLUMN TO THE TABLE IN THE DATABASE!!! ****
+                        onChange={e => dispatch({ type: 'SET_CLEAN_OTHER_ROOM', payload: event.target.value })}>
+                        <FormControlLabel value="yes" control={<Radio />} label="yes" />
+                        <FormControlLabel value="no" control={<Radio />} label="no" />
+                    </RadioGroup>
 
+                    {/* If clean other rooms = yes then show forms for room types and sq ft. */}
+                    {kitchen.clean_other_room === 'yes' && 
+                    <>
+                    
+                    {/* ROOM TYPES */}
+                    <FormLabel>Select the type of room.</FormLabel>
+                    <RadioGroup aria-labelledby="room_type" name="room_type"
+                        row value={otherRoom.room_type}
+                        onChange={e => dispatch({ type: 'SET_ROOM_TYPE', payload: event.target.value })}>
+                        <FormControlLabel value="bedroom" control={<Radio />} label="Bedroom" />
+                        <FormControlLabel value="livingRoom" control={<Radio />} label="Living Room" />
+                        <FormControlLabel value="diningRoom" control={<Radio />} label="Dining Room" />
+                        <FormControlLabel value="office" control={<Radio />} label="Office" />
+                        <FormControlLabel value="laundry" control={<Radio />} label="Laundry" />
+                    </RadioGroup>
 
-                <FormLabel>Do surfaces need to be wiped?</FormLabel>
-                <RadioGroup aria-labelledby="wipe_surfaces" name="wipe_surfaces"
-                    row defaultValue="yes" value={otherRoomForm.wipe_surfaces}
-                    onChange={setForm}>
-                    <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                    <FormControlLabel value="no" control={<Radio />} label="No" />
-                </RadioGroup>
+                     {/* SQ FT */}
+                    <FormLabel>What is the square footage of the room?</FormLabel>
+                    <TextField size='small' value={otherRoom.sq_ft} 
+                        onChange={e => dispatch({ type: 'SET_SQ_FT', payload: event.target.value })}/>
 
-                <FormLabel>Do floors need to be cleaned?</FormLabel>
-                <RadioGroup aria-labelledby="clean_floor" name="clean_floor"
-                    row defaultValue="yes" value={otherRoomForm.clean_floor}
-                    onChange={setForm}>
-                    <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                    <FormControlLabel value="no" control={<Radio />} label="No" />
-                </RadioGroup>
+                    </>
+                    }
 
-                <FormLabel>If floors need to be cleaned, please select floor type.</FormLabel>
-                <RadioGroup aria-labelledby="floor_type" name="floor_type"
-                    row defaultValue="yes" value={otherRoomForm.floor_type}
-                    onChange={setForm}>
-                    <FormControlLabel value="wood" control={<Radio />} label="Wood" />
-                    <FormControlLabel value="carpet" control={<Radio />} label="Carpet" />
-                    <FormControlLabel value="tiles" control={<Radio />} label="Tiles" />
-                    <FormControlLabel value="laminate" control={<Radio />} label="Laminate" />
-                    <FormControlLabel value="vinyl" control={<Radio />} label="Vinyl" />
-                    <FormControlLabel value="other" control={<Radio />} label="Other" />
-                    <FormControlLabel value="na" control={<Radio />} label="N/A" />
-                </RadioGroup>
-                {/* Maybe have a textbox here for the client to type in the type of floor that's not listed here */}
-            </FormControl>
-            {/* Need to create a Next button here that will also act as a submit button */}
-        </FormGroup>
+                    {/* WIPE SURFACES? */}
+                    <FormLabel>Do surfaces need to be wiped?</FormLabel>
+                    <RadioGroup aria-labelledby="wipe_surfaces" name="wipe_surfaces"
+                        row value={otherRoom.wipe_surfaces}
+                        onChange={e => dispatch({ type: 'WIPE_SURFACES', payload: event.target.value })}>
+                        <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                        <FormControlLabel value="no" control={<Radio />} label="No" />
+                    </RadioGroup>
+
+                    {/* CLEAN FLOORS? */}
+                    <FormLabel>Do floors need to be cleaned?</FormLabel>
+                    <RadioGroup aria-labelledby="clean_floor" name="clean_floor"
+                        row value={otherRoom.clean_floor}
+                        onChange={e => dispatch({ type: 'SET_CLEAN_FLOOR', payload: event.target.value })}>
+                        <FormControlLabel value="yes" control={<Radio />} label="yes" />
+                        <FormControlLabel value="no" control={<Radio />} label="no" />
+                    </RadioGroup>
+
+                    {/* If clean floor = yes then show the form for floor type. */}
+                    {kitchen.clean_floor === 'yes' && 
+                    <>
+                    {/* FLOOR TYPE */}
+                    <FormLabel>Select floor type.</FormLabel>
+                    <RadioGroup aria-labelledby="floor_type" name="floor_type"
+                        row value={otherRoom.floor_type}
+                        onChange={e => dispatch({ type: 'SET_FLOOR_TYPE', payload: event.target.value })}>
+                        <FormControlLabel value="wood" control={<Radio />} label="Wood" />
+                        <FormControlLabel value="carpet" control={<Radio />} label="Carpet" />
+                        <FormControlLabel value="tiles" control={<Radio />} label="Tiles" />
+                        <FormControlLabel value="laminate" control={<Radio />} label="Laminate" />
+                        <FormControlLabel value="vinyl" control={<Radio />} label="Vinyl" />
+                        <FormControlLabel value="na" control={<Radio />} label="N/A" />
+                    </RadioGroup>
+                    </>
+                    }
+
+                </FormControl>
+            </FormGroup>
+        </>
     )
 }
 
