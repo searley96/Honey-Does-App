@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 
 function MirrorGroup() {
+    
   const bathroom = useSelector((store) => store.clientBathroomReducer);
   const dispatch = useDispatch();
 

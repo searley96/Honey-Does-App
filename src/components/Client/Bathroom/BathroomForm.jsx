@@ -1,6 +1,7 @@
 import BathroomType from "./BathroomType"
 import MirrorGroup from "./MirrorGroup";
 import SinkGroup from "./SinkGroup";
+import ToiletGroup from "./ToiletGroup";
 
 function BathroomForm() {
     return (
@@ -8,6 +9,7 @@ function BathroomForm() {
         <BathroomType />
         <MirrorGroup />
         <SinkGroup />
+        <ToiletGroup />
         </>
     );
 }
