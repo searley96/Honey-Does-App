@@ -4,16 +4,17 @@
 -- ex. SELECT * FROM "user";
 -- Otherwise you will have errors!
 -- Phone number - string or int
+-- TEMPORARY USER
 CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL,
-    "first_name" VARCHAR(50) NOT NULL,
-    "last_name" VARCHAR(50) NOT NULL,
-    "email" VARCHAR(100) NOT NULL,
-    "phone_number" VARCHAR(15) NOT NULL,
-    "role" VARCHAR(20) NOT NULL,
-    "address" VARCHAR(50) NOT NULL
+  "id" SERIAL PRIMARY KEY,
+   "password" VARCHAR (1000) NOT NULL,
+   "first_name" VARCHAR(50) NOT NULL,
+   "last_name" VARCHAR(50) NOT NULL,
+   -- username is email address
+   "username" VARCHAR(100) NOT NULL,
+   "phone_number" VARCHAR(15) NOT NULL,
+   "role" VARCHAR(20) NOT NULL,
+   "address" VARCHAR(200) NOT NULL
 );
 
 -- date
@@ -59,10 +60,10 @@ CREATE TABLE "user_kitchen"(
 	"clean_microwave" BOOLEAN NOT NULL,
 	"clean_stove_top" BOOLEAN NOT NULL,
 	"type_of_stove" VARCHAR(100),
-	"clean_hood_vent" BOOLEAN NOT NULL,
+	"clean_hood_vent" BOOLEAN,
 	"hood_vent_special_instructions" VARCHAR(255),
-	"back_splash" BOOLEAN NOT NULL,
-	"clean_stove_front" BOOLEAN NOT NULL,
+	"back_splash" BOOLEAN,
+	"clean_stove_front" BOOLEAN,
 	"stove_stainless_steel" BOOLEAN,
 	"wipe_counters_sink" BOOLEAN NOT NULL,
 	"granite_counter_tops" BOOLEAN,
@@ -70,7 +71,8 @@ CREATE TABLE "user_kitchen"(
 	"shake_rugs" BOOLEAN,
 	"hardwood_floors" BOOLEAN,
 	"specialty_flooring" BOOLEAN,
-	"specialty_flooring_instructions" VARCHAR(500)
+	"specialty_flooring_instructions" VARCHAR(500),
+	"mop_location" VARCHAR(500)
 );
 
 CREATE TABLE "user_bathroom" (
@@ -80,7 +82,6 @@ CREATE TABLE "user_bathroom" (
 	"bathroom_type" VARCHAR(50) NOT NULL,
 	"bath_shower_type" VARCHAR(50),
 	"threshold_type" VARCHAR(50),
-	"clean_jacuzzi" BOOLEAN NOT NULL,
 	"clean_mirror" BOOLEAN NOT NULL,
 	"number_mirrors_clean" INT,
 	"clean_sink_counter" BOOLEAN NOT NULL,

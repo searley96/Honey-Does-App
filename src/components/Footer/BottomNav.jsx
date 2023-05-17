@@ -8,10 +8,12 @@ import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
 
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 function BottomNav() {
 
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const StyledFab = styled(Fab)({
     position: 'absolute',
