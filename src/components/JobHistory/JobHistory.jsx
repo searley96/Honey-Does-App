@@ -92,10 +92,18 @@ function JobHistory() {
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
     >
       <div>
-        <Button variant="outlined" onClick={togglePastJobs}>
+        <Button
+          variant="outlined"
+          sx={{ marginLeft: 1 }}
+          onClick={togglePastJobs}
+        >
           Past Jobs
         </Button>
-        <Button variant="outlined" onClick={toggleActiveJobs}>
+        <Button
+          variant="outlined"
+          sx={{ marginLeft: 1 }}
+          onClick={toggleActiveJobs}
+        >
           Active Jobs
         </Button>
         <IconButton
@@ -118,7 +126,7 @@ function JobHistory() {
                 Active Jobs
               </Typography>
               {activeJobs.map((job, index) => (
-                <Card key={index}>
+                <Card sx={{ mb: 5 }} key={index}>
                   <Typography
                     sx={{ mb: 2, backgroundColor: "#fcb900" }}
                     color="blue"
