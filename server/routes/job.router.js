@@ -38,21 +38,28 @@ router.get("/jobid", (req, res) => {
   pool
     .query(queryJobID)
     .then((result) => {
-      console.log(result.rows);
+      // console.log(result.rows);
       const jobIdArray = [];
       const approvedJobIdArray = [];
       const jobId = jobIDGenerator(0, 9);
-      result.rows.forEach((id) => {
-        jobIdArray.push(id.job_id);
-      });
-      console.log(jobIdArray);
-      jobIdArray.forEach((id) => {
-        checkRandomNumberDupes(jobId, id, jobIdArray, approvedJobIdArray);
-      });
-      console.log(approvedJobIdArray);
-      const approvedJobID = approvedJobIdArray[0];
-      console.log(approvedJobID);
-      res.send(approvedJobID);
+      if (result.rows.length === 0) {
+        res.send(jobId);
+      } else {
+        result.rows.forEach((id) => {
+          jobIdArray.push(id.job_id);
+        });
+        // console.log(jobIdArray);
+        jobIdArray.forEach((id) => {
+          checkRandomNumberDupes(jobId, id, jobIdArray, approvedJobIdArray);
+        });
+        // console.log(approvedJobIdArray);
+        const approvedJobID = approvedJobIdArray[0];
+        // console.log(approvedJobID);
+        res.send(approvedJobID);
+      }
+    })
+    .catch(() => {
+      console.log("ERROR getting Job ID list");
     })
     .catch(() => {
       console.log("ERROR getting Job ID list");
