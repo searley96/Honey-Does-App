@@ -14,33 +14,38 @@ const router = express.Router();
         }
         return numberString;
     }
-    const checkRandomNumberDupes = (number1, number2, array) => {
+    const checkRandomNumberDupes = (number1, number2, array1, array2) => {
+        console.log('inside checkRandomNumberDupes');
+        console.log('this is number1', number1);
+        console.log('this is number2', number2);
         if(number1 === number2) {
-            checkRandomNumberDupes(jobIDGenerator(0, 9), number2);
+            console.log('duplicate found, creating new number');
+            checkRandomNumberDupes(jobIDGenerator(0, 9), number2, array1, array2);
         } else {
-            if(!array.includes(number1)) {
-                array.push(number1)
+            if(!array1.includes(number1)) {
+                array2.push(number1)
             }
         }
     }
-
     const queryJobID = `SELECT "job_id" FROM "job"`
     pool.query(queryJobID)
     .then((result) => {
         console.log(result.rows);
         const jobIdArray = [];
+        const approvedJobIdArray = [];
         const jobId = jobIDGenerator(0, 9);
         result.rows.forEach(id => {
-            checkRandomNumberDupes(jobId, id.job_id, jobIdArray);
+            jobIdArray.push(id.job_id);
+        })
+        console.log(jobIdArray);
+        jobIdArray.forEach(id => {
+            checkRandomNumberDupes(456789, id, jobIdArray, approvedJobIdArray);
         });
-        const approvedJobID = jobIdArray[0];
+        console.log(approvedJobIdArray);
+        const approvedJobID = approvedJobIdArray[0];
         console.log(approvedJobID);
     }).catch(() => {
         console.log('ERROR getting Job ID list');
     })
-    
-
-
-    
 
 module.exports = router;
