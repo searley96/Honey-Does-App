@@ -3,33 +3,64 @@ import { useHistory } from 'react-router-dom';
 import './LandingPage.css';
 
 // CUSTOM COMPONENTS
-import RegisterForm from '../RegisterForm/RegisterForm';
+import { Box, Button, Typography } from '@mui/material';
+import { Stack } from '@mui/system';
+import { useDispatch } from 'react-redux';
 
 function LandingPage() {
-  const [heading, setHeading] = useState('Welcome');
-  const history = useHistory();
 
-  const onLogin = (event) => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const toLogin = (event) => {
     history.push('/login');
   };
 
+  const toForm = (event) => {
+    // history.push('/form');
+    
+    dispatch({
+      type: 'CREATE_JOB_ID'
+    })
+  }
+
+  const imgStyle = {
+    width: '190px',
+    height: '190px',
+    border: 'solid 6px #0288d1',
+    padding: '2%'
+  }
+
+  const boxStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+
+  }
+
   return (
-    <div className="container">
-      <h2>{heading}</h2>
-
-      <div className="grid">
-        <div className="grid-col grid-col_12">
-          <RegisterForm />
-
-          <center>
-            <h4>Already a Member?</h4>
-            <button className="btn btn_sizeSm" onClick={onLogin}>
-              Login
-            </button>
-          </center>
+    <>
+      <Box sx={boxStyle}>
+        <div style={{display: 'flex', justifyContent: 'center', marginTop: '20%', marginBottom: '10%'}}>
+          <a href="https://honeydoesllc.com/" target="_blank" rel="link to Honey Does LLC website">
+            <img style={imgStyle} src='./images/Honey-Does-Landing.jpeg'/>
+          </a>
         </div>
-      </div>
-    </div>
+        <div style={{width: '300px'}}>
+          <Typography variant='h5' align='center' color='#3291b9' sx={{mb: 5, fontStyle: 'italic', textDecoration: 'underline'}} >
+            Meeting all of your cleaning needs with excellence!
+          </Typography>
+        </div>
+        <Stack spacing={3} sx={{width: '80%'}}>
+          <Button variant='contained' sx={{padding: 1.5}} onClick={toForm}>
+            Get an Estimate
+          </Button>
+          <Button variant='contained' sx={{padding: 1.5}} onClick={toLogin}>
+            Login
+          </Button>
+        </Stack>
+      </Box>
+    </>
   );
 }
 
