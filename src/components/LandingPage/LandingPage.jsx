@@ -4,7 +4,7 @@ import './LandingPage.css';
 
 // CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { border, Stack } from '@mui/system';
 
 function LandingPage() {
@@ -14,9 +14,9 @@ function LandingPage() {
   };
 
   const imgStyle = {
-    width: '84%',
-    height: '110px',
-    border: 'solid 6px #1769aa',
+    width: '190px',
+    height: '190px',
+    border: 'solid 6px #0288d1',
     padding: '2%'
   }
 
@@ -30,14 +30,21 @@ function LandingPage() {
   return (
     <>
       <Box sx={boxStyle}>
-        <div style={{display: 'flex', justifyContent: 'center', marginTop: '20%', marginBottom: '20%'}}>
-          <img style={imgStyle} src='./images/Honey-Does-Inline-Logo.png'/>
+        <div style={{display: 'flex', justifyContent: 'center', marginTop: '20%', marginBottom: '10%'}}>
+          <a href="https://honeydoesllc.com/" target="_blank" rel="link to Honey Does LLC website">
+            <img style={imgStyle} src='./images/Honey-Does-Landing.jpeg'/>
+          </a>
         </div>
-        <Stack spacing={3}>
-          <Button variant='contained'>
+        <div style={{width: '300px'}}>
+          <Typography variant='h5' align='center' color='#3291b9' sx={{mb: 5, fontStyle: 'italic', textDecoration: 'underline'}} >
+            Meeting all of your cleaning needs with excellence!
+          </Typography>
+        </div>
+        <Stack spacing={3} sx={{width: '80%'}}>
+          <Button variant='contained' sx={{padding: 1.5}}>
             Get an Estimate
           </Button>
-          <Button variant='contained'>
+          <Button variant='contained' sx={{padding: 1.5}}>
             Login
           </Button>
         </Stack>

@@ -13,7 +13,9 @@ function NewNav() {
     paddingLeft: '5%',
     paddingRight: '5%',
     height: '70px',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    display: 'flex',
+    justifyContent: 'center'
   }
 
   const toHome = () => {
@@ -24,7 +26,7 @@ function NewNav() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" color='primary'>
         <div style={style}>
-            <img onClick={toHome} src='./images/Honey-Does-Inline-Logo.png'/>
+            <img onClick={toHome} style={{maxHeight: '100%', maxWidth: '100%'}} src='./images/Honey-Does-Inline-Logo.png'/>
         </div>
       </AppBar>
     </Box>
