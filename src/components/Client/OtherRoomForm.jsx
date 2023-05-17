@@ -16,8 +16,6 @@ function OtherRoomForm() {
         sq_ft: ''
     });
 
-    // QUESTION: What if the client does not want other rooms cleaned? What do we send to the db?
-    // capture user inputs and set in to "otherRoomForm"
     const setForm = (event) => {
         let targetInputField = event.target.id;
         switch (targetInputField) {
