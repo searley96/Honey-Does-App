@@ -6,15 +6,15 @@
 -- Phone number - string or int
 -- TEMPORARY USER
 CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-     "password" VARCHAR (1000) NOT NULL,
-     "first_name" VARCHAR(50) NOT NULL,
-     "last_name" VARCHAR(50) NOT NULL,
-     -- username is email address
-     "username" VARCHAR(100) NOT NULL,
-     "phone_number" VARCHAR(15) NOT NULL,
-     "role" VARCHAR(20) NOT NULL,
-     "address" VARCHAR(50) NOT NULL
+  "id" SERIAL PRIMARY KEY,
+   "password" VARCHAR (1000) NOT NULL,
+   "first_name" VARCHAR(50) NOT NULL,
+   "last_name" VARCHAR(50) NOT NULL,
+   -- username is email address
+   "username" VARCHAR(100) NOT NULL,
+   "phone_number" VARCHAR(15) NOT NULL,
+   "role" VARCHAR(20) NOT NULL,
+   "address" VARCHAR(200) NOT NULL
 );
 
 -- date
@@ -82,7 +82,6 @@ CREATE TABLE "user_bathroom" (
 	"bathroom_type" VARCHAR(50) NOT NULL,
 	"bath_shower_type" VARCHAR(50),
 	"threshold_type" VARCHAR(50),
-	"clean_jacuzzi" BOOLEAN NOT NULL,
 	"clean_mirror" BOOLEAN NOT NULL,
 	"number_mirrors_clean" INT,
 	"clean_sink_counter" BOOLEAN NOT NULL,
