@@ -3,6 +3,7 @@ import KitchenForm from '../Client/Kitchen/KitchenForm';
 import Message from '../Chat/Message';
 import Chat from '../Chat/Chat';
 
+
 // This is one of our simplest components
 // It doesn't have local state,
 // It doesn't dispatch any redux actions or display any part of redux state
@@ -16,7 +17,7 @@ function AboutPage() {
       </div>
       <div>
         <KitchenForm />
-        <Chat />
+        {/* <Chat /> */}
       </div>
     </div>
   );

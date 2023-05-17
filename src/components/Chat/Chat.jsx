@@ -11,7 +11,7 @@ function Chat() {
         userId: 1
     },
     {
-        text: 'leave me alone',
+        text: 'good, hbu?',
         userId: 2
     }];
 
