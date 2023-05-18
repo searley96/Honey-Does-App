@@ -1,30 +1,31 @@
-const clientWipeDustReducer = (state = {
-	job_id: '',
-	wipe_clean_glass: 'yes',
-	glass_door: '',
-	glass_door_number: '',
-	inside_glass_door: '',
-	outside_glass_door: '',
-	glass_door_location: '',
-	other_mirrors: '',
-	other_mirrors_number: '',
-	other_mirrors_location: '',
-	dust: 'yes',
-	ceiling_lines_wall_lines_baseboards: '',
-	ceiling_fixtures: '',
-	swiffer_feather: '',
-	window_blinds: '',
-	window_ledges: '',
-	window_sills: '',
-	picture_frames_wall_decor: '',
-	tops_decor_items: '',
-	pick_up_get_under: '',
-	electronics: '',
-	dust_other: '',
-	dust_other_instructions: '',
-	dust_bed_living_furniture: '',
-	bed_living_furniture_duster: ''
-}, action) => {
+const clientWipeDustReducer = (state =
+    {
+        job_id: '',
+        wipe_clean_glass: 'yes',
+        glass_door: '',
+        glass_door_number: '',
+        inside_glass_door: '',
+        outside_glass_door: '',
+        glass_door_location: '',
+        other_mirrors: '',
+        other_mirrors_number: '',
+        other_mirrors_location: '',
+        dust: 'yes',
+        ceiling_lines_wall_lines_baseboards: '',
+        ceiling_fixtures: '',
+        swiffer_feather: '',
+        window_blinds: '',
+        window_ledges: '',
+        window_sills: '',
+        picture_frames_wall_decor: '',
+        tops_decor_items: '',
+        pick_up_get_under: '',
+        electronics: '',
+        dust_other: '',
+        dust_other_instructions: '',
+        dust_bed_living_furniture: '',
+        bed_living_furniture_duster: ''
+    }, action) => {
     switch(action.type) {
         case 'JOB_ID':
             return {...state, job_id: action.payload};
