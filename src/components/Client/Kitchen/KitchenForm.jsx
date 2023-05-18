@@ -8,8 +8,6 @@ import { Button, ButtonGroup, Stack, Box } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import DoneIcon from '@mui/icons-material/Done';
 
-import './Kitchen.css';
-
 function KitchenForm() {
 
     return (
