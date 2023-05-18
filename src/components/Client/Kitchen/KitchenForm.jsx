@@ -24,7 +24,7 @@ function KitchenForm() {
 
         <>
             <h1>Kitchen Form</h1>
-            <Box>
+            <Box sx={{ mb: '60px'}}>
                 <CabinetGroup className='form-group' />
             </Box>
             <Box sx={{ my: '60px' }}>
