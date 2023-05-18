@@ -8,8 +8,20 @@ const userStrategy = require('../strategies/user.strategy');
 const router = express.Router();
 
 // KITCHEN GET
-router.get('/kitchen/', rejectUnauthenticated, (req, res) => {
+router.get('/kitchen/:jobid', rejectUnauthenticated, (req, res) => {
+    const jobId = req.params.jobid;
+    const queryText = `
+        SELECT * FROM user_kitchen
+        WHERE job_id = $1;
+    `;
 
+    pool.query(queryText, [jobId])
+        .then(result => {
+            res.send(result.rows);
+        }).catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+        })
 })
 
 // KITCHEN POST
@@ -98,14 +110,26 @@ router.post('/kitchen/', rejectUnauthenticated, (req, res) => {
 })
 
 // BATHROOM GET
-router.get('/bathroom/', rejectUnauthenticated, (req, res) => {
-    
+router.get('/bathroom/:jobid', rejectUnauthenticated, (req, res) => {
+    const jobId = req.params.jobid;
+    const queryText = `
+        SELECT * FROM user_bathroom
+        WHERE job_id = $1;
+    `;
+
+    pool.query(queryText, [jobId])
+        .then(result => {
+            res.send(result.rows);
+        }).catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+        })
 })
 
 // BATHROOM POST
 router.post('/bathroom/', rejectUnauthenticated, (req, res) => {
     const queryText = `
-        INSERT INTO user_kitchen( 
+        INSERT INTO user_bathroom( 
             job_id,
             room_type,
             bathroom_type,
@@ -168,14 +192,26 @@ router.post('/bathroom/', rejectUnauthenticated, (req, res) => {
 })
 
 // OTHER ROOM GET
-router.get('/other/', rejectUnauthenticated, (req, res) => {
-    
+router.get('/other/:jobid', rejectUnauthenticated, (req, res) => {
+    const jobId = req.params.jobid;
+    const queryText = `
+        SELECT * FROM user_other_room
+        WHERE job_id = $1;
+    `;
+
+    pool.query(queryText, [jobId])
+        .then(result => {
+            res.send(result.rows);
+        }).catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+        })
 })
 
 // OTHER ROOM POST
 router.post('/other/', rejectUnauthenticated, (req, res) => {
     const queryText = `
-    INSERT INTO user_kitchen( 
+    INSERT INTO user_other_room( 
         job_id,
         room_type,
         floor_type,
@@ -205,13 +241,49 @@ router.post('/other/', rejectUnauthenticated, (req, res) => {
 })
 
 // WIPE / DUST GET
-router.get('/wipe-dust/', rejectUnauthenticated, (req, res) => {
-    
+router.get('/wipe-dust/:jobid', rejectUnauthenticated, (req, res) => {
+    // mind the table name
+    const jobId = req.params.jobid;
+    const queryText = `
+        SELECT * FROM TABLE_NAME_HERE
+        WHERE job_id = $1;
+    `;
+
+    pool.query(queryText, [jobId])
+        .then(result => {
+            res.send(result.rows);
+        }).catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+        })
 })
 
 // WIPE / DUST POST
 router.post('/wipe-dust/', rejectUnauthenticated, (req, res) => {
-    
+    // mind the table name
+    const queryText = `
+    INSERT INTO TABLE_NAME( 
+       
+        
+        )
+    VALUES(
+        $1, $2, $3, $4, $5, $6)
+    );
+    `
+    pool.query(queryText, 
+        [
+            // req.body.job_id, 
+            // req.body.room_type, 
+            // req.body.floor_type, 
+            // req.body.wipe_surfaces, 
+            // req.body.clean_floor, 
+            // req.body.sq_ft
+        ]).then(response => {
+            res.sendStatus(201);
+        }).catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+        })
 })
 
 export default router;
