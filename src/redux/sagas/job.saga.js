@@ -8,7 +8,7 @@ function* createJobId() {
 
         // places generated jobId into the associated reducer
         yield put({
-            type: 'JOB_ID',
+            type: 'SET_JOB_ID_REDUCER',
             payload: jobId.data
         });
     } catch(error) {
