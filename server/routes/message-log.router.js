@@ -40,7 +40,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         ts = req.body.ts,
         image_url = req.body.image_url,
         messageText = req.body.messageText,
-        sender_id = req.body.sender_id
+        sender_id = req.user.id
         console.log(req.body);
     const queryText = `
         INSERT INTO "message_log" (job_id, "timestamp", image_url, "text", sender_id)

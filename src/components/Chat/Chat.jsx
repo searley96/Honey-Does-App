@@ -24,6 +24,12 @@ function Chat() {
     const handleSubmit = event => {
         // setMessages(...messages, {text: newMessage, userId: 1});
         // setNewMessage('');
+        dispatch({
+            type: 'ADD_MESSAGE', 
+            payload: {
+                
+            }
+        })
     }
     console.log('chat:', chat);
     return (
