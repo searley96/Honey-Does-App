@@ -4,20 +4,19 @@ import { useSelector } from 'react-redux';
 import { FormControl, FormGroup, RadioGroup, FormLabel, FormControlLabel, Radio, Card, Paper, Box } from '@mui/material';
 import { spacing } from '@mui/system';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import './Message.css';
 
 function Message({ message }) {
 
     const user = 1;
 
 
-    // console.log(user, userId)
+    // console.log(user, message.sender_id)
     return (
 
         // <Box sx={{ backgroundColor: '#f5f5f5'}}>
         <>
             {
-                message.userId == user ?
+                message.sender_id == user ?
                     <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                         <Paper className="message" variant='elevation' elevation={3}
                             sx={{
@@ -38,7 +37,7 @@ function Message({ message }) {
                                 maxWidth: '80%',
                                 justifyContent: 'end',
                                 px: '10px',
-                                backgroundColor: '#f5f5f5',
+                                backgroundColor: 'rgba(252, 185, 0,.75)',
                                 my: '10px',
                                 ml: '20px'
                             }}>

@@ -8,12 +8,26 @@ import { Button, ButtonGroup, Stack, Box } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import DoneIcon from '@mui/icons-material/Done';
 
-function KitchenForm() {
+<<<<<<< HEAD
+=======
+import React, {useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+
+>>>>>>> main
+function KitchenForm() {
+    
+    const dispatch = useDispatch();
+    const jobId = useSelector(store => store.jobid);
+
+    useEffect(() => {
+        dispatch({type: 'JOB_ID', payload: jobId})
+    }, [])
     return (
 
         <>
-            <Box sx={{ my: '60px' }}>
+            <h1>Kitchen Form</h1>
+            <Box sx={{ mb: '60px'}}>
                 <CabinetGroup className='form-group' />
             </Box>
             <Box sx={{ my: '60px' }}>
