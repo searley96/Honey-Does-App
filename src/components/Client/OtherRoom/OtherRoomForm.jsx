@@ -15,7 +15,7 @@ function OtherRoomForm() {
     // Post form to database, clear form, and go to the next page.
     const submitHandler = (event) => {
         event.preventDefault();
-        dispatch({ type: 'ADD_OTHER_ROOM_FORM', payload: otherRoomForm})
+        dispatch({ type: 'ADD_OTHER_ROOM', payload: otherRoomForm})
         history.push('/nextPageGoesHere'); // TO DO: put the route of the next componenet here
     }
     
@@ -25,7 +25,7 @@ function OtherRoomForm() {
             
             <Stack spacing={1} direction='row' sx={{ mt: '40px', display: 'flex', justifyContent: 'space-between' }}>
 
-                <Button variant="outlined" onClick={e => dispatch({ type: 'ADD_OTHER_ROOM_FORM', payload: otherRoomForm })}>
+                <Button variant="outlined" onClick={e => dispatch({ type: 'ADD_OTHER_ROOM', payload: otherRoomForm })}>
                     <AddIcon sx={{ mx: '5px' }} fontSize="small" /> Add Another Room
                 </Button>
 
