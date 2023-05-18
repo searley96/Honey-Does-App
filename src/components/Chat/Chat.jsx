@@ -16,7 +16,8 @@ function Chat() {
         text: 'good, hbu?',
         userId: 2
     }];
-
+    // NOTE TO SELF: user should have access to this job id when 
+    //   they access the chat (when they click on an active or request status job)
     useEffect(() => {
         dispatch({type: 'FETCH_CHAT', payload: {jobId: 123456}})
     }, [])
@@ -27,7 +28,7 @@ function Chat() {
         dispatch({
             type: 'ADD_MESSAGE', 
             payload: {
-                
+
             }
         })
     }
