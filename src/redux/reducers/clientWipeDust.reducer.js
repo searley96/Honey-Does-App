@@ -24,7 +24,8 @@ const clientWipeDustReducer = (state =
         dust_other: '',
         dust_other_instructions: '',
         dust_bed_living_furniture: '',
-        bed_living_furniture_duster: ''
+        bed_living_furniture_duster: '',
+        orange_glo_applicable: '',
     }, action) => {
     switch(action.type) {
         case 'JOB_ID':
@@ -77,6 +78,8 @@ const clientWipeDustReducer = (state =
             return {...state, dust_bed_living_furniture: action.payload};
         case 'SET_BED_LIVING_FURNITURE_DUSTER':
             return {...state, bed_living_furniture_duster: action.payload};
+        case 'SET_ORANGE_GLO_APPLICABLE':
+            return {...state, orange_glo_applicable: action.payload};     
         default:
             return state;
     }

@@ -133,7 +133,8 @@ CREATE TABLE "user_wipe_dust"(
 	"dust_other" BOOLEAN,
 	"dust_other_instructions" VARCHAR(500),
 	"dust_bed_living_furniture" BOOLEAN,
-	"bed_living_furniture_duster" VARCHAR(50)
+	"bed_living_furniture_duster" VARCHAR(50),
+	"orange_glo_applicable" BOOLEAN
 );
 
 -- Job Table Mock Data
