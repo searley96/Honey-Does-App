@@ -88,7 +88,7 @@ function DustOtherGroup() {
                         multiline
                         sx={{width: '90%'}}
                         size="small"
-                        placeholder="Example: 1. Den, 2. Backdoor, etc."
+                        placeholder="Example: 1. Dresser in den, 2. Lamp in basement, etc."
                         onChange={e => dispatch({ type: 'SET_DUST_OTHER_INSTRUCTIONS', payload: event.target.value })}
                     />
                 </Box>
