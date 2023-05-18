@@ -25,7 +25,6 @@ function OtherRoomForm() {
             
             <Stack spacing={1} direction='row' sx={{ mt: '40px', display: 'flex', justifyContent: 'space-between' }}>
 
-                {/* TO DO: need to clear/reset otherRoomForm reducer after clicking this button */}
                 <Button variant="outlined" onClick={e => dispatch({ type: 'ADD_OTHER_ROOM_FORM', payload: otherRoomForm })}>
                     <AddIcon sx={{ mx: '5px' }} fontSize="small" /> Add Another Room
                 </Button>

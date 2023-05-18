@@ -1,6 +1,5 @@
 const clientOtherRoomReducer = (state = {
     job_id: '',
-    clean_other_room: 'no',
     room_type: '',
     floor_type: '',
     wipe_surfaces: 'yes',
@@ -10,8 +9,6 @@ const clientOtherRoomReducer = (state = {
     switch (action.type) {
         case 'JOB_ID':
             return { ...state, job_id: action.payload };
-        case 'SET_CLEAN_OTHER_ROOM':
-            return { ...state, clean_other_room: action.payload }
         case 'SET_ROOM_TYPE':
             return { ...state, room_type: action.payload };
         case 'SET_SQ_FT':
@@ -20,6 +17,13 @@ const clientOtherRoomReducer = (state = {
             return { ...state, wipe_surfaces: action.payload };
         case 'SET_CLEAN_FLOOR':
             return { ...state, clean_floor: action.payload };
+        case 'CLEAR_OTHER_ROOM_FORM':
+            return {job_id: '',
+            room_type: '',
+            floor_type: '',
+            wipe_surfaces: 'yes',
+            clean_floor: 'yes',
+            sq_ft: ''};
         default:
             return state;
     }
