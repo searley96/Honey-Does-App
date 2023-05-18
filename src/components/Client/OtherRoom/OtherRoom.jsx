@@ -14,19 +14,19 @@ function OtherRoom() {
             <h3>{otherRoomHeader}</h3>
             <FormGroup>
                 <FormControl>
-
+                    {/* For all the codes commented out, not sure if we should keep the clean other rooms question. */}
                     {/* CLEAN OTHER ROOMS? */}
-                    <FormLabel>Do you want to add a room to be cleaned?</FormLabel>
+                    {/* <FormLabel>Do you want to add a room to be cleaned?</FormLabel>
                     <RadioGroup aria-labelledby="clean_other_room" name="clean_other_room"
                         row value={otherRoom.clean_other_room} // **** NEED TO ADD THIS COLUMN TO THE TABLE IN THE DATABASE!!! ****
                         onChange={e => dispatch({ type: 'SET_CLEAN_OTHER_ROOM', payload: event.target.value })}>
                         <FormControlLabel value="yes" control={<Radio />} label="yes" />
                         <FormControlLabel value="no" control={<Radio />} label="no" />
-                    </RadioGroup>
+                    </RadioGroup> */}
 
                     {/* If clean other rooms = yes then show form */}
-                    {otherRoom.clean_other_room === 'yes' &&
-                        <>
+                    {/* {otherRoom.clean_other_room === 'yes' &&
+                        <> */}
                             {/* ROOM TYPES */}
                             <FormLabel>Select room type:</FormLabel>
                             <RadioGroup aria-labelledby="room_type" name="room_type"
@@ -41,7 +41,7 @@ function OtherRoom() {
 
                             {/* SQ FT */}
                             <FormLabel>What is the square footage of the room?</FormLabel>
-                            <TextField size='small' value={otherRoom.sq_ft}
+                            <TextField size='small' sx={{ width: 150}} value={otherRoom.sq_ft}
                                 onChange={e => dispatch({ type: 'SET_SQ_FT', payload: event.target.value })} />
 
                             {/* WIPE SURFACES? */}
@@ -80,8 +80,8 @@ function OtherRoom() {
                                 </>
                             }
 
-                        </>
-                    }
+                        {/* </>
+                    } */}
 
                 </FormControl>
             </FormGroup>
