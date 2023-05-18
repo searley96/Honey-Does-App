@@ -15,8 +15,8 @@ function GlassDoorsGroup() {
             <RadioGroup aria-labelledby="glass_door" name="glass_door"
             row value={wipeDust.glass_door}
             onChange={e => dispatch({ type: 'SET_GLASS_DOOR', payload: event.target.value })}>
-                <FormControlLabel value="yes" control={<Radio />} label="yes" />
-                <FormControlLabel value="no" control={<Radio />} label="no" />
+                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                <FormControlLabel value="no" control={<Radio />} label="No" />
             </RadioGroup>
             {wipeDust.glass_door === 'yes' &&
                 <>
@@ -30,16 +30,16 @@ function GlassDoorsGroup() {
                     <RadioGroup aria-labelledby="inside_glass_door" name="inside_glass_door"
                     row value={wipeDust.inside_glass_door}
                     onChange={e => dispatch({ type: 'SET_INSIDE_GLASS_DOOR', payload: event.target.value })}>
-                        <FormControlLabel value="yes" control={<Radio />} label="yes" />
-                        <FormControlLabel value="no" control={<Radio />} label="no" />
+                        <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                        <FormControlLabel value="no" control={<Radio />} label="No" />
                     </RadioGroup>
                     {/* Clean Outside of Glass Doors */}
                     <FormLabel>Do you want us to clean the outside of the glass doors?</FormLabel>
                     <RadioGroup aria-labelledby="outside_glass_door" name="outside_glass_door"
                     row value={wipeDust.outside_glass_door}
                     onChange={e => dispatch({ type: 'SET_OUTSIDE_GLASS_DOOR', payload: event.target.value })}>
-                        <FormControlLabel value="yes" control={<Radio />} label="yes" />
-                        <FormControlLabel value="no" control={<Radio />} label="no" />
+                        <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                        <FormControlLabel value="no" control={<Radio />} label="No" />
                     </RadioGroup>
                     {/* Glass Door Location */}
                     <Box>

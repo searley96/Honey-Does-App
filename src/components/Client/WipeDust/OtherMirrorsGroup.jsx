@@ -15,8 +15,8 @@ function MirrorsGroup() {
             <RadioGroup aria-labelledby="other_mirrors" name="other_mirrors"
             row value={wipeDust.other_mirrors}
             onChange={e => dispatch({ type: 'SET_OTHER_MIRRORS', payload: event.target.value })}>
-                <FormControlLabel value="yes" control={<Radio />} label="yes" />
-                <FormControlLabel value="no" control={<Radio />} label="no" />
+                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                <FormControlLabel value="no" control={<Radio />} label="No" />
             </RadioGroup>
             {wipeDust.other_mirrors === 'yes' &&
             <>
