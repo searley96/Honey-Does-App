@@ -37,15 +37,15 @@ function WipeDustForm() {
                 </FormControl>
             </FormGroup>
             <h3>Dust</h3>
-                <FormGroup>
-                    <FormControl>
-                        <FormLabel>Do you want us to dust?</FormLabel>
-                        <RadioGroup aria-labelledby="dust" name="dust"
-                        row value={wipeDust.dust}
-                        onChange={e => dispatch({ type: 'SET_DUST', payload: event.target.value })}>
-                            <FormControlLabel value="yes" control={<Radio />} label="yes" />
-                            <FormControlLabel value="no" control={<Radio />} label="no" />
-                        </RadioGroup>
+            <FormGroup>
+                <FormControl>
+                    <FormLabel>Do you want us to dust?</FormLabel>
+                    <RadioGroup aria-labelledby="dust" name="dust"
+                    row value={wipeDust.dust}
+                    onChange={e => dispatch({ type: 'SET_DUST', payload: event.target.value })}>
+                        <FormControlLabel value="yes" control={<Radio />} label="yes" />
+                        <FormControlLabel value="no" control={<Radio />} label="no" />
+                    </RadioGroup>
             {wipeDust.dust === "yes" &&
                 <>
                     <Box sx={{ my: '60px' }}>
@@ -59,8 +59,8 @@ function WipeDustForm() {
                     </Box>
                 </>
             }
-                    </FormControl>
-                </FormGroup>
+                </FormControl>
+            </FormGroup>
         </>
     )
 }
