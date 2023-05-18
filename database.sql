@@ -119,6 +119,8 @@ VALUES (123456, 1, 6, 3, 'active', 'I am very happy with the clean your company 
 -- or the same day as the date to determine job_status
 
 -- also need to check if job.client_id matches req.user.id
-SELECT * FROM message_log
-WHERE job_id = 6
+SELECT message_log.job_id, "timestamp", image_url, "text", job.client_id, job.manager_id, job.cleaner_id, job.job_status
+FROM message_log
+JOIN job ON job.job_id = message_log.job_id
+WHERE message_log.job_id = 123456
 ORDER BY TIMESTAMP ASC;

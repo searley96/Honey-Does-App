@@ -18,7 +18,7 @@ function Chat() {
     }];
 
     useEffect(() => {
-        dispatch({type: 'FETCH_CHAT', payload: {jobId: 6}})
+        dispatch({type: 'FETCH_CHAT', payload: {jobId: 123456}})
     }, [])
 
     const handleSubmit = event => {
@@ -29,8 +29,8 @@ function Chat() {
     return (
         <>
             <Box sx={{ backgroundColor: 'rgba(252, 185, 0, 0.5)', backgroundOp: 0.5 }}>
-                {messages.map((message, index) =>
-                    <Message key={index} message={message} />
+                {chat.map((message) =>
+                    <Message key={message.id} message={message} />
                 )}
             </Box>
             <Box sx={{ display: 'flex' }}>
