@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams, useHistory } from "react-router-dom";
 import SmsIcon from "@mui/icons-material/Sms";
 import {
   Box,
@@ -22,8 +23,21 @@ const AnimatedIconButton = styled(IconButton)`
 `;
 
 function JobHistory() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { id } = useParams();
   const [showActiveJobs, setShowActiveJobs] = useState(false);
   const [showPastJobs, setShowPastJobs] = useState(false);
+
+  const getAllJobs = () => {
+    dispatch({
+      type: "FETCH_JOB_ID",
+    });
+  };
+
+  useEffect(() => {
+    getAllJobs();
+  }, []);
 
   const activeJobs = [
     {

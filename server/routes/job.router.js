@@ -1,11 +1,9 @@
 const express = require("express");
 const pool = require("../modules/pool");
-const express = require("express");
 const {
   rejectUnauthenticated,
 } = require("../modules/authentication-middleware");
 const encryptLib = require("../modules/encryption");
-const pool = require("../modules/pool");
 const userStrategy = require("../strategies/user.strategy");
 
 const router = express.Router();
@@ -77,6 +75,23 @@ router.get("/", rejectUnauthenticated, (req, res) => {
   const queryText = `
         SELECT * FROM "job"
         WHERE "client_id" = $1 AND "job_status" = 'active';
+    `;
+  pool
+    .query(queryText, [req.user.id])
+    .then((result) => {
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
+
+// GET ALL JOBS
+router.get("/jobHistory", rejectUnauthenticated, (req, res) => {
+  const queryText = `
+        SELECT * FROM "job"
+        WHERE "client_id" = $1;
     `;
   pool
     .query(queryText, [req.user.id])

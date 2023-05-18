@@ -73,6 +73,9 @@ function App() {
           >
             <InfoPage />
           </ProtectedRoute>
+          <ProtectedRoute exact path="/jobHistory">
+            <JobHistory />
+          </ProtectedRoute>
 
           <Route exact path="/login">
             {user.id ? (
@@ -135,7 +138,7 @@ function App() {
         </Switch>
         {/* <Menu />
         <Container /> */}
-        <JobHistory />
+
         <Footer />
       </div>
     </Router>
