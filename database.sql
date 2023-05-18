@@ -46,7 +46,7 @@ CREATE TABLE "message_log"(
 -- query rooms by job_id
 CREATE TABLE "user_kitchen"(
 	"id" SERIAL PRIMARY KEY,
-	"job_id" INT NOT NULL,
+	"job_id" INT NOT NULL REFERENCES "job",
 	"room_type" VARCHAR(50) NOT NULL,
 	"wipe_cabinets" BOOLEAN NOT NULL,
 	"cabinet_spot_full_clean" VARCHAR(50),
@@ -77,7 +77,7 @@ CREATE TABLE "user_kitchen"(
 
 CREATE TABLE "user_bathroom" (
 	"id" SERIAL PRIMARY KEY,
-	"job_id" INT NOT NULL,
+	"job_id" INT NOT NULL REFERENCES "job",
 	"room_type" VARCHAR(50) NOT NULL,
 	"bathroom_type" VARCHAR(50) NOT NULL,
 	"bath_shower_type" VARCHAR(50),
@@ -99,7 +99,7 @@ CREATE TABLE "user_bathroom" (
     
 CREATE TABLE "user_other_room"(
 	"id" SERIAL PRIMARY KEY,
-	"job_id" INT NOT NULL,
+	"job_id" INT NOT NULL REFERENCES "job",
 	"room_type" VARCHAR(50) NOT NULL,
 	"floor_type" VARCHAR(50) NOT NULL,
 	"wipe_surfaces" BOOLEAN NOT NULL,
@@ -119,8 +119,21 @@ CREATE TABLE "user_wipe_dust"(
 	"other_mirrors" BOOLEAN,
 	"other_mirrors_number" INT,
 	"other_mirrors_location" VARCHAR(500),
-	
-
+	"dust" BOOLEAN NOT NULL,
+	"ceiling_lines_wall_lines_baseboards" BOOLEAN,
+	"ceiling_fixtures" BOOLEAN,
+	"swiffer_feather" VARCHAR(50),
+	"window_blinds" BOOLEAN,
+	"window_ledges" BOOLEAN,
+	"window_sills" BOOLEAN,
+	"picture_frames_wall_decor" BOOLEAN,
+	"tops_decor_items" BOOLEAN,
+	"pick_up_get_under" BOOLEAN,
+	"electronics" BOOLEAN,
+	"dust_other" BOOLEAN,
+	"dust_other_instructions" VARCHAR(500),
+	"dust_bed_living_furniture" BOOLEAN,
+	"bed_living_furniture_duster" VARCHAR(50)
 );
 
 -- Job Table Mock Data
