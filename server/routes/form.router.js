@@ -14,7 +14,87 @@ router.get('/kitchen/', rejectUnauthenticated, (req, res) => {
 
 // KITCHEN POST
 router.post('/kitchen/', rejectUnauthenticated, (req, res) => {
-    
+    const queryText = `
+        INSERT INTO user_kitchen( 
+            job_id,
+            room_type,
+            wipe_cabinets,
+            cabinet_spot_full_clean,
+            cabinet_orange_glo,
+
+            wipe_appliances,
+            wipe_fridge,
+            fridge_stainless_steel,
+            wipe_dishwasher,
+            dishwasher_stainless_steel,
+
+            wipe_deep_freezer,
+            clean_microwave,
+            clean_stove_top,
+            type_of_stove,
+            clean_hood_vent,
+
+            hood_vent_special_instructions,
+            back_splash,
+            clean_stove_front,
+            stove_stainless_steel,
+            wipe_counters_sink,
+
+            granite_counter_tops,
+            sweep_mop_floor,
+            shake_rugs,
+            hardwood_floors,
+            specialty_flooring,
+            
+            specialty_flooring_instructions,
+            mop_location
+            )
+        VALUES(
+            $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, 
+            $11, $12, $13, $14, $15, $16, $17, $18, 19, $20, 
+            $21, $22, $23, $24, $25, $26, $27)
+        );
+        `;
+        pool.query(queryText, 
+            [
+                req.body.job_id, 
+                req.body.room_type, 
+                req.body.wipe_cabinets, 
+                req.body.cabinet_spot_full_clean, 
+                req.body.cabinet_orange_glo, 
+
+                req.body.wipe_appliances,
+                req.body.wipe_fridge,
+                req.body.fridge_stainless_steel,
+                req.body.wipe_dishwasher,
+                req.body.clean_hood_vent,
+
+                req.body.wipe_deep_freezer,
+                req.body.clean_microwave,
+                req.body.clean_stove_top,
+                req.body.type_of_stove,
+                req.body.clean_hood_vent,
+
+                req.body.hood_vent_special_instructions,
+                req.body.back_splash,
+                req.body.clean_stove_front,
+                req.body.stove_stainless_steel,
+                req.body.wipe_counters_sink,
+
+                req.body.granite_counter_tops,
+                req.body.sweep_mop_floor,
+                req.body.shake_rugs,
+                req.body.hardwood_floors,
+                req.body.specialty_flooring,
+
+                req.body.specialty_flooring_instructions,
+                req.body.mop_location
+            ]).then(response => {
+                res.sendStatus(201);
+            }).catch(err => {
+                console.log(err);
+                res.sendStatus(500);
+            })
 })
 
 // BATHROOM GET
@@ -34,7 +114,34 @@ router.get('/other/', rejectUnauthenticated, (req, res) => {
 
 // OTHER ROOM POST
 router.post('/other/', rejectUnauthenticated, (req, res) => {
-    
+    const queryText = `
+    INSERT INTO user_kitchen( 
+        job_id,
+        room_type,
+        floor_type,
+        wipe_surfaces,
+        clean_floor,
+        sq_ft
+        
+        )
+    VALUES(
+        $1, $2, $3, $4, $5, $6)
+    );
+    `
+    pool.query(queryText, 
+        [
+            req.body.job_id, 
+            req.body.room_type, 
+            req.body.floor_type, 
+            req.body.wipe_surfaces, 
+            req.body.clean_floor, 
+            req.body.sq_ft
+        ]).then(response => {
+            res.sendStatus(201);
+        }).catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+        })
 })
 
 // WIPE / DUST GET
