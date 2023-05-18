@@ -17,13 +17,17 @@ const clientOtherRoomReducer = (state = {
             return { ...state, wipe_surfaces: action.payload };
         case 'SET_CLEAN_FLOOR':
             return { ...state, clean_floor: action.payload };
+        case 'SET_FLOOR_TYPE':
+            return { ...state, floor_type: action.payload };
         case 'CLEAR_OTHER_ROOM_FORM':
-            return {job_id: '',
-            room_type: '',
-            floor_type: '',
-            wipe_surfaces: 'yes',
-            clean_floor: 'yes',
-            sq_ft: ''};
+            return {
+                job_id: '',
+                room_type: '',
+                floor_type: '',
+                wipe_surfaces: 'yes',
+                clean_floor: 'yes',
+                sq_ft: ''
+            };
         default:
             return state;
     }

@@ -31,7 +31,7 @@ function* fetchBathroom() {
 
 function* createOtherRoom(action) {
     try {
-        yield axios.post(`/api/ROUTERGOESHERE`, action.payload);
+        yield axios.post(`/api/form/other`, action.payload);
         yield axios.get(`/api/job/jobid`);
         yield put({ type: 'JOB_ID', payload: jobId.data });
     } catch (error) {
@@ -42,7 +42,7 @@ function* createOtherRoom(action) {
 
 function* fetchOtherRoom() {
     try {
-        const response = yield axios.get(`/api/ROUTERGOESHERE`);
+        const response = yield axios.get(`/api/job/jobid`);
         // yield put({type})
     } catch (error) {
         console.log('Error retrieving Other Room:', error);
