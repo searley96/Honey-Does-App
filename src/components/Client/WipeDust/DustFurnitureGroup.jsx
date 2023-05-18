@@ -14,8 +14,8 @@ function DustFurnitureGroup() {
             <RadioGroup aria-labelledby="dust_bed_living_furniture" name="dust_bed_living_furniture"
             row value={wipeDust.dust_bed_living_furniture}
             onChange={e => dispatch({ type: 'SET_DUST_BED_LIVING_FURNITURE', payload: event.target.value })}>
-                <FormControlLabel value="yes" control={<Radio />} label="yes" />
-                <FormControlLabel value="no" control={<Radio />} label="no" />
+                <FormControlLabel value='yes' control={<Radio />} label="Yes" />
+                <FormControlLabel value='no' control={<Radio />} label="No" />
             </RadioGroup>
             {wipeDust.dust_bed_living_furniture === 'yes' &&
                 <>

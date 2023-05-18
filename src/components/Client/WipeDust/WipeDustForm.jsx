@@ -1,5 +1,5 @@
 import GlassDoorsGroup from "./GlassDoorsGroup";
-import MirrorsGroup from "./MirrorsGroup";
+import MirrorsGroup from "./OtherMirrorsGroup";
 import DustCeilingGroup from "./DustCeilingGroup";
 import DustOtherGroup from "./DustOtherGroup";
 import DustFurnitureGroup from "./DustFurnitureGroup"
@@ -28,8 +28,8 @@ function WipeDustForm() {
                     <RadioGroup aria-labelledby="wipe_clean_glass" name="wipe_clean_glass"
                     row value={wipeDust.wipe_clean_glass}
                     onChange={e => dispatch({ type: 'SET_WIPE_CLEAN_GLASS', payload: event.target.value })}>
-                        <FormControlLabel value="yes" control={<Radio />} label="yes" />
-                        <FormControlLabel value="no" control={<Radio />} label="no" />
+                        <FormControlLabel value='yes' control={<Radio />} label="Yes" />
+                        <FormControlLabel value='no' control={<Radio />} label="No" />
                     </RadioGroup>
             {wipeDust.wipe_clean_glass === 'yes' &&
                 <>
@@ -50,10 +50,10 @@ function WipeDustForm() {
                     <RadioGroup aria-labelledby="dust" name="dust"
                     row value={wipeDust.dust}
                     onChange={e => dispatch({ type: 'SET_DUST', payload: event.target.value })}>
-                        <FormControlLabel value="yes" control={<Radio />} label="yes" />
-                        <FormControlLabel value="no" control={<Radio />} label="no" />
+                        <FormControlLabel value='yes' control={<Radio />} label="Yes" />
+                        <FormControlLabel value='no' control={<Radio />} label="No" />
                     </RadioGroup>
-            {wipeDust.dust === "yes" &&
+            {wipeDust.dust === 'yes' &&
                 <>
                     <Box sx={{ my: '30px' }}>
                         <DustCeilingGroup />

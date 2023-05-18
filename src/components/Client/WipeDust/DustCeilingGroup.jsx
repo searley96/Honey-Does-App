@@ -14,16 +14,16 @@ function DustCeilingGroup() {
             <RadioGroup aria-labelledby="ceiling_lines_wall_lines_baseboards" name="ceiling_lines_wall_lines_baseboards"
             row value={wipeDust.ceiling_lines_wall_lines_baseboards}
             onChange={e => dispatch({ type: 'SET_CEILING_LINES_WALL_LINES_BASEBOARDS', payload: event.target.value })}>
-                <FormControlLabel value="yes" control={<Radio />} label="yes" />
-                <FormControlLabel value="no" control={<Radio />} label="no" />
+                <FormControlLabel value='yes' control={<Radio />} label="Yes" />
+                <FormControlLabel value='no' control={<Radio />} label="No" />
             </RadioGroup>
             {/* Dust Ceiling Fixtures and Fans */}
             <FormLabel>Do you want us to dust ceiling fixtures and fans?</FormLabel>
             <RadioGroup aria-labelledby="ceiling_fixtures" name="ceiling_fixtures"
             row value={wipeDust.ceiling_fixtures}
             onChange={e => dispatch({ type: 'SET_CEILING_FIXTURES', payload: event.target.value })}>
-                <FormControlLabel value="yes" control={<Radio />} label="yes" />
-                <FormControlLabel value="no" control={<Radio />} label="no" />
+                <FormControlLabel value='yes' control={<Radio />} label="Yes" />
+                <FormControlLabel value='no' control={<Radio />} label="No" />
             </RadioGroup>
         </>
     )
