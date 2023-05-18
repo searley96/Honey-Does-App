@@ -124,3 +124,7 @@ FROM message_log
 JOIN job ON job.job_id = message_log.job_id
 WHERE message_log.job_id = 123456
 ORDER BY TIMESTAMP ASC;
+
+--POST CHAT
+INSERT INTO "message_log" (job_id, "timestamp", image_url, "text", sender_id)
+VALUES (123456, '03-13-2020', NULL, 'its my birthday', 1);
