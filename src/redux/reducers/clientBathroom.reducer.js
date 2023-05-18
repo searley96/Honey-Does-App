@@ -2,7 +2,7 @@ const clientBathroomReducer = (state = {
     job_id: '',
     room_type: '',
     bathroom_type: '',
-    bath_shower_type: 'yes',
+    bath_shower_type: '',
     threshold_type: '',
     clean_jacuzzi: 'yes',
     clean_mirror: 'yes',
