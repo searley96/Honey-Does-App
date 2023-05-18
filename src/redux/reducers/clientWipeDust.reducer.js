@@ -29,54 +29,56 @@ const clientWipeDustReducer = (state =
     switch(action.type) {
         case 'JOB_ID':
             return {...state, job_id: action.payload};
-        case 'WIPE_CLEAN_GLASS':
+        case 'SET_WIPE_CLEAN_GLASS':
             return {...state, wipe_clean_glass: action.payload};
-        case 'GLASS_DOOR':
+        case 'SET_GLASS_DOOR':
             return {...state, glass_door: action.payload};
-        case 'GLASS_DOOR_NUMBER':
+        case 'SET_GLASS_DOOR_NUMBER':
             return {...state, glass_door_number: action.payload};
-        case 'INSIDE_GLASS_DOOR':
+        case 'SET_INSIDE_GLASS_DOOR':
             return {...state, inside_glass_door: action.payload};
-        case 'OUTSIDE_GLASS_DOOR':
+        case 'SET_OUTSIDE_GLASS_DOOR':
             return {...state, outside_glass_door: action.payload};
-        case 'GLASS_DOOR_LOCATION':
+        case 'SET_GLASS_DOOR_LOCATION':
             return {...state, glass_door_location: action.payload};
-        case 'OTHER_MIRRORS':
+        case 'SET_OTHER_MIRRORS':
             return {...state, other_mirrors: action.payload};
-        case 'OTHER_MIRRORS_NUMBER':
+        case 'SET_OTHER_MIRRORS_NUMBER':
             return {...state, other_mirrors_number: action.payload};
-        case 'OTHER_MIRRORS_LOCATION':
+        case 'SET_OTHER_MIRRORS_LOCATION':
             return {...state, other_mirrors_location: action.payload};
-        case 'DUST':
+        case 'SET_DUST':
             return {...state, dust: action.payload};
-        case 'CEILING_LINES_WALL_LINES_BASEBOARDS':
+        case 'SET_CEILING_LINES_WALL_LINES_BASEBOARDS':
             return {...state, ceiling_lines_wall_lines_baseboards: action.payload};
-        case 'CEILING_FIXTURES':
+        case 'SET_CEILING_FIXTURES':
             return {...state, ceiling_fixtures: action.payload};
-        case 'SWIFFER_FEATHER':
+        case 'SET_SWIFFER_FEATHER':
             return {...state, swiffer_feather: action.payload};
-        case 'WINDOW_BLINDS':
+        case 'SET_WINDOW_BLINDS':
             return {...state, window_blinds: action.payload};
-        case 'WINDOW_LEDGES':
+        case 'SET_WINDOW_LEDGES':
             return {...state, window_ledges: action.payload};
-        case 'WINDOW_SILLS':
+        case 'SET_WINDOW_SILLS':
             return {...state, window_sills: action.payload};
-        case 'PICTURE_FRAMES_WALL_DECOR':
+        case 'SET_PICTURE_FRAMES_WALL_DECOR':
             return {...state, picture_frames_wall_decor: action.payload};
-        case 'TOPS_DECOR_ITEMS':
+        case 'SET_TOPS_DECOR_ITEMS':
             return {...state, tops_decor_items: action.payload};
-        case 'PICK_UP_GET_UNDER':
+        case 'SET_PICK_UP_GET_UNDER':
             return {...state, pick_up_get_under: action.payload};
-        case 'ELECTRONICS':
+        case 'SET_ELECTRONICS':
             return {...state, electronics: action.payload};
-        case 'DUST_OTHER':
+        case 'SET_DUST_OTHER':
             return {...state, dust_other: action.payload};
-        case 'DUST_OTHER_INSTRUCTIONS':
+        case 'SET_DUST_OTHER_INSTRUCTIONS':
             return {...state, dust_other_instructions: action.payload};
-        case 'DUST_BED_LIVING_FURNITURE':
+        case 'SET_DUST_BED_LIVING_FURNITURE':
             return {...state, dust_bed_living_furniture: action.payload};
-        case 'BED_LIVING_FURNITURE_DUSTER':
+        case 'SET_BED_LIVING_FURNITURE_DUSTER':
             return {...state, bed_living_furniture_duster: action.payload};
+        default:
+            return state;
     }
 };
 

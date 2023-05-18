@@ -24,6 +24,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import ProfilePage from '../ProfilePage/ProfilePage';
 
 import './App.css';
+import WipeDustForm from '../Client/WipeDust/WipeDustForm';
 
 function App() {
   const dispatch = useDispatch();
@@ -121,6 +122,18 @@ function App() {
               {user.id ?
               <>
                 <ProfilePage />
+                <BottomNav />
+              </>
+              :
+              <LoginPage />
+              }
+          </Route>
+
+          <Route
+            exact path="/wipedust">
+              {user.id ?
+              <>
+                <WipeDustForm />
                 <BottomNav />
               </>
               :
