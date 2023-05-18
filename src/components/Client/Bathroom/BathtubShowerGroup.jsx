@@ -21,7 +21,7 @@ function BathtubShowerGroup() {
   // local state to store what items are checked
   const [list, updateList] = useState([]);
 
-  const [regularChecked, setRegular] = useState(false);
+  const [regularChecked, setRegularChecked] = useState(false);
   const [regularType, setRegularType] = useState('');
 
   const [ceramicPorcelainChecked, setCeramicPorcelainChecked] = useState(false);
@@ -59,15 +59,13 @@ function BathtubShowerGroup() {
   };
 
   
-
+  // submits other bathroom types from textfield, 
+  // sets textfield to an empty string and disable the component
   const otherSubmit = (e) => {
-    // getAttribute references the FormControlLabel's name attribute
-    updateList([...list, other]);
-
-    // dispatch({
-    //   type: "SET_BATH_SHOWER_TYPE",
-    //   payload: list,
-    // });
+    dispatch({
+      type: "SET_OTHER_TYPE",
+      payload: other,
+    });
     updateOther("");
     updateDisabled(true);
   };
@@ -85,7 +83,12 @@ function BathtubShowerGroup() {
 
           {/* BATHTUB SHOWER TYPE */}
           <FormControlLabel
-            onChange={() => setRegular(!regularChecked)}
+            onChange={(e) => {
+              setRegularChecked(e.target.checked)
+              setRegularType('');
+              dispatch({type: 'SET_REGULAR_TYPE', payload: ''})             
+              }
+            }
             control={<Checkbox />}
             name="Regular plastic tub/shower combo"
             label="Regular plastic tub/shower combo"
@@ -101,7 +104,7 @@ function BathtubShowerGroup() {
                 row  
               onChange={(event) =>  {
                 setRegularType(event.target.getAttribute("value"));
-                console.log(regularType);
+                dispatch({type: 'SET_REGULAR_TYPE', payload: regularType}) 
               }
                 
               }
@@ -121,7 +124,12 @@ function BathtubShowerGroup() {
           )}
 
           <FormControlLabel
-            onChange={() => setCeramicPorcelainChecked(!ceramicPorcelainChecked)}
+            onChange={(e) => {
+              setCeramicPorcelainChecked(e.target.checked)
+              setCeramicPorcelainType('');
+              dispatch({type: 'SET_CERAMIC_PORCELAIN_TYPE', payload: ''})             
+              }
+            }
             control={<Checkbox />}
             name="Ceramic or porcelain tub"
             label="Ceramic or porcelain tub"
@@ -133,9 +141,9 @@ function BathtubShowerGroup() {
                 aria-labelledby="threshold-type"
                 name="threshold-type"
                 row               
-                onChange={(event) =>{
+                onChange={(event) =>  {
                   setCeramicPorcelainType(event.target.getAttribute("value"));
-                  console.log(ceramicPorcelainType);
+                  dispatch({type: 'SET_CERAMIC_PORCELAIN_TYPE', payload: ceramicPorcelainType}) 
                 }
                 }
               >
@@ -153,7 +161,12 @@ function BathtubShowerGroup() {
             </>
           )}
           <FormControlLabel
-            onChange={() => setWalkInChecked(!walkInChecked)}
+            onChange={(e) => {
+              setWalkInChecked(e.target.checked)
+              setWalkInType('');
+              dispatch({type: 'SET_WALK_IN_TYPE', payload: ''})             
+              }
+            }
             control={<Checkbox />}
             name="Walk-in shower"
             label="Walk-in shower"
@@ -167,8 +180,9 @@ function BathtubShowerGroup() {
                 row
                 
                 onChange={(event) => {
-                  setWalkInType(event.target.getAttribute("value"))
-                  console.log(walkInType);
+                  setWalkInType(event.target.getAttribute("value"));
+                  dispatch({type: 'SET_WALK_IN_TYPE', payload: walkInType}) 
+     
                 }
                 }
               >
@@ -187,7 +201,12 @@ function BathtubShowerGroup() {
           )}
 
           <FormControlLabel
-            onChange={() => setSpecialShowerChecked(!specialShowerChecked)}
+            onChange={(e) => {
+              setSpecialShowerChecked(e.target.checked);
+              setSpecialShowerType('');
+              dispatch({type: 'SET_SPECIALTY_TYPE', payload: ''})             
+              }
+            }
             control={<Checkbox />}
             name="Specialty walk-in shower"
             label="Specialty walk-in shower"
@@ -202,7 +221,7 @@ function BathtubShowerGroup() {
                 
                 onChange={(event) => {
                   setSpecialShowerType(event.target.getAttribute("value"));
-                  console.log(specialShowerType);
+                  dispatch({type: 'SET_SPECIALTY_TYPE', payload: specialShowerType})
                 }
                 }
               >
@@ -221,7 +240,12 @@ function BathtubShowerGroup() {
           )}
 
           <FormControlLabel
-            onChange={() => setJacuzziChecked(!jacuzziChecked)}
+            onChange={(e) => {
+              setJacuzziChecked(e.target.checked)
+              setJacuzziType('');
+              dispatch({type: 'SET_JACUZZI_TYPE', payload: ''})             
+              }
+            }
             control={<Checkbox />}
             name="Jacuzzi tub"
             label="Jacuzzi tub"
@@ -233,10 +257,9 @@ function BathtubShowerGroup() {
                 aria-labelledby="threshold-type"
                 name="threshold-type"
                 row
-                
                 onChange={(event) => {
                   setJacuzziType(event.target.getAttribute("value"));
-                  console.log(jacuzziType);
+                  dispatch({type: 'SET_JACUZZI_TYPE', payload: jacuzziType})
                 }
                   
                 }
