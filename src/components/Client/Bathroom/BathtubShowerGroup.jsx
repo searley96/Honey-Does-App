@@ -21,8 +21,27 @@ function BathtubShowerGroup() {
   // local state to store what items are checked
   const [list, updateList] = useState([]);
 
+  const [regularChecked, setRegular] = useState(false);
+  const [regularType, setRegularType] = useState('');
+
+  const [ceramicPorcelainChecked, setCeramicPorcelainChecked] = useState(false);
+  const [ceramicPorcelainType, setCeramicPorcelainType] = useState('');
+
+  const [walkInChecked, setWalkInChecked] = useState(false);
+  const [walkInType, setWalkInType] = useState('');
+
+  const [specialShowerChecked, setSpecialShowerChecked] = useState(false);
+  const [specialShowerType, setSpecialShowerType] = useState('');
+
+  const [jacuzziChecked, setJacuzziChecked] = useState(false);
+  const [jacuzziType, setJacuzziType] = useState('');
+  // state to track TextField input, gets pushed into list state array and reset
+  const [other, updateOther] = useState("");
+  const [otherDisabled, updateDisabled] = useState(false);
+
   const handleChange = (e) => {
     // if checked, add to list state array
+    console.log(e.target.checked);
     if (e.target.checked) {
       // getAttribute references the FormControlLabel's name attribute
       updateList([...list, e.target.getAttribute("name")]);
@@ -39,20 +58,20 @@ function BathtubShowerGroup() {
     });
   };
 
-  const [other, updateOther] = useState("")
+  
 
   const otherSubmit = (e) => {
     // getAttribute references the FormControlLabel's name attribute
     updateList([...list, other]);
 
-    dispatch({
-      type: "SET_BATH_SHOWER_TYPE",
-      payload: list,
-    });
+    // dispatch({
+    //   type: "SET_BATH_SHOWER_TYPE",
+    //   payload: list,
+    // });
     updateOther("");
+    updateDisabled(true);
   };
 
-  const [enclosureList, setEnclosureList] = useState([])
 
   return (
     <>
@@ -64,27 +83,28 @@ function BathtubShowerGroup() {
             Check all that apply.
           </FormLabel>
 
+          {/* BATHTUB SHOWER TYPE */}
           <FormControlLabel
-            onChange={handleChange}
+            onChange={() => setRegular(!regularChecked)}
             control={<Checkbox />}
             name="Regular plastic tub/shower combo"
             label="Regular plastic tub/shower combo"
-            // value={bathroom.bath_shower_type}
+          // value={bathroom.bath_shower_type}
           />
-          {list.includes("Regular plastic tub/shower combo") && (
+
+          {regularChecked && (
             <>
               <FormLabel>Enclosure Type:</FormLabel>
               <RadioGroup
-                aria-labelledby="threshold-type"
-                name="threshold-type"
-                row
-                value={bathroom.threshold_type}
-                onChange={(event) =>
-                  dispatch({
-                    type: "SET_THRESHOLD_TYPE",
-                    payload: event.target.value,
-                  })
-                }
+                aria-labelledby="regular-threshold-type"
+                name="regular-threshold-type"
+                row  
+              onChange={(event) =>  {
+                setRegularType(event.target.getAttribute("value"));
+                console.log(regularType);
+              }
+                
+              }
               >
                 <FormControlLabel
                   value="Curtain"
@@ -101,24 +121,22 @@ function BathtubShowerGroup() {
           )}
 
           <FormControlLabel
-            onChange={handleChange}
+            onChange={() => setCeramicPorcelainChecked(!ceramicPorcelainChecked)}
             control={<Checkbox />}
             name="Ceramic or porcelain tub"
             label="Ceramic or porcelain tub"
           />
-          {list.includes("Ceramic or porcelain tub") && (
+          {ceramicPorcelainChecked && (
             <>
               <FormLabel>Enclosure Type:</FormLabel>
               <RadioGroup
                 aria-labelledby="threshold-type"
                 name="threshold-type"
-                row
-                value={bathroom.threshold_type}
-                onChange={(event) =>
-                  dispatch({
-                    type: "SET_THRESHOLD_TYPE",
-                    payload: event.target.value,
-                  })
+                row               
+                onChange={(event) =>{
+                  setCeramicPorcelainType(event.target.getAttribute("value"));
+                  console.log(ceramicPorcelainType);
+                }
                 }
               >
                 <FormControlLabel
@@ -135,24 +153,23 @@ function BathtubShowerGroup() {
             </>
           )}
           <FormControlLabel
-            onChange={handleChange}
+            onChange={() => setWalkInChecked(!walkInChecked)}
             control={<Checkbox />}
             name="Walk-in shower"
             label="Walk-in shower"
           />
-          {list.includes("Walk-in shower") && (
+          {walkInChecked && (
             <>
               <FormLabel>Enclosure Type:</FormLabel>
               <RadioGroup
                 aria-labelledby="threshold-type"
                 name="threshold-type"
                 row
-                value={bathroom.threshold_type}
-                onChange={(event) =>
-                  dispatch({
-                    type: "SET_THRESHOLD_TYPE",
-                    payload: event.target.value,
-                  })
+                
+                onChange={(event) => {
+                  setWalkInType(event.target.getAttribute("value"))
+                  console.log(walkInType);
+                }
                 }
               >
                 <FormControlLabel
@@ -170,24 +187,23 @@ function BathtubShowerGroup() {
           )}
 
           <FormControlLabel
-            onChange={handleChange}
+            onChange={() => setSpecialShowerChecked(!specialShowerChecked)}
             control={<Checkbox />}
             name="Specialty walk-in shower"
             label="Specialty walk-in shower"
           />
-          {list.includes("Specialty walk-in shower") && (
+          {specialShowerChecked && (
             <>
               <FormLabel>Enclosure Type:</FormLabel>
               <RadioGroup
                 aria-labelledby="threshold-type"
                 name="threshold-type"
                 row
-                value={bathroom.threshold_type}
-                onChange={(event) =>
-                  dispatch({
-                    type: "SET_THRESHOLD_TYPE",
-                    payload: event.target.value,
-                  })
+                
+                onChange={(event) => {
+                  setSpecialShowerType(event.target.getAttribute("value"));
+                  console.log(specialShowerType);
+                }
                 }
               >
                 <FormControlLabel
@@ -205,24 +221,24 @@ function BathtubShowerGroup() {
           )}
 
           <FormControlLabel
-            onChange={handleChange}
+            onChange={() => setJacuzziChecked(!jacuzziChecked)}
             control={<Checkbox />}
             name="Jacuzzi tub"
             label="Jacuzzi tub"
           />
-          {list.includes("Jacuzzi tub") && (
+          {jacuzziChecked && (
             <>
               <FormLabel>Enclosure Type:</FormLabel>
               <RadioGroup
                 aria-labelledby="threshold-type"
                 name="threshold-type"
                 row
-                value={bathroom.threshold_type}
-                onChange={(event) =>
-                  dispatch({
-                    type: "SET_THRESHOLD_TYPE",
-                    payload: event.target.value,
-                  })
+                
+                onChange={(event) => {
+                  setJacuzziType(event.target.getAttribute("value"));
+                  console.log(jacuzziType);
+                }
+                  
                 }
               >
                 <FormControlLabel
@@ -241,13 +257,14 @@ function BathtubShowerGroup() {
 
           <>
             {/* OTHER BATH/SHOWER */}
-            <FormLabel>If other, please specify.</FormLabel>
+            <FormLabel>If any other types, please specify quantity of other bathrooms, and describe them.</FormLabel>
             <TextField
               size="small"
               value={other}
+              disabled={otherDisabled}
               onChange={(event) => updateOther(event.target.value)}
             />
-            <Button onClick={otherSubmit}>Submit</Button>
+            <Button onClick={otherSubmit} disabled={otherDisabled}>Submit</Button>
           </>
         </FormControl>
       </FormGroup>

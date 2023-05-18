@@ -133,29 +133,35 @@ router.post('/bathroom/', rejectUnauthenticated, (req, res) => {
             job_id,
             room_type,
             bathroom_type,
-            bath_shower_type,
-            threshold_type,
+            regular_type,
+            ceramic_porcelain_type,
 
+            walk_in_type,
+            specialty_type,
+            jacuzzi_type,
+            other_type,
             clean_jacuzzi,
+
             clean_mirror,
             number_mirrors_clean,
             clean_sink_counter,
             granite_counter_tops,
-
             sink_type,
+
             clean_front_cabinets,
             cabinet_spot_full_clean,
             cabinet_orange_glo,
             clean_toilet,
-
             take_out_trash,
+
             take_out_trash_instructions,
             sweep_mop_floor,
             shake_rugs
             )
         VALUES(
             $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, 
-            $11, $12, $13, $14, $15, $16, $17, $18, $19, 
+            $11, $12, $13, $14, $15, $16, $17, $18, $19, $20,
+            $21, $22, $23
             )
         );
         `;
@@ -164,22 +170,27 @@ router.post('/bathroom/', rejectUnauthenticated, (req, res) => {
                 req.body.job_id, 
                 req.body.room_type, 
                 req.body.bathroom_type, 
-                req.body.bath_shower_type, 
-                req.body.threshold_type, 
+                regular_type,
+                ceramic_porcelain_type,
 
-                req.body.clean_jacuzzi,
+                walk_in_type,
+                specialty_type,
+                jacuzzi_type,
+                other_type,
+                req.body.clean_jacuzzi, 
+
                 req.body.clean_mirror,
                 req.body.number_mirrors_clean,
                 req.body.clean_sink_counter,
                 req.body.granite_counter_tops,
-
                 req.body.sink_type,
+
                 req.body.clean_front_cabinets,
                 req.body.cabinet_spot_full_clean,
                 req.body.cabinet_orange_glo,
                 req.body.clean_toilet,
-
                 req.body.take_out_trash,
+
                 req.body.take_out_trash_instructions,
                 req.body.sweep_mop_floor,
                 req.body.shake_rugs
