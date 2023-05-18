@@ -32,8 +32,8 @@ function DustFurnitureGroup() {
                     <RadioGroup aria-labelledby="orange_glo_applicable" name="orange_glo_applicable"
                     row value={wipeDust.orange_glo_applicable}
                     onChange={e => dispatch({ type: 'SET_ORANGE_GLO_APPLICABLE', payload: event.target.value })}>
-                        <FormControlLabel value="yes" control={<Radio />} label="yes" />
-                        <FormControlLabel value="no" control={<Radio />} label="no" />
+                        <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                        <FormControlLabel value="no" control={<Radio />} label="No" />
                     </RadioGroup>
                 </>
             }
