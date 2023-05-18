@@ -57,6 +57,10 @@ function BottomNav() {
     setAnchorEl(null);
   }
 
+  const toBathroomForm = () => {
+    history.push('/bathroomForm');
+  }
+
   return (
     <React.Fragment>
       <CssBaseline />
