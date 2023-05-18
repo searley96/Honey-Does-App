@@ -112,3 +112,23 @@ INSERT INTO "job" ("job_id", "client_id", "manager_id", "cleaner_id", "job_statu
 VALUES (123456, 1, 6, 3, 'active', 'I am very happy with the clean your company provided, thank you!', '03-04-2023', '12:00', '4:00'),
 (456789, 2, 6, 5, 'active', 'My cleaner did such a great job, and she was so communicative!', '04-10-2023', '10:00', '2:00'),
 (135791, 4, 6, 5, 'active', 'The cleaner was very friendly', '04-24-2023', '9:00', '1:00');
+
+-- GET Chat
+-- NOTE: Will need to join with job table and 
+-- and sort messages by job_id and whether its before
+-- or the same day as the date to determine job_status
+
+-- also need to check if job.client_id matches req.user.id
+SELECT message_log.job_id, "timestamp", image_url, "text", job.client_id, job.manager_id, job.cleaner_id, job.job_status
+FROM message_log
+JOIN job ON job.job_id = message_log.job_id
+WHERE message_log.job_id = 123456
+ORDER BY TIMESTAMP ASC;
+
+--POST CHAT
+INSERT INTO "message_log" (job_id, "timestamp", image_url, "text", sender_id)
+VALUES (123456, '03-13-2020', NULL, 'its my birthday', 1);
+
+-- GET active job
+SELECT * FROM "job"
+WHERE "client_id" = 1 AND "job_status" = 'active';
