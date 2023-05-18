@@ -20,12 +20,12 @@ function DustFurnitureGroup() {
             {wipeDust.dust_bed_living_furniture === 'yes' &&
                 <>
                     {/* Dust Bedroom and Living Room Furniture Duster */}
-                    <FormLabel>Do you want us to dust bedroom/living room furniture such as dressers and tables, desks and bed frames?</FormLabel>
+                    <FormLabel>Please select which you prefer</FormLabel>
                     <RadioGroup aria-labelledby="bed_living_furniture_duster" name="bed_living_furniture_duster"
                     row value={wipeDust.bed_living_furniture_duster}
                     onChange={e => dispatch({ type: 'SET_BED_LIVING_FURNITURE_DUSTER', payload: event.target.value })}>
-                        <FormControlLabel value="yes" control={<Radio />} label="yes" />
-                        <FormControlLabel value="no" control={<Radio />} label="no" />
+                        <FormControlLabel value="swiffer" control={<Radio />} label="Swiffer" />
+                        <FormControlLabel value="feather" control={<Radio />} label="Feather" />
                     </RadioGroup>
                     {/* Use Orange Glo when applicable */}
                     <FormLabel>Do you want us to use orange glo where applicable?</FormLabel>
