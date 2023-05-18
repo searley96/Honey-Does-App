@@ -8,13 +8,10 @@ import { Button, ButtonGroup, Stack, Box } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import DoneIcon from '@mui/icons-material/Done';
 
-<<<<<<< HEAD
-=======
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 
->>>>>>> main
 function KitchenForm() {
     
     const dispatch = useDispatch();
