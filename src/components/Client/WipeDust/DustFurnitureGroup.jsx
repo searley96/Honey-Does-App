@@ -8,6 +8,7 @@ function DustFurnitureGroup() {
 
     return (
         <>
+            <h3>Dust Bedroom and Living Room Furniture</h3>
             {/* Dust Bedroom and Living Room Furniture */}
             <FormLabel>Do you want us to dust bedroom/living room furniture such as dressers and tables, desks and bed frames?</FormLabel>
             <RadioGroup aria-labelledby="dust_bed_living_furniture" name="dust_bed_living_furniture"
