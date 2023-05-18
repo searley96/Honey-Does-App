@@ -37,7 +37,7 @@ function Message({ message }) {
                                 maxWidth: '80%',
                                 justifyContent: 'end',
                                 px: '10px',
-                                backgroundColor: '#f5f5f5',
+                                backgroundColor: 'rgba(252, 185, 0,.75)',
                                 my: '10px',
                                 ml: '20px'
                             }}>

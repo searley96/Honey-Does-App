@@ -35,7 +35,8 @@ function Chat() {
     console.log('chat:', chat);
     return (
         <>
-            <Box sx={{ backgroundColor: 'rgba(252, 185, 0, 0.5)', backgroundOp: 0.5 }}>
+            <Box sx={{ backgroundColor: '#f5f5f5', backgroundOp: 0.5 }}>
+                {/* 'rgba(252, 185, 0, 0.5)' */}
                 {chat.map((message) =>
                     <Message key={message.id} message={message} />
                 )}

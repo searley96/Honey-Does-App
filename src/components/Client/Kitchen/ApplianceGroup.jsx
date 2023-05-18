@@ -5,6 +5,7 @@ import {  FormControl, FormGroup, RadioGroup, FormLabel, FormControlLabel, Radio
 
 function ApplianceGroup() {
 
+    
     const kitchen = useSelector(store => store.clientKitchen)
     const dispatch = useDispatch();
 
