@@ -7,8 +7,8 @@ const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
 const router = express.Router();
 
-router.get('/', rejectUnauthenticated, (req, res) => {
-    const jobId = req.body.jobId;
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+    const jobId = req.params.id;
     const queryText = 
         `SELECT * FROM message_log
         WHERE job_id = $1

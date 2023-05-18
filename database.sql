@@ -117,6 +117,8 @@ VALUES (123456, 1, 6, 3, 'active', 'I am very happy with the clean your company 
 -- NOTE: Will need to join with job table and 
 -- and sort messages by job_id and whether its before
 -- or the same day as the date to determine job_status
+
+-- also need to check if job.client_id matches req.user.id
 SELECT * FROM message_log
 WHERE job_id = 6
 ORDER BY TIMESTAMP ASC;

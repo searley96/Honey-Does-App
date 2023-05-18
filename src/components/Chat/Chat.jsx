@@ -7,6 +7,7 @@ import SendIcon from '@mui/icons-material/Send';
 function Chat() {
     const [newMessage, setNewMessage] = useState('');
     const dispatch = useDispatch();
+    const chat = useSelector(store => store.chat);
     const messages = [{
         text: 'how are you?',
         userId: 1
@@ -16,15 +17,15 @@ function Chat() {
         userId: 2
     }];
 
-    // useEffect = (() => {
-    //     dispatch({type})
-    // }, [])
+    useEffect(() => {
+        dispatch({type: 'FETCH_CHAT', payload: {jobId: 6}})
+    }, [])
 
     const handleSubmit = event => {
         // setMessages(...messages, {text: newMessage, userId: 1});
         // setNewMessage('');
     }
-    console.log(messages);
+    console.log('chat:', chat);
     return (
         <>
             <Box sx={{ backgroundColor: 'rgba(252, 185, 0, 0.5)', backgroundOp: 0.5 }}>
