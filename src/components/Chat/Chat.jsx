@@ -1,11 +1,12 @@
 import Message from "./Message";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, TextField, Box } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 
 function Chat() {
     const [newMessage, setNewMessage] = useState('');
-    
+    const dispatch = useDispatch();
     const messages = [{
         text: 'how are you?',
         userId: 1
@@ -14,6 +15,10 @@ function Chat() {
         text: 'good, hbu?',
         userId: 2
     }];
+
+    // useEffect = (() => {
+    //     dispatch({type})
+    // }, [])
 
     const handleSubmit = event => {
         // setMessages(...messages, {text: newMessage, userId: 1});
