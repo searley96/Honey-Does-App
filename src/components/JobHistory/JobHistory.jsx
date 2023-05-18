@@ -28,6 +28,7 @@ function JobHistory() {
   const { id } = useParams();
   const [showActiveJobs, setShowActiveJobs] = useState(false);
   const [showPastJobs, setShowPastJobs] = useState(false);
+  const allJobsData = useSelector((state) => state.allJobsReducer);
 
   const getAllJobs = () => {
     dispatch({
@@ -39,58 +40,58 @@ function JobHistory() {
     getAllJobs();
   }, []);
 
-  const activeJobs = [
-    {
-      jobId: 123,
-      assignedCleaner: "Joann",
-      jobAddress: "1436 Prime Ave N",
-      jobDateToBeServiced: "6/14/2023",
-      jobPrice: "$345",
-      jobNotes: `Owner has a pet terrier dog that will not be in the cage`,
-    },
-    {
-      jobId: 126,
-      assignedCleaner: "Kim",
-      jobAddress: "34 Java Parkway N",
-      jobDateToBeServiced: "7/18/2023",
-      jobPrice: "$260",
-      jobNotes: `Go in through the patio door in the back of the house`,
-    },
-    {
-      jobId: 130,
-      assignedCleaner: "Cynthia",
-      jobAddress: "19th React Street SW",
-      jobDateToBeServiced: "6/24/2023",
-      jobPrice: "$184",
-      jobNotes: `Please knock and do not ring the doorbell`,
-    },
-  ];
-  const pastJobs = [
-    {
-      jobId: 90,
-      assignedCleaner: "Joann",
-      jobAddress: "1436 Prime Ave N",
-      jobDateServiced: "2/14/2022",
-      jobPrice: "$245",
-      jobNotes: `Owner has a pet terrier dog that will not be in the cage`,
-    },
-    {
-      jobId: 16,
-      assignedCleaner: "Kim",
-      jobAddress: "34 Java Parkway N",
-      jobDateServiced: "1/18/2023",
-      jobPrice: "$160",
-      jobNotes: `Go in through the patio door in the back of the house`,
-    },
-    {
-      jobId: 67,
-      assignedCleaner: "Cynthia",
-      jobAddress: "19th React Street SW",
-      jobDateServiced: "9/24/2022",
-      jobPrice: "$210",
-      jobNotes: `Please knock and do not ring the doorbell`,
-    },
-  ];
+  // const activeJobs = [
+  //   {
+  //     jobId: 123,
+  //     assignedCleaner: "Joann",
+  //     jobAddress: "1436 Prime Ave N",
+  //     jobDateToBeServiced: "6/14/2023",
+  //     jobPrice: "$345",
+  //     jobNotes: `Owner has a pet terrier dog that will not be in the cage`,
+  //   },
+  //   {
+  //     jobId: 126,
+  //     assignedCleaner: "Kim",
+  //     jobAddress: "34 Java Parkway N",
+  //     jobDateToBeServiced: "7/18/2023",
+  //     jobPrice: "$260",
+  //     jobNotes: `Go in through the patio door in the back of the house`,
+  //   },
+  //   {
+  //     jobId: 130,
+  //     assignedCleaner: "Cynthia",
+  //     jobAddress: "19th React Street SW",
+  //     jobDateToBeServiced: "6/24/2023",
+  //     jobPrice: "$184",
+  //     jobNotes: `Please knock and do not ring the doorbell`,
+  //   },
+  // ];
+  // const pastJobs = [
+  //   {
+  //     jobId: 90,
+  //     assignedCleaner: "Joann",
+  //     jobAddress: "1436 Prime Ave N",
+  //     jobDateServiced: "2/14/2022",
+  //     jobPrice: "$245",
+  //     jobNotes: `Owner has a pet terrier dog that will not be in the cage`,
+  //   },
+  //   {
+  //     jobId: 16,
+  //     assignedCleaner: "Kim",
+  //     jobAddress: "34 Java Parkway N",
+  //     jobDateServiced: "1/18/2023",
+  //     jobPrice: "$160",
+  //     jobNotes: `Go in through the patio door in the back of the house`,
+  //   },
+  //   {
+  //     jobId: 67,
+  //     assignedCleaner: "Cynthia",
+  //     jobAddress: "19th React Street SW",
+  //     jobDateServiced: "9/24/2022",
+  //     jobPrice: "$210",
+  //     jobNotes: `Please knock and do not ring the doorbell`,
+  //   },
+  // ];
 
   const togglePastJobs = () => {
     setShowPastJobs(!showPastJobs);
@@ -99,7 +100,7 @@ function JobHistory() {
   const toggleActiveJobs = () => {
     setShowActiveJobs(!showActiveJobs);
   };
-
+  console.log("looking for Jobs Array", activeJobsData);
   return (
     <Container
       maxWidth="sm"
@@ -139,6 +140,7 @@ function JobHistory() {
               >
                 Active Jobs
               </Typography>
+
               {activeJobs.map((job, index) => (
                 <Card sx={{ mb: 5 }} key={index}>
                   <Typography

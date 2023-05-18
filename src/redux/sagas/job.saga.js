@@ -26,6 +26,10 @@ function* fetchJobsSaga() {
   try {
     const jobDetails = yield axios.get(`/api/job/jobHistory`);
     console.log("get all jobs saga", jobDetails);
+    yield put({
+      type: "SET_ALL_JOBS_REDUCER",
+      payload: jobDetails.data,
+    });
   } catch (error) {
     console.log("get all jobs error", error);
   }
