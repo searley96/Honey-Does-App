@@ -134,6 +134,7 @@ router.get('/bathroom/:jobid', rejectUnauthenticated, (req, res) => {
 
 // BATHROOM POST
 router.post('/bathroom/', rejectUnauthenticated, (req, res) => {
+    console.log(req.body);
     const queryText = `
         INSERT INTO user_bathroom( 
             job_id,
@@ -172,16 +173,16 @@ router.post('/bathroom/', rejectUnauthenticated, (req, res) => {
         `;
         pool.query(queryText, 
             [
-                req.body.job_id, 
-                req.body.room_type, 
+                123456, 
+                'bathroom', 
                 req.body.bathroom_type, 
-                regular_type,
-                ceramic_porcelain_type,
+                req.body.regular_type,
+                req.body.ceramic_porcelain_type,
 
-                walk_in_type,
-                specialty_type,
-                jacuzzi_type,
-                other_type,
+                req.body.walk_in_type,
+                req.body.specialty_type,
+                req.body.jacuzzi_type,
+                req.body.other_type,
                 req.body.clean_jacuzzi, 
 
                 req.body.clean_mirror,

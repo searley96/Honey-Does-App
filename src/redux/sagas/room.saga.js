@@ -17,8 +17,17 @@ function* fetchKitchen() {
    
 }
 
-function* createBathroom() {
-   
+function* createBathroom(action) {
+    console.log('inside saga', action.payload);
+    try {
+        yield axios.post(`/api/form/bathroom`, action.payload);
+
+        yield put({
+            type: 'CLEAR_ROOM'
+        });
+    } catch(error) {
+        console.log('ERROR clearing rooms', error);
+    } 
 }
 
 function* fetchBathroom() {
