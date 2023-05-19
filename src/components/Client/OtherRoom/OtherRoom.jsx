@@ -61,8 +61,8 @@ function OtherRoom() {
                     <RadioGroup aria-labelledby="wipe_surfaces" name="wipe_surfaces"
                         row value={otherRoom.wipe_surfaces}
                         onChange={e => dispatch({ type: 'SET_WIPE_SURFACES', payload: (e.target.value === 'true') })}>
-                        <FormControlLabel value={true} control={<Radio />} label="yes" />
-                        <FormControlLabel value={false} control={<Radio />} label="no" />
+                        <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                        <FormControlLabel value={false} control={<Radio />} label="No" />
                     </RadioGroup>
 
                     {/* CLEAN FLOORS? */}
@@ -70,8 +70,8 @@ function OtherRoom() {
                     <RadioGroup aria-labelledby="clean_floor" name="clean_floor"
                         row value={otherRoom.clean_floor}
                         onChange={e => dispatch({ type: 'SET_CLEAN_FLOOR', payload: (e.target.value === 'true') })}>
-                        <FormControlLabel value={true} control={<Radio />} label="yes" />
-                        <FormControlLabel value={false} control={<Radio />} label="no" />
+                        <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                        <FormControlLabel value={false} control={<Radio />} label="No" />
                     </RadioGroup>
 
                     {/* If clean floor = yes then show the form for floor type. */}
