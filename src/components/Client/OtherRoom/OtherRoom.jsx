@@ -12,10 +12,12 @@ import { TextField,
     } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import DoneIcon from '@mui/icons-material/Done';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function OtherRoom() {
     const dispatch = useDispatch();
     const otherRoom = useSelector(store => store.clientOtherRoom);
+    const history = useHistory();
 
     let counter = 1;
     const otherRoomHeader = `Other Room #${counter}`;
@@ -26,7 +28,7 @@ function OtherRoom() {
 
     const moveToFinalTouches = () => {
         dispatch({type: 'ADD_OTHER_ROOM', payload: otherRoom});
-        // history.push(FINAL TOUCHES ROUTE HERE);
+        history.push('/wipeDustForm');
     }
     // Not using these for now.
     // const [otherInput, setOtherInput] = useState('');
@@ -80,8 +82,8 @@ function OtherRoom() {
                     <RadioGroup aria-labelledby="wipe_surfaces" name="wipe_surfaces"
                         row value={otherRoom.wipe_surfaces}
                         onChange={e => dispatch({ type: 'SET_WIPE_SURFACES', payload: (e.target.value === 'true') })}>
-                        <FormControlLabel value={true} control={<Radio />} label="yes" />
-                        <FormControlLabel value={false} control={<Radio />} label="no" />
+                        <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                        <FormControlLabel value={false} control={<Radio />} label="No" />
                     </RadioGroup>
 
                     {/* CLEAN FLOORS? */}
@@ -89,8 +91,8 @@ function OtherRoom() {
                     <RadioGroup aria-labelledby="clean_floor" name="clean_floor"
                         row value={otherRoom.clean_floor}
                         onChange={e => dispatch({ type: 'SET_CLEAN_FLOOR', payload: (e.target.value === 'true') })}>
-                        <FormControlLabel value={true} control={<Radio />} label="yes" />
-                        <FormControlLabel value={false} control={<Radio />} label="no" />
+                        <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                        <FormControlLabel value={false} control={<Radio />} label="No" />
                     </RadioGroup>
 
                     {/* If clean floor = yes then show the form for floor type. */}

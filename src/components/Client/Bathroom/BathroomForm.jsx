@@ -10,11 +10,12 @@ import AddIcon from "@mui/icons-material/Add";
 import DoneIcon from "@mui/icons-material/Done";
 import { useDispatch, useSelector  } from "react-redux";
 import React, {useEffect} from 'react';
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function BathroomForm() {
 
   const dispatch = useDispatch();
-  const jobId = useSelector(store => store.jobid);
+  const jobId = useSelector(store => store.jobidReducer);
   const bathroom = useSelector(store => store.clientBathroomReducer);
 
     useEffect(() => {
@@ -24,7 +25,7 @@ function BathroomForm() {
     const submitHandler = (event) => {
       event.preventDefault();
       dispatch ( {type: 'ADD_BATHROOM', payload: bathroom} )
-      // history.push('/nextPage') //add page component 
+      history.push('/kitchenForm') //add page component 
     }
   return (
     <>
@@ -45,11 +46,11 @@ function BathroomForm() {
         direction="row"
         sx={{ mt: "40px", display: "flex", justifyContent: "space-between" }}
       >
-        <Button variant="outlined" onClick={e => dispatch ({ type: 'ADD_BATHROOM', payload: bathroom})}>
-          <AddIcon sx={{ mx: "5px" }} fontSize="small" /> Add Another Bathroom
+        <Button variant="outlined" onClick={e => dispatch ({ type: 'ADD_BATHROOM', payload: bathroomForm})}>
+          <AddIcon sx={{ mx: "5px" }}  fontSize="small" /> Add Another Bathroom
         </Button>
-        <Button variant="contained" onClick={submitHandler}>
-          <DoneIcon sx={{ mx: "5px" }} fontSize="small" /> Done With Bathroom
+        <Button variant="contained"  onClick={submitHandler} >
+          <DoneIcon sx={{ mx: "5px" }}fontSize="small" /> Done With Bathroom
           Forms
         </Button>
       </Stack>

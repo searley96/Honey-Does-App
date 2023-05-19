@@ -18,7 +18,7 @@ function KitchenForm() {
     const dispatch = useDispatch();
     const history = useHistory();
     const kitchen = useSelector(store => store.clientKitchen);
-    const jobId = useSelector(store => store.jobid);
+    const jobId = useSelector(store => store.jobidReducer);
 
     // DISABLED UNTIL ROUTES ARE SET UP
     // useEffect(() => {
@@ -31,7 +31,7 @@ function KitchenForm() {
 
     const moveToOtherRooms = () => {
         dispatch({type: 'ADD_KITCHEN', payload: kitchen});
-        // history.push(OTHER ROOM ROUTE HERE);
+        history.push('/otherRoomForm');
     }
     
     return (

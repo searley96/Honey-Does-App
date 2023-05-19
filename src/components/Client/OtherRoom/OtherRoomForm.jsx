@@ -11,7 +11,7 @@ function OtherRoomForm() {
     const dispatch = useDispatch();
     const history = useHistory();
     const otherRoomForm = useSelector(store => store.clientOtherRoom);
-    const jobId = useSelector(store => store.jobid);
+    const jobId = useSelector(store => store.jobidReducer);
 
     useEffect(() => {
         dispatch({type: 'JOB_ID', payload: jobId});
@@ -22,24 +22,24 @@ function OtherRoomForm() {
     const submitHandler = (event) => {
         event.preventDefault();
         dispatch({ type: 'ADD_OTHER_ROOM', payload: otherRoomForm})
-        // history.push('/nextPageGoesHere'); // TO DO: put the route of the next component here
+        history.push('/wipeDustForm'); // TO DO: put the route of the next component here
     }
     
     return (
         <>
             <OtherRoom />
             
-            <Stack spacing={1} direction='row' sx={{ mt: '40px', display: 'flex', justifyContent: 'space-between' }}>
+            {/* <Stack spacing={1} direction='row' sx={{ mt: '40px', display: 'flex', justifyContent: 'space-between' }}>
 
                 <Button variant="outlined" onClick={e => dispatch({ type: 'ADD_OTHER_ROOM', payload: otherRoomForm })}>
                     <AddIcon sx={{ mx: '5px' }} fontSize="small" /> Add Another Room
                 </Button>
 
                 <Button variant="contained" type="submit" onClick={submitHandler}>
-                    <DoneIcon sx={{ mx: '5px' }} fontSize="small" /> Done with rooms
+                    <DoneIcon sx={{ mx: '5px' }} fontSize="small" /> Done with Other Rooms
                 </Button>
 
-            </Stack>
+            </Stack> */}
         </>
     )
 }
