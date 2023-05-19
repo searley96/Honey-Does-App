@@ -74,7 +74,7 @@ router.post('/kitchen/', rejectUnauthenticated, (req, res) => {
         pool.query(queryText, 
             [
                 // req.body.job_id, 
-                '123456',
+                123456,
                 'kitchen', 
                 req.body.wipe_cabinets, 
                 req.body.cabinet_spot_full_clean, 
