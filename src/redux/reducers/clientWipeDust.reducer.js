@@ -28,7 +28,7 @@ const clientWipeDustReducer = (state =
         orange_glo_applicable: '',
     }, action) => {
     switch(action.type) {
-        case 'JOB_ID':
+        case 'SET_JOB_ID':
             return {...state, job_id: action.payload};
         case 'SET_WIPE_CLEAN_GLASS':
             return {...state, wipe_clean_glass: action.payload};

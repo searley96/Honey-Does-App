@@ -4,7 +4,7 @@ import axios from 'axios';
 function* createJobId() {
     try {
         const jobId = yield axios.get(`/api/job/jobid`);
-        console.log('this is jobId.data', jobId.data);
+        yield console.log('this is jobId.data', jobId.data);
 
         // places generated jobId into the associated reducer
         yield put({

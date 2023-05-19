@@ -85,7 +85,7 @@ const clientKitchenReducer = (state =
         case 'SET_MOP_LOCATION':
             return { ...state, mop_location: action.payload };
             case 'CLEAR_ROOM':
-            return { job_id: '',
+            return { 
             room_type: '',
             wipe_cabinets: true,
             cabinet_spot_full_clean: '',

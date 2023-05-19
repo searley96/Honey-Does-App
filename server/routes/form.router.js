@@ -8,8 +8,8 @@ const userStrategy = require('../strategies/user.strategy');
 const router = express.Router();
 
 // KITCHEN GET
-router.get('/kitchen/:jobid', rejectUnauthenticated, (req, res) => {
-    const jobId = req.params.jobid;
+router.get('/kitchen/:job_id', rejectUnauthenticated, (req, res) => {
+    const jobId = req.params.jobID;
 
     
 
@@ -134,6 +134,7 @@ router.get('/bathroom/:jobid', rejectUnauthenticated, (req, res) => {
 
 // BATHROOM POST
 router.post('/bathroom/', rejectUnauthenticated, (req, res) => {
+    
     console.log(req.body);
     const queryText = `
         INSERT INTO user_bathroom( 
@@ -173,33 +174,33 @@ router.post('/bathroom/', rejectUnauthenticated, (req, res) => {
         `;
         pool.query(queryText, 
             [
-                123456, 
+                req.body.jobId,
                 'bathroom', 
-                req.body.bathroom_type, 
-                req.body.regular_type,
-                req.body.ceramic_porcelain_type,
+                req.body.bathroom.bathroom_type, 
+                req.body.bathroom.regular_type,
+                req.body.bathroom.ceramic_porcelain_type,
 
-                req.body.walk_in_type,
-                req.body.specialty_type,
-                req.body.jacuzzi_type,
-                req.body.other_type,
-                req.body.clean_jacuzzi, 
+                req.body.bathroom.walk_in_type,
+                req.body.bathroom.specialty_type,
+                req.body.bathroom.jacuzzi_type,
+                req.body.bathroom.other_type,
+                req.body.bathroom.clean_jacuzzi, 
 
-                req.body.clean_mirror,
-                req.body.number_mirrors_clean,
-                req.body.clean_sink_counter,
-                req.body.granite_counter_tops,
-                req.body.sink_type,
+                req.body.bathroom.clean_mirror,
+                req.body.bathroom.number_mirrors_clean,
+                req.body.bathroom.clean_sink_counter,
+                req.body.bathroom.granite_counter_tops,
+                req.body.bathroom.sink_type,
 
-                req.body.clean_front_cabinets,
-                req.body.cabinet_spot_full_clean,
-                req.body.cabinet_orange_glo,
-                req.body.clean_toilet,
-                req.body.take_out_trash,
+                req.body.bathroom.clean_front_cabinets,
+                req.body.bathroom.cabinet_spot_full_clean,
+                req.body.bathroom.cabinet_orange_glo,
+                req.body.bathroom.clean_toilet,
+                req.body.bathroom.take_out_trash,
 
-                req.body.take_out_trash_instructions,
-                req.body.sweep_mop_floor,
-                req.body.shake_rugs
+                req.body.bathroom.take_out_trash_instructions,
+                req.body.bathroom.sweep_mop_floor,
+                req.body.bathroom.shake_rugs
             ]).then(response => {
                 res.sendStatus(201);
             }).catch(err => {
@@ -284,8 +285,7 @@ router.post('/wipe-dust/', rejectUnauthenticated, (req, res) => {
         
         )
     VALUES(
-        $1, $2, $3, $4, $5, $6)
-    );
+        $1, $2, $3, $4, $5, $6);
     `
     pool.query(queryText, 
         [

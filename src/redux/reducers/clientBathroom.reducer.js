@@ -24,7 +24,7 @@ const clientBathroomReducer = (state = {
     shake_rugs: null
 }, action) => {
     switch (action.type) {
-        case 'JOB_ID':
+        case 'SET_JOB_ID':
             return { ...state, job_id: action.payload };
         case 'SET_ROOM_TYPE':
             return { ...state, room_type: action.payload };
@@ -72,7 +72,6 @@ const clientBathroomReducer = (state = {
             return { ...state, shake_rugs: action.payload };
         case 'CLEAR_ROOM':
             return {
-                job_id: '',
                 room_type: '',
                 bathroom_type: '',
                 regular_type: '',

@@ -13,7 +13,6 @@ import {
 function BathroomType() {
   const bathroom = useSelector((store) => store.clientBathroomReducer);
   const dispatch = useDispatch();
-  //   console.log('bathroom', bathroom)
 
   return (
     <>

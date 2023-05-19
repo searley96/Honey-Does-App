@@ -13,9 +13,6 @@ function* createKitchen(action) {
     }   
 }
 
-function* fetchKitchen() {
-   
-}
 
 function* createBathroom(action) {
     console.log('inside saga', action.payload);
@@ -30,9 +27,6 @@ function* createBathroom(action) {
     } 
 }
 
-function* fetchBathroom() {
-   
-}
 
 function* createOtherRoom(action) {
     try {
@@ -47,17 +41,12 @@ function* createOtherRoom(action) {
    
 }
 
-function* fetchOtherRoom(action) {
-   
-}
+
 
 function* roomSaga() {
     yield takeLatest('ADD_KITCHEN', createKitchen);
     yield takeLatest('ADD_BATHROOM', createBathroom);
     yield takeLatest('ADD_OTHER_ROOM', createOtherRoom);
-    yield takeLatest('FETCH_KITCHEN', fetchKitchen);
-    yield takeLatest('FETCH_BATHROOM', fetchBathroom);
-    yield takeLatest('FETCH_OTHER_ROOM', fetchOtherRoom);
   }
   
   export default roomSaga;
