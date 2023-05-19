@@ -29,7 +29,7 @@ function OtherRoomForm() {
         <>
             <OtherRoom />
             
-            <Stack spacing={1} direction='row' sx={{ mt: '40px', display: 'flex', justifyContent: 'space-between' }}>
+            {/* <Stack spacing={1} direction='row' sx={{ mt: '40px', display: 'flex', justifyContent: 'space-between' }}>
 
                 <Button variant="outlined" onClick={e => dispatch({ type: 'ADD_OTHER_ROOM', payload: otherRoomForm })}>
                     <AddIcon sx={{ mx: '5px' }} fontSize="small" /> Add Another Room
@@ -39,7 +39,7 @@ function OtherRoomForm() {
                     <DoneIcon sx={{ mx: '5px' }} fontSize="small" /> Done with Other Rooms
                 </Button>
 
-            </Stack>
+            </Stack> */}
         </>
     )
 }
