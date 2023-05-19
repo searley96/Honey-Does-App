@@ -31,7 +31,7 @@ function KitchenForm() {
 
     const moveToOtherRooms = () => {
         dispatch({type: 'ADD_KITCHEN', payload: kitchen});
-        // history.push(OTHER ROOM ROUTE HERE);
+        history.push('/otherRoomForm');
     }
     
     return (

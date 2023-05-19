@@ -21,7 +21,7 @@ function OtherRoomForm() {
     const submitHandler = (event) => {
         event.preventDefault();
         dispatch({ type: 'ADD_OTHER_ROOM', payload: otherRoomForm})
-        // history.push('/nextPageGoesHere'); // TO DO: put the route of the next component here
+        history.push('/wipeDustForm'); // TO DO: put the route of the next component here
     }
     
     return (
@@ -35,7 +35,7 @@ function OtherRoomForm() {
                 </Button>
 
                 <Button variant="contained" type="submit" onClick={submitHandler}>
-                    <DoneIcon sx={{ mx: '5px' }} fontSize="small" /> Done with rooms
+                    <DoneIcon sx={{ mx: '5px' }} fontSize="small" /> Done with Other Rooms
                 </Button>
 
             </Stack>

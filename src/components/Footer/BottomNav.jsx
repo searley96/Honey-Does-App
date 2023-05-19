@@ -46,7 +46,7 @@ function BottomNav() {
 
   const toClientForm = () => {
     // ADJUST WHEN FORMS ARE READY
-    // history.push('/form')
+    history.push('/bathroomForm')
     dispatch({
       type: 'CREATE_JOB_ID'
     })

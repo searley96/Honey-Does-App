@@ -19,7 +19,7 @@ function AboutPage() {
       <div>
         {/* <KitchenForm /> */}
         {/* <Chat /> */}
-        <OtherRoom />
+        {/* <OtherRoom /> */}
       </div>
     </div>
   );
