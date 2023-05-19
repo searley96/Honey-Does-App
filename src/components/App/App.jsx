@@ -23,6 +23,7 @@ import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import BathroomForm from "../Client/Bathroom/BathroomForm";
 import ProfilePage from '../ProfilePage/ProfilePage';
+import AdminDashboard from '../Admin/AdminDashboard/AdminDashboard';
 
 import "./App.css";
 
@@ -74,6 +75,13 @@ function App() {
           >
             <InfoPage />
           </ProtectedRoute>
+
+          <Route
+            exact
+            path="/adminDashboard"
+          >
+            <AdminDashboard />
+          </Route>
 
           <Route exact path="/login">
             {user.id ? (
