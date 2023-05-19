@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import { Button, Card, CardActions, CardContent, CardMedia, Typography, Link } from '@mui/material';
+import { useHistory } from "react-router-dom";
 
 function AdminDashboard() {
     console.log('Inside Dashboard()!!');
@@ -13,8 +14,12 @@ function AdminDashboard() {
         dispatch({ type: "FETCH_JOBS" }); // Fetch job ID
     }, []);
 
+    const history = useHistory();
 
-
+const handleOnClick = () => {
+    history.push('/jobDetails')
+}
+    
     return (
         <>
             <h3>Jobs</h3>
@@ -24,7 +29,11 @@ function AdminDashboard() {
                     <Card key={i}>
                         <CardContent sx={{ display: "flex", justifyContent: "space-evenly" }}>
                             <Typography style={{ display: 'inline-block' }}>
-                                {job.job_id}
+                                <Link href="#" underline="hover"  onClick={handleOnClick}>
+                               
+                                    {job.job_id}
+                                </Link>
+
                             </Typography>
                             <Typography style={{ display: 'inline-block' }}>
                                 {job.first_name} {job.last_name}
@@ -38,7 +47,7 @@ function AdminDashboard() {
                     </Card>
                 ))
             ) : (
-                <p>More items coming soon!</p>
+                <p>No jobs yet.</p>
 
             )}
 
