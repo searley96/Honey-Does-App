@@ -60,22 +60,22 @@ function OtherRoom() {
                     <FormLabel>Do surfaces need to be wiped?</FormLabel>
                     <RadioGroup aria-labelledby="wipe_surfaces" name="wipe_surfaces"
                         row value={otherRoom.wipe_surfaces}
-                        onChange={e => dispatch({ type: 'SET_WIPE_SURFACES', payload: e.target.value })}>
-                        <FormControlLabel value="yes" control={<Radio />} label="yes" />
-                        <FormControlLabel value="no" control={<Radio />} label="no" />
+                        onChange={e => dispatch({ type: 'SET_WIPE_SURFACES', payload: (e.target.value === 'true') })}>
+                        <FormControlLabel value={true} control={<Radio />} label="yes" />
+                        <FormControlLabel value={false} control={<Radio />} label="no" />
                     </RadioGroup>
 
                     {/* CLEAN FLOORS? */}
                     <FormLabel>Do floors need to be cleaned?</FormLabel>
                     <RadioGroup aria-labelledby="clean_floor" name="clean_floor"
                         row value={otherRoom.clean_floor}
-                        onChange={e => dispatch({ type: 'SET_CLEAN_FLOOR', payload: e.target.value })}>
-                        <FormControlLabel value="yes" control={<Radio />} label="yes" />
-                        <FormControlLabel value="no" control={<Radio />} label="no" />
+                        onChange={e => dispatch({ type: 'SET_CLEAN_FLOOR', payload: (e.target.value === 'true') })}>
+                        <FormControlLabel value={true} control={<Radio />} label="yes" />
+                        <FormControlLabel value={false} control={<Radio />} label="no" />
                     </RadioGroup>
 
                     {/* If clean floor = yes then show the form for floor type. */}
-                    {otherRoom.clean_floor === 'yes' &&
+                    {otherRoom.clean_floor === true &&
                         <>
                             {/* FLOOR TYPE */}
                             <FormLabel>Select floor type:</FormLabel>
