@@ -26,7 +26,6 @@ function BathroomForm() {
       dispatch ( {type: 'ADD_BATHROOM', payload: bathroom} )
       // history.push('/nextPage') //add page component 
     }
-console.log(bathroom);
   return (
     <>
       <h1>Bathroom Form</h1>

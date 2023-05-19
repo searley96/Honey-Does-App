@@ -17,9 +17,9 @@ function AboutPage() {
         <p>This about page is for anyone to read!</p>
       </div>
       <div>
-        {/* <KitchenForm /> */}
+        <KitchenForm />
         {/* <Chat /> */}
-        <OtherRoom />
+        {/* <OtherRoom /> */}
       </div>
     </div>
   );
