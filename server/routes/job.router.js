@@ -86,7 +86,9 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // GET ALL JOBS
 router.get('/allJobs', rejectUnauthenticated, (req, res) => {
     const queryText = `
-        SELECT * FROM "job";
+    SELECT *
+    FROM "job"
+    JOIN "user" AS client ON client.id = "job".client_id
     `
     pool.query(queryText)
         .then(result => {
