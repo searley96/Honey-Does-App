@@ -286,4 +286,4 @@ router.post('/wipe-dust/', rejectUnauthenticated, (req, res) => {
         })
 })
 
-export default router;
+module.exports = router;

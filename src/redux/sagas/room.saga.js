@@ -29,11 +29,24 @@ function* fetchBathroom() {
    
 }
 
-function* createOtherRoom() {
+function* createOtherRoom(action) {
+    try {
+        yield axios.post(`/api/form/other`, action.payload);
+        yield axios.get(`/api/job/other/jobid`);
+        yield put({ type: 'JOB_ID', payload: jobId.data });
+    } catch (error) {
+        console.log('ERROR retrieving new jobID', error);
+    }
    
 }
 
 function* fetchOtherRoom() {
+    try {
+        const response = yield axios.get(`/api/job/jobid`);
+        // yield put({type})
+    } catch (error) {
+        console.log('Error retrieving Other Room:', error);
+    }
    
 }
 
