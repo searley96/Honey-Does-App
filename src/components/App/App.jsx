@@ -24,6 +24,7 @@ import RegisterPage from "../RegisterPage/RegisterPage";
 import BathroomForm from "../Client/Bathroom/BathroomForm";
 import ProfilePage from '../ProfilePage/ProfilePage';
 import AdminDashboard from '../Admin/AdminDashboard/AdminDashboard';
+import JobDetails from "../Admin/AdminDashboard/JobDetails";
 
 import "./App.css";
 
@@ -79,8 +80,27 @@ function App() {
           <Route
             exact
             path="/adminDashboard"
+
           >
-            <AdminDashboard />
+            {user.id ? (
+
+              <AdminDashboard />
+            ) : (
+              // Otherwise, show the login page
+              <LoginPage />
+            )}
+
+          </Route>
+
+          <Route
+            exact
+            path="/jobDetails"
+          >
+            {user.id ?
+              <JobDetails />
+
+              : <LoginPage />}
+
           </Route>
 
           <Route exact path="/login">
@@ -117,31 +137,31 @@ function App() {
           </Route>
 
           <Route exact path="/bathroomForm">
-            <BathroomForm/>
+            <BathroomForm />
           </Route>
 
           <Route
             exact path="/profile">
-              {user.id ?
+            {user.id ?
               <>
                 <ProfilePage />
                 <BottomNav />
               </>
               :
               <LoginPage />
-              }
+            }
           </Route>
 
           <Route
             exact path="/profile">
-              {user.id ?
+            {user.id ?
               <>
                 <ProfilePage />
                 <BottomNav />
               </>
               :
               <LoginPage />
-              }
+            }
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}

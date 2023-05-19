@@ -28,13 +28,13 @@ const handleOnClick = () => {
                 allJobs.map((job, i) => (
                     <Card key={i}>
                         <CardContent sx={{ display: "flex", justifyContent: "space-evenly" }}>
-                            <Typography style={{ display: 'inline-block' }}>
-                                <Link href="#" underline="hover"  onClick={handleOnClick}>
+                            <Button style={{ display: 'inline-block' }} variant='outlined' onClick={handleOnClick}>
+                               
                                
                                     {job.job_id}
-                                </Link>
+                               
 
-                            </Typography>
+                            </Button>
                             <Typography style={{ display: 'inline-block' }}>
                                 {job.first_name} {job.last_name}
                             </Typography>
