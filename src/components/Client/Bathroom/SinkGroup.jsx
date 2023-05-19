@@ -24,15 +24,15 @@ function SinkGroup() {
           name="clean-sink"
           row
           value={bathroom.clean_sink_counter}
-          onChange={(event) =>
+          onChange={e =>
             dispatch({
               type: "SET_CLEAN_SINK_COUNTER",
-              payload: event.target.value,
+              payload: (e.target.value === 'true')
             })
           }
         >
-          <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-          <FormControlLabel value="No" control={<Radio />} label="No" />
+          <FormControlLabel value={true} control={<Radio />} label="Yes" />
+          <FormControlLabel value={false} control={<Radio />} label="No" />
         </RadioGroup>
         <FormLabel> Do you have granite counter tops?</FormLabel>
         <RadioGroup
@@ -40,15 +40,15 @@ function SinkGroup() {
           name="granite-tops"
           row
           value={bathroom.granite_counter_tops}
-          onChange={(event) =>
+          onChange={e =>
             dispatch({
               type: "SET_GRANITE_COUNTER_TOPS",
-              payload: event.target.value,
+              payload: (e.target.value === 'true')
             })
           }
         >
-          <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-          <FormControlLabel value="No" control={<Radio />} label="No" />
+          <FormControlLabel value={true} control={<Radio />} label="Yes" />
+          <FormControlLabel value={false} control={<Radio />} label="No" />
         </RadioGroup>
         <FormLabel>Sink type?</FormLabel>
         <RadioGroup
@@ -56,10 +56,10 @@ function SinkGroup() {
           name="sink-type"
           row
           value={bathroom.sink_type}
-          onChange={(event) =>
+          onChange={e =>
             dispatch({
               type: "SET_SINK_TYPE",
-              payload: event.target.value,
+              payload: e.target.value,
             })
           }
         >
@@ -83,21 +83,21 @@ function SinkGroup() {
               name="cabinet-clean"
               row
               value={bathroom.clean_front_cabinets}
-              onChange={(event) =>
+              onChange={e =>
                 dispatch({
                   type: "SET_CLEAN_FRONT_CABINETS",
-                  payload: event.target.value,
+                  payload: (e.target.value === 'true'),
                 })
               }
             >
-              <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-              <FormControlLabel value="No" control={<Radio />} label="No" />
+              <FormControlLabel value={true} control={<Radio />} label="Yes" />
+              <FormControlLabel value={false} control={<Radio />} label="No" />
             </RadioGroup>
           </>
         )}
 
         {/* if yes to cabinet front clean, display clean type options */}
-        {bathroom.clean_front_cabinets === "Yes" && (
+        {bathroom.clean_front_cabinets === true && (
           <>
             <FormLabel>How do you want cabinet fronts cleaned?</FormLabel>
             <RadioGroup
@@ -105,10 +105,10 @@ function SinkGroup() {
               name="cabinet-clean-type"
               row
               value={bathroom.cabinet_spot_full_clean}
-              onChange={(event) =>
+              onChange={e =>
                 dispatch({
                   type: "SET_CABINET_SPOT_FULL_CLEAN",
-                  payload: event.target.value,
+                  payload: e.target.value,
                 })
               }
             >
@@ -126,7 +126,7 @@ function SinkGroup() {
           </>
         )}
         {/* if yes to cabinet front clean, ask wood cabinets */}
-        {bathroom.clean_front_cabinets === "Yes" && (
+        {bathroom.clean_front_cabinets === true && (
           <>
             <FormLabel>
               If wood cabinets, do you want us to use Orange Glo Polish?
@@ -136,15 +136,15 @@ function SinkGroup() {
               name="cabinet-orange-glo"
               row
               value={bathroom.cabinet_orange_glo}
-              onChange={(event) =>
+              onChange={e =>
                 dispatch({
                   type: "SET_CABINET_ORANGE_GLO",
-                  payload: event.target.value,
+                  payload: (e.target.value === 'true')
                 })
               }
             >
-              <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-              <FormControlLabel value="No" control={<Radio />} label="No" />
+              <FormControlLabel value={true} control={<Radio />} label="Yes" />
+              <FormControlLabel value={false} control={<Radio />} label="No" />
             </RadioGroup>
           </>
         )}
