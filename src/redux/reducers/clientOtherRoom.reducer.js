@@ -19,7 +19,7 @@ const clientOtherRoomReducer = (state = {
             return { ...state, clean_floor: action.payload };
         case 'SET_FLOOR_TYPE':
             return { ...state, floor_type: action.payload };
-        case 'CLEAR_OTHER_ROOM_FORM':
+        case 'CLEAR_ROOM':
             return {
                 job_id: '',
                 room_type: '',

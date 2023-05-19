@@ -14,7 +14,8 @@ function OtherRoomForm() {
     const jobId = useSelector(store => store.jobid);
 
     useEffect(() => {
-        dispatch({type: 'JOB_ID', payload: jobId})
+        dispatch({type: 'JOB_ID', payload: jobId});
+        dispatch({type: 'SET_ROOM_TYPE'})
     }, [])
     
     // Post form to database, clear form, and go to the next page.

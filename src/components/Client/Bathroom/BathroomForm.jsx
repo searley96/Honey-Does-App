@@ -15,6 +15,7 @@ function BathroomForm() {
 
   const dispatch = useDispatch();
   const jobId = useSelector(store => store.jobid);
+  const bathroom = useSelector(store => store.clientBathroomReducer);
 
     useEffect(() => {
         dispatch({type: 'JOB_ID', payload: jobId})
@@ -22,10 +23,10 @@ function BathroomForm() {
 
     const submitHandler = (event) => {
       event.preventDefault();
-      dispatch ( {type: 'ADD_BATHROOM', payload: bathroomForm} )
-      history.push('/nextPage') //add page component 
+      dispatch ( {type: 'ADD_BATHROOM', payload: bathroom} )
+      // history.push('/nextPage') //add page component 
     }
-
+console.log(bathroom);
   return (
     <>
       <h1>Bathroom Form</h1>
@@ -45,11 +46,11 @@ function BathroomForm() {
         direction="row"
         sx={{ mt: "40px", display: "flex", justifyContent: "space-between" }}
       >
-        <Button variant="outlined">
-          <AddIcon sx={{ mx: "5px" }} onClick={e => dispatch ({ type: 'ADD_BATHROOM', paylaod: bathroomForm})} fontSize="small" /> Add Another Bathroom
+        <Button variant="outlined" onClick={e => dispatch ({ type: 'ADD_BATHROOM', payload: bathroom})}>
+          <AddIcon sx={{ mx: "5px" }} fontSize="small" /> Add Another Bathroom
         </Button>
-        <Button variant="contained">
-          <DoneIcon sx={{ mx: "5px" }} onClick={submitHandler} fontSize="small" /> Done With Bathroom
+        <Button variant="contained" onClick={submitHandler}>
+          <DoneIcon sx={{ mx: "5px" }} fontSize="small" /> Done With Bathroom
           Forms
         </Button>
       </Stack>

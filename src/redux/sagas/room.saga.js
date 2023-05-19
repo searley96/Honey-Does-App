@@ -17,8 +17,17 @@ function* fetchKitchen() {
    
 }
 
-function* createBathroom() {
-   
+function* createBathroom(action) {
+    console.log('inside saga', action.payload);
+    try {
+        yield axios.post(`/api/form/bathroom`, action.payload);
+
+        yield put({
+            type: 'CLEAR_ROOM'
+        });
+    } catch(error) {
+        console.log('ERROR clearing rooms', error);
+    } 
 }
 
 function* fetchBathroom() {
@@ -28,21 +37,17 @@ function* fetchBathroom() {
 function* createOtherRoom(action) {
     try {
         yield axios.post(`/api/form/other`, action.payload);
-        yield axios.get(`/api/job/other/jobid`);
-        yield put({ type: 'JOB_ID', payload: jobId.data });
-    } catch (error) {
-        console.log('ERROR retrieving new jobID', error);
-    }
+
+        yield put({
+            type: 'CLEAR_ROOM'
+        });
+    } catch(error) {
+        console.log('ERROR clearing rooms', error);
+    }  
    
 }
 
-function* fetchOtherRoom() {
-    try {
-        const response = yield axios.get(`/api/job/jobid`);
-        // yield put({type})
-    } catch (error) {
-        console.log('Error retrieving Other Room:', error);
-    }
+function* fetchOtherRoom(action) {
    
 }
 
