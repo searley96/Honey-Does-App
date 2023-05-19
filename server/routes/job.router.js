@@ -81,4 +81,21 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             res.sendStatus(500);
         })
 })
+
+// ADMIN
+// GET ALL JOBS
+router.get('/allJobs', rejectUnauthenticated, (req, res) => {
+    const queryText = `
+        SELECT * FROM "job";
+    `
+    pool.query(queryText)
+        .then(result => {
+            console.log('result.rows:', result.rows);
+            res.send(result.rows);
+        }).catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+        })
+})
+
 module.exports = router;
