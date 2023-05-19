@@ -11,7 +11,7 @@ function OtherRoomForm() {
     const dispatch = useDispatch();
     const history = useHistory();
     const otherRoomForm = useSelector(store => store.clientOtherRoom);
-    const jobId = useSelector(store => store.jobid);
+    const jobId = useSelector(store => store.jobidReducer);
 
     useEffect(() => {
         dispatch({type: 'JOB_ID', payload: jobId})
