@@ -168,8 +168,7 @@ router.post('/bathroom/', rejectUnauthenticated, (req, res) => {
             $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, 
             $11, $12, $13, $14, $15, $16, $17, $18, $19, $20,
             $21, $22, $23
-            )
-        );
+            );
         `;
         pool.query(queryText, 
             [
@@ -239,12 +238,12 @@ router.post('/other/', rejectUnauthenticated, (req, res) => {
         )
     VALUES(
         $1, $2, $3, $4, $5, $6)
-    );
+    ;
     `
     pool.query(queryText, 
         [
-            req.body.job_id, 
-            req.body.room_type, 
+            123456, 
+            'other', 
             req.body.floor_type, 
             req.body.wipe_surfaces, 
             req.body.clean_floor, 
