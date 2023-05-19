@@ -10,6 +10,9 @@ const router = express.Router();
 // KITCHEN GET
 router.get('/kitchen/:jobid', rejectUnauthenticated, (req, res) => {
     const jobId = req.params.jobid;
+
+    
+
     const queryText = `
         SELECT * FROM user_kitchen
         WHERE job_id = $1;
@@ -26,6 +29,7 @@ router.get('/kitchen/:jobid', rejectUnauthenticated, (req, res) => {
 
 // KITCHEN POST
 router.post('/kitchen/', rejectUnauthenticated, (req, res) => {
+    console.log(req.body);
     const queryText = `
         INSERT INTO user_kitchen( 
             job_id,
@@ -65,12 +69,13 @@ router.post('/kitchen/', rejectUnauthenticated, (req, res) => {
             $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, 
             $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, 
             $21, $22, $23, $24, $25, $26, $27)
-        );
+        ;
         `;
         pool.query(queryText, 
             [
-                req.body.job_id, 
-                req.body.room_type, 
+                // req.body.job_id, 
+                '123456',
+                'kitchen', 
                 req.body.wipe_cabinets, 
                 req.body.cabinet_spot_full_clean, 
                 req.body.cabinet_orange_glo, 
@@ -102,6 +107,7 @@ router.post('/kitchen/', rejectUnauthenticated, (req, res) => {
                 req.body.specialty_flooring_instructions,
                 req.body.mop_location
             ]).then(response => {
+                console.log('kitchen POSTED successfully!');
                 res.sendStatus(201);
             }).catch(err => {
                 console.log(err);
@@ -133,29 +139,35 @@ router.post('/bathroom/', rejectUnauthenticated, (req, res) => {
             job_id,
             room_type,
             bathroom_type,
-            bath_shower_type,
-            threshold_type,
+            regular_type,
+            ceramic_porcelain_type,
 
+            walk_in_type,
+            specialty_type,
+            jacuzzi_type,
+            other_type,
             clean_jacuzzi,
+
             clean_mirror,
             number_mirrors_clean,
             clean_sink_counter,
             granite_counter_tops,
-
             sink_type,
+
             clean_front_cabinets,
             cabinet_spot_full_clean,
             cabinet_orange_glo,
             clean_toilet,
-
             take_out_trash,
+
             take_out_trash_instructions,
             sweep_mop_floor,
             shake_rugs
             )
         VALUES(
             $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, 
-            $11, $12, $13, $14, $15, $16, $17, $18, $19, 
+            $11, $12, $13, $14, $15, $16, $17, $18, $19, $20,
+            $21, $22, $23
             )
         );
         `;
@@ -164,22 +176,27 @@ router.post('/bathroom/', rejectUnauthenticated, (req, res) => {
                 req.body.job_id, 
                 req.body.room_type, 
                 req.body.bathroom_type, 
-                req.body.bath_shower_type, 
-                req.body.threshold_type, 
+                regular_type,
+                ceramic_porcelain_type,
 
-                req.body.clean_jacuzzi,
+                walk_in_type,
+                specialty_type,
+                jacuzzi_type,
+                other_type,
+                req.body.clean_jacuzzi, 
+
                 req.body.clean_mirror,
                 req.body.number_mirrors_clean,
                 req.body.clean_sink_counter,
                 req.body.granite_counter_tops,
-
                 req.body.sink_type,
+
                 req.body.clean_front_cabinets,
                 req.body.cabinet_spot_full_clean,
                 req.body.cabinet_orange_glo,
                 req.body.clean_toilet,
-
                 req.body.take_out_trash,
+
                 req.body.take_out_trash_instructions,
                 req.body.sweep_mop_floor,
                 req.body.shake_rugs

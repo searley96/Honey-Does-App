@@ -26,10 +26,10 @@ function BathroomType() {
             name="bathroom-type-group"
             row
             value={bathroom.bathroom_type}
-            onChange={event =>
+            onChange={e =>
               dispatch({
                 type: "SET_BATHROOM_TYPE",
-                payload: event.target.value,
+                payload: e.target.value,
               })
             }
           >

@@ -2,26 +2,26 @@ const clientKitchenReducer = (state =
     {
         job_id: '',
         room_type: '',
-        wipe_cabinets: 'yes',
+        wipe_cabinets: true,
         cabinet_spot_full_clean: '',
         cabinet_orange_glo: '',
-        wipe_appliances: 'yes',
-        wipe_fridge: 'yes',
+        wipe_appliances: true,
+        wipe_fridge: true,
         fridge_stainless_steel: '',
-        wipe_dishwasher: 'yes',
+        wipe_dishwasher: true,
         dishwasher_stainless_steel: '',
         wipe_deep_freezer: '',
-        clean_microwave: 'yes',
-        clean_stove_top: 'yes',
+        clean_microwave: true,
+        clean_stove_top: true,
         type_of_stove: '',
         clean_hood_vent: '',
         hood_vent_special_instructions: '',
         back_splash: '',
         clean_stove_front: '',
         stove_stainless_steel: '',
-        wipe_counters_sink: 'yes',
+        wipe_counters_sink: true,
         granite_counter_tops: '',
-        sweep_mop_floor: 'yes',
+        sweep_mop_floor: true,
         shake_rugs: '',
         hardwood_floors: '',
         specialty_flooring: '',
@@ -30,7 +30,7 @@ const clientKitchenReducer = (state =
 
     }, action) => {
     switch (action.type) {
-        case 'JOB_ID':
+        case 'SET_JOB_ID':
             return { ...state, job_id: action.payload };
         case 'SET_ROOM_TYPE':
             return { ...state, room_type: action.payload };
@@ -84,29 +84,29 @@ const clientKitchenReducer = (state =
             return { ...state, specialty_flooring_instructions: action.payload };
         case 'SET_MOP_LOCATION':
             return { ...state, mop_location: action.payload };
-            case 'CLEAR_KITCHEN':
+            case 'CLEAR_ROOM':
             return { job_id: '',
             room_type: '',
-            wipe_cabinets: 'yes',
+            wipe_cabinets: true,
             cabinet_spot_full_clean: '',
             cabinet_orange_glo: '',
-            wipe_appliances: 'yes',
-            wipe_fridge: 'yes',
+            wipe_appliances: true,
+            wipe_fridge: true,
             fridge_stainless_steel: '',
-            wipe_dishwasher: 'yes',
+            wipe_dishwasher: true,
             dishwasher_stainless_steel: '',
             wipe_deep_freezer: '',
-            clean_microwave: 'yes',
-            clean_stove_top: 'yes',
+            clean_microwave: true,
+            clean_stove_top: true,
             type_of_stove: '',
             clean_hood_vent: '',
             hood_vent_special_instructions: '',
             back_splash: '',
             clean_stove_front: '',
             stove_stainless_steel: '',
-            wipe_counters_sink: 'yes',
+            wipe_counters_sink: true,
             granite_counter_tops: '',
-            sweep_mop_floor: 'yes',
+            sweep_mop_floor: true,
             shake_rugs: '',
             hardwood_floors: '',
             specialty_flooring: '',
