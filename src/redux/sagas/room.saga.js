@@ -32,7 +32,7 @@ function* fetchBathroom() {
 function* createOtherRoom(action) {
     try {
         yield axios.post(`/api/form/other`, action.payload);
-        yield axios.get(`/api/job/jobid`);
+        yield axios.get(`/api/job/other/jobid`);
         yield put({ type: 'JOB_ID', payload: jobId.data });
     } catch (error) {
         console.log('ERROR retrieving new jobID', error);

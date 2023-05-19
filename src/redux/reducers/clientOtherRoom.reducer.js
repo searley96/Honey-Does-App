@@ -2,8 +2,8 @@ const clientOtherRoomReducer = (state = {
     job_id: '',
     room_type: '',
     floor_type: '',
-    wipe_surfaces: 'yes',
-    clean_floor: 'yes',
+    wipe_surfaces: true,
+    clean_floor: true,
     sq_ft: ''
 }, action) => {
     switch (action.type) {
@@ -24,8 +24,8 @@ const clientOtherRoomReducer = (state = {
                 job_id: '',
                 room_type: '',
                 floor_type: '',
-                wipe_surfaces: 'yes',
-                clean_floor: 'yes',
+                wipe_surfaces: true,
+                clean_floor: true,
                 sq_ft: ''
             };
         default:

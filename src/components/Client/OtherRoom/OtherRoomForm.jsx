@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import OtherRoom from "./OtherRoom";
@@ -11,12 +11,17 @@ function OtherRoomForm() {
     const dispatch = useDispatch();
     const history = useHistory();
     const otherRoomForm = useSelector(store => store.clientOtherRoom);
+    const jobId = useSelector(store => store.jobid);
+
+    useEffect(() => {
+        dispatch({type: 'JOB_ID', payload: jobId})
+    }, [])
     
     // Post form to database, clear form, and go to the next page.
     const submitHandler = (event) => {
         event.preventDefault();
         dispatch({ type: 'ADD_OTHER_ROOM', payload: otherRoomForm})
-        history.push('/nextPageGoesHere'); // TO DO: put the route of the next componenet here
+        // history.push('/nextPageGoesHere'); // TO DO: put the route of the next component here
     }
     
     return (
