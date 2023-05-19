@@ -24,7 +24,8 @@ import RegisterPage from "../RegisterPage/RegisterPage";
 import BathroomForm from "../Client/Bathroom/BathroomForm";
 import ProfilePage from '../ProfilePage/ProfilePage';
 
-import "./App.css";
+import './App.css';
+import OtherRoomForm from '../Client/OtherRoom/OtherRoomForm';
 
 function App() {
   const dispatch = useDispatch();
@@ -75,9 +76,21 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
 
-          <Route exact path="/login">
+          <Route
+            // logged in shows OtherRoomForm else shows LoginPage
+            exact
+            path="/otherRoomForm"
+          >
+            <OtherRoomForm />
+            <BottomNav />
+          </Route>
+
+          <Route
+            exact
+            path="/login"
+          >
             {user.id ? (
-              // If the user is already logged in,
+              // If the user is already logged in, 
               // redirect to the /user page
               <Redirect to="/user" />
             ) : (
