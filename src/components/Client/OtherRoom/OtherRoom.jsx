@@ -1,6 +1,17 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { TextField, FormControl, FormGroup, RadioGroup, Checkbox, FormLabel, FormControlLabel, Radio } from '@mui/material';
+import { TextField, 
+    FormControl, 
+    FormGroup, 
+    RadioGroup, 
+    FormLabel, 
+    FormControlLabel, 
+    Radio,
+    Stack,
+    Button 
+    } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import DoneIcon from '@mui/icons-material/Done';
 
 function OtherRoom() {
     const dispatch = useDispatch();
@@ -9,6 +20,14 @@ function OtherRoom() {
     let counter = 1;
     const otherRoomHeader = `Other Room #${counter}`;
 
+    const addRoom = () => {
+        dispatch({type: 'ADD_OTHER_ROOM', payload: otherRoom});
+    }
+
+    const moveToFinalTouches = () => {
+        dispatch({type: 'ADD_OTHER_ROOM', payload: otherRoom});
+        // history.push(FINAL TOUCHES ROUTE HERE);
+    }
     // Not using these for now.
     // const [otherInput, setOtherInput] = useState('');
     // const [checkedRoomType, setCheckedRoomType] = useState(false);
@@ -36,7 +55,7 @@ function OtherRoom() {
                         <FormControlLabel value="library" control={<Radio />} label="Library" />
                         <FormControlLabel value="other" control={<Radio />} label="Other" />
                     </RadioGroup>
-                        {/* <FormControlLabel value={otherInput} 
+                    {/* <FormControlLabel value={otherInput} 
                             control={
                                 <Radio checkedRoomType={checkedRoomType} onClick={() => setCheckedRoomType(!checkedRoomType)} />
                             } 
@@ -50,7 +69,7 @@ function OtherRoom() {
                                 : ( "Other" )
                             } 
                         /> */}
-                   
+
                     {/* SQ FT */}
                     <FormLabel>What is the square footage of the room?</FormLabel>
                     <TextField size='small' sx={{ width: 150 }} value={otherRoom.sq_ft}
@@ -92,6 +111,10 @@ function OtherRoom() {
                             </RadioGroup>
                         </>
                     }
+                    <Stack spacing={1} direction='row' sx={{ mt: '40px', display: 'flex', justifyContent: 'space-between' }}>
+                        <Button onClick={addRoom} variant="outlined"><AddIcon sx={{ mx: '5px' }} fontSize="small" /> Add Another Room</Button>
+                        <Button onClick={moveToFinalTouches} variant="contained"><DoneIcon sx={{ mx: '5px' }} fontSize="small" /> Move on to final touches</Button>
+                    </Stack>
 
                 </FormControl>
             </FormGroup>

@@ -10,18 +10,18 @@ const clientBathroomReducer = (state = {
     other_type: '',
     clean_jacuzzi: true,
     clean_mirror: true,
-    number_mirrors_clean: '',
+    number_mirrors_clean: 0,
     clean_sink_counter: true,
-    granite_counter_tops: true,
+    granite_counter_tops: null,
     sink_type: '',
-    clean_front_cabinets: true,
+    clean_front_cabinets: null,
     cabinet_spot_full_clean: '',
-    cabinet_orange_glo: true,
+    cabinet_orange_glo: null,
     clean_toilet: true,
     take_out_trash: true,
     take_out_trash_instructions: '',
     sweep_mop_floor: true,
-    shake_rugs: true
+    shake_rugs: null
 }, action) => {
     switch (action.type) {
         case 'JOB_ID':
@@ -83,19 +83,19 @@ const clientBathroomReducer = (state = {
                 other_type: '',
                 clean_jacuzzi: true,
                 clean_mirror: true,
-                number_mirrors_clean: '',
+                number_mirrors_clean: 0,
                 clean_sink_counter: true,
-                granite_counter_tops: true,
+                granite_counter_tops: null,
                 sink_type: '',
-                clean_front_cabinets: true,
+                clean_front_cabinets: null,
                 cabinet_spot_full_clean: '',
-                cabinet_orange_glo: true,
+                cabinet_orange_glo: null,
                 clean_toilet: true,
                 take_out_trash: true,
                 take_out_trash_instructions: '',
                 sweep_mop_floor: true,
-                shake_rugs: true
-            };
+                shake_rugs: null
+            }
         default:
             return state;
     }

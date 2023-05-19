@@ -74,7 +74,7 @@ router.post('/kitchen/', rejectUnauthenticated, (req, res) => {
         pool.query(queryText, 
             [
                 // req.body.job_id, 
-                '123456',
+                123456,
                 'kitchen', 
                 req.body.wipe_cabinets, 
                 req.body.cabinet_spot_full_clean, 
@@ -134,6 +134,7 @@ router.get('/bathroom/:jobid', rejectUnauthenticated, (req, res) => {
 
 // BATHROOM POST
 router.post('/bathroom/', rejectUnauthenticated, (req, res) => {
+    console.log(req.body);
     const queryText = `
         INSERT INTO user_bathroom( 
             job_id,
@@ -168,21 +169,20 @@ router.post('/bathroom/', rejectUnauthenticated, (req, res) => {
             $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, 
             $11, $12, $13, $14, $15, $16, $17, $18, $19, $20,
             $21, $22, $23
-            )
-        );
+            );
         `;
         pool.query(queryText, 
             [
-                req.body.job_id, 
-                req.body.room_type, 
+                123456, 
+                'bathroom', 
                 req.body.bathroom_type, 
-                regular_type,
-                ceramic_porcelain_type,
+                req.body.regular_type,
+                req.body.ceramic_porcelain_type,
 
-                walk_in_type,
-                specialty_type,
-                jacuzzi_type,
-                other_type,
+                req.body.walk_in_type,
+                req.body.specialty_type,
+                req.body.jacuzzi_type,
+                req.body.other_type,
                 req.body.clean_jacuzzi, 
 
                 req.body.clean_mirror,
@@ -239,12 +239,12 @@ router.post('/other/', rejectUnauthenticated, (req, res) => {
         )
     VALUES(
         $1, $2, $3, $4, $5, $6)
-    );
+    ;
     `
     pool.query(queryText, 
         [
-            req.body.job_id, 
-            req.body.room_type, 
+            123456, 
+            'other', 
             req.body.floor_type, 
             req.body.wipe_surfaces, 
             req.body.clean_floor, 

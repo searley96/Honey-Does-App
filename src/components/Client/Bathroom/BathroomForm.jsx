@@ -15,9 +15,8 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 function BathroomForm() {
 
   const dispatch = useDispatch();
-  const history = useHistory();
   const jobId = useSelector(store => store.jobidReducer);
-  const bathroomForm = useSelector(store => store.clientBathroomReducer)
+  const bathroom = useSelector(store => store.clientBathroomReducer);
 
     useEffect(() => {
         dispatch({type: 'JOB_ID', payload: jobId})
@@ -25,10 +24,10 @@ function BathroomForm() {
 
     const submitHandler = (event) => {
       event.preventDefault();
-      dispatch ( {type: 'ADD_BATHROOM', payload: bathroomForm} )
+      dispatch ( {type: 'ADD_BATHROOM', payload: bathroom} )
       history.push('/kitchenForm') //add page component 
     }
-
+console.log(bathroom);
   return (
     <>
       <h1>Bathroom Form</h1>
