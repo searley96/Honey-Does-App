@@ -35,41 +35,6 @@ function BathtubShowerGroup() {
 
   const [jacuzziChecked, setJacuzziChecked] = useState(false);
   const [jacuzziType, setJacuzziType] = useState('');
-  // state to track TextField input, gets pushed into list state array and reset
-  const [other, updateOther] = useState("");
-  const [otherDisabled, updateDisabled] = useState(false);
-
-  const handleChange = (e) => {
-    // if checked, add to list state array
-    console.log(e.target.checked);
-    if (e.target.checked) {
-      // getAttribute references the FormControlLabel's name attribute
-      updateList([...list, e.target.getAttribute("name")]);
-    }
-    //else remove from list state array
-    else {
-      // updateList to a new array that filters out the item that was unchecked
-      updateList(list.filter((item) => item != e.target.getAttribute("name")));
-    }
-    // DISPATCH CAN GO HERE, LOCAL STATE WILL BE THE PAYLOAD
-    dispatch({
-      type: "SET_BATH_SHOWER_TYPE",
-      payload: list,
-    });
-  };
-
-  
-  // submits other bathroom types from textfield, 
-  // sets textfield to an empty string and disable the component
-  const otherSubmit = (e) => {
-    dispatch({
-      type: "SET_OTHER_TYPE",
-      payload: other,
-    });
-    updateOther("");
-    updateDisabled(true);
-  };
-
 
   return (
     <>
@@ -283,11 +248,10 @@ function BathtubShowerGroup() {
             <FormLabel>If any other types, please specify quantity of other bathrooms, and describe them.</FormLabel>
             <TextField
               size="small"
-              value={other}
-              disabled={otherDisabled}
-              onChange={(event) => updateOther(event.target.value)}
+              value={bathroom.other_type}
+              onChange={e => dispatch({type: 'SET_OTHER_TYPE', payload: e.target.value})}
             />
-            <Button onClick={otherSubmit} disabled={otherDisabled}>Submit</Button>
+            
           </>
         </FormControl>
       </FormGroup>

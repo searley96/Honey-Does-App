@@ -8,20 +8,20 @@ const clientBathroomReducer = (state = {
     specialty_type: '',
     jacuzzi_type: '',
     other_type: '',
-    clean_jacuzzi: 'yes',
-    clean_mirror: 'yes',
+    clean_jacuzzi: true,
+    clean_mirror: true,
     number_mirrors_clean: '',
-    clean_sink_counter: 'yes',
-    granite_counter_tops: 'yes',
+    clean_sink_counter: true,
+    granite_counter_tops: true,
     sink_type: '',
-    clean_front_cabinets: 'yes',
+    clean_front_cabinets: true,
     cabinet_spot_full_clean: '',
-    cabinet_orange_glo: 'yes',
-    clean_toilet: 'yes',
-    take_out_trash: 'yes',
+    cabinet_orange_glo: true,
+    clean_toilet: true,
+    take_out_trash: true,
     take_out_trash_instructions: '',
-    sweep_mop_floor: 'yes',
-    shake_rugs: 'yes'
+    sweep_mop_floor: true,
+    shake_rugs: true
 }, action) => {
     switch (action.type) {
         case 'JOB_ID':
@@ -70,6 +70,32 @@ const clientBathroomReducer = (state = {
             return { ...state, sweep_mop_floor: action.payload };
         case 'SET_SHAKE_RUGS':
             return { ...state, shake_rugs: action.payload };
+        case 'CLEAR_ROOM':
+            return {
+                job_id: '',
+                room_type: '',
+                bathroom_type: '',
+                regular_type: '',
+                ceramic_porcelain_type: '',
+                walk_in_type: '',
+                specialty_type: '',
+                jacuzzi_type: '',
+                other_type: '',
+                clean_jacuzzi: true,
+                clean_mirror: true,
+                number_mirrors_clean: '',
+                clean_sink_counter: true,
+                granite_counter_tops: true,
+                sink_type: '',
+                clean_front_cabinets: true,
+                cabinet_spot_full_clean: '',
+                cabinet_orange_glo: true,
+                clean_toilet: true,
+                take_out_trash: true,
+                take_out_trash_instructions: '',
+                sweep_mop_floor: true,
+                shake_rugs: true
+            };
         default:
             return state;
     }
