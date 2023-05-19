@@ -10,6 +10,9 @@ const router = express.Router();
 // KITCHEN GET
 router.get('/kitchen/:jobid', rejectUnauthenticated, (req, res) => {
     const jobId = req.params.jobid;
+
+    
+
     const queryText = `
         SELECT * FROM user_kitchen
         WHERE job_id = $1;
@@ -26,6 +29,7 @@ router.get('/kitchen/:jobid', rejectUnauthenticated, (req, res) => {
 
 // KITCHEN POST
 router.post('/kitchen/', rejectUnauthenticated, (req, res) => {
+    console.log(req.body);
     const queryText = `
         INSERT INTO user_kitchen( 
             job_id,
@@ -65,12 +69,13 @@ router.post('/kitchen/', rejectUnauthenticated, (req, res) => {
             $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, 
             $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, 
             $21, $22, $23, $24, $25, $26, $27)
-        );
+        ;
         `;
         pool.query(queryText, 
             [
-                req.body.job_id, 
-                req.body.room_type, 
+                // req.body.job_id, 
+                '123456',
+                'kitchen', 
                 req.body.wipe_cabinets, 
                 req.body.cabinet_spot_full_clean, 
                 req.body.cabinet_orange_glo, 
@@ -102,6 +107,7 @@ router.post('/kitchen/', rejectUnauthenticated, (req, res) => {
                 req.body.specialty_flooring_instructions,
                 req.body.mop_location
             ]).then(response => {
+                console.log('kitchen POSTED successfully!');
                 res.sendStatus(201);
             }).catch(err => {
                 console.log(err);
@@ -297,4 +303,4 @@ router.post('/wipe-dust/', rejectUnauthenticated, (req, res) => {
         })
 })
 
-export default router;
+module.exports = router;

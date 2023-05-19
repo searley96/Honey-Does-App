@@ -30,7 +30,7 @@ const clientKitchenReducer = (state =
 
     }, action) => {
     switch (action.type) {
-        case 'JOB_ID':
+        case 'SET_JOB_ID':
             return { ...state, job_id: action.payload };
         case 'SET_ROOM_TYPE':
             return { ...state, room_type: action.payload };
@@ -84,7 +84,7 @@ const clientKitchenReducer = (state =
             return { ...state, specialty_flooring_instructions: action.payload };
         case 'SET_MOP_LOCATION':
             return { ...state, mop_location: action.payload };
-            case 'CLEAR_KITCHEN':
+            case 'CLEAR_ROOM':
             return { job_id: '',
             room_type: '',
             wipe_cabinets: true,
