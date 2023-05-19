@@ -19,6 +19,7 @@ function LandingPage() {
   const toForm = (event) => {
     // history.push('/form');
     
+    //TEMPORARY DISABLE UNTIL ROUTES ARE SET UP
     dispatch({
       type: 'CREATE_JOB_ID'
     })

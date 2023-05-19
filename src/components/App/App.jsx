@@ -1,38 +1,40 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   HashRouter as Router,
   Redirect,
   Route,
   Switch,
-} from 'react-router-dom';
+} from "react-router-dom";
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 
-import Nav from '../Nav/Nav';
-import NewNav from '../Nav/NewNav';
-import Footer from '../Footer/Footer';
-import BottomNav from '../Footer/BottomNav';
+import Nav from "../Nav/Nav";
+import NewNav from "../Nav/NewNav";
+import Footer from "../Footer/Footer";
+import BottomNav from "../Footer/BottomNav";
 
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
-import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
-import LandingPage from '../LandingPage/LandingPage';
-import LoginPage from '../LoginPage/LoginPage';
-import RegisterPage from '../RegisterPage/RegisterPage';
+import AboutPage from "../AboutPage/AboutPage";
+import UserPage from "../UserPage/UserPage";
+import InfoPage from "../InfoPage/InfoPage";
+import LandingPage from "../LandingPage/LandingPage";
+import LoginPage from "../LoginPage/LoginPage";
+import RegisterPage from "../RegisterPage/RegisterPage";
+import BathroomForm from "../Client/Bathroom/BathroomForm";
 import ProfilePage from '../ProfilePage/ProfilePage';
 
 import './App.css';
 import WipeDustForm from '../Client/WipeDust/WipeDustForm';
+import OtherRoomForm from '../Client/OtherRoom/OtherRoomForm';
 
 function App() {
   const dispatch = useDispatch();
 
-  const user = useSelector(store => store.user);
+  const user = useSelector((store) => store.user);
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_USER' });
+    dispatch({ type: "FETCH_USER" });
   }, [dispatch]);
 
   return (
@@ -76,45 +78,64 @@ function App() {
           </ProtectedRoute>
 
           <Route
+            // logged in shows OtherRoomForm else shows LoginPage
+            exact
+            path="/otherRoomForm"
+          >
+            <OtherRoomForm />
+            <BottomNav />
+          </Route>
+
+          <Route
             exact
             path="/login"
           >
-            {user.id ?
+            {user.id ? (
               // If the user is already logged in, 
               // redirect to the /user page
               <Redirect to="/user" />
-              :
+            ) : (
               // Otherwise, show the login page
               <LoginPage />
-            }
+            )}
           </Route>
 
-          <Route
-            exact
-            path="/registration"
-          >
-            {user.id ?
-              // If the user is already logged in, 
+          <Route exact path="/registration">
+            {user.id ? (
+              // If the user is already logged in,
               // redirect them to the /user page
               <Redirect to="/user" />
-              :
+            ) : (
               // Otherwise, show the registration page
               <RegisterPage />
-            }
+            )}
+          </Route>
+
+          <Route exact path="/home">
+            {user.id ? (
+              // If the user is already logged in,
+              // redirect them to the /user page
+              <Redirect to="/user" />
+            ) : (
+              // Otherwise, show the Landing page
+              <LandingPage />
+            )}
+          </Route>
+
+          <Route exact path="/bathroomForm">
+            <BathroomForm/>
           </Route>
 
           <Route
-            exact
-            path="/home"
-          >
-            {user.id ?
-              // If the user is already logged in, 
-              // redirect them to the /user page
-              <Redirect to="/user" />
+            exact path="/profile">
+              {user.id ?
+              <>
+                <ProfilePage />
+                <BottomNav />
+              </>
               :
-              // Otherwise, show the Landing page
-              <LandingPage />
-            }
+              <LoginPage />
+              }
           </Route>
 
           <Route

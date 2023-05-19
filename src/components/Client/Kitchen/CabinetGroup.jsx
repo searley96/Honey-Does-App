@@ -17,11 +17,11 @@ function CabinetGroup() {
                     <FormLabel>Wipe the fronts of the cabinets and drawers in the kitchen?</FormLabel>
                     <RadioGroup aria-labelledby="clean_cabinets" name="clean_cabinets"
                         row value={kitchen.wipe_cabinets}
-                        onChange={e => dispatch({ type: 'SET_WIPE_CABINETS', payload: event.target.value })}>
-                        <FormControlLabel value="yes" control={<Radio />} label="yes" />
-                        <FormControlLabel value="no" control={<Radio />} label="no" />
+                        onChange={e => dispatch({ type: 'SET_WIPE_CABINETS', payload: (e.target.value === 'true') })}>
+                        <FormControlLabel value={true} control={<Radio />} label="yes" />
+                        <FormControlLabel value={false} control={<Radio />} label="no" />
                     </RadioGroup>
-                    {kitchen.wipe_cabinets === 'yes' &&
+                    {kitchen.wipe_cabinets === true &&
                         <RadioGroup>
                             {/* CABINET CLEAN METHOD */}
                             <FormLabel>How should we clean cabinets?</FormLabel>
@@ -36,9 +36,9 @@ function CabinetGroup() {
                             <FormLabel>If wood cabinets, should we use orange glo polish?</FormLabel>
                             <RadioGroup aria-labelledby="wipe_or_spot_cabinets" name="wipe_or_spot_cabinets"
                                 row value={kitchen.cabinet_orange_glo}
-                                onChange={e => dispatch({ type: 'SET_CABINET_ORANGE_GLO', payload: event.target.value })}>
-                                <FormControlLabel value="yes" control={<Radio />} label="yes" />
-                                <FormControlLabel value="no" control={<Radio />} label="no" />
+                                onChange={e => dispatch({ type: 'SET_CABINET_ORANGE_GLO', payload: (e.target.value === 'true') })}>
+                                <FormControlLabel value={true} control={<Radio />} label="yes" />
+                                <FormControlLabel value={false} control={<Radio />} label="no" />
                             </RadioGroup>
                         </RadioGroup>
                     }
