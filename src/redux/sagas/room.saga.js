@@ -61,6 +61,7 @@ function* createWipeDust(action) {
 // GETS FORM LIST
 function* fetchFormList() {
     try {
+        // GET request to form router to get up to date formList
         yield axios.get(`/api/form/form-list`);
 
         // update jobList reducer
@@ -75,7 +76,7 @@ function* fetchFormList() {
 function* roomSaga() {
     // ADD KITCHEN FORM
     yield takeLatest('ADD_KITCHEN', createKitchen);
-    //ADD BATHROOM FORM
+    // ADD BATHROOM FORM
     yield takeLatest('ADD_BATHROOM', createBathroom);
     // ADD OTHER ROOM FORM
     yield takeLatest('ADD_OTHER_ROOM', createOtherRoom);
