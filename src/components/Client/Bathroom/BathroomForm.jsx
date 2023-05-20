@@ -16,7 +16,7 @@ function BathroomForm() {
 
   const dispatch = useDispatch();
   const jobId = useSelector(store => store.user.form_job_id);
-  // const formList = useSelector(store => store.formList);
+  const formList = useSelector(store => store.formList);
   const bathroom = useSelector(store => store.clientBathroomReducer);
   const history = useHistory();
 
@@ -33,16 +33,20 @@ function BathroomForm() {
     // dispatch to the room saga to:
     //  -make a request to the server to gather all forms with job_id === user.form_job_id
     //  -update the jobList reducer
+    //  -result of this specific dispatch will be to initialize formList = []
     dispatch({type: 'FETCH_FORM_LIST'})
   }, [])
+
   function addBathroom(event) {
-    event.preventDefault()
-    dispatch({ type: 'ADD_BATHROOM', payload: { bathroom, jobId, order: 1 } });
+    // dispatch to room.saga that triggers post request to form.router ('/bathroom/)
+    const order = formList.length;
+    console.log('inside bathroom form', formList)
+    dispatch({ type: 'ADD_BATHROOM', payload: { bathroom, jobId, order } });
   }
   function submitHandler(event) {
-    event.preventDefault();
-    dispatch({ type: 'ADD_BATHROOM', payload: { bathroom, jobId, order: 1 } })
-    history.push('/kitchenForm') //add page component 
+    // dispatch to room.saga that triggers post request to form.router ('/bathroom/)
+    dispatch({ type: 'ADD_BATHROOM', payload: { bathroom, jobId, order } })
+    history.push('/kitchenForm') // directs user to the kitchen form 
   }
 
   return (

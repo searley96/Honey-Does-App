@@ -1,10 +1,10 @@
-const jobList = (state= [], action) => {
+const formList = (state= [], action) => {
     switch (action.type) {
-        case 'SET_JOB_LIST':
+        case 'SET_FORM_LIST':
             return action.payload;
         default:
             return state;
     }
 }
 
-export default jobList;
+export default formList;

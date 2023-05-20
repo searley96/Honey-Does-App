@@ -16,7 +16,7 @@ router.get('/form-list', rejectUnauthenticated, (req, res) => {
         ORDER BY "order" ASC;
     `;
     const querykitchens = `
-        SELECT * FROM user_bathroom
+        SELECT * FROM user_kitchen
         WHERE job_id = $1
         ORDER BY "order" ASC;
     `;
@@ -33,22 +33,24 @@ router.get('/form-list', rejectUnauthenticated, (req, res) => {
     // **QUERY BATHROOMS**
     pool.query(querybathrooms, [jobId])
         .then(bathroomResults => {
-            console.log('query bathrooms successful', bathroomResults);
 
             // **QUERY KITCHENS**
             pool.query(querykitchens, [jobId])
                 .then(kitchenResults => {
-                    // console.log('query kitchens successful', kitchenResults);
 
                     // **QUERY OTHER ROOMS**
                     pool.query(queryOtherRooms, [jobId])
                         .then(otherRoomResults => {
-                            // console.log('query other rooms successful', otherRoomResults);
 
                             // **QUERY KITCHENS**
                             pool.query(queryWipeDust, [jobId])
                                 .then(wipeDustResults => {
-                            // console.log('query final wipe dust successful', wipeDustResults);
+                                    console.log('bathroomResults:', bathroomResults.rows);
+                                    console.log('kitchenResults:', kitchenResults.rows);
+                                    console.log('otherRoomResults:', otherRoomResults.rows);
+                                    console.log('wipeDustResults:', wipeDustResults.rows);
+                                    // takes the results of every query and spreads them out in order into a new array
+                                    // packages the new array as the response and sends it back to the room saga
                                     res.send([...bathroomResults.rows, ...kitchenResults.rows, ...otherRoomResults.rows, ...wipeDustResults.rows])
                                 })
                                 // catch wipe dust 
