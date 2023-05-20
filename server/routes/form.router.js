@@ -7,6 +7,75 @@ const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
 const router = express.Router();
 
+// GET FORM LIST
+router.get('/form-list', rejectUnauthenticated, (req, res) => {
+    const jobId = req.user.form_job_id;
+    const querybathrooms = `
+        SELECT * FROM user_bathroom
+        WHERE job_id = $1
+        ORDER BY "order" ASC;
+    `;
+    const querykitchens = `
+        SELECT * FROM user_bathroom
+        WHERE job_id = $1
+        ORDER BY "order" ASC;
+    `;
+    const queryOtherRooms = `
+        SELECT * FROM user_other_room
+        WHERE job_id = $1
+        ORDER BY "order" ASC;
+    `;
+    const queryWipeDust = `
+        SELECT * FROM user_wipe_dust
+        WHERE job_id = $1
+        ORDER BY "order" ASC;
+    `;
+    // **QUERY BATHROOMS**
+    pool.query(querybathrooms, [jobId])
+        .then(bathroomResults => {
+            console.log('query bathrooms successful', bathroomResults);
+
+            // **QUERY KITCHENS**
+            pool.query(querykitchens, [jobId])
+                .then(kitchenResults => {
+                    // console.log('query kitchens successful', kitchenResults);
+
+                    // **QUERY OTHER ROOMS**
+                    pool.query(queryOtherRooms, [jobId])
+                        .then(otherRoomResults => {
+                            // console.log('query other rooms successful', otherRoomResults);
+
+                            // **QUERY KITCHENS**
+                            pool.query(queryWipeDust, [jobId])
+                                .then(wipeDustResults => {
+                            // console.log('query final wipe dust successful', wipeDustResults);
+                                    res.send([...bathroomResults.rows, ...kitchenResults.rows, ...otherRoomResults.rows, ...wipeDustResults.rows])
+                                })
+                                // catch wipe dust 
+                                .catch(err => {
+                                    console.log(err);
+                                    res.sendStatus(500);
+                                })
+
+                            // catch other rooms
+                        }).catch(err => {
+                            console.log(err);
+                            sendStatus(500);
+                        })
+
+                    // catch kitchens    
+                }).catch(err => {
+                    console.log(err);
+                    res.sendStatus(500);
+                })
+
+            // catch bathrooms
+        }).catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+        })
+})
+
 // KITCHEN GET
 router.get('/kitchen/:job_id', rejectUnauthenticated, (req, res) => {
     const jobId = req.params.jobID;

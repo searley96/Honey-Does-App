@@ -15,7 +15,6 @@ function* createKitchen(action) {
 
 
 function* createBathroom(action) {
-    console.log('inside saga', action.payload);
     try {
         yield axios.post(`/api/form/bathroom`, action.payload);
 
@@ -61,12 +60,14 @@ function* createWipeDust(action) {
 // GETS FORM LIST
 function* fetchFormList() {
     try {
+        console.log('inside fetchFormList');
         // GET request to form router to get up to date formList
-        yield axios.get(`/api/form/form-list`);
-
+        const formList = yield axios.get(`/api/form/form-list`);
+        //console.log('formList after GET', formList);
         // update jobList reducer
         yield put({
-            type: 'SET_JOB_LIST'
+            type: 'SET_JOB_LIST',
+            payload: formList.data
         });
     }catch(err){
         console.log('ERROR getting formList from db', err);

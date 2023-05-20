@@ -33,7 +33,7 @@ function BathroomForm() {
     // dispatch to the room saga to:
     //  -make a request to the server to gather all forms with job_id === user.form_job_id
     //  -update the jobList reducer
-    dispatch({type: 'FETCH_JOB_LIST'})
+    dispatch({type: 'FETCH_FORM_LIST'})
   }, [])
   function addBathroom(event) {
     event.preventDefault()

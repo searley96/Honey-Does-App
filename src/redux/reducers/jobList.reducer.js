@@ -1,4 +1,4 @@
-const jobList = (state= '', action) => {
+const jobList = (state= [], action) => {
     switch (action.type) {
         case 'SET_JOB_LIST':
             return action.payload;
