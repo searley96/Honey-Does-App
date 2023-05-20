@@ -1,6 +1,6 @@
 const clientBathroomReducer = (state = {
-    job_id: '',
-    room_type: '',
+    order: null,
+    form_type: 'bathroom',
     bathroom_type: '',
     regular_type: '',
     ceramic_porcelain_type: '',
@@ -24,10 +24,8 @@ const clientBathroomReducer = (state = {
     shake_rugs: null
 }, action) => {
     switch (action.type) {
-        case 'SET_JOB_ID':
-            return { ...state, job_id: action.payload };
-        case 'SET_ROOM_TYPE':
-            return { ...state, room_type: action.payload };
+        case 'SET_ORDER':
+            return { ...state, order: action.payload };
         case 'SET_BATHROOM_TYPE':
             return { ...state, bathroom_type: action.payload };
         case 'SET_REGULAR_TYPE':
@@ -72,7 +70,8 @@ const clientBathroomReducer = (state = {
             return { ...state, shake_rugs: action.payload };
         case 'CLEAR_ROOM':
             return {
-                room_type: '',
+                order: null,
+                form_type: 'bathroom',
                 bathroom_type: '',
                 regular_type: '',
                 ceramic_porcelain_type: '',

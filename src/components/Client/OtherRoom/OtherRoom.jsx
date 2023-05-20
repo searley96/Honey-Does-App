@@ -22,14 +22,14 @@ function OtherRoom() {
     let counter = 1;
     const otherRoomHeader = `Other Room #${counter}`;
 
-    const addRoom = () => {
-        dispatch({type: 'ADD_OTHER_ROOM', payload: otherRoom});
-    }
+    // const addRoom = () => {
+    //     dispatch({type: 'ADD_OTHER_ROOM', payload: otherRoom});
+    // }
 
-    const moveToFinalTouches = () => {
-        dispatch({type: 'ADD_OTHER_ROOM', payload: otherRoom});
-        history.push('/wipeDustForm');
-    }
+    // const moveToFinalTouches = () => {
+    //     dispatch({type: 'ADD_OTHER_ROOM', payload: otherRoom});
+    //     history.push('/wipeDustForm');
+    // }
     // Not using these for now.
     // const [otherInput, setOtherInput] = useState('');
     // const [checkedRoomType, setCheckedRoomType] = useState(false);
@@ -49,7 +49,7 @@ function OtherRoom() {
                     <FormLabel>Select room type:</FormLabel>
                     <RadioGroup aria-labelledby="room_type" name="room_type"
                         row value={otherRoom.room_type}
-                        onChange={e => dispatch({ type: 'SET_ROOM_TYPE', payload: e.target.value })}>
+                        onChange={e => dispatch({ type: 'SET_FORM_TYPE', payload: e.target.value })}>
                         <FormControlLabel value="bedroom" control={<Radio />} label="Bedroom" />
                         <FormControlLabel value="livingRoom" control={<Radio />} label="Living Room" />
                         <FormControlLabel value="diningRoom" control={<Radio />} label="Dining Room" />
@@ -113,10 +113,10 @@ function OtherRoom() {
                             </RadioGroup>
                         </>
                     }
-                    <Stack spacing={1} direction='row' sx={{ mt: '40px', display: 'flex', justifyContent: 'space-between' }}>
+                    {/* <Stack spacing={1} direction='row' sx={{ mt: '40px', display: 'flex', justifyContent: 'space-between' }}>
                         <Button onClick={addRoom} variant="outlined"><AddIcon sx={{ mx: '5px' }} fontSize="small" /> Add Another Room</Button>
                         <Button onClick={moveToFinalTouches} variant="contained"><DoneIcon sx={{ mx: '5px' }} fontSize="small" /> Move on to final touches</Button>
-                    </Stack>
+                    </Stack> */}
 
                 </FormControl>
             </FormGroup>

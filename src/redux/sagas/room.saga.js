@@ -9,7 +9,7 @@ function* createKitchen(action) {
             type: 'CLEAR_ROOM'
         });
     } catch(error) {
-        console.log('ERROR clearing rooms', error);
+        console.log('ERROR updating kitchen and clearing forms', error);
     }   
 }
 
@@ -23,7 +23,7 @@ function* createBathroom(action) {
             type: 'CLEAR_ROOM'
         });
     } catch(error) {
-        console.log('ERROR clearing rooms', error);
+        console.log('ERROR updating bathroom and clearing forms', error);
     } 
 }
 
@@ -36,17 +36,33 @@ function* createOtherRoom(action) {
             type: 'CLEAR_ROOM'
         });
     } catch(error) {
-        console.log('ERROR clearing rooms', error);
+        console.log('ERROR updating other room type and clearing forms', error);
     }  
    
 }
 
+function* createWipeDust(action){
+    try {
+        yield axios.post(`/api/form/wipe-dust`, action.payload);
 
+        yield put({
+            type: 'CLEAR_ROOM'
+        });
+
+        // CALCULATE ESTIMATE AND SUBMIT REQUEST
+
+        // SEND DISPATCH TO USER SAGA TO RESET THE FORM_JOB_ID TO NULL
+        yield put({ type: 'FINISH_FORM_JOB'});
+    } catch(error) {
+        console.log('ERROR updating wipe-dust and clearing forms', error);
+    }  
+}
 
 function* roomSaga() {
     yield takeLatest('ADD_KITCHEN', createKitchen);
     yield takeLatest('ADD_BATHROOM', createBathroom);
     yield takeLatest('ADD_OTHER_ROOM', createOtherRoom);
+    yield takeLatest('ADD_WIPE_DUST', createWipeDust);
   }
   
   export default roomSaga;

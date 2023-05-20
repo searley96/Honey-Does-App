@@ -11,11 +11,14 @@ import { useHistory } from "react-router-dom";
 function WipeDustForm() {
 
     const wipeDust = useSelector(store => store.clientWipeDust);
+    const jobId = useSelector(store => store.user.form_job_id)
     const dispatch = useDispatch();
     const history = useHistory();
 
     const toEstimate = () => {
+        dispatch({type: 'ADD_WIPE_DUST', payload: {wipeDust, jobId, order: 4}})
         // history.push('/estimate')
+        history.push('/profile');
         console.log('Ready for estimate!');
     }
 
@@ -27,11 +30,11 @@ function WipeDustForm() {
                     <FormLabel>Do you want us to wipe or clean any glass?</FormLabel>
                     <RadioGroup aria-labelledby="wipe_clean_glass" name="wipe_clean_glass"
                     row value={wipeDust.wipe_clean_glass}
-                    onChange={e => dispatch({ type: 'SET_WIPE_CLEAN_GLASS', payload: event.target.value })}>
-                        <FormControlLabel value='yes' control={<Radio />} label="Yes" />
-                        <FormControlLabel value='no' control={<Radio />} label="No" />
+                    onChange={e => dispatch({ type: 'SET_WIPE_CLEAN_GLASS', payload: (e.target.value == 'true') })}>
+                        <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                        <FormControlLabel value={false} control={<Radio />} label="No" />
                     </RadioGroup>
-            {wipeDust.wipe_clean_glass === 'yes' &&
+            {wipeDust.wipe_clean_glass === true &&
                 <>
                     <Box sx={{ my: '30px' }}>
                         <GlassDoorsGroup />
@@ -49,11 +52,11 @@ function WipeDustForm() {
                     <FormLabel>Do you want us to dust?</FormLabel>
                     <RadioGroup aria-labelledby="dust" name="dust"
                     row value={wipeDust.dust}
-                    onChange={e => dispatch({ type: 'SET_DUST', payload: event.target.value })}>
-                        <FormControlLabel value='yes' control={<Radio />} label="Yes" />
-                        <FormControlLabel value='no' control={<Radio />} label="No" />
+                    onChange={e => dispatch({ type: 'SET_DUST', payload: (e.target.value == 'true') })}>
+                        <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                        <FormControlLabel value={false} control={<Radio />} label="No" />
                     </RadioGroup>
-            {wipeDust.dust === 'yes' &&
+            {wipeDust.dust === true &&
                 <>
                     <Box sx={{ my: '30px' }}>
                         <DustCeilingGroup />

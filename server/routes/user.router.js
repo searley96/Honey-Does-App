@@ -87,6 +87,23 @@ WHERE "user".id = $2;
     })
 })
 
+// resets form_job_id to null
+router.put('/client/resetFormId', rejectUnauthenticated, (req, res) => {
+  const queryText = `
+    UPDATE "user"
+    SET form_job_id = NULL
+    WHERE id = $1
+  `
+  pool.query(queryText, [req.user.id])
+    .then(result => {
+      res.sendStatus(200);
+    }).catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    })
+})
+
+
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route
 // this middleware will run our POST if successful

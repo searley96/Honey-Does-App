@@ -10,18 +10,18 @@ function OtherRoomForm() {
     console.log('Inside OtherRoomForm()')
     const dispatch = useDispatch();
     const history = useHistory();
-    const otherRoomForm = useSelector(store => store.clientOtherRoom);
-    const jobId = useSelector(store => store.jobidReducer);
+    const wipeDust = useSelector(store => store.clientOtherRoom);
+    const jobId = useSelector(store => store.user.form_job_id);
 
-    useEffect(() => {
-        dispatch({type: 'JOB_ID', payload: jobId});
-        dispatch({type: 'SET_ROOM_TYPE'})
-    }, [])
+    // useEffect(() => {
+    //     dispatch({type: 'JOB_ID', payload: jobId});
+    //     dispatch({type: 'SET_ROOM_TYPE'})
+    // }, [])
     
     // Post form to database, clear form, and go to the next page.
     const submitHandler = (event) => {
         event.preventDefault();
-        dispatch({ type: 'ADD_OTHER_ROOM', payload: otherRoomForm})
+        dispatch({ type: 'ADD_OTHER_ROOM', payload: {wipeDust, jobId, order: 3 }})
         history.push('/wipeDustForm'); // TO DO: put the route of the next component here
     }
     
@@ -29,9 +29,9 @@ function OtherRoomForm() {
         <>
             <OtherRoom />
             
-            {/* <Stack spacing={1} direction='row' sx={{ mt: '40px', display: 'flex', justifyContent: 'space-between' }}>
+            <Stack spacing={1} direction='row' sx={{ mt: '40px', display: 'flex', justifyContent: 'space-between' }}>
 
-                <Button variant="outlined" onClick={e => dispatch({ type: 'ADD_OTHER_ROOM', payload: otherRoomForm })}>
+                <Button variant="outlined" onClick={e => dispatch({ type: 'ADD_OTHER_ROOM', payload: {wipeDust, jobId, order: 3 }})}>
                     <AddIcon sx={{ mx: '5px' }} fontSize="small" /> Add Another Room
                 </Button>
 
@@ -39,7 +39,7 @@ function OtherRoomForm() {
                     <DoneIcon sx={{ mx: '5px' }} fontSize="small" /> Done with Other Rooms
                 </Button>
 
-            </Stack> */}
+            </Stack>
         </>
     )
 }

@@ -13,7 +13,7 @@ function DustOtherGroup() {
             <FormLabel>Please select which you prefer</FormLabel>
             <RadioGroup aria-labelledby="swiffer_feather" name="swiffer_feather"
             row value={wipeDust.swiffer_feather}
-            onChange={e => dispatch({ type: 'SET_SWIFFER_FEATHER', payload: event.target.value })}>
+            onChange={e => dispatch({ type: 'SET_SWIFFER_FEATHER', payload: e.target.value })}>
                 <FormControlLabel value="swiffer" control={<Radio />} label="Swiffer" />
                 <FormControlLabel value="feather" control={<Radio />} label="Feather" />
             </RadioGroup>
@@ -21,67 +21,67 @@ function DustOtherGroup() {
             <FormLabel>Do you want us to dust window blinds?</FormLabel>
             <RadioGroup aria-labelledby="window_blinds" name="window_blinds"
             row value={wipeDust.window_blinds}
-            onChange={e => dispatch({ type: 'SET_WINDOW_BLINDS', payload: event.target.value })}>
-                <FormControlLabel value='yes' control={<Radio />} label="Yes" />
-                <FormControlLabel value='no' control={<Radio />} label="No" />
+            onChange={e => dispatch({ type: 'SET_WINDOW_BLINDS', payload: (e.target.value == 'true') })}>
+                <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                <FormControlLabel value={false} control={<Radio />} label="No" />
             </RadioGroup>
             {/* Dust Window Ledges */}
             <FormLabel>Do you want us to dust window ledges?</FormLabel>
             <RadioGroup aria-labelledby="window_ledges" name="window_ledges"
             row value={wipeDust.window_ledges}
-            onChange={e => dispatch({ type: 'SET_WINDOW_LEDGES', payload: event.target.value })}>
-                <FormControlLabel value='yes' control={<Radio />} label="Yes" />
-                <FormControlLabel value='no' control={<Radio />} label="No" />
+            onChange={e => dispatch({ type: 'SET_WINDOW_LEDGES', payload: (e.target.value == 'true') })}>
+                <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                <FormControlLabel value={false} control={<Radio />} label="No" />
             </RadioGroup>
             {/* Dust Window Sills */}
             <FormLabel>Do you want us to dust window sills?</FormLabel>
             <RadioGroup aria-labelledby="window_sills" name="window_sills"
             row value={wipeDust.window_sills}
-            onChange={e => dispatch({ type: 'SET_WINDOW_SILLS', payload: event.target.value })}>
-                <FormControlLabel value='yes' control={<Radio />} label="Yes" />
-                <FormControlLabel value='no' control={<Radio />} label="No" />
+            onChange={e => dispatch({ type: 'SET_WINDOW_SILLS', payload: (e.target.value == 'true') })}>
+                <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                <FormControlLabel value={false} control={<Radio />} label="No" />
             </RadioGroup>
             {/* Dust Picture Frames and Wall Decor */}
             <FormLabel>Do you want us to dust picture frames and other decor hung on the walls?</FormLabel>
             <RadioGroup aria-labelledby="picture_frames_wall_decor" name="picture_frames_wall_decor"
             row value={wipeDust.picture_frames_wall_decor}
-            onChange={e => dispatch({ type: 'SET_PICTURE_FRAMES_WALL_DECOR', payload: event.target.value })}>
-                <FormControlLabel value='yes' control={<Radio />} label="Yes" />
-                <FormControlLabel value='no' control={<Radio />} label="No" />
+            onChange={e => dispatch({ type: 'SET_PICTURE_FRAMES_WALL_DECOR', payload: (e.target.value == 'true') })}>
+                <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                <FormControlLabel value={false} control={<Radio />} label="No" />
             </RadioGroup>
             {/* Dust Tops of Decor Items */}
             <FormLabel>Do you want us to dust the tops of decor items and lamps on top of the furniture?</FormLabel>
             <RadioGroup aria-labelledby="tops_decor_items" name="tops_decor_items"
             row value={wipeDust.tops_decor_items}
-            onChange={e => dispatch({ type: 'SET_TOPS_DECOR_ITEMS', payload: event.target.value })}>
-                <FormControlLabel value='yes' control={<Radio />} label="Yes" />
-                <FormControlLabel value='no' control={<Radio />} label="No" />
+            onChange={e => dispatch({ type: 'SET_TOPS_DECOR_ITEMS', payload: (e.target.value == 'true') })}>
+                <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                <FormControlLabel value={false} control={<Radio />} label="No" />
             </RadioGroup>
             {/* Pick Up and Get Under and Behind Objects */}
             <FormLabel>Do you want us to pick items up and get under and behind items?</FormLabel>
             <RadioGroup aria-labelledby="pick_up_get_under" name="pick_up_get_under"
             row value={wipeDust.pick_up_get_under}
-            onChange={e => dispatch({ type: 'SET_PICK_UP_GET_UNDER', payload: event.target.value })}>
-                <FormControlLabel value='yes' control={<Radio />} label="Yes" />
-                <FormControlLabel value='no' control={<Radio />} label="No" />
+            onChange={e => dispatch({ type: 'SET_PICK_UP_GET_UNDER', payload: (e.target.value == 'true') })}>
+                <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                <FormControlLabel value={false} control={<Radio />} label="No" />
             </RadioGroup>
             {/* Dust All Electronics */}
             <FormLabel>Do you want us to dust all electronics?</FormLabel>
             <RadioGroup aria-labelledby="electronics" name="electronics"
             row value={wipeDust.electronics}
-            onChange={e => dispatch({ type: 'SET_ELECTRONICS', payload: event.target.value })}>
-                <FormControlLabel value='yes' control={<Radio />} label="Yes" />
-                <FormControlLabel value='no' control={<Radio />} label="No" />
+            onChange={e => dispatch({ type: 'SET_ELECTRONICS', payload: (e.target.value == 'true') })}>
+                <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                <FormControlLabel value={false} control={<Radio />} label="No" />
             </RadioGroup>
             {/* Dust Anything Else */}
             <FormLabel>Do you want us to dust anything else?</FormLabel>
             <RadioGroup aria-labelledby="dust_other" name="dust_other"
             row value={wipeDust.dust_other}
-            onChange={e => dispatch({ type: 'SET_DUST_OTHER', payload: event.target.value })}>
-                <FormControlLabel value='yes' control={<Radio />} label="Yes" />
-                <FormControlLabel value='no' control={<Radio />} label="No" />
+            onChange={e => dispatch({ type: 'SET_DUST_OTHER', payload: (e.target.value == 'true') })}>
+                <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                <FormControlLabel value={false} control={<Radio />} label="No" />
             </RadioGroup>
-            {wipeDust.dust_other === 'yes' &&
+            {wipeDust.dust_other === true &&
                 <Box>
                     <FormLabel>Please list what else you would like to be dusted</FormLabel>
                     <TextField
@@ -89,7 +89,7 @@ function DustOtherGroup() {
                         sx={{width: '90%'}}
                         size="small"
                         placeholder="Example: 1. Dresser in den, 2. Lamp in basement, etc."
-                        onChange={e => dispatch({ type: 'SET_DUST_OTHER_INSTRUCTIONS', payload: event.target.value })}
+                        onChange={e => dispatch({ type: 'SET_DUST_OTHER_INSTRUCTIONS', payload: e.target.value })}
                     />
                 </Box>
             }
