@@ -16,8 +16,13 @@ function BathroomForm() {
 
   const dispatch = useDispatch();
   const history = useHistory();
+  // form_job_id connected to the user table.
+  //    - identifier that allows to collect all forms
+  //      a user fills out for an estimate
   const jobId = useSelector(store => store.user.form_job_id);
+  // the list of forms that have a job_id that match user.form_job_id
   const formList = useSelector(store => store.formList);
+  // the state of the current bathroom form
   const bathroom = useSelector(store => store.clientBathroomReducer);
 
   const [err, setError] = useState();
@@ -34,7 +39,7 @@ function BathroomForm() {
     //  -make a request to the server to gather all forms with job_id === user.form_job_id
     //  -update the jobList reducer
     //  -result of this specific dispatch will be to initialize formList = []
-    dispatch({type: 'FETCH_FORM_LIST'})
+    dispatch({ type: 'FETCH_FORM_LIST' })
   }, [])
 
   function addBathroom() {
@@ -54,30 +59,30 @@ function BathroomForm() {
     <>
       <h1>Bathroom Form</h1>
 
-        <BathroomType />
+      <BathroomType />
 
-        <BathtubShowerGroup />
+      <BathtubShowerGroup />
 
-        <MirrorGroup />
+      <MirrorGroup />
 
-        <SinkGroup />
-        <ToiletGroup />
-        <TrashForm />
-        <BathroomFloors />
-        <Stack
-          spacing={1}
-          direction="row"
-          sx={{ mt: "40px", display: "flex", justifyContent: "space-between" }}
-        >
-          <Button variant="outlined" onClick={addBathroom}>
-            <AddIcon sx={{ mx: "5px" }} fontSize="small" /> Add Another Bathroom
-          </Button>
-          <Button variant="contained" onClick={submitHandler} >
-            <DoneIcon sx={{ mx: "5px" }} fontSize="small" /> Done With Bathroom
-            Forms
-          </Button>
-        </Stack>
-      
+      <SinkGroup />
+      <ToiletGroup />
+      <TrashForm />
+      <BathroomFloors />
+      <Stack
+        spacing={1}
+        direction="row"
+        sx={{ mt: "40px", display: "flex", justifyContent: "space-between" }}
+      >
+        <Button variant="outlined" onClick={addBathroom}>
+          <AddIcon sx={{ mx: "5px" }} fontSize="small" /> Add Another Bathroom
+        </Button>
+        <Button variant="contained" onClick={submitHandler} >
+          <DoneIcon sx={{ mx: "5px" }} fontSize="small" /> Done With Bathroom
+          Forms
+        </Button>
+      </Stack>
+
     </>
   );
 }

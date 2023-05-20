@@ -8,7 +8,7 @@ import { Button, Stack, Box } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import DoneIcon from '@mui/icons-material/Done';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
@@ -17,19 +17,26 @@ function KitchenForm() {
 
     const dispatch = useDispatch();
     const history = useHistory();
+    // user.form_job_id connected to the user table.
+    //    - identifier that allows to collect all forms
+    //      a user fills out for an estimate
     const jobId = useSelector(store => store.user.form_job_id);
+    // the list of forms that have a job_id that match user.form_job_id
     const formList = useSelector(store => store.formList);
+    // the state of the current kitchen form
     const kitchen = useSelector(store => store.clientKitchen);
 
     const addKitchen = () => {
         const order = formList.length;
+        // dispatch to room.saga that triggers post request to form.router ('/kitchen/)
         dispatch({ type: 'ADD_KITCHEN', payload: { kitchen, jobId, order } });
     }
 
     const moveToOtherRooms = () => {
         const order = formList.length;
+        // dispatch to room.saga that triggers post request to form.router ('/bathroom/)
         dispatch({ type: 'ADD_KITCHEN', payload: { kitchen, jobId, order } });
-        history.push('/otherRoomForm');
+        history.push('/otherRoomForm'); // directs user to the other room form 
     }
 
     return (
