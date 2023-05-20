@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
-
 // worker Saga: will be fired on "FETCH_USER" actions
 function* fetchUser() {
   try {
@@ -35,9 +34,26 @@ function* updateClientInfo(action) {
   }
 }
 
+// form_job_id is a reference to a job that the client is
+// currently in progress filling out
+// addFormId sets the generatedId to the users form_job_id
+function* addFormId(action){
+ 
+  try{
+    yield axios.post('api/user/client/addFormId', action.payload);
+    yield put ({
+      type: 'FETCH_USER'
+    })
+  }catch(err){
+    console.log('ERROR posting new form_job_id');
+  }
+
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeLatest('UPDATE_CLIENT_INFO', updateClientInfo);
+  yield takeLatest('ADD_FORM_ID', addFormId);
 }
 
 export default userSaga;

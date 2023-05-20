@@ -11,6 +11,13 @@ function* createJobId() {
             type: 'SET_JOB_ID_REDUCER',
             payload: jobId.data
         });
+
+        // update the job_id for the form that the user is 
+        // currently filling out
+        yield put({
+            type: 'ADD_FORM_ID',
+            payload: {job_id: jobId.data}
+        });
     } catch(error) {
         console.log('ERROR retrieving new jobID', error);
     }

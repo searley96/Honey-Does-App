@@ -69,6 +69,24 @@ router.put('/client/update/:id', rejectUnauthenticated, (req, res) => {
   }
 })
 
+// attempt to post form_job_id to user row
+router.post('/client/addFormId', rejectUnauthenticated, (req, res) => {
+  console.log('req.body', req.body.job_id);
+
+  const queryText = `
+  UPDATE "user" 
+SET form_job_id = $1
+WHERE "user".id = $2;
+  `
+
+  pool.query(queryText, [req.body.job_id, req.user.id])
+    .then(result => {
+      res.sendStatus(201);
+    }).catch(err => {
+      console.log(err);
+    })
+})
+
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route
 // this middleware will run our POST if successful

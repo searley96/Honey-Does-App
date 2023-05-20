@@ -14,7 +14,7 @@ import React from 'react';
 function BathroomForm() {
 
   const dispatch = useDispatch();
-  const jobId = useSelector(store => store.jobidReducer);
+  const jobId = useSelector(store => store.user.form_job_id);
   const bathroom = useSelector(store => store.clientBathroomReducer);
 
    function addBathroom() {

@@ -8,12 +8,13 @@ import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
 
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function BottomNav() {
 
   const history = useHistory();
   const dispatch = useDispatch();
+  const user = useSelector(store => store.user);
 
   const StyledFab = styled(Fab)({
     position: 'absolute',
@@ -47,9 +48,13 @@ function BottomNav() {
   const toClientForm = () => {
     // ADJUST WHEN FORMS ARE READY
     history.push('/bathroomForm')
-    dispatch({
-      type: 'CREATE_JOB_ID'
-    })
+    console.log(user);
+    if(user.form_job_id == null){
+
+      dispatch({
+        type: 'CREATE_JOB_ID'
+      })
+    }
   }
 
   const logout = () => {
