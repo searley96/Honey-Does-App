@@ -4,41 +4,39 @@ import ApplianceGroup from './ApplianceGroup';
 import MicrowaveGroup from './MicrowaveGroup';
 import CountersSinksGroup from './CountersSinksGroup';
 import KitchenFloors from './KitchenFloors';
-import { Button, ButtonGroup, Stack, Box } from '@mui/material';
+import { Button, Stack, Box } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import DoneIcon from '@mui/icons-material/Done';
 
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 function KitchenForm() {
-    
+
     const dispatch = useDispatch();
     const history = useHistory();
-    const kitchen = useSelector(store => store.clientKitchen);
     const jobId = useSelector(store => store.user.form_job_id);
-
-    // DISABLED UNTIL ROUTES ARE SET UP
-    // useEffect(() => {
-    //     dispatch({type: 'SET_JOB_ID', payload: jobId})
-    // }, [])
+    const formList = useSelector(store => store.formList);
+    const kitchen = useSelector(store => store.clientKitchen);
 
     const addKitchen = () => {
-        dispatch({type: 'ADD_KITCHEN', payload: {kitchen, jobId, order: 2}});
+        const order = formList.length;
+        dispatch({ type: 'ADD_KITCHEN', payload: { kitchen, jobId, order } });
     }
 
     const moveToOtherRooms = () => {
-        dispatch({type: 'ADD_KITCHEN', payload: {kitchen, jobId, order: 2}});
+        const order = formList.length;
+        dispatch({ type: 'ADD_KITCHEN', payload: { kitchen, jobId, order } });
         history.push('/otherRoomForm');
     }
-    
+
     return (
 
         <>
             <h1>Kitchen Form</h1>
-            <Box sx={{ mb: '60px'}}>
+            <Box sx={{ mb: '60px' }}>
                 <CabinetGroup className='form-group' />
             </Box>
             <Box sx={{ my: '60px' }}>
