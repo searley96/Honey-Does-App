@@ -51,7 +51,7 @@ function OtherRoomForm() {
                     <AddIcon sx={{ mx: '5px' }} fontSize="small" /> Add Another Room
                 </Button>
 
-                <Button variant="contained" type="submit" onClick={moveToWipeDust}>
+                <Button variant="contained" onClick={moveToWipeDust}>
                     <DoneIcon sx={{ mx: '5px' }} fontSize="small" /> Done with Other Rooms
                 </Button>
 

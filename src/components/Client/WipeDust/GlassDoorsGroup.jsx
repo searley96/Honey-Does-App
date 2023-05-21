@@ -10,7 +10,7 @@ function GlassDoorsGroup() {
     return (
         <>
             <h3>Glass Doors</h3>
-            {/* Wipe Glass Doors */}
+            Wipe Glass Doors
             <FormLabel>Do you want us to wipe your glass doors?</FormLabel>
             <RadioGroup aria-labelledby="glass_door" name="glass_door"
             row value={wipeDust.glass_door}

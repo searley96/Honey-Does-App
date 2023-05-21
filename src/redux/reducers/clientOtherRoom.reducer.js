@@ -1,6 +1,6 @@
 const clientOtherRoomReducer = (state = {
     order: null,
-    form_type: '',
+    form_type: 'bedroom',
     floor_type: '',
     wipe_surfaces: true,
     clean_floor: true,
@@ -21,7 +21,7 @@ const clientOtherRoomReducer = (state = {
             return {
                 
                 order: null,
-                form_type: '',
+                form_type: 'bedroom',
                 floor_type: '',
                 wipe_surfaces: true,
                 clean_floor: true,

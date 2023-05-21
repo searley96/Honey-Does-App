@@ -6,6 +6,7 @@ function DustCeilingGroup() {
     const wipeDust = useSelector(store => store.clientWipeDust);
     const dispatch = useDispatch();
 
+    
     return (
         <>
             <h3>Extender Duster</h3>
