@@ -28,7 +28,7 @@ function KitchenForm() {
 
     const addKitchen = () => {
         const order = formList.length;
-        // dispatch to room.saga that triggers post request to form.router ('/kitchen/)
+        // dispatch to room.saga that triggers post request to form.router ('/kitchen/')
         dispatch({ type: 'ADD_KITCHEN', payload: { kitchen, jobId, order } });
     }
 
@@ -41,7 +41,7 @@ function KitchenForm() {
 
     return (
 
-        <>
+        <Box sx={{ ml: '20px'}}>
             <h1>Kitchen Form</h1>
             <Box sx={{ mb: '60px' }}>
                 <CabinetGroup className='form-group' />
@@ -66,7 +66,7 @@ function KitchenForm() {
                 <Button onClick={moveToOtherRooms} variant="contained"><DoneIcon sx={{ mx: '5px' }} fontSize="small" /> Done with kitchen forms</Button>
             </Stack>
 
-        </>
+        </Box>
     );
 
 

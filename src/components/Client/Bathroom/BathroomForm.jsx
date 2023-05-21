@@ -5,7 +5,7 @@ import ToiletGroup from "./ToiletGroup";
 import TrashForm from "./TrashForm";
 import BathroomFloors from "./BathroomFloors";
 import BathtubShowerGroup from "./BathtubShowerGroup";
-import { Button, Stack } from "@mui/material";
+import { Button, Stack, Box } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DoneIcon from "@mui/icons-material/Done";
 import { useDispatch, useSelector } from "react-redux";
@@ -56,7 +56,7 @@ function BathroomForm() {
   }
 
   return (
-    <>
+    <Box sx={{ ml: '20px'}}>
       <h1>Bathroom Form</h1>
 
       <BathroomType />
@@ -83,7 +83,7 @@ function BathroomForm() {
         </Button>
       </Stack>
 
-    </>
+    </Box>
   );
 }
 
