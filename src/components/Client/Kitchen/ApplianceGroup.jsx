@@ -22,8 +22,8 @@ function ApplianceGroup() {
                         onChange={e => {
                             dispatch({ type: 'SET_WIPE_APPLIANCES', payload: (e.target.value === 'true') })
                         }}>
-                        <FormControlLabel value={true} control={<Radio />} label="yes" />
-                        <FormControlLabel value={false} control={<Radio />} label="no" />
+                        <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                        <FormControlLabel value={false} control={<Radio />} label="No" />
                     </RadioGroup>
 
                     {/* if cleanAppliances is set to yes, display specific appliances to be cleaned */}
@@ -35,8 +35,8 @@ function ApplianceGroup() {
                             <RadioGroup aria-labelledby="wipe_fridge" name="wipe_fridge"
                                 row value={kitchen.wipe_fridge}
                                 onChange={e => dispatch({ type: 'SET_WIPE_FRIDGE', payload: (e.target.value === 'true') })}>
-                                <FormControlLabel value={true} control={<Radio />} label="yes" />
-                                <FormControlLabel value={false} control={<Radio />} label="no" />
+                                <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                                <FormControlLabel value={false} control={<Radio />} label="No" />
                             </RadioGroup>
                         </>
                     }
@@ -47,8 +47,8 @@ function ApplianceGroup() {
                             <RadioGroup aria-labelledby="fridge_ss" name="fridge_ss"
                                 row value={kitchen.fridge_stainless_steel}
                                 onChange={e => dispatch({ type: 'SET_FRIDGE_SS', payload: (e.target.value === 'true') })}>
-                                <FormControlLabel value={true} control={<Radio />} label="yes" />
-                                <FormControlLabel value={false} control={<Radio />} label="no" />
+                                <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                                <FormControlLabel value={false} control={<Radio />} label="No" />
                             </RadioGroup>
                         </>
                     }
@@ -61,8 +61,8 @@ function ApplianceGroup() {
                             <RadioGroup aria-labelledby="wipe_dishwasher" name="wipe_dishwasher"
                                 row value={kitchen.wipe_dishwasher}
                                 onChange={e => dispatch({ type: 'SET_WIPE_DISHWASHER', payload: (e.target.value === 'true') })}>
-                                <FormControlLabel value={true} control={<Radio />} label="yes" />
-                                <FormControlLabel value={false} control={<Radio />} label="no" />
+                                <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                                <FormControlLabel value={false} control={<Radio />} label="No" />
                             </RadioGroup>
                         </>
                     }
@@ -73,8 +73,8 @@ function ApplianceGroup() {
                             <RadioGroup aria-labelledby="dishwasher_ss" name="dishwasher_ss"
                                 row value={kitchen.dishwasher_stainless_steel}
                                 onChange={e => dispatch({ type: 'SET_DISHWASHER_SS', payload: (e.target.value === 'true') })}>
-                                <FormControlLabel value="yes" control={<Radio />} label="yes" />
-                                <FormControlLabel value="no" control={<Radio />} label="no" />
+                                <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                                <FormControlLabel value={false} control={<Radio />} label="No" />
                             </RadioGroup>
                         </>
                     }
@@ -86,8 +86,8 @@ function ApplianceGroup() {
                             <RadioGroup aria-labelledby="wipe_deep_freeze" name="wipe_deep_freeze"
                                 row value={kitchen.wipe_deep_freezer}
                                 onChange={e => dispatch({ type: 'SET_WIPE_DEEP_FREEZER', payload: (e.target.value === 'true') })}>
-                                <FormControlLabel value={true} control={<Radio />} label="yes" />
-                                <FormControlLabel value={false} control={<Radio />} label="no" />
+                                <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                                <FormControlLabel value={false} control={<Radio />} label="No" />
                             </RadioGroup>
                         </>
                     }

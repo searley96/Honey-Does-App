@@ -19,8 +19,8 @@ function KitchenFloors() {
                     <RadioGroup aria-labelledby="sweep_mop_floor" name="sweep_mop_floor"
                         row value={kitchen.sweep_mop_floor}
                         onChange={e => dispatch({ type: 'SET_SWEEP_MOP_FLOORS', payload: (e.target.value === 'true') })}>
-                        <FormControlLabel value={true} control={<Radio />} label="yes" />
-                        <FormControlLabel value={false} control={<Radio />} label="no" />
+                        <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                        <FormControlLabel value={false} control={<Radio />} label="No" />
                     </RadioGroup>
 
                     {kitchen.sweep_mop_floor === true &&
@@ -30,8 +30,8 @@ function KitchenFloors() {
                             <RadioGroup aria-labelledby="shake_rugs" name="shake_rugs"
                                 value={kitchen.shake_rugs}
                                 onChange={e => dispatch({ type: 'SET_SHAKE_RUGS', payload: (e.target.value === 'true') })}>
-                                <FormControlLabel value={true} control={<Radio />} label="yes" />
-                                <FormControlLabel value={false} control={<Radio />} label="no" />
+                                <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                                <FormControlLabel value={false} control={<Radio />} label="No" />
                             </RadioGroup>
                         </>
                     }
@@ -43,8 +43,8 @@ function KitchenFloors() {
                             <RadioGroup aria-labelledby="hardwood_floors" name="hardwood_floors"
                                 value={kitchen.hardwood_floors}
                                 onChange={e => dispatch({ type: 'SET_HARDWOOD_FLOORS', payload: (e.target.value === 'true') })}>
-                                <FormControlLabel value={true} control={<Radio />} label="yes" />
-                                <FormControlLabel value={false} control={<Radio />} label="no" />
+                                <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                                <FormControlLabel value={false} control={<Radio />} label="No" />
                             </RadioGroup>
                         </>
                     }
@@ -59,8 +59,8 @@ function KitchenFloors() {
                             <RadioGroup aria-labelledby="specialty_flooring" name="specialty_flooring"
                                 value={kitchen.specialty_flooring}
                                 onChange={e => dispatch({ type: 'SET_SPECIALTY_FLOORING', payload: (e.target.value === 'true') })}>
-                                <FormControlLabel value={true} control={<Radio />} label="yes" />
-                                <FormControlLabel value={false} control={<Radio />} label="no" />
+                                <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                                <FormControlLabel value={false} control={<Radio />} label="No" />
                             </RadioGroup>
                         </>
                     }

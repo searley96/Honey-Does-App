@@ -18,8 +18,8 @@ function CabinetGroup() {
                     <RadioGroup aria-labelledby="clean_cabinets" name="clean_cabinets"
                         row value={kitchen.wipe_cabinets}
                         onChange={e => dispatch({ type: 'SET_WIPE_CABINETS', payload: (e.target.value === 'true') })}>
-                        <FormControlLabel value={true} control={<Radio />} label="yes" />
-                        <FormControlLabel value={false} control={<Radio />} label="no" />
+                        <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                        <FormControlLabel value={false} control={<Radio />} label="No" />
                     </RadioGroup>
                     {kitchen.wipe_cabinets === true &&
                         <RadioGroup>
@@ -28,8 +28,8 @@ function CabinetGroup() {
                             <RadioGroup aria-labelledby="wipe_or_spot_cabinets" name="wipe_or_spot_cabinets"
                                 row value={kitchen.cabinet_spot_full_clean}
                                 onChange={e => dispatch({ type: 'SET_CABINET_SPOT_FULL_CLEAN', payload: event.target.value })}>
-                                <FormControlLabel value="spot clean" control={<Radio />} label="spot clean" />
-                                <FormControlLabel value="full wipe down" control={<Radio />} label="full wipe down" />
+                                <FormControlLabel value="Spot Clean" control={<Radio />} label="Spot Clean" />
+                                <FormControlLabel value="Full Wipe Down" control={<Radio />} label="Full Wipe Down" />
                             </RadioGroup>
 
                             {/* USE ORANGE GLO FOR WOOD? */}
@@ -37,8 +37,8 @@ function CabinetGroup() {
                             <RadioGroup aria-labelledby="wipe_or_spot_cabinets" name="wipe_or_spot_cabinets"
                                 row value={kitchen.cabinet_orange_glo}
                                 onChange={e => dispatch({ type: 'SET_CABINET_ORANGE_GLO', payload: (e.target.value === 'true') })}>
-                                <FormControlLabel value={true} control={<Radio />} label="yes" />
-                                <FormControlLabel value={false} control={<Radio />} label="no" />
+                                <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                                <FormControlLabel value={false} control={<Radio />} label="No" />
                             </RadioGroup>
                         </RadioGroup>
                     }
