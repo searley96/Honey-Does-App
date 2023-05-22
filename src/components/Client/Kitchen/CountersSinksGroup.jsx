@@ -19,8 +19,8 @@ function CountersSinksGroup() {
                     <RadioGroup aria-labelledby="wipe_counters_sink" name="wipe_counters_sink"
                         row value={kitchen.wipe_counters_sink}
                         onChange={e => dispatch({ type: 'SET_COUNTERS_SINK', payload: (e.target.value === 'true') })}>
-                        <FormControlLabel value={true} control={<Radio />} label="yes" />
-                        <FormControlLabel value={false} control={<Radio />} label="no" />
+                        <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                        <FormControlLabel value={false} control={<Radio />} label="No" />
                     </RadioGroup>
                     <h5>
                         Note: In most cases we will move items on top of the counter out,
@@ -35,8 +35,8 @@ function CountersSinksGroup() {
                             <RadioGroup aria-labelledby="granite_counter_tops" name="granite_counter_tops"
                                 row value={kitchen.granite_counter_tops}
                                 onChange={e => dispatch({ type: 'SET_GRANITE_COUNTERS', payload: (e.target.value === 'true') })}>
-                                <FormControlLabel value={true} control={<Radio />} label="yes" />
-                                <FormControlLabel value={false} control={<Radio />} label="no" />
+                                <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                                <FormControlLabel value={false} control={<Radio />} label="No" />
                             </RadioGroup>
                         </>
                     }

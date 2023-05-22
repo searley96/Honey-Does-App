@@ -1,7 +1,5 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   FormControl,
   FormGroup,
@@ -11,27 +9,18 @@ import {
   Radio,
   Checkbox,
   TextField,
-  Button,
 } from "@mui/material";
 
 function BathtubShowerGroup() {
   const bathroom = useSelector((store) => store.clientBathroomReducer);
   const dispatch = useDispatch();
 
+  // state for checkboxes
   const [regularChecked, setRegularChecked] = useState(false);
-  const [regularType, setRegularType] = useState('');
-
   const [ceramicPorcelainChecked, setCeramicPorcelainChecked] = useState(false);
-  const [ceramicPorcelainType, setCeramicPorcelainType] = useState('');
-
   const [walkInChecked, setWalkInChecked] = useState(false);
-  const [walkInType, setWalkInType] = useState('');
-
   const [specialShowerChecked, setSpecialShowerChecked] = useState(false);
-  const [specialShowerType, setSpecialShowerType] = useState('');
-
   const [jacuzziChecked, setJacuzziChecked] = useState(false);
-  const [jacuzziType, setJacuzziType] = useState('');
 
   return (
     <>
@@ -55,7 +44,7 @@ function BathtubShowerGroup() {
             control={<Checkbox />}
             name="Regular plastic tub/shower combo"
             label="Regular plastic tub/shower combo"
-          // value={bathroom.bath_shower_type}
+            value={regularChecked}
           />
 
           {regularChecked && (
@@ -99,6 +88,7 @@ function BathtubShowerGroup() {
             control={<Checkbox />}
             name="Ceramic or porcelain tub"
             label="Ceramic or porcelain tub"
+            value={ceramicPorcelainChecked}
           />
           {ceramicPorcelainChecked && (
             <>
@@ -140,6 +130,7 @@ function BathtubShowerGroup() {
             control={<Checkbox />}
             name="Walk-in shower"
             label="Walk-in shower"
+            value={walkInChecked}
           />
           {walkInChecked && (
             <>
@@ -183,6 +174,7 @@ function BathtubShowerGroup() {
             control={<Checkbox />}
             name="Specialty walk-in shower"
             label="Specialty walk-in shower"
+            value={specialShowerChecked}
           />
           {specialShowerChecked && (
             <>
@@ -225,6 +217,7 @@ function BathtubShowerGroup() {
             control={<Checkbox />}
             name="Jacuzzi tub"
             label="Jacuzzi tub"
+            value={jacuzziChecked}
           />
           {jacuzziChecked && (
             <>
@@ -242,6 +235,12 @@ function BathtubShowerGroup() {
 
                 }
               >
+                <FormControlLabel
+                  value="none"
+                  control={<Radio />}
+                  label="none"
+                />
+
                 <FormControlLabel
                   value="Curtain"
                   control={<Radio />}

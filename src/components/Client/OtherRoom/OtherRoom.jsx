@@ -7,11 +7,7 @@ import { TextField,
     FormLabel, 
     FormControlLabel, 
     Radio,
-    Stack,
-    Button 
     } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import DoneIcon from '@mui/icons-material/Done';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function OtherRoom() {
@@ -22,14 +18,14 @@ function OtherRoom() {
     let counter = 1;
     const otherRoomHeader = `Other Room #${counter}`;
 
-    const addRoom = () => {
-        dispatch({type: 'ADD_OTHER_ROOM', payload: otherRoom});
-    }
+    // const addRoom = () => {
+    //     dispatch({type: 'ADD_OTHER_ROOM', payload: otherRoom});
+    // }
 
-    const moveToFinalTouches = () => {
-        dispatch({type: 'ADD_OTHER_ROOM', payload: otherRoom});
-        history.push('/wipeDustForm');
-    }
+    // const moveToFinalTouches = () => {
+    //     dispatch({type: 'ADD_OTHER_ROOM', payload: otherRoom});
+    //     history.push('/wipeDustForm');
+    // }
     // Not using these for now.
     // const [otherInput, setOtherInput] = useState('');
     // const [checkedRoomType, setCheckedRoomType] = useState(false);
@@ -41,15 +37,15 @@ function OtherRoom() {
 
     return (
         <>
-            <h3>{otherRoomHeader}</h3>
+            <h3>Other Room</h3>
             <FormGroup>
                 <FormControl>
 
                     {/* ROOM TYPES */}
                     <FormLabel>Select room type:</FormLabel>
                     <RadioGroup aria-labelledby="room_type" name="room_type"
-                        row value={otherRoom.room_type}
-                        onChange={e => dispatch({ type: 'SET_ROOM_TYPE', payload: e.target.value })}>
+                        row value={otherRoom.form_type}
+                        onChange={e => dispatch({ type: 'SET_FORM_TYPE', payload: e.target.value })}>
                         <FormControlLabel value="bedroom" control={<Radio />} label="Bedroom" />
                         <FormControlLabel value="livingRoom" control={<Radio />} label="Living Room" />
                         <FormControlLabel value="diningRoom" control={<Radio />} label="Dining Room" />
@@ -57,20 +53,6 @@ function OtherRoom() {
                         <FormControlLabel value="library" control={<Radio />} label="Library" />
                         <FormControlLabel value="other" control={<Radio />} label="Other" />
                     </RadioGroup>
-                    {/* <FormControlLabel value={otherInput} 
-                            control={
-                                <Radio checkedRoomType={checkedRoomType} onClick={() => setCheckedRoomType(!checkedRoomType)} />
-                            } 
-                            label={
-                                checkedRoomType ? (
-                                <TextField
-                                disabled={!checkedRoomType}
-                                placeholder="other"
-                                value={otherInput}
-                                onChange={handleOtherInput} /> )
-                                : ( "Other" )
-                            } 
-                        /> */}
 
                     {/* SQ FT */}
                     <FormLabel>What is the square footage of the room?</FormLabel>
@@ -113,10 +95,7 @@ function OtherRoom() {
                             </RadioGroup>
                         </>
                     }
-                    <Stack spacing={1} direction='row' sx={{ mt: '40px', display: 'flex', justifyContent: 'space-between' }}>
-                        <Button onClick={addRoom} variant="outlined"><AddIcon sx={{ mx: '5px' }} fontSize="small" /> Add Another Room</Button>
-                        <Button onClick={moveToFinalTouches} variant="contained"><DoneIcon sx={{ mx: '5px' }} fontSize="small" /> Move on to final touches</Button>
-                    </Stack>
+                    
 
                 </FormControl>
             </FormGroup>

@@ -1,34 +1,40 @@
 const clientWipeDustReducer = (state =
     {
-        job_id: '',
-        wipe_clean_glass: 'yes',
-        glass_door: '',
-        glass_door_number: '',
-        inside_glass_door: '',
-        outside_glass_door: '',
+        order: 0,
+        form_type: 'wipe-dust',
+        wipe_clean_glass: true,
+        glass_door: null,
+        glass_door_number: 0,
+
+        inside_glass_door: null,
+        outside_glass_door: null,
         glass_door_location: '',
-        other_mirrors: '',
-        other_mirrors_number: '',
+        other_mirrors: null,
+        other_mirrors_number: 0,
+
         other_mirrors_location: '',
-        dust: 'yes',
-        ceiling_lines_wall_lines_baseboards: '',
-        ceiling_fixtures: '',
+        dust: true,
+        ceiling_lines_wall_lines_baseboards: null,
+        ceiling_fixtures: null,
         swiffer_feather: '',
-        window_blinds: '',
-        window_ledges: '',
-        window_sills: '',
-        picture_frames_wall_decor: '',
-        tops_decor_items: '',
-        pick_up_get_under: '',
-        electronics: '',
-        dust_other: '',
+
+        window_blinds: null,
+        window_ledges: null,
+        window_sills: null,
+        picture_frames_wall_decor: null,
+        tops_decor_items: null,
+
+        pick_up_get_under: null,
+        electronics: null,
+        dust_other: null,
         dust_other_instructions: '',
-        dust_bed_living_furniture: '',
+        dust_bed_living_furniture: null,
+
         bed_living_furniture_duster: '',
-        orange_glo_applicable: '',
+        orange_glo_applicable: null
     }, action) => {
     switch(action.type) {
-        case 'JOB_ID':
+        case 'SET_JOB_ID':
             return {...state, job_id: action.payload};
         case 'SET_WIPE_CLEAN_GLASS':
             return {...state, wipe_clean_glass: action.payload};
@@ -79,7 +85,42 @@ const clientWipeDustReducer = (state =
         case 'SET_BED_LIVING_FURNITURE_DUSTER':
             return {...state, bed_living_furniture_duster: action.payload};
         case 'SET_ORANGE_GLO_APPLICABLE':
-            return {...state, orange_glo_applicable: action.payload};     
+            return {...state, orange_glo_applicable: action.payload}; 
+            case 'CLEAR_FORM':
+                return {
+                    order: 0,
+                    form_type: 'wipe-dust',
+                    wipe_clean_glass: true,
+                    glass_door: null,
+                    glass_door_number: 0,
+            
+                    inside_glass_door: null,
+                    outside_glass_door: null,
+                    glass_door_location: '',
+                    other_mirrors: null,
+                    other_mirrors_number: 0,
+            
+                    other_mirrors_location: '',
+                    dust: true,
+                    ceiling_lines_wall_lines_baseboards: null,
+                    ceiling_fixtures: null,
+                    swiffer_feather: '',
+            
+                    window_blinds: null,
+                    window_ledges: null,
+                    window_sills: null,
+                    picture_frames_wall_decor: null,
+                    tops_decor_items: null,
+            
+                    pick_up_get_under: null,
+                    electronics: null,
+                    dust_other: null,
+                    dust_other_instructions: '',
+                    dust_bed_living_furniture: null,
+            
+                    bed_living_furniture_duster: '',
+                    orange_glo_applicable: null  
+                }  
         default:
             return state;
     }

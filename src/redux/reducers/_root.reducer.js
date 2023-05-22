@@ -7,6 +7,7 @@ import clientOtherRoom from './clientOtherRoom.reducer';
 import jobidReducer from './jobid.reducer';
 import chat from './chat.reducer';
 import clientBathroomReducer from './clientBathroom.reducer';
+import formList from './formList.reducer';
 
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   jobidReducer,
   clientWipeDust,
   clientBathroomReducer,
+  formList
 });
 
 export default rootReducer;
