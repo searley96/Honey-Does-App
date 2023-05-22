@@ -46,7 +46,7 @@ CREATE TABLE "message_log"(
 -- query rooms by job_id
 CREATE TABLE "user_kitchen"(
 	"id" SERIAL PRIMARY KEY,
-	"job_id" INT NOT NULL,
+	"job_id" INT NOT NULL REFERENCES "job",
 	"room_type" VARCHAR(50) NOT NULL,
 	"wipe_cabinets" BOOLEAN NOT NULL,
 	"cabinet_spot_full_clean" VARCHAR(50),
@@ -77,7 +77,7 @@ CREATE TABLE "user_kitchen"(
 
 CREATE TABLE "user_bathroom" (
 	"id" SERIAL PRIMARY KEY,
-	"job_id" INT NOT NULL,
+	"job_id" INT NOT NULL REFERENCES "job",
 	"room_type" VARCHAR(50) NOT NULL,
 	"bathroom_type" VARCHAR(50) NOT NULL,
 	"bath_shower_type" VARCHAR(50),
@@ -99,7 +99,7 @@ CREATE TABLE "user_bathroom" (
     
 CREATE TABLE "user_other_room"(
 	"id" SERIAL PRIMARY KEY,
-	"job_id" INT NOT NULL,
+	"job_id" INT NOT NULL REFERENCES "job",
 	"room_type" VARCHAR(50) NOT NULL,
 	"floor_type" VARCHAR(50) NOT NULL,
 	"wipe_surfaces" BOOLEAN NOT NULL,
@@ -107,8 +107,83 @@ CREATE TABLE "user_other_room"(
 	"sq_ft" INT NOT NULL
 );
 
+CREATE TABLE "user_wipe_dust"(
+	"id" SERIAL PRIMARY KEY,
+	"job_id" INT NOT NULL REFERENCES "job",
+	"wipe_clean_glass" BOOLEAN NOT NULL,
+	"glass_door" BOOLEAN,
+	"glass_door_number" INT,
+	"inside_glass_door" BOOLEAN,
+	"outside_glass_door" BOOLEAN,
+	"glass_door_location" VARCHAR(500),
+	"other_mirrors" BOOLEAN,
+	"other_mirrors_number" INT,
+	"other_mirrors_location" VARCHAR(500),
+	"dust" BOOLEAN NOT NULL,
+	"ceiling_lines_wall_lines_baseboards" BOOLEAN,
+	"ceiling_fixtures" BOOLEAN,
+	"swiffer_feather" VARCHAR(50),
+	"window_blinds" BOOLEAN,
+	"window_ledges" BOOLEAN,
+	"window_sills" BOOLEAN,
+	"picture_frames_wall_decor" BOOLEAN,
+	"tops_decor_items" BOOLEAN,
+	"pick_up_get_under" BOOLEAN,
+	"electronics" BOOLEAN,
+	"dust_other" BOOLEAN,
+	"dust_other_instructions" VARCHAR(500),
+	"dust_bed_living_furniture" BOOLEAN,
+	"bed_living_furniture_duster" VARCHAR(50),
+	"orange_glo_applicable" BOOLEAN
+);
+
 -- Job Table Mock Data
 INSERT INTO "job" ("job_id", "client_id", "manager_id", "cleaner_id", "job_status", "feedback", "date", "start_time", "end_time")
 VALUES (123456, 1, 6, 3, 'active', 'I am very happy with the clean your company provided, thank you!', '03-04-2023', '12:00', '4:00'),
 (456789, 2, 6, 5, 'active', 'My cleaner did such a great job, and she was so communicative!', '04-10-2023', '10:00', '2:00'),
 (135791, 4, 6, 5, 'active', 'The cleaner was very friendly', '04-24-2023', '9:00', '1:00');
+
+-- GET Chat
+-- NOTE: Will need to join with job table and 
+-- and sort messages by job_id and whether its before
+-- or the same day as the date to determine job_status
+
+-- also need to check if job.client_id matches req.user.id
+SELECT message_log.job_id, "timestamp", image_url, "text", job.client_id, job.manager_id, job.cleaner_id, job.job_status
+FROM message_log
+JOIN job ON job.job_id = message_log.job_id
+WHERE message_log.job_id = 123456
+ORDER BY TIMESTAMP ASC;
+
+--POST CHAT
+INSERT INTO "message_log" (job_id, "timestamp", image_url, "text", sender_id)
+VALUES (123456, '03-13-2020', NULL, 'its my birthday', 1);
+
+-- GET active job
+SELECT * FROM "job"
+WHERE "client_id" = 1 AND "job_status" = 'active';
+
+-- SET user form_job_id
+UPDATE "user" 
+SET form_job_id = 394053
+WHERE "user".id = 1;
+
+-- GET bathroom forms
+SELECT * FROM user_bathroom
+        WHERE job_id = $1
+        ORDER BY "order" ASC;
+
+-- GET kitchen forms
+SELECT * FROM user_kitchen
+        WHERE job_id = $1
+        ORDER BY "order" ASC;
+
+-- GET other room forms
+SELECT * FROM user_other_room
+        WHERE job_id = $1
+        ORDER BY "order" ASC;
+
+-- GET wipe dust forms
+SELECT * FROM user_wipe_dust
+        WHERE job_id = $1
+        ORDER BY "order" ASC;
