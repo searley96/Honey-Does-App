@@ -1,7 +1,7 @@
 //reducer function for storing All Jobs
-const allJobsReducer = (state = {}, action) => {
+const clientJobsReducer = (state = [], action) => {
   switch (action.type) {
-    case "SET_ALL_JOBS_REDUCER":
+    case "SET_CLIENT_JOBS_REDUCER":
       console.log("inside reducer", action.payload);
       return action.payload;
     default:
@@ -9,4 +9,4 @@ const allJobsReducer = (state = {}, action) => {
   }
 };
 
-export default allJobsReducer;
+export default clientJobsReducer;

@@ -28,11 +28,13 @@ function JobHistory() {
   const { id } = useParams();
   const [showActiveJobs, setShowActiveJobs] = useState(false);
   const [showPastJobs, setShowPastJobs] = useState(false);
-  const allJobsData = useSelector((state) => state.allJobsReducer);
+  const clientJobsData = useSelector((store) => store.clientJobsReducer);
+  const user = useSelector((store) => store.user);
 
   const getAllJobs = () => {
     dispatch({
-      type: "FETCH_JOB_ID",
+      type: "FETCH_CLIENT_JOB",
+      payload: Number(user.id),
     });
   };
 
@@ -40,6 +42,7 @@ function JobHistory() {
     getAllJobs();
   }, []);
 
+  console.log("map function", clientJobsData);
   // const activeJobs = [
   //   {
   //     jobId: 123,
@@ -100,7 +103,7 @@ function JobHistory() {
   const toggleActiveJobs = () => {
     setShowActiveJobs(!showActiveJobs);
   };
-  console.log("looking for Jobs Array", activeJobsData);
+  console.log("looking for Jobs Array", clientJobsData);
   return (
     <Container
       maxWidth="sm"
@@ -141,7 +144,7 @@ function JobHistory() {
                 Active Jobs
               </Typography>
 
-              {activeJobs.map((job, index) => (
+              {clientJobsData.map((job, index) => (
                 <Card sx={{ mb: 5 }} key={index}>
                   <Typography
                     sx={{ mb: 2, backgroundColor: "#fcb900" }}
@@ -176,7 +179,7 @@ function JobHistory() {
               >
                 Past Jobs
               </Typography>
-              {pastJobs.map((job, index) => (
+              {clientJobsData.map((job, index) => (
                 <Card key={index} sx={{ mb: 5 }}>
                   <Typography
                     sx={{ mb: 1.5, backgroundColor: "#fcb900" }}

@@ -4,9 +4,7 @@ const {
   rejectUnauthenticated,
 } = require("../modules/authentication-middleware");
 const encryptLib = require("../modules/encryption");
-const pool = require("../modules/pool");
 const userStrategy = require("../strategies/user.strategy");
-
 const router = express.Router();
 
 // ********** Job ID Generator **********
@@ -71,15 +69,18 @@ router.get("/jobid", (req, res) => {
 });
 // END ********** Job ID Generator **********
 
-// GET ACTIVE JOB
-router.get("/", rejectUnauthenticated, (req, res) => {
+// CLIENT
+// GET JOB HISTORY
+router.get("/client/:id", rejectUnauthenticated, (req, res) => {
+  console.log("inside client job history");
   const queryText = `
         SELECT * FROM "job"
-        WHERE "client_id" = $1 AND "job_status" = 'active';
+        WHERE "client_id" = $1;
     `;
   pool
-    .query(queryText, [req.user.id])
+    .query(queryText, [req.params.id])
     .then((result) => {
+      console.log("checking res.send", result.rows);
       res.send(result.rows);
     })
     .catch((err) => {

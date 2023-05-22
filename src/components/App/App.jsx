@@ -13,11 +13,7 @@ import Nav from "../Nav/Nav";
 import NewNav from "../Nav/NewNav";
 import Footer from "../Footer/Footer";
 import BottomNav from "../Footer/BottomNav";
-import Nav from "../Nav/Nav";
-import NewNav from "../Nav/NewNav";
-import Footer from "../Footer/Footer";
-import BottomNav from "../Footer/BottomNav";
-
+import JobHistory from "../JobHistory/JobHistory";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import AboutPage from "../AboutPage/AboutPage";
 import UserPage from "../UserPage/UserPage";
