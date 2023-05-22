@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+
 import {
   HashRouter as Router,
   Redirect,
@@ -12,8 +13,11 @@ import Nav from "../Nav/Nav";
 import NewNav from "../Nav/NewNav";
 import Footer from "../Footer/Footer";
 import BottomNav from "../Footer/BottomNav";
-import Menu from "../DashBoard/Menu";
-import JobHistory from "../JobHistory/JobHistory";
+import Nav from "../Nav/Nav";
+import NewNav from "../Nav/NewNav";
+import Footer from "../Footer/Footer";
+import BottomNav from "../Footer/BottomNav";
+
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import AboutPage from "../AboutPage/AboutPage";
 import UserPage from "../UserPage/UserPage";
@@ -24,6 +28,10 @@ import RegisterPage from "../RegisterPage/RegisterPage";
 import ProfilePage from "../ProfilePage/ProfilePage";
 
 import "./App.css";
+import KitchenForm from "../Client/Kitchen/KitchenForm";
+import BathroomForm from "../Client/Bathroom/BathroomForm";
+import WipeDustForm from "../Client/WipeDust/WipeDustForm";
+import OtherRoomForm from "../Client/OtherRoom/OtherRoomForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -120,10 +128,48 @@ function App() {
               <LoginPage />
             )}
           </Route>
-          <Route exact path="/profile">
+
+          <Route exact path="/bathroomForm">
             {user.id ? (
               <>
-                <ProfilePage />
+                <BathroomForm />
+                <BottomNav />
+              </>
+            ) : (
+              <LoginPage />
+            )}
+          </Route>
+
+          <Route exact path="/kitchenForm">
+            {user.id ? (
+              <>
+                <KitchenForm />
+                <BottomNav />
+              </>
+            ) : (
+              <LoginPage />
+            )}
+          </Route>
+
+          <Route
+            // logged in shows OtherRoomForm else shows LoginPage
+            exact
+            path="/otherRoomForm"
+          >
+            {user.id ? (
+              <>
+                <OtherRoomForm />
+                <BottomNav />
+              </>
+            ) : (
+              <LoginPage />
+            )}
+          </Route>
+
+          <Route exact path="/wipeDustForm">
+            {user.id ? (
+              <>
+                <WipeDustForm />
                 <BottomNav />
               </>
             ) : (
