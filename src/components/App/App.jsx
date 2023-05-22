@@ -22,6 +22,8 @@ import LandingPage from "../LandingPage/LandingPage";
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import ProfilePage from '../ProfilePage/ProfilePage';
+import AdminDashboard from '../Admin/AdminDashboard/AdminDashboard';
+import JobDetails from "../Admin/AdminDashboard/JobDetails";
 
 import './App.css';
 import KitchenForm from "../Client/Kitchen/KitchenForm";
@@ -79,7 +81,32 @@ function App() {
           </ProtectedRoute>
 
           <Route
-            exact path="/login">
+            exact
+            path="/adminDashboard"
+
+          >
+            {user.id ? (
+
+              <AdminDashboard />
+            ) : (
+              // Otherwise, show the login page
+              <LoginPage />
+            )}
+
+          </Route>
+
+          <Route
+            exact
+            path="/jobDetails"
+          >
+            {user.id ?
+              <JobDetails />
+
+              : <LoginPage />}
+
+          </Route>
+
+          <Route exact path="/login">
             {user.id ? (
               // If the user is already logged in, 
               // redirect to the /user page
@@ -114,7 +141,7 @@ function App() {
 
           <Route
             exact path="/profile">
-              {user.id ?
+            {user.id ?
               <>
                 <ProfilePage />
                 <BottomNav />

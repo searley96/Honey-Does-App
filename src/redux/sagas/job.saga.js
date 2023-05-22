@@ -23,8 +23,23 @@ function* createJobId() {
     }
 }
 
+function* fetchJobs() {
+    try {
+        const allJobs = yield axios.get(`/api/job/allJobs`);
+        console.log('this is allJobs.data', allJobs.data);
+
+        yield put({
+            type: 'SET_ALL_JOBS',
+            payload: allJobs.data
+        });
+    } catch(error) {
+        console.log('ERROR retrieving new allJobs', error);
+    }
+}
+
 function* jobSaga() {
     yield takeLatest('CREATE_JOB_ID', createJobId);
+    yield takeLatest('FETCH_JOBS', fetchJobs);
   }
   
   export default jobSaga;

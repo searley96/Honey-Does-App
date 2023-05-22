@@ -7,6 +7,7 @@ import clientOtherRoom from './clientOtherRoom.reducer';
 import jobidReducer from './jobid.reducer';
 import chat from './chat.reducer';
 import clientBathroomReducer from './clientBathroom.reducer';
+import allJobs from './allJobs.reducer';
 import formList from './formList.reducer';
 
 const rootReducer = combineReducers({
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   jobidReducer,
   clientWipeDust,
   clientBathroomReducer,
+  allJobs,
   formList
 });
 
