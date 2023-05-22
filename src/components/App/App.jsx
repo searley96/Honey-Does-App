@@ -138,6 +138,7 @@ function App() {
 
           <Route exact path="/bathroomForm">
             <BathroomForm />
+            <BottomNav />
           </Route>
 
           <Route

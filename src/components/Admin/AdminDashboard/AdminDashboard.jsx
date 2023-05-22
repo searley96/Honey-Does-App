@@ -34,7 +34,7 @@ function AdminDashboard() {
                                 {job.job_id}
                             </Button>
                             <Typography style={{ display: 'inline-block' }}>
-                                {job.first_name} {job.last_name}
+                                {job.client_first_name} {job.client_last_name}
                             </Typography>
                             <Typography style={{ display: 'inline-block' }}>
                                 {job.job_status}
@@ -43,7 +43,7 @@ function AdminDashboard() {
                     </Card>
                 ))
             ) : (
-                <p>No jobs yet.</p>
+                <p>No details yet.</p>
 
             )}
 
