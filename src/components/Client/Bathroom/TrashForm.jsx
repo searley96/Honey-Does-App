@@ -1,6 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   FormControl,
   FormGroup,
@@ -26,30 +25,30 @@ function TrashForm() {
             name="trash-out"
             row
             value={bathroom.take_out_trash}
-            onChange={(event) =>
+            onChange={e =>
               dispatch({
                 type: "SET_TAKE_OUT_TRASH",
-                payload: event.target.value,
+                payload: (e.target.value === 'true')
               })
             }
           >
-            <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="No" control={<Radio />} label="No" />
+            <FormControlLabel value={true} control={<Radio />} label="Yes" />
+            <FormControlLabel value={false} control={<Radio />} label="No" />
           </RadioGroup>
 
           {/* if trash out is set to yes, display removal instructions box */}
 
-          {bathroom.take_out_trash === "Yes" && 
+          {bathroom.take_out_trash === true && 
           <>
           {/* Trash removal instructions */}
           <FormLabel>Please enter trash removal instructions.<br />
           (Add to kitchen trash, take outside to dumpster, etc.)
           </FormLabel>
           <TextField size='small' value={bathroom.take_out_trash_instructions}
-              onChange={(event) =>
+              onChange={e =>
                   dispatch({
                       type: 'SET_TAKE_OUT_TRASH_INSTRUCTIONS',
-                      payload: event.target.value
+                      payload: e.target.value
                   })}
           />
 

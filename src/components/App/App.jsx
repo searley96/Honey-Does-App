@@ -21,12 +21,15 @@ import InfoPage from "../InfoPage/InfoPage";
 import LandingPage from "../LandingPage/LandingPage";
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
-import BathroomForm from "../Client/Bathroom/BathroomForm";
 import ProfilePage from '../ProfilePage/ProfilePage';
 import AdminDashboard from '../Admin/AdminDashboard/AdminDashboard';
 import JobDetails from "../Admin/AdminDashboard/JobDetails";
 
-import "./App.css";
+import './App.css';
+import KitchenForm from "../Client/Kitchen/KitchenForm";
+import BathroomForm from "../Client/Bathroom/BathroomForm";
+import WipeDustForm from '../Client/WipeDust/WipeDustForm';
+import OtherRoomForm from '../Client/OtherRoom/OtherRoomForm';
 
 function App() {
   const dispatch = useDispatch();
@@ -105,7 +108,7 @@ function App() {
 
           <Route exact path="/login">
             {user.id ? (
-              // If the user is already logged in,
+              // If the user is already logged in, 
               // redirect to the /user page
               <Redirect to="/user" />
             ) : (
@@ -136,33 +139,63 @@ function App() {
             )}
           </Route>
 
+          <Route
+            exact path="/profile">
+            {user.id ?
+              <>
+                <ProfilePage />
+                <BottomNav />
+              </>
+              :
+                <LoginPage />
+              }
+          </Route>
+
           <Route exact path="/bathroomForm">
-            <BathroomForm />
-            <BottomNav />
+            {user.id ?
+            <>
+              <BathroomForm/>
+              <BottomNav />
+            </>
+            :
+              <LoginPage />
+            }
           </Route>
 
-          <Route
-            exact path="/profile">
+          <Route exact path="/kitchenForm">
             {user.id ?
-              <>
-                <ProfilePage />
-                <BottomNav />
-              </>
-              :
+            <>
+              <KitchenForm />
+              <BottomNav />
+            </>
+            :
               <LoginPage />
             }
           </Route>
 
           <Route
-            exact path="/profile">
-            {user.id ?
+            // logged in shows OtherRoomForm else shows LoginPage
+            exact path="/otherRoomForm">
+              {user.id ?
               <>
-                <ProfilePage />
+                <OtherRoomForm />
                 <BottomNav />
               </>
               :
-              <LoginPage />
-            }
+                <LoginPage />
+              }
+          </Route>
+
+          <Route
+            exact path="/wipeDustForm">
+              {user.id ?
+              <>
+                <WipeDustForm />
+                <BottomNav />
+              </>
+              :
+                <LoginPage />
+              }
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}

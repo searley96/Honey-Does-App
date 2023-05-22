@@ -1,6 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   FormControl,
   FormGroup,
@@ -25,15 +24,15 @@ function ToiletGroup() {
             name="clean-toilet"
             row
             value={bathroom.clean_toilet}
-            onChange={(event) =>
+            onChange={e =>
               dispatch({
                 type: "SET_CLEAN_TOILET",
-                payload: event.target.value,
+                payload: (e.target.value === 'true')
               })
             }
           >
-            <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="No" control={<Radio />} label="No" />
+            <FormControlLabel value={true} control={<Radio />} label="Yes" />
+            <FormControlLabel value={false} control={<Radio />} label="No" />
           </RadioGroup>
         </FormControl>
       </FormGroup>

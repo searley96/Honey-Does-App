@@ -1,39 +1,37 @@
 const clientKitchenReducer = (state =
     {
-        job_id: '',
-        room_type: '',
-        wipe_cabinets: 'yes',
+        order: null,
+        form_type: 'kitchen',
+        wipe_cabinets: true,
         cabinet_spot_full_clean: '',
-        cabinet_orange_glo: '',
-        wipe_appliances: 'yes',
-        wipe_fridge: 'yes',
-        fridge_stainless_steel: '',
-        wipe_dishwasher: 'yes',
-        dishwasher_stainless_steel: '',
-        wipe_deep_freezer: '',
-        clean_microwave: 'yes',
-        clean_stove_top: 'yes',
+        cabinet_orange_glo: null,
+        wipe_appliances: true,
+        wipe_fridge: true,
+        fridge_stainless_steel: null,
+        wipe_dishwasher: true,
+        dishwasher_stainless_steel: null,
+        wipe_deep_freezer: null,
+        clean_microwave: true,
+        clean_stove_top: true,
         type_of_stove: '',
-        clean_hood_vent: '',
+        clean_hood_vent: null,
         hood_vent_special_instructions: '',
-        back_splash: '',
-        clean_stove_front: '',
-        stove_stainless_steel: '',
-        wipe_counters_sink: 'yes',
-        granite_counter_tops: '',
-        sweep_mop_floor: 'yes',
-        shake_rugs: '',
-        hardwood_floors: '',
-        specialty_flooring: '',
+        back_splash: null,
+        clean_stove_front: null,
+        stove_stainless_steel: null,
+        wipe_counters_sink: true,
+        granite_counter_tops: null,
+        sweep_mop_floor: true,
+        shake_rugs: null,
+        hardwood_floors: null,
+        specialty_flooring: null,
         specialty_flooring_instructions: '',
         mop_location: ''
 
     }, action) => {
     switch (action.type) {
-        case 'JOB_ID':
-            return { ...state, job_id: action.payload };
-        case 'SET_ROOM_TYPE':
-            return { ...state, room_type: action.payload };
+        case 'SET_ORDER':
+            return { ...state, order: action.payload };
         case 'SET_WIPE_CABINETS':
             return { ...state, wipe_cabinets: action.payload };
         case 'SET_CABINET_SPOT_FULL_CLEAN':
@@ -84,34 +82,36 @@ const clientKitchenReducer = (state =
             return { ...state, specialty_flooring_instructions: action.payload };
         case 'SET_MOP_LOCATION':
             return { ...state, mop_location: action.payload };
-            case 'CLEAR_KITCHEN':
-            return { job_id: '',
-            room_type: '',
-            wipe_cabinets: 'yes',
-            cabinet_spot_full_clean: '',
-            cabinet_orange_glo: '',
-            wipe_appliances: 'yes',
-            wipe_fridge: 'yes',
-            fridge_stainless_steel: '',
-            wipe_dishwasher: 'yes',
-            dishwasher_stainless_steel: '',
-            wipe_deep_freezer: '',
-            clean_microwave: 'yes',
-            clean_stove_top: 'yes',
-            type_of_stove: '',
-            clean_hood_vent: '',
-            hood_vent_special_instructions: '',
-            back_splash: '',
-            clean_stove_front: '',
-            stove_stainless_steel: '',
-            wipe_counters_sink: 'yes',
-            granite_counter_tops: '',
-            sweep_mop_floor: 'yes',
-            shake_rugs: '',
-            hardwood_floors: '',
-            specialty_flooring: '',
-            specialty_flooring_instructions: '',
-            mop_location: '' };
+            case 'CLEAR_ROOM':
+            return { 
+                order: null,
+                form_type: 'kitchen',
+                wipe_cabinets: true,
+                cabinet_spot_full_clean: '',
+                cabinet_orange_glo: null,
+                wipe_appliances: true,
+                wipe_fridge: true,
+                fridge_stainless_steel: null,
+                wipe_dishwasher: true,
+                dishwasher_stainless_steel: null,
+                wipe_deep_freezer: null,
+                clean_microwave: true,
+                clean_stove_top: true,
+                type_of_stove: '',
+                clean_hood_vent: null,
+                hood_vent_special_instructions: '',
+                back_splash: null,
+                clean_stove_front: null,
+                stove_stainless_steel: null,
+                wipe_counters_sink: true,
+                granite_counter_tops: null,
+                sweep_mop_floor: true,
+                shake_rugs: null,
+                hardwood_floors: null,
+                specialty_flooring: null,
+                specialty_flooring_instructions: '',
+                mop_location: ''
+             };
         default:
             return state;
     }

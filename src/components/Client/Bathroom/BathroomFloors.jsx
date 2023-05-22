@@ -1,6 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   FormControl,
   FormGroup,
@@ -26,20 +25,20 @@ function BathroomFloors() {
             name="sweep-mop"
             row
             value={bathroom.sweep_mop_floor}
-            onChange={(event) =>
+            onChange={e =>
               dispatch({
                 type: 'SET_SWEEP_MOP_FLOOR',
-                payload: event.target.value,
+                payload: (e.target.value === 'true')
               })
             }
           >
-            <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="No" control={<Radio />} label="No" />
+            <FormControlLabel value={true} control={<Radio />} label="Yes" />
+            <FormControlLabel value={false} control={<Radio />} label="No" />
           </RadioGroup>
 
           {/* if sweep/mop is set to yes, display rugs option */}
 
-          {bathroom.sweep_mop_floor === "Yes" && (
+          {bathroom.sweep_mop_floor === true && (
           <>
             <FormLabel>
               Do you have accent rugs that need to be moved/shaken beforehand?
@@ -49,15 +48,15 @@ function BathroomFloors() {
               name="shake-rugs"
               row
               value={bathroom.shake_rugs}
-              onChange={(event) =>
+              onChange={e =>
                 dispatch({
                   type: 'SET_SHAKE_RUGS',
-                  payload: event.target.value,
+                  payload: (e.target.value === 'true')
                 })
               }
             >
-              <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-              <FormControlLabel value="No" control={<Radio />} label="No" />
+              <FormControlLabel value={true} control={<Radio />} label="Yes" />
+              <FormControlLabel value={false} control={<Radio />} label="No" />
             </RadioGroup>
           </>
         )}

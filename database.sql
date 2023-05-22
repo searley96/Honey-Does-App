@@ -46,7 +46,7 @@ CREATE TABLE "message_log"(
 -- query rooms by job_id
 CREATE TABLE "user_kitchen"(
 	"id" SERIAL PRIMARY KEY,
-	"job_id" INT NOT NULL,
+	"job_id" INT NOT NULL REFERENCES "job",
 	"room_type" VARCHAR(50) NOT NULL,
 	"wipe_cabinets" BOOLEAN NOT NULL,
 	"cabinet_spot_full_clean" VARCHAR(50),
@@ -77,7 +77,7 @@ CREATE TABLE "user_kitchen"(
 
 CREATE TABLE "user_bathroom" (
 	"id" SERIAL PRIMARY KEY,
-	"job_id" INT NOT NULL,
+	"job_id" INT NOT NULL REFERENCES "job",
 	"room_type" VARCHAR(50) NOT NULL,
 	"bathroom_type" VARCHAR(50) NOT NULL,
 	"bath_shower_type" VARCHAR(50),
@@ -99,12 +99,42 @@ CREATE TABLE "user_bathroom" (
     
 CREATE TABLE "user_other_room"(
 	"id" SERIAL PRIMARY KEY,
-	"job_id" INT NOT NULL,
+	"job_id" INT NOT NULL REFERENCES "job",
 	"room_type" VARCHAR(50) NOT NULL,
 	"floor_type" VARCHAR(50) NOT NULL,
 	"wipe_surfaces" BOOLEAN NOT NULL,
 	"clean_floor" BOOLEAN NOT NULL,
 	"sq_ft" INT NOT NULL
+);
+
+CREATE TABLE "user_wipe_dust"(
+	"id" SERIAL PRIMARY KEY,
+	"job_id" INT NOT NULL REFERENCES "job",
+	"wipe_clean_glass" BOOLEAN NOT NULL,
+	"glass_door" BOOLEAN,
+	"glass_door_number" INT,
+	"inside_glass_door" BOOLEAN,
+	"outside_glass_door" BOOLEAN,
+	"glass_door_location" VARCHAR(500),
+	"other_mirrors" BOOLEAN,
+	"other_mirrors_number" INT,
+	"other_mirrors_location" VARCHAR(500),
+	"dust" BOOLEAN NOT NULL,
+	"ceiling_lines_wall_lines_baseboards" BOOLEAN,
+	"ceiling_fixtures" BOOLEAN,
+	"swiffer_feather" VARCHAR(50),
+	"window_blinds" BOOLEAN,
+	"window_ledges" BOOLEAN,
+	"window_sills" BOOLEAN,
+	"picture_frames_wall_decor" BOOLEAN,
+	"tops_decor_items" BOOLEAN,
+	"pick_up_get_under" BOOLEAN,
+	"electronics" BOOLEAN,
+	"dust_other" BOOLEAN,
+	"dust_other_instructions" VARCHAR(500),
+	"dust_bed_living_furniture" BOOLEAN,
+	"bed_living_furniture_duster" VARCHAR(50),
+	"orange_glo_applicable" BOOLEAN
 );
 
 -- Job Table Mock Data
@@ -133,34 +163,27 @@ VALUES (123456, '03-13-2020', NULL, 'its my birthday', 1);
 SELECT * FROM "job"
 WHERE "client_id" = 1 AND "job_status" = 'active';
 
--- POST KITCHEN
-INSERT INTO user_kitchen( 
-	job_id,
-	room_type,
-	wipe_cabinets,
-	cabinet_spot_full_clean,
-	cabinet_orange_glo,
-	wipe_appliances,
-	wipe_fridge,
-	fridge_stainless_steel,
-	wipe_dishwasher,
-	dishwasher_stainless_steel,
-	wipe_deep_freezer,
-	clean_microwave,
-	clean_stove_top,
-	type_of_stove,
-	clean_hood_vent,
-	hood_vent_special_instructions,
-	back_splash,
-	clean_stove_front,
-	stove_stainless_steel,
-	wipe_counters_sink,
-	granite_counter_tops,
-	sweep_mop_floor,
-	shake_rugs,
-	hardwood_floors,
-	specialty_flooring,
-	specialty_flooring_instructions,
-	mop_location
-	)
-VALUES
+-- SET user form_job_id
+UPDATE "user" 
+SET form_job_id = 394053
+WHERE "user".id = 1;
+
+-- GET bathroom forms
+SELECT * FROM user_bathroom
+        WHERE job_id = $1
+        ORDER BY "order" ASC;
+
+-- GET kitchen forms
+SELECT * FROM user_kitchen
+        WHERE job_id = $1
+        ORDER BY "order" ASC;
+
+-- GET other room forms
+SELECT * FROM user_other_room
+        WHERE job_id = $1
+        ORDER BY "order" ASC;
+
+-- GET wipe dust forms
+SELECT * FROM user_wipe_dust
+        WHERE job_id = $1
+        ORDER BY "order" ASC;

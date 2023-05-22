@@ -1,6 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   FormControl,
   FormGroup,
@@ -26,19 +25,19 @@ function MirrorGroup() {
             name="mirror-type"
             row
             value={bathroom.clean_mirror}
-            onChange={(event) =>
+            onChange={e =>
               dispatch({
                 type: "SET_CLEAN_MIRROR",
-                payload: event.target.value,
+                payload: (e.target.value === 'true')
               })
             }
           >
-            <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="No" control={<Radio />} label="No" />
+            <FormControlLabel value={true} control={<Radio />} label="Yes" />
+            <FormControlLabel value={false} control={<Radio />} label="No" />
           </RadioGroup>
 
           {/* if cleanMirror is set to yes, display mirror count */}
-          {bathroom.clean_mirror === "Yes" && (
+          {bathroom.clean_mirror === true && (
             <>
               <FormLabel id="mirror-count">How many mirrors?</FormLabel>
               <RadioGroup
@@ -46,10 +45,10 @@ function MirrorGroup() {
                 name="mirror-count-group"
                 row
                 value={bathroom.number_mirrors_clean}
-                onChange={(event) =>
+                onChange={e =>
                   dispatch({
                     type: "SET_NUMBER_MIRRORS_CLEAN",
-                    payload: event.target.value,
+                    payload: e.target.value,
                   })
                 }
               >

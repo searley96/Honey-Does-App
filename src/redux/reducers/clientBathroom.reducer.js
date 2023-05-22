@@ -1,35 +1,45 @@
 const clientBathroomReducer = (state = {
-    job_id: '',
-    room_type: '',
+    order: null,
+    form_type: 'bathroom',
     bathroom_type: '',
-    bath_shower_type: '',
-    threshold_type: '',
-    clean_jacuzzi: 'yes',
-    clean_mirror: 'yes',
-    number_mirrors_clean: '',
-    clean_sink_counter: 'yes',
-    granite_counter_tops: 'yes',
+    regular_type: '',
+    ceramic_porcelain_type: '',
+    walk_in_type: '',
+    specialty_type: '',
+    jacuzzi_type: '',
+    other_type: '',
+    clean_jacuzzi: true,
+    clean_mirror: true,
+    number_mirrors_clean: 0,
+    clean_sink_counter: true,
+    granite_counter_tops: null,
     sink_type: '',
-    clean_front_cabinets: 'yes',
+    clean_front_cabinets: null,
     cabinet_spot_full_clean: '',
-    cabinet_orange_glo: 'yes',
-    clean_toilet: 'yes',
-    take_out_trash: 'yes',
+    cabinet_orange_glo: null,
+    clean_toilet: true,
+    take_out_trash: true,
     take_out_trash_instructions: '',
-    sweep_mop_floor:'yes',
-    shake_rugs: 'yes'
+    sweep_mop_floor: true,
+    shake_rugs: null
 }, action) => {
     switch (action.type) {
-        case 'JOB_ID':
-            return { ...state, job_id: action.payload };
-        case 'SET_ROOM_TYPE':
-            return { ...state, room_type: action.payload };
+        case 'SET_ORDER':
+            return { ...state, order: action.payload };
         case 'SET_BATHROOM_TYPE':
             return { ...state, bathroom_type: action.payload };
-        case 'SET_BATH_SHOWER_TYPE':
-            return { ...state, bath_shower_type: action.payload };
-        case 'SET_THRESHOLD_TYPE':
-            return { ...state, threshold_type: action.payload };
+        case 'SET_REGULAR_TYPE':
+            return { ...state, regular_type: action.payload };
+        case 'SET_CERAMIC_PORCELAIN_TYPE':
+            return { ...state, ceramic_porcelain_type: action.payload };
+        case 'SET_WALK_IN_TYPE':
+            return { ...state, walk_in_type: action.payload };
+        case 'SET_SPECIALTY_TYPE':
+            return { ...state, specialty_type: action.payload };
+        case 'SET_JACUZZI_TYPE':
+            return { ...state, jacuzzi_type: action.payload };
+        case 'SET_OTHER_TYPE':
+            return { ...state, other_type: action.payload };
         case 'SET_CLEAN_JACUZZI':
             return { ...state, clean_jacuzzi: action.payload };
         case 'SET_CLEAN_MIRROR':
@@ -58,6 +68,32 @@ const clientBathroomReducer = (state = {
             return { ...state, sweep_mop_floor: action.payload };
         case 'SET_SHAKE_RUGS':
             return { ...state, shake_rugs: action.payload };
+        case 'CLEAR_ROOM':
+            return {
+                order: null,
+                form_type: 'bathroom',
+                bathroom_type: '',
+                regular_type: '',
+                ceramic_porcelain_type: '',
+                walk_in_type: '',
+                specialty_type: '',
+                jacuzzi_type: '',
+                other_type: '',
+                clean_jacuzzi: true,
+                clean_mirror: true,
+                number_mirrors_clean: 0,
+                clean_sink_counter: true,
+                granite_counter_tops: null,
+                sink_type: '',
+                clean_front_cabinets: null,
+                cabinet_spot_full_clean: '',
+                cabinet_orange_glo: null,
+                clean_toilet: true,
+                take_out_trash: true,
+                take_out_trash_instructions: '',
+                sweep_mop_floor: true,
+                shake_rugs: null
+            }
         default:
             return state;
     }

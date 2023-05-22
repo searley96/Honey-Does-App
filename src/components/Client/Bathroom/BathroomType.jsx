@@ -1,6 +1,5 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector, FormHelperText } from "react-redux";
 import {
   FormControl,
   FormGroup,
@@ -13,23 +12,24 @@ import {
 function BathroomType() {
   const bathroom = useSelector((store) => store.clientBathroomReducer);
   const dispatch = useDispatch();
-  //   console.log('bathroom', bathroom)
+  
+  
 
   return (
     <>
       <h3>Bathroom Type</h3>
       <FormGroup>
         <FormControl>
-          <FormLabel id="bathroom-type">Bathroom Type</FormLabel>
+          <FormLabel id="bathroom-type" required>Bathroom Type</FormLabel>
           <RadioGroup
+            aria-required='true'
             aria-labelledby="bathroom-type-group"
             name="bathroom-type-group"
-            row
             value={bathroom.bathroom_type}
-            onChange={event =>
+            onChange={e =>
               dispatch({
                 type: "SET_BATHROOM_TYPE",
-                payload: event.target.value,
+                payload: e.target.value,
               })
             }
           >
@@ -50,6 +50,7 @@ function BathroomType() {
               label="Don't Clean"
             />
           </RadioGroup>
+          {/* <helperText>{helperText}</helperText> */}
         </FormControl>
       </FormGroup>
     </>
