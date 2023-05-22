@@ -163,34 +163,27 @@ VALUES (123456, '03-13-2020', NULL, 'its my birthday', 1);
 SELECT * FROM "job"
 WHERE "client_id" = 1 AND "job_status" = 'active';
 
--- POST KITCHEN
-INSERT INTO user_kitchen( 
-	job_id,
-	room_type,
-	wipe_cabinets,
-	cabinet_spot_full_clean,
-	cabinet_orange_glo,
-	wipe_appliances,
-	wipe_fridge,
-	fridge_stainless_steel,
-	wipe_dishwasher,
-	dishwasher_stainless_steel,
-	wipe_deep_freezer,
-	clean_microwave,
-	clean_stove_top,
-	type_of_stove,
-	clean_hood_vent,
-	hood_vent_special_instructions,
-	back_splash,
-	clean_stove_front,
-	stove_stainless_steel,
-	wipe_counters_sink,
-	granite_counter_tops,
-	sweep_mop_floor,
-	shake_rugs,
-	hardwood_floors,
-	specialty_flooring,
-	specialty_flooring_instructions,
-	mop_location
-	)
-VALUES
+-- SET user form_job_id
+UPDATE "user" 
+SET form_job_id = 394053
+WHERE "user".id = 1;
+
+-- GET bathroom forms
+SELECT * FROM user_bathroom
+        WHERE job_id = $1
+        ORDER BY "order" ASC;
+
+-- GET kitchen forms
+SELECT * FROM user_kitchen
+        WHERE job_id = $1
+        ORDER BY "order" ASC;
+
+-- GET other room forms
+SELECT * FROM user_other_room
+        WHERE job_id = $1
+        ORDER BY "order" ASC;
+
+-- GET wipe dust forms
+SELECT * FROM user_wipe_dust
+        WHERE job_id = $1
+        ORDER BY "order" ASC;
