@@ -23,18 +23,23 @@ function* createJobId() {
   }
 }
 
-function* fetchJobsSaga() {
-  // get ALL Jobs
+function* fetchJobs() {
   try {
-    const jobDetails = yield axios.get(`/api/job/jobHistory`);
-    console.log("get all jobs saga", jobDetails);
+    const allJobs = yield axios.get(`/api/job/allJobs`);
+    console.log("this is allJobs.data", allJobs.data);
+
     yield put({
-      type: "SET_ALL_JOBS_REDUCER",
-      payload: jobDetails.data,
+      type: "SET_ALL_JOBS",
+      payload: allJobs.data,
     });
   } catch (error) {
-    console.log("get all jobs error", error);
+    console.log("ERROR retrieving new allJobs", error);
   }
+}
+
+function* jobSaga() {
+  yield takeLatest("CREATE_JOB_ID", createJobId);
+  yield takeLatest("FETCH_JOBS", fetchJobs);
 }
 
 export default jobSaga;
