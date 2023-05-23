@@ -1,5 +1,6 @@
-import { put, takeLatest } from 'redux-saga/effects';
-import axios from 'axios';
+import { put, takeLatest, takeEvery } from "redux-saga/effects";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 function* createJobId() {
     try {
@@ -25,9 +26,39 @@ function* createJobId() {
         console.log('ERROR retrieving new jobID', error);
     }
 }
+function* fetchClientJobs(action) {
+  try {
+    console.log("fetchclientjobs", action.payload);
+    const clientJobs = yield axios.get(`/api/job/client/${action.payload}`);
+    console.log("this is clientJobs.data", clientJobs.data);
+
+    yield put({
+      type: "SET_CLIENT_JOBS_REDUCER",
+      payload: clientJobs.data,
+    });
+  } catch (error) {
+    console.log("ERROR retrieving new client Jobs", error);
+  }
+}
+
+function* fetchJobs() {
+  try {
+    const allJobs = yield axios.get(`/api/job/allJobs`);
+    console.log("this is allJobs.data", allJobs.data);
+
+    yield put({
+      type: "SET_ALL_JOBS",
+      payload: allJobs.data,
+    });
+  } catch (error) {
+    console.log("ERROR retrieving new allJobs", error);
+  }
+}
 
 function* jobSaga() {
-    yield takeLatest('CREATE_JOB_ID', createJobId);
-  }
-  
-  export default jobSaga;
+  yield takeLatest("CREATE_JOB_ID", createJobId);
+  yield takeLatest("FETCH_JOBS", fetchJobs);
+  yield takeLatest("FETCH_CLIENT_JOB", fetchClientJobs);
+}
+
+export default jobSaga;
