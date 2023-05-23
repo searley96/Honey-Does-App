@@ -27,13 +27,13 @@ function OtherRoomForm() {
     // Post form to database, clear form, and go to the next page.
     
     const addOtherRoom = () => {
-        const order = formList.length;
+        const order = formList.length + 1;
         // dispatch to room.saga that triggers post request to form.router ('/other/')
         dispatch({ type: 'ADD_OTHER_ROOM', payload: {wipeDust, jobId, order }})
 
     }
     const moveToWipeDust = () => {  
-        const order = formList.length;
+        const order = formList.length + 1;
         // dispatch to room.saga that triggers post request to form.router ('/other/')
         dispatch({ type: 'ADD_OTHER_ROOM', payload: {wipeDust, jobId, order }})
         history.push('/wipeDustForm'); // directs user to the wipeDust form 
