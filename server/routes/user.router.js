@@ -119,4 +119,21 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
+// GET to get all cleaner users for admin
+router.get('/allCleaners', rejectUnauthenticated, (req, res) => {
+  const queryText = `
+    SELECT *
+    FROM "user"
+    WHERE role = 'cleaner'
+  `
+  pool.query(queryText)
+    .then(result => {
+      console.log('result.rows:', result.rows);
+      res.send(result.rows);
+    }).catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    })
+})
+
 module.exports = router;

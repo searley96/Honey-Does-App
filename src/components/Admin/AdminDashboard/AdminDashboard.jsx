@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Card, CardActions, CardContent, CardMedia, Typography, Link } from '@mui/material';
 import { useHistory } from "react-router-dom";
-import JobDetails from "./JobDetails";
 
 function AdminDashboard() {
     console.log('Inside Dashboard()!!');
@@ -18,7 +17,7 @@ function AdminDashboard() {
     const history = useHistory();
 
     const handleOnClick = (jobObj) => {
-        dispatch({ type: 'VIEW_JOB_DETAILS', payload: jobObj})
+        dispatch({ type: 'VIEW_JOB_DETAILS', payload: jobObj })
         history.push('/jobDetails')
     }
 
