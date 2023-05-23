@@ -1,7 +1,7 @@
 const clientBathroomReducer = (state = {
     order: null,
     form_type: 'bathroom',
-    bathroom_type: '',
+    bathroom_type: 'Full Bath',
     regular_type: '',
     ceramic_porcelain_type: '',
     walk_in_type: '',

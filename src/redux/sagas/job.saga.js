@@ -18,6 +18,9 @@ function* createJobId() {
             type: 'ADD_FORM_ID',
             payload: {job_id: jobId.data}
         });
+
+        // create a new job using the generated job id
+        yield axios.post('/api/job', {jobId: jobId.data});
     } catch(error) {
         console.log('ERROR retrieving new jobID', error);
     }

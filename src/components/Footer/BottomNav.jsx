@@ -79,7 +79,7 @@ function BottomNav() {
             </IconButton>
             {/* <StyledFab sx={{backgroundColor: 'rgb(252,228,62)'}} aria-label="new clean request"> */}
 
-            {!user.form_job_id &&
+            {(!user.form_job_id && user.role ==='client') &&
               <StyledFab color='secondary' aria-label="new clean request" onClick={toClientForm}>
                 <CleaningServicesIcon />
               </StyledFab> 

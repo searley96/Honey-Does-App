@@ -82,4 +82,24 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         })
 })
 
+router.post('/', rejectUnauthenticated, (req, res) => {
+    const jobId = req.body.jobId;
+    const userId = req.user.id;
+    const queryText = `
+        INSERT INTO "job" (job_id, client_id, job_status)
+        VALUES ($1, $2, 'unsubmitted')
+    `
+    console.log(jobId);
+
+    pool.query(queryText, [jobId, userId])
+        .then(result => {
+            res.sendStatus(201);
+        })
+        .catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+        })
+
+})
+
 module.exports = router;
