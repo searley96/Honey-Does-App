@@ -1,5 +1,5 @@
 const express = require('express');
-const HOURLY_RATE = require('../constants/constants.json');
+const constants = require('../constants/constants.json');
 const calculateLowEstimate = require('../modules/lowEstimate');
 
 const {
@@ -108,14 +108,14 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 // calculate low and high ends of the job estimate
 router.post('/estimate', rejectUnauthenticated, (req, res) => {
-    console.log('HOURLY_RATE is:', HOURLY_RATE);
+    console.log('HOURLY_RATE is:', constants.HOURLY_RATE);
     const formList = req.body.formList;
     formList.push(req.body.wipeDustForm.wipeDust);
 
 
 
     console.log('formList in /estimate:', formList);
-    calculateLowEstimate();
+    const lowEstimate = calculateLowEstimate(constants, formList);
 
     res.sendStatus(200);
 
