@@ -1,4 +1,7 @@
 const express = require('express');
+const HOURLY_RATE = require('../constants/constants.json');
+const calculateLowEstimate = require('../modules/lowEstimate');
+
 const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
@@ -82,6 +85,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         })
 })
 
+// POST new job at start of new request
 router.post('/', rejectUnauthenticated, (req, res) => {
     const jobId = req.body.jobId;
     const userId = req.user.id;
@@ -89,7 +93,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         INSERT INTO "job" (job_id, client_id, job_status)
         VALUES ($1, $2, 'unsubmitted')
     `
-    console.log(jobId);
+    // console.log(jobId);
 
     pool.query(queryText, [jobId, userId])
         .then(result => {
@@ -100,6 +104,22 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             res.sendStatus(500);
         })
 
+})
+
+// calculate low and high ends of the job estimate
+router.post('/estimate', rejectUnauthenticated, (req, res) => {
+    console.log('HOURLY_RATE is:', HOURLY_RATE);
+    const formList = req.body.formList;
+    formList.push(req.body.wipeDustForm.wipeDust);
+
+
+
+    console.log('formList in /estimate:', formList);
+    calculateLowEstimate();
+
+    res.sendStatus(200);
+
+    
 })
 
 module.exports = router;
