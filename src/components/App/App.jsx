@@ -24,7 +24,7 @@ import RegisterPage from "../RegisterPage/RegisterPage";
 import ProfilePage from "../ProfilePage/ProfilePage";
 import AdminDashboard from "../Admin/AdminDashboard/AdminDashboard";
 import JobDetails from "../Admin/AdminDashboard/JobDetails";
-
+import FullJobHistory from "../JobHistory/FullJobHistory";
 import "./App.css";
 import KitchenForm from "../Client/Kitchen/KitchenForm";
 import BathroomForm from "../Client/Bathroom/BathroomForm";
@@ -79,9 +79,24 @@ function App() {
           >
             <InfoPage />
           </ProtectedRoute>
-          <ProtectedRoute exact path="/jobHistory">
-            <JobHistory />
-          </ProtectedRoute>
+
+          <Route exact path="/jobHistory">
+            {user.id ? (
+              <JobHistory />
+            ) : (
+              // Otherwise, show the login page
+              <LoginPage />
+            )}
+          </Route>
+
+          <Route exact path="/fullJobHistory">
+            {user.id ? (
+              <FullJobHistory />
+            ) : (
+              // Otherwise, show the login page
+              <LoginPage />
+            )}
+          </Route>
 
           <Route exact path="/adminDashboard">
             {user.id ? (

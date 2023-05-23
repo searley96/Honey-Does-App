@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import SmsIcon from "@mui/icons-material/Sms";
-
+import FullJobHistory from "./FullJobHistory";
 import {
   Box,
   Button,
@@ -46,6 +46,10 @@ function JobHistory() {
   const [showJobs, setShowJobs] = useState(true);
   const clientJobsData = useSelector((store) => store.clientJobsReducer);
   const user = useSelector((store) => store.user);
+
+  const handleFullJobHistory = (id) => {
+    history.push("/fullJobHistory");
+  };
 
   const getAllJobs = () => {
     dispatch({
@@ -138,7 +142,12 @@ function JobHistory() {
                         Estimation: {job.estimation}
                       </Typography>
                       <CardActions>
-                        <Button size="small">See Full Job Description</Button>
+                        <Button
+                          onClick={() => handleFullJobHistory(job.job_id)}
+                          size="small"
+                        >
+                          See Full Job Description
+                        </Button>
                       </CardActions>
                     </Card>
                   );
