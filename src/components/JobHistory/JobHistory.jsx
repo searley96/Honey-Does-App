@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import SmsIcon from "@mui/icons-material/Sms";
+
 import {
   Box,
   Button,
@@ -21,13 +22,28 @@ const AnimatedIconButton = styled(IconButton)`
     background-color: #4caf50;
   }
 `;
+function showJobs({ job_status }) {
+  if (
+    job_status === "active" ||
+    job_status === "approved" ||
+    job_status === "request" ||
+    job_status === "submitted"
+  ) {
+    toggleActiveJobs();
+  } else if (
+    job_status === "completed" ||
+    job_status === "cancelled" ||
+    job_status === "rejected"
+  ) {
+    togglePastJobs();
+  }
+}
 
 function JobHistory() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
-  const [showActiveJobs, setShowActiveJobs] = useState(false);
-  const [showPastJobs, setShowPastJobs] = useState(false);
+  const [showJobs, setShowJobs] = useState(true);
   const clientJobsData = useSelector((store) => store.clientJobsReducer);
   const user = useSelector((store) => store.user);
 
@@ -43,67 +59,16 @@ function JobHistory() {
   }, []);
 
   console.log("map function", clientJobsData);
-  // const activeJobs = [
-  //   {
-  //     jobId: 123,
-  //     assignedCleaner: "Joann",
-  //     jobAddress: "1436 Prime Ave N",
-  //     jobDateToBeServiced: "6/14/2023",
-  //     jobPrice: "$345",
-  //     jobNotes: `Owner has a pet terrier dog that will not be in the cage`,
-  //   },
-  //   {
-  //     jobId: 126,
-  //     assignedCleaner: "Kim",
-  //     jobAddress: "34 Java Parkway N",
-  //     jobDateToBeServiced: "7/18/2023",
-  //     jobPrice: "$260",
-  //     jobNotes: `Go in through the patio door in the back of the house`,
-  //   },
-  //   {
-  //     jobId: 130,
-  //     assignedCleaner: "Cynthia",
-  //     jobAddress: "19th React Street SW",
-  //     jobDateToBeServiced: "6/24/2023",
-  //     jobPrice: "$184",
-  //     jobNotes: `Please knock and do not ring the doorbell`,
-  //   },
-  // ];
-  // const pastJobs = [
-  //   {
-  //     jobId: 90,
-  //     assignedCleaner: "Joann",
-  //     jobAddress: "1436 Prime Ave N",
-  //     jobDateServiced: "2/14/2022",
-  //     jobPrice: "$245",
-  //     jobNotes: `Owner has a pet terrier dog that will not be in the cage`,
-  //   },
-  //   {
-  //     jobId: 16,
-  //     assignedCleaner: "Kim",
-  //     jobAddress: "34 Java Parkway N",
-  //     jobDateServiced: "1/18/2023",
-  //     jobPrice: "$160",
-  //     jobNotes: `Go in through the patio door in the back of the house`,
-  //   },
-  //   {
-  //     jobId: 67,
-  //     assignedCleaner: "Cynthia",
-  //     jobAddress: "19th React Street SW",
-  //     jobDateServiced: "9/24/2022",
-  //     jobPrice: "$210",
-  //     jobNotes: `Please knock and do not ring the doorbell`,
-  //   },
-  // ];
 
   const togglePastJobs = () => {
-    setShowPastJobs(!showPastJobs);
+    setShowJobs(false);
   };
 
   const toggleActiveJobs = () => {
-    setShowActiveJobs(!showActiveJobs);
+    setShowJobs(true);
   };
-  console.log("looking for Jobs Array", clientJobsData);
+
+  //console.log("date", clientJobsData[2].date);
   return (
     <Container
       maxWidth="sm"
@@ -133,7 +98,7 @@ function JobHistory() {
           Chat
           <SmsIcon />
         </IconButton>
-        {showActiveJobs && (
+        {showJobs ? (
           <Card>
             <CardContent>
               <Typography
@@ -144,32 +109,43 @@ function JobHistory() {
                 Active Jobs
               </Typography>
 
-              {clientJobsData.map((job, index) => (
-                <Card sx={{ mb: 5 }} key={index}>
-                  <Typography
-                    sx={{ mb: 2, backgroundColor: "#fcb900" }}
-                    color="blue"
-                  >
-                    Job#{job.jobId}
-                  </Typography>
-                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    Date: {job.jobDateToBeServiced}
-                  </Typography>
-                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    Cleaner: {job.assignedCleaner}
-                  </Typography>
-                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    Price: {job.jobPrice}
-                  </Typography>
-                  <CardActions>
-                    <Button size="small">See Full Job Description</Button>
-                  </CardActions>
-                </Card>
-              ))}
+              {clientJobsData
+                .filter(
+                  (job) =>
+                    job.job_status === "active" ||
+                    job.job_status === "approved" ||
+                    job.job_status === "request" ||
+                    job.job_status === "submitted"
+                )
+                .map((job, index) => {
+                  let date = job.date.split("T");
+                  console.log("what is date", date[0]);
+                  return (
+                    <Card sx={{ mb: 5 }} key={index}>
+                      <Typography
+                        sx={{ mb: 2, backgroundColor: "#fcb900" }}
+                        color="blue"
+                      >
+                        Job#{job.job_id}
+                      </Typography>
+                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        Date: {date[0]}
+                      </Typography>
+                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        Cleaner: {job.cleaner_id}
+                      </Typography>
+                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        Estimation: {job.estimation}
+                      </Typography>
+                      <CardActions>
+                        <Button size="small">See Full Job Description</Button>
+                      </CardActions>
+                    </Card>
+                  );
+                })}
             </CardContent>
           </Card>
-        )}
-        {showPastJobs && (
+        ) : (
           <Card>
             <CardContent>
               <Typography
@@ -179,28 +155,35 @@ function JobHistory() {
               >
                 Past Jobs
               </Typography>
-              {clientJobsData.map((job, index) => (
-                <Card key={index} sx={{ mb: 5 }}>
-                  <Typography
-                    sx={{ mb: 1.5, backgroundColor: "#fcb900" }}
-                    color="blue"
-                  >
-                    Job#{job.jobId}
-                  </Typography>
-                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    Date: {job.jobDateServiced}
-                  </Typography>
-                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    Cleaner: {job.assignedCleaner}
-                  </Typography>
-                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    Price: {job.jobPrice}
-                  </Typography>
-                  <CardActions>
-                    <Button size="small">See Full Job Description</Button>
-                  </CardActions>
-                </Card>
-              ))}
+              {clientJobsData
+                .filter(
+                  (job) =>
+                    job.job_status === "completed" ||
+                    job.job_status === "cancelled" ||
+                    job.job_status === "rejected"
+                )
+                .map((job, index) => (
+                  <Card key={index} sx={{ mb: 5 }}>
+                    <Typography
+                      sx={{ mb: 1.5, backgroundColor: "#fcb900" }}
+                      color="blue"
+                    >
+                      Job#{job.job_id}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      Date: {job.date}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      Cleaner: {job.cleaner_id}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      Estimation: {job.estimation}
+                    </Typography>
+                    <CardActions>
+                      <Button size="small">See Full Job Description</Button>
+                    </CardActions>
+                  </Card>
+                ))}
             </CardContent>
           </Card>
         )}
