@@ -20,7 +20,7 @@ let counter = 0;
     if(form.other_type != ''){
         counter++;
     }
-    console.log('inside calcBathroom counter', counter);
+    // console.log('inside calcBathroom counter', counter);
     if(calcType === 'low'){
         if(form.clean_mirror){
             time += constants.RR_MIRRORS_LOW;
@@ -43,7 +43,7 @@ let counter = 0;
             
         time += constants.RR_MARGIN_LOW;
 
-        console.log('after calcBathroom, expected totalTime is 24:', time)
+        // console.log('after calcBathroom, expected totalTime is 24:', time)
         
     }
     else{
@@ -67,7 +67,7 @@ let counter = 0;
         }
         
         time += constants.RR_MARGIN_HIGH;
-        console.log('after calcBathroom, expected totalTime is 87:', time)
+        // console.log('after calcBathroom, expected totalTime is 87:', time)
     }
     return time;
 }

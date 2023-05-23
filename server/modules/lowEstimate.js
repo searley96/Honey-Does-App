@@ -1,20 +1,21 @@
 const calcBathroom = require('../modules/calcBathroom');
+const calcKitchen = require('../modules/calcKitchen');
 
 function calculateLowEstimate(constants, formList){
     // for loop for every form, perform calculations
     let totalTime = 0;
     formList.forEach(form => {
         if(form.form_type === 'bathroom'){
-            totalTime += calcBathroom('low', constants,  form);
+            // totalTime += calcBathroom('low', constants,  form);
         }
         else if(form.form_type === 'kitchen'){
-            //calcKitchen('low', rate, form);
+            // totalTime += calcKitchen('low', constants, form);
         }
         else if (form.form_type === 'wipe_dust'){
-            // calcWipeDust('low', rate, form);
+            // totalTime += calcWipeDust('low', constants, form);
         }
         else{
-            // calcOtherRoom('low', rate, form)
+            // totalTime += calcOtherRoom('low', constants, form)
         }
 
     })
