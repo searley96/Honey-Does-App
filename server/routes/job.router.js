@@ -1,6 +1,7 @@
 const express = require('express');
 const constants = require('../constants/constants.json');
 const calculateLowEstimate = require('../modules/lowEstimate');
+const calculateHighEstimate = require('../modules/highEstimate');
 
 const {
   rejectUnauthenticated,
@@ -116,6 +117,7 @@ router.post('/estimate', rejectUnauthenticated, (req, res) => {
 
     console.log('formList in /estimate:', formList);
     const lowEstimate = calculateLowEstimate(constants, formList);
+    const highEstimate = calculateHighEstimate(constants, formList);
 
     res.sendStatus(200);
 
