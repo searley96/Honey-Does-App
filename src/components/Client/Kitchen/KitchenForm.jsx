@@ -27,13 +27,13 @@ function KitchenForm() {
     const kitchen = useSelector(store => store.clientKitchen);
 
     const addKitchen = () => {
-        const order = formList.length;
+        const order = formList.length + 1;
         // dispatch to room.saga that triggers post request to form.router ('/kitchen/')
         dispatch({ type: 'ADD_KITCHEN', payload: { kitchen, jobId, order } });
     }
 
     const moveToOtherRooms = () => {
-        const order = formList.length;
+        const order = formList.length + 1;
         // dispatch to room.saga that triggers post request to form.router ('/bathroom/)
         dispatch({ type: 'ADD_KITCHEN', payload: { kitchen, jobId, order } });
         history.push('/otherRoomForm'); // directs user to the other room form 

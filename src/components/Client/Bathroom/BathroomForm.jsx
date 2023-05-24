@@ -43,13 +43,13 @@ function BathroomForm() {
   }, [])
 
   function addBathroom() {
-    const order = formList.length;
+    const order = formList.length + 1;
     // dispatch to room.saga that triggers post request to form.router ('/bathroom/)
     console.log('inside bathroom form', formList)
     dispatch({ type: 'ADD_BATHROOM', payload: { bathroom, jobId, order } });
   }
   function submitHandler() {
-    const order = formList.length;
+    const order = formList.length + 1;
     // dispatch to room.saga that triggers post request to form.router ('/bathroom/)
     dispatch({ type: 'ADD_BATHROOM', payload: { bathroom, jobId, order } })
     history.push('/kitchenForm') // directs user to the kitchen form 

@@ -3,25 +3,28 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 
 function* createJobId() {
-  try {
-    const jobId = yield axios.get(`/api/job/jobid`);
-    yield console.log("this is jobId.data", jobId.data);
+    try {
+        const jobId = yield axios.get(`/api/job/jobid`);
+        yield console.log('this is jobId.data', jobId.data);
 
-    // places generated jobId into the associated reducer
-    yield put({
-      type: "SET_JOB_ID_REDUCER",
-      payload: jobId.data,
-    });
+        // places generated jobId into the associated reducer
+        yield put({
+            type: 'SET_JOB_ID_REDUCER',
+            payload: jobId.data
+        });
 
-    // update the job_id for the form that the user is
-    // currently filling out
-    yield put({
-      type: "ADD_FORM_ID",
-      payload: { job_id: jobId.data },
-    });
-  } catch (error) {
-    console.log("ERROR retrieving new jobID", error);
-  }
+        // update the job_id for the form that the user is 
+        // currently filling out
+        yield put({
+            type: 'ADD_FORM_ID',
+            payload: {job_id: jobId.data}
+        });
+
+        // create a new job using the generated job id
+        yield axios.post('/api/job', {jobId: jobId.data});
+    } catch(error) {
+        console.log('ERROR retrieving new jobID', error);
+    }
 }
 function* fetchClientJobs(action) {
   try {
