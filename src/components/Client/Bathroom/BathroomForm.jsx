@@ -16,10 +16,11 @@ function BathroomForm() {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  // form_job_id connected to the user table.
-  //    - identifier that allows to collect all forms
-  //      a user fills out for an estimate
-  const jobId = useSelector(store => store.user.form_job_id);
+  // jobId is taken from the active job that was set on the add clean button press
+  // stored in activeJobReducer
+  const jobId = useSelector(store => store.activeJobReducer.job_id);
+  // used as an alternative to jobId if it is not available in useEffect
+  const formJobId = useSelector(store => store.jobid);
   // the list of forms that have a job_id that match user.form_job_id
   const formList = useSelector(store => store.formList);
   // the state of the current bathroom form
@@ -39,19 +40,37 @@ function BathroomForm() {
     //  -make a request to the server to gather all forms with job_id === user.form_job_id
     //  -update the jobList reducer
     //  -result of this specific dispatch will be to initialize formList = []
-    dispatch({ type: 'FETCH_FORM_LIST' })
+
+    // if active job exists and is available, update reducer
+    if(jobId){
+      console.log('using jobId', jobId);
+      dispatch({ type: 'FETCH_FORM_LIST', payload: {jobId} })
+    }
+    else if(formJobId){
+      console.log('using formJobId', formJobId);
+      dispatch({ type: 'FETCH_FORM_LIST', payload: {formJobId} })
+
+    }
   }, [])
 
   function addBathroom() {
     const order = formList.length + 1;
     // dispatch to room.saga that triggers post request to form.router ('/bathroom/)
-    console.log('inside bathroom form', formList)
-    dispatch({ type: 'ADD_BATHROOM', payload: { bathroom, jobId, order } });
+    console.log('inside bathroom form', jobId);
+    
+      dispatch({ type: 'ADD_BATHROOM', payload: { bathroom, jobId, order } });
+    
+    // else{
+    //   dispatch({type: 'ADD_BATHROOM', payload: { bathroom, jobId, order }})
+    // }
   }
   function submitHandler() {
     const order = formList.length + 1;
     // dispatch to room.saga that triggers post request to form.router ('/bathroom/)
+    
     dispatch({ type: 'ADD_BATHROOM', payload: { bathroom, jobId, order } })
+    
+    
     history.push('/kitchenForm') // directs user to the kitchen form 
   }
 

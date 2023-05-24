@@ -41,6 +41,7 @@ function* addFormId(action){
  
   try{
     yield axios.post('api/user/client/addFormId', action.payload);
+    console.log('past ADD_FORM_ID')
     yield put ({
       type: 'FETCH_USER'
     })

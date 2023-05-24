@@ -10,10 +10,9 @@ function OtherRoomForm() {
     console.log('Inside OtherRoomForm()')
     const dispatch = useDispatch();
     const history = useHistory();
-    // user.form_job_id connected to the user table.
-    //    - identifier that allows to collect all forms
-    //      a user fills out for an estimate
-    const jobId = useSelector(store => store.user.form_job_id);
+    // jobId is taken from the active job that was set on the add clean button press
+  // stored in activeJobReducer
+    const jobId = useSelector(store => store.activeJobReducer.job_id);
     // the list of forms that have a job_id that match user.form_job_id
     const formList = useSelector(store => store.formList);
     // the state of the current kitchen form

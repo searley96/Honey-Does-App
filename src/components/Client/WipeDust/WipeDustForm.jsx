@@ -11,10 +11,9 @@ import { useHistory } from "react-router-dom";
 function WipeDustForm() {
 
     const dispatch = useDispatch();
-    // user.form_job_id connected to the user table.
-    //    - identifier that allows to collect all forms
-    //      a user fills out for an estimate
-    const jobId = useSelector(store => store.user.form_job_id)
+    // jobId is taken from the active job that was set on the add clean button press
+  // stored in activeJobReducer
+    const jobId = useSelector(store => store.activeJobReducer.job_id)
     // the list of forms that have a job_id that match user.form_job_id
     const history = useHistory();
     // the state of the current kitchen form
@@ -28,12 +27,11 @@ function WipeDustForm() {
         dispatch({
             type: 'ADD_WIPE_DUST',
             payload: {
-                wipeDustForm: {
+                
                     wipeDust,
                     jobId,
-                    order
-                },
-                formList
+                    order,
+                    formList
             }
         })
 

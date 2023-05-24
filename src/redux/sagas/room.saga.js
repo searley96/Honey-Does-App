@@ -12,7 +12,7 @@ function* createKitchen(action) {
             type: 'CLEAR_ROOM'
         });
         // gather all forms with job_id === user.form_job_id
-        yield put({type: 'FETCH_FORM_LIST'})
+        yield put({type: 'FETCH_FORM_LIST', payload: action.payload})
     } catch (error) {
         console.log('ERROR updating kitchen and clearing forms', error);
     }
@@ -30,7 +30,7 @@ function* createBathroom(action) {
         });
 
         // gather all forms with job_id === user.form_job_id
-        yield put({type: 'FETCH_FORM_LIST'})
+        yield put({type: 'FETCH_FORM_LIST', payload: action.payload})
     } catch (error) {
         console.log('ERROR updating bathroom and clearing forms', error);
     }
@@ -48,7 +48,7 @@ function* createOtherRoom(action) {
         });
 
         // gather all forms with job_id === user.form_job_id
-        yield put({type: 'FETCH_FORM_LIST'})
+        yield put({type: 'FETCH_FORM_LIST', payload: action.payload})
     } catch (error) {
         console.log('ERROR updating other room type and clearing forms', error);
     }
@@ -59,7 +59,8 @@ function* createWipeDust(action) {
     // const formList  = useSelector(store => store.formList);
     try {
         // POST wipe_dust form to the db
-        yield axios.post(`/api/form/wipe-dust`, action.payload.wipeDustForm);
+        console.log('inside wipeDust:', action.payload.jobId);
+        yield axios.post(`/api/form/wipe-dust`, action.payload);
 
         // clear current form
         yield put({
@@ -67,7 +68,7 @@ function* createWipeDust(action) {
         });
 
         // gather all forms with job_id === user.form_job_id
-        yield put({type: 'FETCH_FORM_LIST'})
+        yield put({type: 'FETCH_FORM_LIST', payload: action.payload})
 
         // CALCULATE ESTIMATE AND SUBMIT REQUEST
         yield axios.post('/api/job/estimate', action.payload);
@@ -80,10 +81,11 @@ function* createWipeDust(action) {
 }
 
 // GETS FORM LIST
-function* fetchFormList() {
+function* fetchFormList(action) {
     try {
         // GET request to form router to get up to date formList
-        const formList = yield axios.get(`/api/form/form-list`);
+        console.log('inside fetchFormList', action.payload);
+        const formList = yield axios.get(`/api/form/form-list/${action.payload.jobId}`);
 
         // update jobList reducer
         yield put({
