@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import SmsIcon from "@mui/icons-material/Sms";
-
+import clientJobsReducer from "../../redux/reducers/jobs.reducer";
+import FullJobHistory from "./FullJobHistory";
+import { Link } from "react-router-dom";
 import {
   Box,
   Button,
@@ -22,7 +24,7 @@ const AnimatedIconButton = styled(IconButton)`
     background-color: #4caf50;
   }
 `;
-function showJobs({ job_status }) {
+function showClientJobs({ job_status }) {
   if (
     job_status === "active" ||
     job_status === "approved" ||
@@ -46,6 +48,7 @@ function JobHistory() {
   const [showJobs, setShowJobs] = useState(true);
   const clientJobsData = useSelector((store) => store.clientJobsReducer);
   const user = useSelector((store) => store.user);
+  const jobs = useSelector((store) => store.jobs);
 
   const getAllJobs = () => {
     dispatch({
@@ -57,6 +60,10 @@ function JobHistory() {
   useEffect(() => {
     getAllJobs();
   }, []);
+
+  const handleFullJobHistory = (jobObject) => {
+    dispatch({ type: "SET_FULL_JOBS_HISTORY", payload: jobObject });
+  };
 
   console.log("map function", clientJobsData);
 
@@ -132,13 +139,23 @@ function JobHistory() {
                         Date: {date[0]}
                       </Typography>
                       <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        Cleaner: {job.cleaner_id}
+                        Cleaner: {job.cleaner_first_name}{" "}
+                        {job.cleaner_last_name}
                       </Typography>
                       <Typography sx={{ mb: 1.5 }} color="text.secondary">
                         Estimation: {job.estimation}
                       </Typography>
                       <CardActions>
-                        <Button size="small">See Full Job Description</Button>
+                        <Button>
+                          <Link
+                            key={id}
+                            to={{ pathname: `/fullJobHistory`, state: jobs }}
+                            onClick={() => handleFullJobHistory(job)}
+                            size="small"
+                          >
+                            See Full Job Description
+                          </Link>
+                        </Button>
                       </CardActions>
                     </Card>
                   );
@@ -162,28 +179,42 @@ function JobHistory() {
                     job.job_status === "cancelled" ||
                     job.job_status === "rejected"
                 )
-                .map((job, index) => (
-                  <Card key={index} sx={{ mb: 5 }}>
-                    <Typography
-                      sx={{ mb: 1.5, backgroundColor: "#fcb900" }}
-                      color="blue"
-                    >
-                      Job#{job.job_id}
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      Date: {job.date}
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      Cleaner: {job.cleaner_id}
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      Estimation: {job.estimation}
-                    </Typography>
-                    <CardActions>
-                      <Button size="small">See Full Job Description</Button>
-                    </CardActions>
-                  </Card>
-                ))}
+                .map((job, index) => {
+                  let date = job.date.split("T");
+                  console.log("what is date", date[0]);
+                  return (
+                    <Card sx={{ mb: 5 }} key={index}>
+                      <Typography
+                        sx={{ mb: 2, backgroundColor: "#fcb900" }}
+                        color="blue"
+                      >
+                        Job#{job.job_id}
+                      </Typography>
+                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        Date: {date[0]}
+                      </Typography>
+                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        Cleaner: {job.cleaner_first_name}{" "}
+                        {job.cleaner_last_name}
+                      </Typography>
+                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        Estimation: {job.estimation}
+                      </Typography>
+                      <CardActions>
+                        <Button>
+                          <Link
+                            key={id}
+                            to={{ pathname: `/fullJobHistory`, state: jobs }}
+                            onClick={() => handleFullJobHistory(job)}
+                            size="small"
+                          >
+                            See Full Job Description
+                          </Link>
+                        </Button>
+                      </CardActions>
+                    </Card>
+                  );
+                })}
             </CardContent>
           </Card>
         )}
