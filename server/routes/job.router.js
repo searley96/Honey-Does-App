@@ -72,18 +72,60 @@ router.get("/jobid", (req, res) => {
 });
 // END ********** Job ID Generator **********
 
-// CLIENT
+// CLIENT VIEW
 // GET JOB HISTORY
 router.get("/client/:id", rejectUnauthenticated, (req, res) => {
   console.log("inside client job history");
   const queryText = `
-        SELECT * FROM "job"
-        WHERE "client_id" = $1;
+          SELECT job_id, client.first_name as client_first_name, client.last_name as client_last_name,
+	    cleaner.first_name as cleaner_first_name, cleaner.last_name as cleaner_last_name,
+	    manager.first_name as manager_first_name, manager.last_name as manager_last_name,
+        job_status,
+	    feedback, 
+	    date,
+	    start_time,
+	    end_time
+    FROM "job"
+    JOIN "user" AS client ON client.id = "job".client_id
+    JOIN "user" AS cleaner ON cleaner.id = "job".cleaner_id
+    JOIN "user" AS manager ON manager.id = "job".manager_id
+    WHERE "client_id" = $1;
     `;
   pool
     .query(queryText, [req.params.id])
     .then((result) => {
       console.log("checking res.send", result.rows);
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
+
+// CLIENT VIEW
+// GET FULL JOB HISTORY
+router.get("/fullJobHistory/:job_id", rejectUnauthenticated, (req, res) => {
+  console.log("inside fulljobhistory", req.params.job_id);
+  const queryText = `
+    SELECT job_id, client.first_name as client_first_name, client.last_name as client_last_name,
+	    cleaner.first_name as cleaner_first_name, cleaner.last_name as cleaner_last_name,
+	    manager.first_name as manager_first_name, manager.last_name as manager_last_name,
+        job_status,
+	    feedback, 
+	    date,
+	    start_time,
+	    end_time
+    FROM "job"
+    JOIN "user" AS client ON client.id = "job".client_id
+    JOIN "user" AS cleaner ON cleaner.id = "job".cleaner_id
+    JOIN "user" AS manager ON manager.id = "job".manager_id
+    WHERE "cleaner_id" = $1;
+    `;
+  pool
+    .query(queryText, [req.params.job_id])
+    .then((result) => {
+      console.log("result.row ", result.rows);
       res.send(result.rows);
     })
     .catch((err) => {
