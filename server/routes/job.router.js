@@ -89,6 +89,9 @@ router.get('/allJobs', rejectUnauthenticated, (req, res) => {
     SELECT job_id, client.first_name as client_first_name, client.last_name as client_last_name,
 	    cleaner.first_name as cleaner_first_name, cleaner.last_name as cleaner_last_name,
 	    manager.first_name as manager_first_name, manager.last_name as manager_last_name,
+        client.id as client_id,
+	    cleaner.id as cleaner_id,
+	    manager.id as manager_id,
         job_status,
 	    feedback, 
 	    date,
@@ -110,9 +113,9 @@ router.get('/allJobs', rejectUnauthenticated, (req, res) => {
 })
 
 // ADMIN
-// Update Cleaner
-router.put('/updateCleaner', rejectUnauthenticated, (req,res) => {
-    console.log('updateCleaner req.body:', req.body);
+// Update job details
+router.put('/adminUpdateJob', rejectUnauthenticated, (req, res) => {
+    console.log('adminUpdateJob req.body:', req.body);
     const queryText = `
         UPDATE "job" SET "cleaner_id" = $1, 
         "job_status" = $2, 
@@ -121,7 +124,14 @@ router.put('/updateCleaner', rejectUnauthenticated, (req,res) => {
         "end_time" = $5
         WHERE job_id = $6
     `
-    
+    pool.query(queryText, [req.body.cleaner_id, req.body.job_status, req.body.date, req.body.start_time, req.body.end_time, req.body.job_id])
+    .then(result => {
+        console.log('result.rows:', result.rows);
+        res.sendStatus(200);
+    }).catch(err => {
+        console.log(err);
+        res.sendStatus(500);
+    })
 })
 
 module.exports = router;

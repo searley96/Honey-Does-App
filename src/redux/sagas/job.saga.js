@@ -38,19 +38,19 @@ function* fetchJobs() {
     }
 }
 
-function* updateCleaner(action) {
+function* adminUpdateJob(action) {
     try {
-        console.log('updateCleaner action.payload:', action.payload);
-        yield axios.put(`/api/job/updateCleaner`, action.payload);
+        console.log('adminUpdateJob action.payload:', action.payload);
+        yield axios.put(`/api/job/adminUpdateJob`, action.payload);
     } catch(error) {
-        console.log('ERROR updating cleaner', error);
+        console.log('ERROR updating job', error);
     }
 }
 
 function* jobSaga() {
     yield takeLatest('CREATE_JOB_ID', createJobId);
     yield takeLatest('FETCH_JOBS', fetchJobs);
-    yield takeLatest('UPDATE_CLEANER', updateCleaner);
+    yield takeLatest('ADMIN_UPDATE_JOB', adminUpdateJob);
   }
   
   export default jobSaga;

@@ -16,21 +16,22 @@ import {
     Grid,
     CardHeader,
     Modal,
-    Textfield
+    TextField
 } from '@mui/material';
 
 function JobDetails() {
+    const dispatch = useDispatch();
     // allJobs combined reducer (jobDetails)
     const allJobs = useSelector(store => store.allJobs);
-   
+
     const allJobStatus = ['request', 'approved', 'completed', 'canceled', 'rejected', 'active']
-    
+
     // default states
     const [newJobStatus, setNewJobStatus] = useState(allJobs.jobDetails.job_status);
     const [newDate, setNewDate] = useState(allJobs.jobDetails.date);
     const [newStartTime, setNewStartTime] = useState(allJobs.jobDetails.start_time);
     const [newEndTime, setNewEndTime] = useState(allJobs.jobDetails.end_time);
-    const [newCleaner, setNewCleaner] = useState('');
+    const [newCleaner, setNewCleaner] = useState(allJobs.jobDetails.cleaner_id);
 
     // This stores the list of cleaners
     const [allCleaners, setAllCleaners] = useState([]);
@@ -76,7 +77,7 @@ function JobDetails() {
     // setNewCleaner
     const handleDropDownChange = (event) => {
         setNewCleaner(event.target.value);
-        console.log('newCleaner:', newCleaner );
+        console.log('newCleaner:', newCleaner);
     }
 
     // setNewJobStatus
@@ -85,26 +86,36 @@ function JobDetails() {
         console.log('newJobStatus:', newJobStatus);
     }
 
-    const handleClickForCleaner = () => {
-        console.log('newCleaner inside handleClickForCleaner:', newCleaner);
-        // move this obj to its own piece of state
-        const updateCleanerObject = {
-            cleaner_id: newCleaner, 
-            job_id: allJobs.jobDetails.job_id, 
-            job_status: newJobStatus,
-            date: newDate,
-            start_time: newStartTime,
-            end_time: newEndTime
-            }
-        dispatch({ type: 'UPDATE_CLEANER', payload: updateCleanerObject });
-    }
+    const [updateCleanerObject, setUpdateCleanerObject] = useState(
+        {
+            cleaner_id: allJobs.jobDetails.cleaner_id,
+            job_id: allJobs.jobDetails.job_id,
+            job_status: allJobs.jobDetails.job_status,
+            date: allJobs.jobDetails.date,
+            start_time: allJobs.jobDetails.start_time,
+            end_time: allJobs.jobDetails.end_time
+        }
+    );
 
 
     // create a handleInputChange function
+    const handleInputChange = (event) => {
+        console.log('handleInputChange event.target:', event.target);
+        const { name, value } = event.target;
+        setUpdateCleanerObject({
+            ...updateCleanerObject,
+            [name]: value,
+        })
+    }
+
+    const handleSubmit = (event) => {
+        console.log('handleSubmit updateCleanerObject:', updateCleanerObject);
+        dispatch({ type: 'ADMIN_UPDATE_JOB', payload: updateCleanerObject });
+    }
 
     const handleClickForJobStatus = () => {
         console.log('newJobStatus inside handleClickForJobStatus:', newJobStatus);
-        const updateJobStatusObject = {jobStatus: newJobStatus}
+        const updateJobStatusObject = { jobStatus: newJobStatus }
     }
 
     return (
@@ -134,9 +145,10 @@ function JobDetails() {
                             {editJobStatusBtn ?
                                 <>
                                     <select
+                                        name="job_status"
                                         defaultValue=""
                                         style={{ width: '100px' }}
-                                        onChange={handleJobStatusDropDownChange}>
+                                        onChange={handleInputChange}>
                                         <option value="" disabled selected> -- select an option -- </option>
                                         {allJobStatus ? (allJobStatus.map((status, i) => (
                                             <option key={i} value={status}>{status}</option>
@@ -145,8 +157,13 @@ function JobDetails() {
                                             <option>Status</option>
                                         }
                                     </select>
-                                    {/* On click, do a dispatch/axios to update the backend */}
-                                    <Button onClick={handleClickForJobStatus} sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>Save</Button>
+                                    {/* Cancel and Submit Buttons */}
+                                    <Button onClick={() => setEditJobStatusBtn(false)} sx={{display: 'inline-flex', mr: 1.5}} variant='outlined'>
+                                        <CloseIcon sx={{color: 'red'}}/>
+                                    </Button>
+                                    <Button onClick={handleSubmit} sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>
+                                        <CheckIcon sx={{color: 'green'}}/>
+                                    </Button>
                                 </> :
                                 <>
                                     <Typography
@@ -161,7 +178,7 @@ function JobDetails() {
                             }
                         </CardContent>
                     </Card>
-                    
+
                     {/* CLEANER INPUT */}
                     <Card sx={{ width: 400, height: 70 }}>
                         <CardContent
@@ -184,9 +201,10 @@ function JobDetails() {
                                 <>
                                     <select
                                         // add a name property to all inputs
+                                        name="cleaner_id"
                                         defaultValue=""
                                         style={{ width: '100px' }}
-                                        onChange={handleDropDownChange}>
+                                        onChange={handleInputChange}>
                                         <option value="" disabled selected> -- select an option -- </option>
                                         {allCleaners ? (allCleaners.map((cleaner, i) => (
                                             <option key={i} value={cleaner.id}>{cleaner.first_name} {cleaner.last_name}</option>
@@ -195,8 +213,13 @@ function JobDetails() {
                                             <option>Cleaners</option>
                                         }
                                     </select>
-                                    {/* On click, do a dispatch/axios to update the backend */}
-                                    <Button onClick={handleClickForCleaner} sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>Save</Button>
+                                    {/* Cancel and Submit Buttons */}
+                                    <Button onClick={() => setEditCleanerFirstNameBtn(false)} sx={{display: 'inline-flex', mr: 1.5}} variant='outlined'>
+                                        <CloseIcon sx={{color: 'red'}}/>
+                                    </Button>
+                                    <Button onClick={handleSubmit} sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>
+                                        <CheckIcon sx={{color: 'green'}}/>
+                                    </Button>
                                 </> :
                                 <>
                                     <Typography
@@ -211,7 +234,7 @@ function JobDetails() {
                             }
                         </CardContent>
                     </Card>
-                    
+
                     {/* CLIENT INPUT */}
                     <Card sx={{ width: 400, height: 50 }}>
                         <CardContent
@@ -240,7 +263,7 @@ function JobDetails() {
                     </Card>
 
                     {/* DATE INPUT */}
-                    <Card sx={{ width: 400, height: 80 }}>
+                    <Card sx={{ width: 400, height: 70 }}>
                         <CardContent
                             sx={{
                                 display: "flex",
@@ -257,13 +280,34 @@ function JobDetails() {
                             >
                                 Date:
                             </Typography>
-                            <Typography
-                                style={{ display: "inline", paddingLeft: "50px", paddingRight: "80px", fontSize: 15 }}
-                                gutterBottom
-                            >
-                                {allJobs.jobDetails.date}
-                            </Typography>
-                            <Button sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>Edit</Button>
+                            {dateBtn ?
+                                <>
+                                    <TextField
+                                        variant='standard'
+                                        size='small'
+                                        name='date'
+                                        value={updateCleanerObject.date}
+                                        onChange={handleInputChange}
+                                        sx={{ display: 'inline-flex', mx: 2.5 }} />
+                                    {/* Cancel and Submit Buttons */}
+                                    <Button onClick={() => setDateBtn(false)} sx={{display: 'inline-flex', mr: 1.5}} variant='outlined'>
+                                        <CloseIcon sx={{color: 'red'}}/>
+                                    </Button>
+                                    <Button onClick={handleSubmit} sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>
+                                        <CheckIcon sx={{color: 'green'}}/>
+                                    </Button>
+                                </> :
+                                <>
+                                    <Typography
+                                        style={{ display: "inline", marginLeft: '50px' }}
+                                        gutterBottom
+                                    >
+                                        {allJobs.jobDetails.date}
+                                    </Typography>
+                                    
+                                    <Button onClick={() => cancelEdit(setDateBtn(true))} sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>Edit</Button>
+                                </>
+                            }
                         </CardContent>
                     </Card>
 
@@ -285,16 +329,37 @@ function JobDetails() {
                             >
                                 Start Time:
                             </Typography>
-                            <Typography
-                                style={{ display: "inline", paddingLeft: "50px", fontSize: 15 }}
-                                gutterBottom
-                            >
-                                {allJobs.jobDetails.start_time}
-                            </Typography>
-                            <Button sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>Edit</Button>
+                            {startTimeBtn ?
+                                <>
+                                    <TextField
+                                        variant='standard'
+                                        size='small'
+                                        name='start_time'
+                                        value={updateCleanerObject.start_time}
+                                        onChange={handleInputChange}
+                                        sx={{ display: 'inline-flex', mx: 2.5 }} />
+                                    {/* Cancel and Submit Buttons */}
+                                    <Button onClick={() => setStartTimeBtn(false)} sx={{display: 'inline-flex', mr: 1.5}} variant='outlined'>
+                                        <CloseIcon sx={{color: 'red'}}/>
+                                    </Button>
+                                    <Button onClick={handleSubmit} sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>
+                                        <CheckIcon sx={{color: 'green'}}/>
+                                    </Button>
+                                </> :
+                                <>
+                                    <Typography
+                                        style={{ display: "inline", marginLeft: '50px' }}
+                                        gutterBottom
+                                    >
+                                        {allJobs.jobDetails.start_time}
+                                    </Typography>
+
+                                    <Button onClick={() => cancelEdit(setStartTimeBtn(true))} sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>Edit</Button>
+                                </>
+                            }
                         </CardContent>
                     </Card>
-
+    
                     {/* END TIME INPUT */}
                     <Card sx={{ width: 400, height: 70 }}>
                         <CardContent
@@ -313,13 +378,34 @@ function JobDetails() {
                             >
                                 End Time:
                             </Typography>
-                            <Typography
-                                style={{ display: "inline", paddingLeft: "50px", paddingRight: "80px", fontSize: 15, }}
-                                gutterBottom
-                            >
-                                {allJobs.jobDetails.end_time}
-                            </Typography>
-                            <Button sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>Edit</Button>
+                            {endTimeBtn ?
+                                <>
+                                    <TextField
+                                        variant='standard'
+                                        size='small'
+                                        name='end_time'
+                                        value={updateCleanerObject.end_time}
+                                        onChange={handleInputChange}
+                                        sx={{ display: 'inline-flex', mx: 2.5 }} />
+                                    {/* Cancel and Submit Buttons */}
+                                    <Button onClick={() => setEndTimeBtn(false)} sx={{display: 'inline-flex', mr: 1.5}} variant='outlined'>
+                                        <CloseIcon sx={{color: 'red'}}/>
+                                    </Button>
+                                    <Button onClick={handleSubmit} sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>
+                                        <CheckIcon sx={{color: 'green'}}/>
+                                    </Button>
+                                </> :
+                                <>
+                                    <Typography
+                                        style={{ display: "inline", marginLeft: '50px' }}
+                                        gutterBottom
+                                    >
+                                        {allJobs.jobDetails.end_time}
+                                    </Typography>
+
+                                    <Button onClick={() => cancelEdit(setEndTimeBtn(true))} sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>Edit</Button>
+                                </>
+                            }
                         </CardContent>
                     </Card>
 
@@ -350,29 +436,12 @@ function JobDetails() {
                         </CardContent>
                     </Card>
 
-                </Grid > 
+                </Grid >
                 // *** END GRID *** //
             ) : (
-                // <Box sx={{ flexGrow: 1 }}>
-                //             <CardContent sx={{ display: "flex", justifyContent: "space-evenly" }}>
-                //                 <Typography style={{ display: 'inline-block' }}>
-                //                     {allJobs.jobDetails.client_first_name} {allJobs.jobDetails.client_last_name}
-                //                 </Typography>
-                //                 <Typography style={{ display: 'inline-block' }}>
-                //                     {allJobs.jobDetails.job_status}
-                //                 </Typography>
-                //                 <Typography style={{ display: 'inline-block' }}>
-                //                     {allJobs.jobDetails.cleaner_first_name} {allJobs.jobDetails.cleaner_last_name}
-                //                 </Typography>
-                //                 <Typography style={{ display: 'inline-block' }}>
-                //                     {allJobs.jobDetails.feedback}
-                //                 </Typography>
-                //             </CardContent>
-                //</Box>
-                <p>No jobs yet.</p>
+                <p>Job Details</p>
             )
             }
-
             <h2>Chat Box Goes here</h2>
         </>
     )
