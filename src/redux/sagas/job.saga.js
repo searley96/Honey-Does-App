@@ -25,6 +25,7 @@ function* createJobId() {
 
 function* fetchJobs() {
     try {
+        console.log("inside fetch jobs")
         const allJobs = yield axios.get(`/api/job/allJobs`);
         console.log('this is allJobs.data', allJobs.data);
 

@@ -24,16 +24,15 @@ function AdminDashboard() {
 
     return (
         <>
-            <h3>Jobs</h3>
-
+            <h3>All Jobs</h3>
             {allJobs.allJobs.length ? (
                 allJobs.allJobs.map((job, i) => (
                     <Card key={i}>
-                        <CardContent sx={{ display: "flex", justifyContent: "space-evenly" }}>
+                        <CardContent sx={{ display: "flex", justifyContent: "space-between" }}>
                             <Button style={{ display: 'inline-block' }} variant='outlined' onClick={() => handleOnClick(job)}>
                                 {job.job_id}
                             </Button>
-                            <Typography style={{ display: 'inline-block' }}>
+                            <Typography style={{ display: 'inline-block'}}>
                                 {job.client_first_name} {job.client_last_name}
                             </Typography>
                             <Typography style={{ display: 'inline-block' }}>
