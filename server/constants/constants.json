@@ -1,5 +1,5 @@
 {
-    "HOURLY-RATE": 45,
+    "HOURLY_RATE": 45,
     "GLASS_LOW": 5, 
     "GLASS_HIGH": 20,
     "WIPE_LOW": 5,

@@ -1,7 +1,19 @@
 function calcKitchen(calcType, constants, form){
     let time = 0;
+    if(calcType === 'low'){
+        time += constants.GLASS_LOW;
+        time += constants.WIPE_LOW;
+        time += constants.DUST_LOW;
+        // console.log('low expected 45:', time);
+    }
     
-        console.log('inside calcKitchen()');
+    if(calcType === 'high'){
+        time += constants.GLASS_HIGH;
+        time += constants.WIPE_HIGH;
+        time += constants.DUST_HIGH;
+        // console.log('high expected 145:', time);
+    }
+
         if(calcType === 'low'){
             if(form.wipe_cabinets){
                 time += constants.K_COUNTERS_SINKS_CABINETS_BACKSPLASH_LOW;
@@ -23,7 +35,7 @@ function calcKitchen(calcType, constants, form){
                 
             time += constants.K_MARGIN_LOW;
     
-            console.log('after calcBathroom, expected totalTime is 20:', time)
+            
             
         }
         else{
@@ -47,7 +59,6 @@ function calcKitchen(calcType, constants, form){
                 
             time += constants.K_MARGIN_HIGH;
     
-            console.log('after calcBathroom, expected totalTime is 52:', time)
             
         }
         return time;

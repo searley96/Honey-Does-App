@@ -119,6 +119,8 @@ router.post('/estimate', rejectUnauthenticated, (req, res) => {
     const lowEstimate = calculateLowEstimate(constants, formList);
     const highEstimate = calculateHighEstimate(constants, formList);
 
+    console.log('low estimate is:', lowEstimate);
+    console.log('high estimate is:', highEstimate);
     res.sendStatus(200);
 
     
