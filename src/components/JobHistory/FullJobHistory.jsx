@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import clientFullJobsHistoryReducer from "../../redux/reducers/fullJob.reducer";
+import Chat from "../Chat/Chat";
 
 import {
   Box,
@@ -34,7 +35,9 @@ function FullJobHistory() {
   const job = useSelector((store) => store.clientFullJobsHistoryReducer);
   const dispatch = useDispatch();
   const history = useHistory();
+
   const [showFullDescription, setShowDescription] = useState(true);
+
 
   console.log("fulljobhistory", job.job);
   const handleBack = () => {
@@ -61,7 +64,7 @@ function FullJobHistory() {
                 color="blue"
                 gutterBottom
               >
-                Job#{job.job_id}
+                Job#{job.job.job_id}
               </Typography>
               <Typography sx={{ mb: 1.5 }} color="text.secondary">
                 Manager: {job.job.manager_first_name}{" "}
@@ -95,6 +98,13 @@ function FullJobHistory() {
         ) : (
           <div>Loading...</div>
         )}
+          {job.job.job_status === "active" ||
+            job.job.job_status === "approved" ? 
+            <>
+              <Chat jobId={job.job.job_id}/>
+            </>
+            : 
+            <h3>Chat Not Available Yet</h3> }
       </div>
     </Container>
   );
