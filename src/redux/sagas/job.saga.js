@@ -38,9 +38,19 @@ function* fetchJobs() {
     }
 }
 
+function* updateCleaner(action) {
+    try {
+        console.log('updateCleaner action.payload:', action.payload);
+        yield axios.put(`/api/job/updateCleaner`, action.payload);
+    } catch(error) {
+        console.log('ERROR updating cleaner', error);
+    }
+}
+
 function* jobSaga() {
     yield takeLatest('CREATE_JOB_ID', createJobId);
     yield takeLatest('FETCH_JOBS', fetchJobs);
+    yield takeLatest('UPDATE_CLEANER', updateCleaner);
   }
   
   export default jobSaga;

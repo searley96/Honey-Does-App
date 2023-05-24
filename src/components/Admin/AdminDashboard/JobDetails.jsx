@@ -20,18 +20,28 @@ import {
 } from '@mui/material';
 
 function JobDetails() {
+    // allJobs combined reducer (jobDetails)
     const allJobs = useSelector(store => store.allJobs);
+   
+    const allJobStatus = ['request', 'approved', 'completed', 'canceled', 'rejected', 'active']
+    
+    // default states
+    const [newJobStatus, setNewJobStatus] = useState(allJobs.jobDetails.job_status);
+    const [newDate, setNewDate] = useState(allJobs.jobDetails.date);
+    const [newStartTime, setNewStartTime] = useState(allJobs.jobDetails.start_time);
+    const [newEndTime, setNewEndTime] = useState(allJobs.jobDetails.end_time);
+    const [newCleaner, setNewCleaner] = useState('');
 
+    // This stores the list of cleaners
     const [allCleaners, setAllCleaners] = useState([]);
-
-    // Get all users
+    // Get all users from DB and then set in AllCleaners state
     useEffect(() => {
         axios({
             method: 'GET',
             url: '/api/user/allCleaners'
         }).then((response) => {
-            console.log('Response:', response);
-            setAllCleaners(response);
+            console.log('Response.data:', response.data);
+            setAllCleaners(response.data);
         }).catch((error) => {
             console.log('Error on post:', error);
         })
@@ -63,11 +73,47 @@ function JobDetails() {
         func;
     }
 
+    // setNewCleaner
+    const handleDropDownChange = (event) => {
+        setNewCleaner(event.target.value);
+        console.log('newCleaner:', newCleaner );
+    }
+
+    // setNewJobStatus
+    const handleJobStatusDropDownChange = (event) => {
+        setNewJobStatus(event.target.value);
+        console.log('newJobStatus:', newJobStatus);
+    }
+
+    const handleClickForCleaner = () => {
+        console.log('newCleaner inside handleClickForCleaner:', newCleaner);
+        // move this obj to its own piece of state
+        const updateCleanerObject = {
+            cleaner_id: newCleaner, 
+            job_id: allJobs.jobDetails.job_id, 
+            job_status: newJobStatus,
+            date: newDate,
+            start_time: newStartTime,
+            end_time: newEndTime
+            }
+        dispatch({ type: 'UPDATE_CLEANER', payload: updateCleanerObject });
+    }
+
+
+    // create a handleInputChange function
+
+    const handleClickForJobStatus = () => {
+        console.log('newJobStatus inside handleClickForJobStatus:', newJobStatus);
+        const updateJobStatusObject = {jobStatus: newJobStatus}
+    }
+
     return (
         <>
             <h3>Job #{allJobs.jobDetails.job_id}</h3>
             {allJobs.jobDetails ? (
                 <Grid item xs={4}>
+
+                    {/* JOB STATUS INPUT */}
                     <Card sx={{ width: 400, height: 70 }}>
                         <CardContent
                             sx={{
@@ -85,15 +131,38 @@ function JobDetails() {
                             >
                                 Job Status:
                             </Typography>
-                            <Typography
-                                style={{ display: "inline", marginLeft: '50px' }}
-                                gutterBottom
-                            >
-                                {allJobs.jobDetails.job_status}
-                            </Typography>
-                            <Button sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>Edit</Button>
+                            {editJobStatusBtn ?
+                                <>
+                                    <select
+                                        defaultValue=""
+                                        style={{ width: '100px' }}
+                                        onChange={handleJobStatusDropDownChange}>
+                                        <option value="" disabled selected> -- select an option -- </option>
+                                        {allJobStatus ? (allJobStatus.map((status, i) => (
+                                            <option key={i} value={status}>{status}</option>
+                                        )
+                                        )) :
+                                            <option>Status</option>
+                                        }
+                                    </select>
+                                    {/* On click, do a dispatch/axios to update the backend */}
+                                    <Button onClick={handleClickForJobStatus} sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>Save</Button>
+                                </> :
+                                <>
+                                    <Typography
+                                        style={{ display: "inline", marginLeft: '50px' }}
+                                        gutterBottom
+                                    >
+                                        {allJobs.jobDetails.job_status}
+                                    </Typography>
+
+                                    <Button onClick={() => cancelEdit(setEditJobStatusBtn(true))} sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>Edit</Button>
+                                </>
+                            }
                         </CardContent>
                     </Card>
+                    
+                    {/* CLEANER INPUT */}
                     <Card sx={{ width: 400, height: 70 }}>
                         <CardContent
                             sx={{
@@ -114,10 +183,20 @@ function JobDetails() {
                             {editCleanerFirstNameBtn ?
                                 <>
                                     <select
-                                        style={{ width: '100px' }}>
+                                        // add a name property to all inputs
+                                        defaultValue=""
+                                        style={{ width: '100px' }}
+                                        onChange={handleDropDownChange}>
                                         <option value="" disabled selected> -- select an option -- </option>
-                                        <option value="customer">Client name</option>
+                                        {allCleaners ? (allCleaners.map((cleaner, i) => (
+                                            <option key={i} value={cleaner.id}>{cleaner.first_name} {cleaner.last_name}</option>
+                                        )
+                                        )) :
+                                            <option>Cleaners</option>
+                                        }
                                     </select>
+                                    {/* On click, do a dispatch/axios to update the backend */}
+                                    <Button onClick={handleClickForCleaner} sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>Save</Button>
                                 </> :
                                 <>
                                     <Typography
@@ -132,6 +211,8 @@ function JobDetails() {
                             }
                         </CardContent>
                     </Card>
+                    
+                    {/* CLIENT INPUT */}
                     <Card sx={{ width: 400, height: 50 }}>
                         <CardContent
                             sx={{
@@ -157,6 +238,8 @@ function JobDetails() {
                             </Typography>
                         </CardContent>
                     </Card>
+
+                    {/* DATE INPUT */}
                     <Card sx={{ width: 400, height: 80 }}>
                         <CardContent
                             sx={{
@@ -183,6 +266,8 @@ function JobDetails() {
                             <Button sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>Edit</Button>
                         </CardContent>
                     </Card>
+
+                    {/* START TIME INPUT */}
                     <Card sx={{ width: 400, height: 70 }}>
                         <CardContent
                             sx={{
@@ -209,6 +294,8 @@ function JobDetails() {
                             <Button sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>Edit</Button>
                         </CardContent>
                     </Card>
+
+                    {/* END TIME INPUT */}
                     <Card sx={{ width: 400, height: 70 }}>
                         <CardContent
                             sx={{
@@ -235,6 +322,8 @@ function JobDetails() {
                             <Button sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>Edit</Button>
                         </CardContent>
                     </Card>
+
+                    {/* CUSTOMER FEEDBACK INPUT */}
                     <Card sx={{ width: 400, height: 80 }}>
                         <CardContent
                             sx={{
@@ -260,7 +349,9 @@ function JobDetails() {
                             </Typography>
                         </CardContent>
                     </Card>
-                </Grid >
+
+                </Grid > 
+                // *** END GRID *** //
             ) : (
                 // <Box sx={{ flexGrow: 1 }}>
                 //             <CardContent sx={{ display: "flex", justifyContent: "space-evenly" }}>

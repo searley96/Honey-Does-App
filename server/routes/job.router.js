@@ -109,4 +109,19 @@ router.get('/allJobs', rejectUnauthenticated, (req, res) => {
         })
 })
 
+// ADMIN
+// Update Cleaner
+router.put('/updateCleaner', rejectUnauthenticated, (req,res) => {
+    console.log('updateCleaner req.body:', req.body);
+    const queryText = `
+        UPDATE "job" SET "cleaner_id" = $1, 
+        "job_status" = $2, 
+        "date" = $3, 
+        "start_time" = $4, 
+        "end_time" = $5
+        WHERE job_id = $6
+    `
+    
+})
+
 module.exports = router;
