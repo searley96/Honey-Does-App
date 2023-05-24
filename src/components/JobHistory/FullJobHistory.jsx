@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
+import clientFullJobsHistoryReducer from "../../redux/reducers/fullJob.reducer";
+
 import {
   Box,
   Button,
@@ -11,50 +13,39 @@ import {
   Typography,
 } from "@mui/material";
 
-function showJobs({ job_status }) {
-  if (
-    job_status === "active" ||
-    job_status === "approved" ||
-    job_status === "request" ||
-    job_status === "submitted"
-  ) {
-    toggleActiveJobs();
-  } else if (
-    job_status === "completed" ||
-    job_status === "cancelled" ||
-    job_status === "rejected"
-  ) {
-    togglePastJobs();
-  }
-}
+// function showFullDescription({ job_status }) {
+//   if (
+//     job_status === "active" ||
+//     job_status === "approved" ||
+//     job_status === "request" ||
+//     job_status === "submitted"
+//   ) {
+//     return toggleActiveJobs();
+//   } else if (
+//     job_status === "completed" ||
+//     job_status === "cancelled" ||
+//     job_status === "rejected"
+//   ) {
+//     return togglePastJobs();
+//   }
+// }
 
 function FullJobHistory() {
+  const job = useSelector((store) => store.clientFullJobsHistoryReducer);
   const dispatch = useDispatch();
   const history = useHistory();
-  const { job } = useParams();
-  //const [showFullDescription, setShowDescription] = useState(true);
-  const [showJobs, setShowJobs] = useState(true);
-  const clientJobsData = useSelector((store) => store.clientJobsReducer);
-  const user = useSelector((store) => store.user);
+  const [showFullDescription, setShowDescription] = useState(true);
 
-  const getAllJobs = () => {
-    dispatch({
-      type: "FETCH_CLIENT_JOB",
-      payload: Number(user.id),
-    });
+  console.log("fulljobhistory", job.job);
+  const handleBack = () => {
+    history.push("/jobHistory");
   };
 
-  useEffect(() => {
-    getAllJobs();
-  }, []);
+  if (!job) {
+    return <div>Loading...</div>;
+  }
 
-  const togglePastJobs = () => {
-    setShowJobs(false);
-  };
-
-  const toggleActiveJobs = () => {
-    setShowJobs(true);
-  };
+  let date = job.job.date.split("T");
 
   return (
     <Container
@@ -62,118 +53,47 @@ function FullJobHistory() {
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
     >
       <div>
-        {showJobs ? (
-          <Card>
+        {showFullDescription ? (
+          <Card sx={{ mb: 5 }}>
             <CardContent>
               <Typography
                 sx={{ fontSize: 14, justifyContent: "center" }}
                 color="blue"
                 gutterBottom
               >
-                Active Jobs
+                Job#{job.job_id}
               </Typography>
-
-              {clientJobsData
-                .filter(
-                  (job) =>
-                    job.job_status === "active" ||
-                    job.job_status === "approved" ||
-                    job.job_status === "request" ||
-                    job.job_status === "submitted"
-                )
-                .map((job, index) => {
-                  let date = job.date.split("T");
-                  console.log("what is date", date[0]);
-                  return (
-                    <Card sx={{ mb: 5 }} key={index}>
-                      <Typography
-                        sx={{ mb: 2, backgroundColor: "#fcb900" }}
-                        color="blue"
-                      >
-                        Job#{job.job_id}
-                      </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        Manager: {job.manager_id}
-                      </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        Cleaner: {job.cleaner_id}
-                      </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        Job Status: {job.job_status}
-                      </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        Feedback: {job.feedback}
-                      </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        Date: {date[0]}
-                      </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        Start Time: {job.start_time}
-                      </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        End Time: {job.end_time}
-                      </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        Estimation: {job.estimation}
-                      </Typography>
-                    </Card>
-                  );
-                })}
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                Manager: {job.job.manager_first_name}{" "}
+                {job.job.manager_last_name}
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                Cleaner: {job.job.cleaner_first_name}{" "}
+                {job.job.cleaner_last_name}
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                Job Status: {job.job.job_status}
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                Feedback: {job.job.feedback}
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                Date: {date[0]}
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                Start Time: {job.job.start_time}
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                End Time: {job.job.end_time}
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                Estimation: {job.job.estimation}
+              </Typography>
+              <Button onClick={handleBack}>Back</Button>
             </CardContent>
           </Card>
         ) : (
-          <Card>
-            <CardContent>
-              <Typography
-                sx={{ fontSize: 14, justifyContent: "center" }}
-                color="blue"
-                gutterBottom
-              >
-                Past Jobs
-              </Typography>
-              {clientJobsData
-                .filter(
-                  (job) =>
-                    job.job_status === "completed" ||
-                    job.job_status === "cancelled" ||
-                    job.job_status === "rejected"
-                )
-                .map((job, index) => (
-                  <Card sx={{ mb: 5 }} key={index}>
-                    <Typography
-                      sx={{ mb: 2, backgroundColor: "#fcb900" }}
-                      color="blue"
-                    >
-                      Job#{job.job_id}
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      Manager: {job.manager_id}
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      Cleaner: {job.cleaner_id}
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      Job Status: {job.job_status}
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      Feedback: {job.feedback}
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      Date: {date[0]}
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      Start Time: {job.start_time}
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      End Time: {job.end_time}
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      Estimation: {job.estimation}
-                    </Typography>
-                  </Card>
-                ))}
-            </CardContent>
-          </Card>
+          <div>Loading...</div>
         )}
       </div>
     </Container>

@@ -52,20 +52,6 @@ function* fetchJobs() {
   }
 }
 
-function* fetchFullJobsHistory(action) {
-  try {
-    const fullJobHistory = yield axios.get(`/api/job/fullJobsHistory`);
-    console.log("this is fullJobsHistory.data", fullJobHistory.data);
-
-    yield put({
-      type: "SET_FULL_JOBS_HISTORY",
-      payload: fullJobHistory.data,
-    });
-  } catch (error) {
-    console.log("ERROR retrieving full Jobs Description", error);
-  }
-}
-
 function* jobSaga() {
   yield takeLatest("CREATE_JOB_ID", createJobId);
   yield takeLatest("FETCH_JOBS", fetchJobs);
