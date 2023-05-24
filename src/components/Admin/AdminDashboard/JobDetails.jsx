@@ -21,10 +21,11 @@ import {
 
 function JobDetails() {
     const dispatch = useDispatch();
-    // allJobs combined reducer (jobDetails)
+
+    // allJobs combined reducer (job details)
     const allJobs = useSelector(store => store.allJobs);
 
-    const allJobStatus = ['request', 'approved', 'completed', 'canceled', 'rejected', 'active']
+    const allJobStatus = ['request', 'approved', 'completed', 'canceled', 'rejected', 'active'];
 
     // default states
     const [newJobStatus, setNewJobStatus] = useState(allJobs.jobDetails.job_status);
@@ -47,6 +48,11 @@ function JobDetails() {
             console.log('Error on post:', error);
         })
     }, []);
+
+    const [jobDetailsRefresh, setJobDetailsRefresh] = useState(false);
+    useEffect(() => {
+        dispatch({ type: "FETCH_JOBS" });
+    }, [jobDetailsRefresh]);
 
     // edit information switches
     const [editJobStatusBtn, setEditJobStatusBtn] = useState(false);
@@ -108,9 +114,14 @@ function JobDetails() {
         })
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (number) => {
         console.log('handleSubmit updateCleanerObject:', updateCleanerObject);
         dispatch({ type: 'ADMIN_UPDATE_JOB', payload: updateCleanerObject });
+        if(number === 1) {
+            setJobDetailsRefresh(!jobDetailsRefresh);
+            setEditJobStatusBtn(false);
+        }
+        
     }
 
     const handleClickForJobStatus = () => {
@@ -161,7 +172,7 @@ function JobDetails() {
                                     <Button onClick={() => setEditJobStatusBtn(false)} sx={{display: 'inline-flex', mr: 1.5}} variant='outlined'>
                                         <CloseIcon sx={{color: 'red'}}/>
                                     </Button>
-                                    <Button onClick={handleSubmit} sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>
+                                    <Button onClick={() => handleSubmit(1)} sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>
                                         <CheckIcon sx={{color: 'green'}}/>
                                     </Button>
                                 </> :
