@@ -23,9 +23,19 @@ function WipeDustForm() {
     const wipeDust = useSelector(store => store.clientWipeDust);
 
     const toEstimate = () => {
-        const order = formList.length;
+        const order = formList.length + 1;
         // dispatch to room.saga that triggers post request to form.router ('/kitchen/')
-        dispatch({ type: 'ADD_WIPE_DUST', payload: { wipeDust, jobId, order } })
+        dispatch({
+            type: 'ADD_WIPE_DUST',
+            payload: {
+                wipeDustForm: {
+                    wipeDust,
+                    jobId,
+                    order
+                },
+                formList
+            }
+        })
 
         // history.push('/estimate')
         history.push('/profile'); // TEMP

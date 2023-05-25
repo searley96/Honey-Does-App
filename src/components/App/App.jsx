@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+
 import {
   HashRouter as Router,
   Redirect,
@@ -7,15 +8,13 @@ import {
 } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-
+// import Container from "../DashBoard/Container";
 import Nav from "../Nav/Nav";
 import NewNav from "../Nav/NewNav";
 import Footer from "../Footer/Footer";
 import BottomNav from "../Footer/BottomNav";
-import AdminBottomNav from "../Footer/AdminBottomNav";
-
+import JobHistory from "../JobHistory/JobHistory";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-
 import AboutPage from "../AboutPage/AboutPage";
 import UserPage from "../UserPage/UserPage";
 import InfoPage from "../InfoPage/InfoPage";
@@ -25,12 +24,13 @@ import RegisterPage from "../RegisterPage/RegisterPage";
 import ProfilePage from "../ProfilePage/ProfilePage";
 import AdminDashboard from "../Admin/AdminDashboard/AdminDashboard";
 import JobDetails from "../Admin/AdminDashboard/JobDetails";
-
+import FullJobHistory from "../JobHistory/FullJobHistory";
 import "./App.css";
 import KitchenForm from "../Client/Kitchen/KitchenForm";
 import BathroomForm from "../Client/Bathroom/BathroomForm";
 import WipeDustForm from "../Client/WipeDust/WipeDustForm";
 import OtherRoomForm from "../Client/OtherRoom/OtherRoomForm";
+import Chat from "../Chat/Chat";
 
 function App() {
   const dispatch = useDispatch();
@@ -69,8 +69,25 @@ function App() {
             exact
             path="/user"
           >
-            <UserPage />
-            <BottomNav />
+            {user.role === 'admin' &&
+              <>
+                <AdminDashboard />
+                <BottomNav />
+              </>
+            }
+            {user.role === 'client' &&
+              <>
+                <JobHistory />
+                <BottomNav />
+              </>
+            }
+            {user.role === 'cleaner' &&
+              <>
+
+                {/* Cleaner Dashboard Will Go Here */}
+                <BottomNav />
+              </>
+            }
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -81,22 +98,35 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
 
-          <Route exact path="/adminDashboard">
+          {/* <Route exact path="/jobHistory">
             {user.id ? (
-              <>
-              <AdminDashboard />
-              <AdminBottomNav />
-              </>
+              <JobHistory />
             ) : (
               // Otherwise, show the login page
               <LoginPage />
             )}
-           
+          </Route> */}
+
+          <Route exact path="/fullJobHistory">
+            {user.id ? (
+              <FullJobHistory />
+            ) : (
+              // Otherwise, show the login page
+              <LoginPage />
+            )}
           </Route>
+
+          {/* <Route exact path="/adminDashboard">
+            {user.role === 'admin' ? (
+              <AdminDashboard />
+            ) : (
+              // Otherwise, show the login page
+              <LoginPage />
+            )}
+          </Route> */}
 
           <Route exact path="/jobDetails">
             {user.id ? <JobDetails /> : <LoginPage />}
-            <AdminBottomNav />
           </Route>
 
           <Route exact path="/login">
@@ -131,6 +161,13 @@ function App() {
               // Otherwise, show the Landing page
               <LandingPage />
             )}
+          </Route>
+
+          <Route exact path='/chat'>
+            <>
+              <Chat />
+              <BottomNav />
+            </>
           </Route>
 
           <Route exact path="/profile">
@@ -197,6 +234,9 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
+        {/* <Menu />
+        <Container /> */}
+
         <Footer />
       </div>
     </Router>
