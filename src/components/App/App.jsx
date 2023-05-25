@@ -28,6 +28,7 @@ import KitchenForm from "../Client/Kitchen/KitchenForm";
 import BathroomForm from "../Client/Bathroom/BathroomForm";
 import WipeDustForm from '../Client/WipeDust/WipeDustForm';
 import OtherRoomForm from '../Client/OtherRoom/OtherRoomForm';
+import GuestBathroomForm from '../Client/Bathroom/GuestBathroomForm.jsx';
 
 function App() {
   const dispatch = useDispatch();
@@ -171,6 +172,10 @@ function App() {
               }
           </Route>
 
+          <Route
+            exact path="/guestBathroomForm">
+            <GuestBathroomForm />
+          </Route>
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>
