@@ -41,7 +41,14 @@ function* fetchJobs() {
 function* adminUpdateJob(action) {
     try {
         console.log('adminUpdateJob action.payload:', action.payload);
-        yield axios.put(`/api/job/adminUpdateJob`, action.payload);
+        const response = yield axios.put(`/api/job/adminUpdateJob`, action.payload);
+
+        const newJobDetails = yield axios.get(`/api/job/updatedJobDetails/${action.payload.job_id}`);
+        console.log('adminUpdateJob() newJobDetails.data[0]:', newJobDetails.data[0]);
+        yield put({
+            type: 'VIEW_JOB_DETAILS',
+            payload: newJobDetails.data[0]
+        });
     } catch(error) {
         console.log('ERROR updating job', error);
     }
@@ -51,6 +58,6 @@ function* jobSaga() {
     yield takeLatest('CREATE_JOB_ID', createJobId);
     yield takeLatest('FETCH_JOBS', fetchJobs);
     yield takeLatest('ADMIN_UPDATE_JOB', adminUpdateJob);
-  }
+}
   
   export default jobSaga;

@@ -121,7 +121,6 @@ function JobDetails() {
             setJobDetailsRefresh(!jobDetailsRefresh);
             setEditJobStatusBtn(false);
         }
-        
     }
 
     const handleClickForJobStatus = () => {
