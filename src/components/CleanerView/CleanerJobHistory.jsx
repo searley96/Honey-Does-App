@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import SmsIcon from "@mui/icons-material/Sms";
-import cleanerJobsReducer from "../../redux/reducers/jobs.reducer";
+import cleanerJobsReducer from "../../redux/reducers/cleanerJobs.reducer";
+import honeycomb from "../../img/HoneyDoes Images/honeycomb.jpeg";
 //import FullJobHistory from "./ClientFullJobHistory";
 import { Link } from "react-router-dom";
 import {
@@ -109,14 +110,14 @@ function CleanerJobHistory() {
           <Card>
             <CardContent>
               <Typography
-                sx={{ fontSize: 14, justifyContent: "center" }}
+                sx={{ mb: 2, fontSize: 14, justifyContent: "center" }}
                 color="blue"
                 gutterBottom
               >
                 Active Jobs
               </Typography>
 
-              {cleanerJobsData.cleanerJobsReducer
+              {cleanerJobsData
                 .filter(
                   (job) =>
                     job.job_status === "active" ||
@@ -128,20 +129,27 @@ function CleanerJobHistory() {
                   let date = job.date.split("T");
                   console.log("what is date", date[0]);
                   return (
-                    <Card sx={{ mb: 5 }} key={index}>
+                    <Card
+                      sx={{ mb: 5, backgroundImage: `url(${honeycomb})` }}
+                      key={index}
+                    >
                       <Typography
-                        sx={{ mb: 2, backgroundColor: "#fcb900" }}
-                        color="blue"
+                        sx={{
+                          mb: 2,
+                          backgroundColor: "#3291B9",
+                          alignContent: "center",
+                        }}
+                        color="#fcb900"
                       >
                         Job#{job.job_id}
                       </Typography>
                       <Typography sx={{ mb: 1.5 }} color="text.secondary">
                         Date: {date[0]}
                       </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      <Typography sx={{ mb: 1.5 }} color="black">
                         Client: {job.client_first_name} {job.client_last_name}
                       </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      <Typography sx={{ mb: 1.5 }} color="blue">
                         Estimation: {job.estimation}
                       </Typography>
                       <CardActions>
@@ -168,13 +176,13 @@ function CleanerJobHistory() {
           <Card>
             <CardContent>
               <Typography
-                sx={{ fontSize: 14, justifyContent: "center" }}
+                sx={{ mb: 2, fontSize: 14, justifyContent: "center" }}
                 color="blue"
                 gutterBottom
               >
                 Past Jobs
               </Typography>
-              {cleanerJobsData.cleanerJobsReducer
+              {cleanerJobsData
                 .filter(
                   (job) =>
                     job.job_status === "completed" ||
@@ -189,6 +197,7 @@ function CleanerJobHistory() {
                       <Typography
                         sx={{ mb: 2, backgroundColor: "#fcb900" }}
                         color="blue"
+                        gutterBottom
                       >
                         Job#{job.job_id}
                       </Typography>

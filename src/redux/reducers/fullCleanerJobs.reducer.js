@@ -1,6 +1,6 @@
-const clientFullJobsHistoryReducer = (state = [], action) => {
+const cleanerFullJobsHistoryReducer = (state = [], action) => {
   switch (action.type) {
-    case "SET_FULL_JOBS_HISTORY":
+    case "SET_FULL_CLEANER_JOBS_HISTORY":
       console.log("inside reducer", action.payload);
       return {
         ...state,
@@ -10,5 +10,4 @@ const clientFullJobsHistoryReducer = (state = [], action) => {
       return state;
   }
 };
-
-export default clientFullJobsHistoryReducer;
+export default cleanerFullJobsHistoryReducer;

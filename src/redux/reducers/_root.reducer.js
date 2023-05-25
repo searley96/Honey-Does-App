@@ -11,8 +11,8 @@ import allJobs from "./allJobs.reducer";
 import formList from "./formList.reducer";
 import clientJobsReducer from "./jobs.reducer";
 import clientFullJobsHistoryReducer from "./fullJob.reducer";
-import cleanerFullJobsHistoryReducer from "./fullJob.reducer";
-import cleanerJobsReducer from "./jobs.reducer";
+import cleanerFullJobsHistoryReducer from "./fullCleanerJobs.reducer";
+import cleanerJobsReducer from "./cleanerJobs.reducer";
 
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
