@@ -61,7 +61,7 @@ function FullJobHistory() {
                 color="blue"
                 gutterBottom
               >
-                Job#{job.job_id}
+                Job#{job.job.job_id}
               </Typography>
               <Typography sx={{ mb: 1.5 }} color="text.secondary">
                 Manager: {job.job.manager_first_name}{" "}

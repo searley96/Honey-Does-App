@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import SmsIcon from "@mui/icons-material/Sms";
 import clientJobsReducer from "../../redux/reducers/jobs.reducer";
-import FullJobHistory from "./FullJobHistory";
 import { Link } from "react-router-dom";
 import {
   Box,
