@@ -4,20 +4,8 @@ import { useState, useEffect } from "react";
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
 import allJobsReducer from "../../../redux/reducers/allJobs.reducer";
-import {
-    Button,
-    Card as Box,
-    CardActions,
-    CardContent,
-    CardMedia,
-    Typography,
-    Link,
-    Card,
-    Grid,
-    CardHeader,
-    Modal,
-    TextField
-} from '@mui/material';
+import { Button, Card as Box, CardActions, CardContent, CardMedia, Typography, Link, Card, Grid, CardHeader, TextField } from '@mui/material';
+import Chat from "../../Chat/Chat";
 
 function JobDetails() {
     const dispatch = useDispatch();

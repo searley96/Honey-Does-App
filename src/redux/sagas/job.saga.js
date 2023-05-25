@@ -1,5 +1,6 @@
-import { put, takeLatest } from 'redux-saga/effects';
-import axios from 'axios';
+import { put, takeLatest, takeEvery } from "redux-saga/effects";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 function* createJobId() {
     try {
@@ -18,9 +19,27 @@ function* createJobId() {
             type: 'ADD_FORM_ID',
             payload: {job_id: jobId.data}
         });
+
+        // create a new job using the generated job id
+        yield axios.post('/api/job', {jobId: jobId.data});
     } catch(error) {
         console.log('ERROR retrieving new jobID', error);
     }
+}
+
+function* fetchClientJobs(action) {
+  try {
+    console.log("fetchclientjobs", action.payload);
+    const clientJobs = yield axios.get(`/api/job/client/${action.payload}`);
+    console.log("this is clientJobs.data", clientJobs.data);
+
+    yield put({
+      type: "SET_CLIENT_JOBS_REDUCER",
+      payload: clientJobs.data,
+    });
+  } catch (error) {
+    console.log("ERROR retrieving new client Jobs", error);
+  }
 }
 
 function* fetchJobs() {
@@ -29,13 +48,13 @@ function* fetchJobs() {
         const allJobs = yield axios.get(`/api/job/allJobs`);
         console.log('this is allJobs.data', allJobs.data);
 
-        yield put({
-            type: 'SET_ALL_JOBS',
-            payload: allJobs.data
-        });
-    } catch(error) {
-        console.log('ERROR retrieving new allJobs', error);
-    }
+    yield put({
+      type: "SET_ALL_JOBS",
+      payload: allJobs.data,
+    });
+  } catch (error) {
+    console.log("ERROR retrieving new allJobs", error);
+  }
 }
 
 function* adminUpdateJob(action) {
@@ -58,6 +77,7 @@ function* jobSaga() {
     yield takeLatest('CREATE_JOB_ID', createJobId);
     yield takeLatest('FETCH_JOBS', fetchJobs);
     yield takeLatest('ADMIN_UPDATE_JOB', adminUpdateJob);
+    yield takeLatest("FETCH_CLIENT_JOB", fetchClientJobs);
 }
-  
-  export default jobSaga;
+
+export default jobSaga;

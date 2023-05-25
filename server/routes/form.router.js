@@ -82,8 +82,6 @@ router.get('/form-list', rejectUnauthenticated, (req, res) => {
 router.get('/kitchen/:job_id', rejectUnauthenticated, (req, res) => {
     const jobId = req.params.jobID;
 
-
-
     const queryText = `
         SELECT * FROM user_kitchen
         WHERE job_id = $1;
@@ -100,7 +98,7 @@ router.get('/kitchen/:job_id', rejectUnauthenticated, (req, res) => {
 
 // KITCHEN POST
 router.post('/kitchen/', rejectUnauthenticated, (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     const queryText = `
         INSERT INTO user_kitchen( 
             job_id,
@@ -207,7 +205,7 @@ router.get('/bathroom/:jobid', rejectUnauthenticated, (req, res) => {
 // BATHROOM POST
 router.post('/bathroom/', rejectUnauthenticated, (req, res) => {
 
-    console.log(req.body);
+    // console.log(req.body);
     const queryText = `
         INSERT INTO user_bathroom( 
             job_id,
@@ -302,7 +300,7 @@ router.get('/other/:jobid', rejectUnauthenticated, (req, res) => {
 
 // OTHER ROOM POST
 router.post('/other/', rejectUnauthenticated, (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     const queryText = `
     INSERT INTO user_other_room( 
         job_id,
@@ -356,7 +354,7 @@ router.get('/wipe-dust/:jobid', rejectUnauthenticated, (req, res) => {
 // WIPE / DUST POST
 router.post('/wipe-dust/', rejectUnauthenticated, (req, res) => {
     // mind the table name
-    console.log(req.body);
+    // console.log(req.body);
     const queryText = `
     INSERT INTO "user_wipe_dust"( 
        job_id,

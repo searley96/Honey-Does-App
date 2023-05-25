@@ -36,9 +36,10 @@ CREATE TABLE "job" (
 CREATE TABLE "message_log"(
 	"id" SERIAL PRIMARY KEY,
 	"job_id" INT NOT NULL,
-    "timestamp" TIMESTAMP NOT NULL,
-    "image_url" VARCHAR(100),
-    "text" VARCHAR(500) NOT NULL
+  "timestamp" TIMESTAMP NOT NULL,
+  "image_url" VARCHAR(100),
+  "text" VARCHAR(500) NOT NULL,
+  "sender_id" INT NOT NULL
 );
 
 -- schema fix
@@ -136,6 +137,8 @@ CREATE TABLE "user_wipe_dust"(
 	"bed_living_furniture_duster" VARCHAR(50),
 	"orange_glo_applicable" BOOLEAN
 );
+
+
 
 -- Job Table Mock Data
 INSERT INTO "job" ("job_id", "client_id", "manager_id", "cleaner_id", "job_status", "feedback", "date", "start_time", "end_time")

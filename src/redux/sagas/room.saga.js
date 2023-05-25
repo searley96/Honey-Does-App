@@ -1,5 +1,6 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 function* createKitchen(action) {
     try {
@@ -55,9 +56,10 @@ function* createOtherRoom(action) {
 }
 
 function* createWipeDust(action) {
+    // const formList  = useSelector(store => store.formList);
     try {
         // POST wipe_dust form to the db
-        yield axios.post(`/api/form/wipe-dust`, action.payload);
+        yield axios.post(`/api/form/wipe-dust`, action.payload.wipeDustForm);
 
         // clear current form
         yield put({
@@ -68,6 +70,7 @@ function* createWipeDust(action) {
         yield put({type: 'FETCH_FORM_LIST'})
 
         // CALCULATE ESTIMATE AND SUBMIT REQUEST
+        yield axios.post('/api/job/estimate', action.payload);
 
         // SEND DISPATCH TO USER SAGA TO RESET THE FORM_JOB_ID TO NULL
         yield put({ type: 'FINISH_FORM_JOB' });
