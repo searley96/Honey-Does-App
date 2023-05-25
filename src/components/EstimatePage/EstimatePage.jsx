@@ -60,10 +60,9 @@ function EstimatePage() {
                 <Button sx={{my: 4, p: 3}} variant="contained">Submit New Clean Request</Button>
             </Box>
             :
-                <Card sx={{mx: '32px', height: '250px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-                    <Typography sx={{mb: 4}}>Disclaimer:</Typography>
-                    <Button sx={{width: '80%', height: '50%', mb: 4}} variant='contained'>Create Account and Submit Request</Button>
-                </Card>
+            <Card sx={{mx: '32px', height: '200px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+                <Button sx={{width: '80%', height: '50%'}} variant='contained'>Create Account and Submit Request</Button>
+            </Card>
             }
         </>
     )
