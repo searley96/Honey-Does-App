@@ -31,6 +31,7 @@ import BathroomForm from "../Client/Bathroom/BathroomForm";
 import WipeDustForm from "../Client/WipeDust/WipeDustForm";
 import OtherRoomForm from "../Client/OtherRoom/OtherRoomForm";
 import Chat from "../Chat/Chat";
+import EstimatePage from "../EstimatePage/EstimatePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -225,6 +226,19 @@ function App() {
               </>
             ) : (
               <LoginPage />
+            )}
+          </Route>
+
+          <Route exact path="/estimate">
+            {user.id ? (
+              <>
+                <EstimatePage />
+                <BottomNav />
+              </>
+            ) : (
+              <>
+                <EstimatePage />
+              </>
             )}
           </Route>
 
