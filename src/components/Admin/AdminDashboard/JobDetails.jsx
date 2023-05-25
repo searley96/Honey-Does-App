@@ -57,7 +57,7 @@ function JobDetails() {
     // edit information switches
     const [editJobStatusBtn, setEditJobStatusBtn] = useState(false);
     const [editCleanerFirstNameBtn, setEditCleanerFirstNameBtn] = useState(false);
-    const [editCleanerLastNameBtn, setEditCleanerLastNameBtn] = useState(false);
+    // const [editCleanerLastNameBtn, setEditCleanerLastNameBtn] = useState(false);
     const [dateBtn, setDateBtn] = useState(false);
     const [startTimeBtn, setStartTimeBtn] = useState(false);
     const [endTimeBtn, setEndTimeBtn] = useState(false);
@@ -120,6 +120,18 @@ function JobDetails() {
         if(number === 1) {
             setJobDetailsRefresh(!jobDetailsRefresh);
             setEditJobStatusBtn(false);
+        } else if(number === 2) {
+            setJobDetailsRefresh(!jobDetailsRefresh);
+            setEditCleanerFirstNameBtn(false);
+        } else if(number === 3) {
+            setJobDetailsRefresh(!jobDetailsRefresh);
+            setDateBtn(false);
+        } else if(number === 4) {
+            setJobDetailsRefresh(!jobDetailsRefresh);
+            setStartTimeBtn(false);
+        } else if(number === 5) {
+            setJobDetailsRefresh(!jobDetailsRefresh);
+            setEndTimeBtn(false);
         }
     }
 
@@ -127,6 +139,8 @@ function JobDetails() {
         console.log('newJobStatus inside handleClickForJobStatus:', newJobStatus);
         const updateJobStatusObject = { jobStatus: newJobStatus }
     }
+
+    let date = allJobs.jobDetails.date.split("T");
 
     return (
         <>
@@ -227,7 +241,7 @@ function JobDetails() {
                                     <Button onClick={() => setEditCleanerFirstNameBtn(false)} sx={{display: 'inline-flex', mr: 1.5}} variant='outlined'>
                                         <CloseIcon sx={{color: 'red'}}/>
                                     </Button>
-                                    <Button onClick={handleSubmit} sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>
+                                    <Button onClick={() => handleSubmit(2)} sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>
                                         <CheckIcon sx={{color: 'green'}}/>
                                     </Button>
                                 </> :
@@ -303,7 +317,7 @@ function JobDetails() {
                                     <Button onClick={() => setDateBtn(false)} sx={{display: 'inline-flex', mr: 1.5}} variant='outlined'>
                                         <CloseIcon sx={{color: 'red'}}/>
                                     </Button>
-                                    <Button onClick={handleSubmit} sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>
+                                    <Button onClick={() => handleSubmit(3)} sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>
                                         <CheckIcon sx={{color: 'green'}}/>
                                     </Button>
                                 </> :
@@ -312,7 +326,7 @@ function JobDetails() {
                                         style={{ display: "inline", marginLeft: '50px' }}
                                         gutterBottom
                                     >
-                                        {allJobs.jobDetails.date}
+                                        {date[0]}
                                     </Typography>
                                     
                                     <Button onClick={() => cancelEdit(setDateBtn(true))} sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>Edit</Button>
@@ -352,7 +366,7 @@ function JobDetails() {
                                     <Button onClick={() => setStartTimeBtn(false)} sx={{display: 'inline-flex', mr: 1.5}} variant='outlined'>
                                         <CloseIcon sx={{color: 'red'}}/>
                                     </Button>
-                                    <Button onClick={handleSubmit} sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>
+                                    <Button onClick={() => handleSubmit(4)} sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>
                                         <CheckIcon sx={{color: 'green'}}/>
                                     </Button>
                                 </> :
@@ -401,7 +415,7 @@ function JobDetails() {
                                     <Button onClick={() => setEndTimeBtn(false)} sx={{display: 'inline-flex', mr: 1.5}} variant='outlined'>
                                         <CloseIcon sx={{color: 'red'}}/>
                                     </Button>
-                                    <Button onClick={handleSubmit} sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>
+                                    <Button onClick={() => handleSubmit(5)} sx={{ display: 'inline-flex', mr: 1.5 }} variant='outlined'>
                                         <CheckIcon sx={{color: 'green'}}/>
                                     </Button>
                                 </> :
