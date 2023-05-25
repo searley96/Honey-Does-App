@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Card, CardActions, CardContent, CardMedia, IconButton, Typography, Link } from '@mui/material';
 import { useHistory } from "react-router-dom";
-import JobDetails from "./JobDetails";
-import SmsIcon from "@mui/icons-material/Sms";
 
 function AdminDashboard() {
     console.log('Inside Dashboard()!!');
