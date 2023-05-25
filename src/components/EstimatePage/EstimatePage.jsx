@@ -57,7 +57,7 @@ function EstimatePage() {
                         </Button>
                     </Box>
                 </Card>
-                <Button sx={{my: 4, p: 3}} variant="contained">Submit New Clean Request</Button>
+                <Button sx={{my: 3, p: 3, width: '311px'}} variant="contained">Submit New Clean Request</Button>
             </Box>
             :
             <Card sx={{mx: '32px', height: '200px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
