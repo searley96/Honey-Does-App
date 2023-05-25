@@ -21,6 +21,12 @@ function EstimatePage() {
     const toWipeDustForm = () => {
         history.push('/wipeDustForm');
     }
+    
+    // TO-DO: figure out when to POST request as job in DB
+        // Hard-Code job request to POST on new user registration?
+    const toRegister = () => {
+        history.push('/registration');
+    }
 
 
     return(
@@ -61,7 +67,7 @@ function EstimatePage() {
             </Box>
             :
             <Card sx={{mx: '32px', height: '200px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-                <Button sx={{width: '80%', height: '50%'}} variant='contained'>Create Account and Submit Request</Button>
+                <Button sx={{width: '80%', height: '50%'}} variant='contained' onClick={{toRegister}}>Create Account and Submit Request</Button>
             </Card>
             }
         </>
