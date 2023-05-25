@@ -18,11 +18,14 @@ function LandingPage() {
 
   const toForm = (event) => {
     // history.push('/form');
+    // dispatch({
+    //   type: 'CREATE_JOB_ID'
+    // })
     dispatch({
-      type: 'CREATE_JOB_ID'
+      type: 'CLEAR_FORM'
     })
     dispatch({
-      type: ''
+      type: 'CLEAR_FORM_LIST'
     })
     history.push('/guestBathroomForm')
   }

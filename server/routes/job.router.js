@@ -125,22 +125,50 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 })
 
 // calculate low and high ends of the job estimate
-router.post('/estimate', rejectUnauthenticated, (req, res) => {
+router.put('/estimate', rejectUnauthenticated, (req, res) => {
     console.log('HOURLY_RATE is:', constants.HOURLY_RATE);
     const formList = req.body.formList;
     formList.push(req.body.wipeDust);
 
+    const queryText = `
+        UPDATE job 
+        SET low_estimate = $1, high_estimate = $2
+        WHERE job_id = $3;
+    `
 
 
     console.log('formList in /estimate:', formList);
+    const lowEstimate = Math.round(calculateLowEstimate(constants, formList));
+    const highEstimate = Math.round(calculateHighEstimate(constants, formList));
+
+    console.log('low estimate is:', lowEstimate);
+    console.log('high estimate is:', highEstimate);
+
+    pool.query(queryText, [lowEstimate, highEstimate, req.body.jobId])
+        .then(result => {
+            res.sendStatus(201);
+        }).catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+        })
+
+    // res.sendStatus(200);
+
+    
+})
+
+router.post('/guestEstimate', (req, res) => {
+    console.log('HOURLY_RATE is:', constants.HOURLY_RATE);
+    const formList = req.body.formList;
+    formList.push(req.body.wipeDust);
+
+    console.log('formList in /guestEstimate:', formList);
     const lowEstimate = calculateLowEstimate(constants, formList);
     const highEstimate = calculateHighEstimate(constants, formList);
 
     console.log('low estimate is:', lowEstimate);
     console.log('high estimate is:', highEstimate);
-    res.sendStatus(200);
-
-    
+    res.send({lowEstimate, highEstimate});
 })
 
 module.exports = router;
