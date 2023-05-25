@@ -93,7 +93,10 @@ function App() {
 
           <Route exact path="/fullJobHistory">
             {user.id ? (
-              <ClientFullJobHistory />
+              <>
+                <ClientFullJobHistory />
+                <BottomNav />
+              </>
             ) : (
               // Otherwise, show the login page
               <LoginPage />
@@ -102,7 +105,10 @@ function App() {
 
           <Route exact path="/cleanerJobHistory">
             {user.id ? (
-              <CleanerJobHistory />
+              <>
+                <CleanerJobHistory />
+                <BottomNav />
+              </>
             ) : (
               // Otherwise, show the login page
               <LoginPage />

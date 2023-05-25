@@ -4,7 +4,9 @@ import { useParams, useHistory } from "react-router-dom";
 import SmsIcon from "@mui/icons-material/Sms";
 import cleanerJobsReducer from "../../redux/reducers/cleanerJobs.reducer";
 import honeycomb from "../../img/HoneyDoes Images/honeycomb.jpeg";
+import bees from "../../img/HoneyDoes Images/bees.gif";
 //import FullJobHistory from "./ClientFullJobHistory";
+import DescriptionIcon from "@mui/icons-material/Description";
 import { Link } from "react-router-dom";
 import {
   Box,
@@ -50,6 +52,7 @@ function CleanerJobHistory() {
   const cleanerJobsData = useSelector((store) => store.cleanerJobsReducer);
   const user = useSelector((store) => store.user);
   const jobs = useSelector((store) => store.jobs);
+  const [isClicked, setIsClicked] = useState(false);
 
   const getAllCleanerJobs = () => {
     dispatch({
@@ -69,50 +72,74 @@ function CleanerJobHistory() {
   console.log("map function", cleanerJobsData);
 
   const togglePastJobs = () => {
-    setShowJobs(false);
+    setShowJobs(false), setIsClicked(!isClicked);
   };
 
   const toggleActiveJobs = () => {
-    setShowJobs(true);
+    setShowJobs(true), setIsClicked(!isClicked);
   };
 
   //console.log("date", clientJobsData[2].date);
   return (
     <Container
       maxWidth="sm"
-      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        boxShadow: 24,
+      }}
     >
       <div>
         <Button
           variant="outlined"
-          sx={{ marginLeft: 1 }}
+          sx={{
+            marginLeft: "32px",
+            marginRight: "10px",
+            color: isClicked ? "#1976D2" : "#1976D2",
+            backgroundColor: isClicked ? "fff" : "#fff",
+            fontWeight: "bold",
+            fontSize: 15,
+            marginTop: "40px",
+            outline: "none",
+            "&:focus": {
+              outlineWidth: isClicked ? "2px" : "1px",
+              outlineStyle: "solid",
+              outlineColor: "#1976D2",
+            },
+          }}
           onClick={togglePastJobs}
         >
           Past Jobs
         </Button>
         <Button
           variant="outlined"
-          sx={{ marginLeft: 1 }}
+          sx={{
+            marginRight: "32px",
+            marginLeft: "10px",
+            color: isClicked ? "#1976D2" : "#1976D2",
+            backgroundColor: isClicked ? "fff" : "#fff",
+            fontWeight: "bold",
+            fontSize: 15,
+            marginTop: "40px",
+            outline: "none",
+            "&:focus": {
+              outlineWidth: isClicked ? "2px" : "1px",
+              outlineStyle: "solid",
+              outlineColor: "#1976D2",
+            },
+          }}
           onClick={toggleActiveJobs}
         >
           Active Jobs
         </Button>
-        <IconButton
-          variant="contained"
-          aria-label="chat"
-          color="success"
-          fontSize="inherit"
-        >
-          Chat
-          <SmsIcon />
-        </IconButton>
         {showJobs ? (
           <Card>
             <CardContent>
               <Typography
-                sx={{ mb: 2, fontSize: 14, justifyContent: "center" }}
-                color="blue"
+                sx={{ textAlign: "center", py: "20px", fontWeight: "bold" }}
                 gutterBottom
+                variant="h5"
               >
                 Active Jobs
               </Typography>
@@ -130,43 +157,75 @@ function CleanerJobHistory() {
                   console.log("what is date", date[0]);
                   return (
                     <Card
-                      sx={{ mb: 5, backgroundImage: `url(${honeycomb})` }}
+                      sx={{
+                        mb: 5,
+                        backgroundColor: "whitesmoke",
+                        boxShadow: 14,
+                      }}
                       key={index}
                     >
                       <Typography
                         sx={{
                           mb: 2,
-                          backgroundColor: "#3291B9",
+                          backgroundColor: "#1976D2",
                           alignContent: "center",
+                          fontWeight: "bold",
+                          textAlign: "center",
                         }}
                         color="#fcb900"
+                        fontSize={20}
                       >
-                        Job#{job.job_id}
+                        Job# {job.job_id}
                       </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        Date: {date[0]}
+                      <Typography sx={{ mb: 1.5, ml: 2 }} color="black">
+                        <span style={{ fontWeight: "bold" }}>Date: </span>{" "}
+                        {date[0]}
                       </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="black">
-                        Client: {job.client_first_name} {job.client_last_name}
+                      <Typography sx={{ mb: 1.5, ml: 2 }} color="black">
+                        <span style={{ fontWeight: "bold" }}>Client: </span>
+                        {job.client_first_name} {job.client_last_name}
                       </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="blue">
-                        Estimation: {job.estimation}
+                      <Typography sx={{ mb: 1.5, ml: 2 }} color="black">
+                        <span style={{ fontWeight: "bold" }}>
+                          {" "}
+                          Estimation:{" "}
+                        </span>
+                        {job.estimation}
                       </Typography>
-                      <CardActions>
-                        <Button>
-                          <Link
-                            key={id}
-                            to={{
-                              pathname: `/cleanerFullHistory`,
-                              state: jobs,
-                            }}
-                            onClick={() => handleFullCleanerJobHistory(job)}
-                            size="small"
-                          >
-                            See Full Job Description
-                          </Link>
-                        </Button>
-                      </CardActions>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <CardActions>
+                          <Button>
+                            <Link
+                              key={id}
+                              to={{
+                                pathname: `/cleanerFullHistory`,
+                                state: jobs,
+                              }}
+                              onClick={() => handleFullCleanerJobHistory(job)}
+                              underline="none"
+                              color="inherit"
+                            >
+                              <Typography
+                                variant="h5"
+                                component="span"
+                                sx={{
+                                  color: "#1976d2",
+                                  fontSize: "16px",
+                                }}
+                              >
+                                See Details
+                              </Typography>
+                            </Link>
+                          </Button>
+                          <Button>Chat W/ Client</Button>
+                        </CardActions>
+                      </Box>
                     </Card>
                   );
                 })}
@@ -176,9 +235,9 @@ function CleanerJobHistory() {
           <Card>
             <CardContent>
               <Typography
-                sx={{ mb: 2, fontSize: 14, justifyContent: "center" }}
-                color="blue"
+                sx={{ textAlign: "center", py: "20px", fontWeight: "bold" }}
                 gutterBottom
+                variant="h5"
               >
                 Past Jobs
               </Typography>
@@ -193,38 +252,76 @@ function CleanerJobHistory() {
                   let date = job.date.split("T");
                   console.log("what is date", date[0]);
                   return (
-                    <Card sx={{ mb: 5 }} key={index}>
+                    <Card
+                      sx={{
+                        mb: 5,
+                        backgroundColor: "whitesmoke",
+                        boxShadow: 14,
+                      }}
+                      key={index}
+                    >
                       <Typography
-                        sx={{ mb: 2, backgroundColor: "#fcb900" }}
-                        color="blue"
-                        gutterBottom
+                        sx={{
+                          mb: 2,
+                          backgroundColor: "#fcb900",
+                          alignContent: "center",
+                          fontWeight: "bold",
+                          textAlign: "center",
+                        }}
+                        color="#1976D2"
+                        fontSize={20}
                       >
-                        Job#{job.job_id}
+                        Job# {job.job_id}
                       </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        Date: {date[0]}
+                      <Typography sx={{ mb: 1.5, ml: 2 }} color="black">
+                        <span style={{ fontWeight: "bold" }}>Date: </span>{" "}
+                        {date[0]}
                       </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        Client: {job.client_first_name} {job.client_last_name}
+                      <Typography sx={{ mb: 1.5, ml: 2 }} color="black">
+                        <span style={{ fontWeight: "bold" }}>Client: </span>
+                        {job.client_first_name} {job.client_last_name}
                       </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        Estimation: {job.estimation}
+                      <Typography sx={{ mb: 1.5, ml: 2 }} color="black">
+                        <span style={{ fontWeight: "bold" }}>
+                          {" "}
+                          Estimation:{" "}
+                        </span>
+                        {job.estimation}
                       </Typography>
-                      <CardActions>
-                        <Button>
-                          <Link
-                            key={id}
-                            to={{
-                              pathname: `/cleanerFullHistory`,
-                              state: jobs,
-                            }}
-                            onClick={() => handleFullCleanerJobHistory(job)}
-                            size="small"
-                          >
-                            See Full Job Description
-                          </Link>
-                        </Button>
-                      </CardActions>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <CardActions>
+                          <Button>
+                            <Link
+                              key={id}
+                              to={{
+                                pathname: `/cleanerFullHistory`,
+                                state: jobs,
+                              }}
+                              onClick={() => handleFullCleanerJobHistory(job)}
+                              underline="none"
+                              color="inherit"
+                            >
+                              <Typography
+                                variant="h5"
+                                component="span"
+                                sx={{
+                                  color: "#1976d2",
+                                  fontSize: "16px",
+                                }}
+                              >
+                                See Details
+                              </Typography>
+                            </Link>
+                          </Button>
+                          <Button>Chat W/ Client</Button>
+                        </CardActions>
+                      </Box>
                     </Card>
                   );
                 })}
