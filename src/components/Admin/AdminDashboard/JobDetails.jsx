@@ -57,7 +57,7 @@ function JobDetails() {
                                 </Typography>
                         </CardContent>
                     </Card>
-                    <Chat jobId={allJobs.jobDetails.job_id} />
+                    <Chat />
                 </Grid>
                 // <Box sx={{ flexGrow: 1 }}>
                 //             <CardContent sx={{ display: "flex", justifyContent: "space-evenly" }}>

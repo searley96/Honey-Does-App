@@ -1,16 +1,24 @@
 import Message from "./Message";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, TextField, Box } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 
 // pass job_id through props
-function Chat({ jobId }) {
+function Chat() {
     const [newMessage, setNewMessage] = useState('');
     const dispatch = useDispatch();
     const chat = useSelector(store => store.chat);
+    const jobDetails = useSelector(store => store.jobDetailChatReducer);
 
     const [refreshChat, setRefreshChat] = useState(false);
+
+    const divRef = useRef(null);
+
+    useEffect(() => {
+        divRef.current.scrollIntoView({behavior: 'smooth' });
+    });
+    console.log('this is jobDetails', jobDetails);
 
     // const userId = useSelector(store => store.user.id)
     //const jobId = useSelector(store => );
@@ -26,7 +34,7 @@ function Chat({ jobId }) {
     //   they access the chat (when they click on an active or request status job)
     // console.log(jobId);
     useEffect(() => {
-        dispatch({type: 'FETCH_CHAT', payload: {jobId: jobId}})
+        dispatch({type: 'FETCH_CHAT', payload: {jobId: jobDetails.job_id}})
     }, [refreshChat])
 
     const handleSubmit = e => {
@@ -35,7 +43,7 @@ function Chat({ jobId }) {
         dispatch({
             type: 'ADD_MESSAGE', 
             payload: {
-                jobId: jobId,
+                jobId: jobDetails.job_id,
                 timeStamp: new Date(Date.now()),
                 text: newMessage
             }
@@ -51,7 +59,7 @@ function Chat({ jobId }) {
     return (
         <>
             <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
-                <h3>Chat</h3>
+                <h3>Job# {jobDetails.job_id} Chat</h3>
                 <Button
                     onClick={handleChatRefresh}
                     variant='outlined'>Refresh Chat</Button>
@@ -62,8 +70,14 @@ function Chat({ jobId }) {
                     {chat.map((message) =>
                         <Message key={message.id} message={message} />
                     )}
+                    <div ref={divRef}/>
                 </Box>
             </Box>
+            {/* if job is in any of these statuses, the chat is usable, if not, the submit will be disabled */}
+            {jobDetails.job_status === 'approved' ||
+             jobDetails.job_status === 'request' ||
+             jobDetails.job_status === 'active' ?
+            
             <Box sx={{ display: 'flex' }}>
                 <TextField value={newMessage} onChange={e => setNewMessage(e.target.value)} sx={{ width: '90%' }} />
                 <Button variant="contained" sx={{ width: '10%' }}
@@ -71,6 +85,14 @@ function Chat({ jobId }) {
                     {<SendIcon fontSize="large" />}
                 </Button>
             </Box>
+            :
+            <Box sx={{ display: 'flex' }}>
+                <TextField value={newMessage} onChange={e => setNewMessage(e.target.value)} sx={{ width: '90%' }} />
+                <Button variant="contained" disabled sx={{ width: '10%' }}
+                    onClick={e => handleSubmit(e)}>
+                    {<SendIcon fontSize="large" />}
+                </Button>
+            </Box>}
         </>
     )
 }

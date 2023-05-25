@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Button, Card, CardActions, CardContent, CardMedia, Typography, Link } from '@mui/material';
+import { Button, Card, CardActions, CardContent, CardMedia, IconButton, Typography, Link } from '@mui/material';
 import { useHistory } from "react-router-dom";
 import JobDetails from "./JobDetails";
+import SmsIcon from "@mui/icons-material/Sms";
 
 function AdminDashboard() {
     console.log('Inside Dashboard()!!');
@@ -19,6 +20,7 @@ function AdminDashboard() {
 
     const handleOnClick = (jobObj) => {
         dispatch({ type: 'VIEW_JOB_DETAILS', payload: jobObj})
+        dispatch({ type: "SET_JOB_DETAIL_CHAT", payload: jobObj})
         history.push('/jobDetails')
     }
 
@@ -29,7 +31,7 @@ function AdminDashboard() {
             {allJobs.allJobs.length ? (
                 allJobs.allJobs.map((job, i) => (
                     <Card key={i}>
-                        <CardContent sx={{ display: "flex", justifyContent: "space-evenly" }}>
+                        <CardContent sx={{ display: "flex", justifyContent: "space-between" }}>
                             <Button style={{ display: 'inline-block' }} variant='outlined' onClick={() => handleOnClick(job)}>
                                 {job.job_id}
                             </Button>
