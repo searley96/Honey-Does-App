@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import clientFullJobsHistoryReducer from "../../redux/reducers/fullJob.reducer";
+import Chat from "../Chat/Chat";
 
 import {
   Box,
@@ -13,39 +14,25 @@ import {
   Typography,
 } from "@mui/material";
 
-// function showFullDescription({ job_status }) {
-//   if (
-//     job_status === "active" ||
-//     job_status === "approved" ||
-//     job_status === "request" ||
-//     job_status === "submitted"
-//   ) {
-//     return toggleActiveJobs();
-//   } else if (
-//     job_status === "completed" ||
-//     job_status === "cancelled" ||
-//     job_status === "rejected"
-//   ) {
-//     return togglePastJobs();
-//   }
-// }
 
 function FullJobHistory() {
   const job = useSelector((store) => store.clientFullJobsHistoryReducer);
   const dispatch = useDispatch();
   const history = useHistory();
+
   const [showFullDescription, setShowDescription] = useState(true);
 
-  console.log("fulljobhistory", job.job);
+
+  console.log("fulljobhistory", job);
   const handleBack = () => {
-    history.push("/jobHistory");
+    history.push("/user");
   };
 
   if (!job) {
     return <div>Loading...</div>;
   }
 
-  let date = job.job.date.split("T");
+  let date = job.date.split("T");
 
   return (
     <Container
@@ -64,30 +51,30 @@ function FullJobHistory() {
                 Job#{job.job_id}
               </Typography>
               <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                Manager: {job.job.manager_first_name}{" "}
-                {job.job.manager_last_name}
+                Manager: {job.manager_first_name}{" "}
+                {job.manager_last_name}
               </Typography>
               <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                Cleaner: {job.job.cleaner_first_name}{" "}
-                {job.job.cleaner_last_name}
+                Cleaner: {job.cleaner_first_name}{" "}
+                {job.cleaner_last_name}
               </Typography>
               <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                Job Status: {job.job.job_status}
+                Job Status: {job.job_status}
               </Typography>
               <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                Feedback: {job.job.feedback}
+                Feedback: {job.feedback}
               </Typography>
               <Typography sx={{ mb: 1.5 }} color="text.secondary">
                 Date: {date[0]}
               </Typography>
               <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                Start Time: {job.job.start_time}
+                Start Time: {job.start_time}
               </Typography>
               <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                End Time: {job.job.end_time}
+                End Time: {job.end_time}
               </Typography>
               <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                Estimation: {job.job.estimation}
+                Estimation: {job.estimation}
               </Typography>
               <Button onClick={handleBack}>Back</Button>
             </CardContent>

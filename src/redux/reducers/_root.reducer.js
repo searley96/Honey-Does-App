@@ -11,6 +11,7 @@ import allJobs from "./allJobs.reducer";
 import formList from "./formList.reducer";
 import clientJobsReducer from "./jobs.reducer";
 import clientFullJobsHistoryReducer from "./fullJob.reducer";
+import jobDetailChatReducer from "./jobDetailChat.reducer";
 
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   formList,
   clientJobsReducer,
   clientFullJobsHistoryReducer,
+  jobDetailChatReducer
 });
 
 export default rootReducer;

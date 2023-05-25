@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import allJobsReducer from "../../../redux/reducers/allJobs.reducer";
 import { Button, Card as Box, CardActions, CardContent, CardMedia, Typography, Link, Card, Grid, CardHeader } from '@mui/material';
+import Chat from "../../Chat/Chat";
 
 function JobDetails() {
     const allJobs = useSelector(store => store.allJobs);
@@ -56,6 +57,7 @@ function JobDetails() {
                                 </Typography>
                         </CardContent>
                     </Card>
+                    <Chat />
                 </Grid>
                 // <Box sx={{ flexGrow: 1 }}>
                 //             <CardContent sx={{ display: "flex", justifyContent: "space-evenly" }}>

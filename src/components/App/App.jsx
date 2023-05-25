@@ -30,6 +30,7 @@ import KitchenForm from "../Client/Kitchen/KitchenForm";
 import BathroomForm from "../Client/Bathroom/BathroomForm";
 import WipeDustForm from "../Client/WipeDust/WipeDustForm";
 import OtherRoomForm from "../Client/OtherRoom/OtherRoomForm";
+import Chat from "../Chat/Chat";
 
 function App() {
   const dispatch = useDispatch();
@@ -68,8 +69,25 @@ function App() {
             exact
             path="/user"
           >
-            <UserPage />
-            <BottomNav />
+            {user.role === 'admin' &&
+              <>
+                <AdminDashboard />
+                <BottomNav />
+              </>
+            }
+            {user.role === 'client' &&
+              <>
+                <JobHistory />
+                <BottomNav />
+              </>
+            }
+            {user.role === 'cleaner' &&
+              <>
+
+                {/* Cleaner Dashboard Will Go Here */}
+                <BottomNav />
+              </>
+            }
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -80,14 +98,14 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
 
-          <Route exact path="/jobHistory">
+          {/* <Route exact path="/jobHistory">
             {user.id ? (
               <JobHistory />
             ) : (
               // Otherwise, show the login page
               <LoginPage />
             )}
-          </Route>
+          </Route> */}
 
           <Route exact path="/fullJobHistory">
             {user.id ? (
@@ -98,14 +116,14 @@ function App() {
             )}
           </Route>
 
-          <Route exact path="/adminDashboard">
-            {user.id ? (
+          {/* <Route exact path="/adminDashboard">
+            {user.role === 'admin' ? (
               <AdminDashboard />
             ) : (
               // Otherwise, show the login page
               <LoginPage />
             )}
-          </Route>
+          </Route> */}
 
           <Route exact path="/jobDetails">
             {user.id ? <JobDetails /> : <LoginPage />}
@@ -142,6 +160,13 @@ function App() {
               // Otherwise, show the Landing page
               <LandingPage />
             )}
+          </Route>
+
+          <Route exact path='/chat'>
+            <>
+              <Chat />
+              <BottomNav />
+            </>
           </Route>
 
           <Route exact path="/profile">

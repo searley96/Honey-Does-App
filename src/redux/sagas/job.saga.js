@@ -26,6 +26,7 @@ function* createJobId() {
         console.log('ERROR retrieving new jobID', error);
     }
 }
+
 function* fetchClientJobs(action) {
   try {
     console.log("fetchclientjobs", action.payload);

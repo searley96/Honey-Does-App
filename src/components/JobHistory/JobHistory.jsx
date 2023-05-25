@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import SmsIcon from "@mui/icons-material/Sms";
-import clientJobsReducer from "../../redux/reducers/jobs.reducer";
 import FullJobHistory from "./FullJobHistory";
 import { Link } from "react-router-dom";
 import {
@@ -17,35 +16,14 @@ import {
   styled,
 } from "@mui/material";
 
-const AnimatedIconButton = styled(IconButton)`
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #4caf50;
-  }
-`;
-function showClientJobs({ job_status }) {
-  if (
-    job_status === "active" ||
-    job_status === "approved" ||
-    job_status === "request" ||
-    job_status === "submitted"
-  ) {
-    toggleActiveJobs();
-  } else if (
-    job_status === "completed" ||
-    job_status === "cancelled" ||
-    job_status === "rejected"
-  ) {
-    togglePastJobs();
-  }
-}
 
 function JobHistory() {
   const dispatch = useDispatch();
   const history = useHistory();
+
   const { id } = useParams();
   const [showJobs, setShowJobs] = useState(true);
+
   const clientJobsData = useSelector((store) => store.clientJobsReducer);
   const user = useSelector((store) => store.user);
   const jobs = useSelector((store) => store.jobs);
@@ -75,6 +53,11 @@ function JobHistory() {
     setShowJobs(true);
   };
 
+  const toChat = (jobObject) => {
+    dispatch({ type: "SET_JOB_DETAIL_CHAT", payload: jobObject });
+    history.push('/chat')
+  }
+
   //console.log("date", clientJobsData[2].date);
   return (
     <Container
@@ -96,78 +79,82 @@ function JobHistory() {
         >
           Active Jobs
         </Button>
-        <IconButton
-          variant="contained"
-          aria-label="chat"
-          color="success"
-          fontSize="inherit"
-        >
-          Chat
-          <SmsIcon />
-        </IconButton>
         {showJobs ? (
-          <Card>
-            <CardContent>
-              <Typography
-                sx={{ fontSize: 14, justifyContent: "center" }}
-                color="blue"
-                gutterBottom
-              >
-                Active Jobs
-              </Typography>
+        <Box>
+          <Typography
+            sx={{fontWeight: 500 }}
+            variant='h4'
+            color="primary"
+            align="center"
+            gutterBottom
+          >
+            Active Jobs
+          </Typography>
 
-              {clientJobsData
-                .filter(
-                  (job) =>
-                    job.job_status === "active" ||
-                    job.job_status === "approved" ||
-                    job.job_status === "request" ||
-                    job.job_status === "submitted"
-                )
-                .map((job, index) => {
-                  let date = job.date.split("T");
-                  console.log("what is date", date[0]);
-                  return (
-                    <Card sx={{ mb: 5 }} key={index}>
-                      <Typography
-                        sx={{ mb: 2, backgroundColor: "#fcb900" }}
-                        color="blue"
-                      >
-                        Job#{job.job_id}
-                      </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        Date: {date[0]}
-                      </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        Cleaner: {job.cleaner_first_name}{" "}
-                        {job.cleaner_last_name}
-                      </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        Estimation: {job.estimation}
-                      </Typography>
-                      <CardActions>
-                        <Button>
-                          <Link
-                            key={id}
-                            to={{ pathname: `/fullJobHistory`, state: jobs }}
-                            onClick={() => handleFullJobHistory(job)}
-                            size="small"
-                          >
-                            See Full Job Description
-                          </Link>
-                        </Button>
-                      </CardActions>
-                    </Card>
-                  );
-                })}
-            </CardContent>
-          </Card>
+          {clientJobsData
+            .filter(
+              (job) =>
+                job.job_status === "active" ||
+                job.job_status === "approved" ||
+                job.job_status === "request" ||
+                job.job_status === "submitted"
+            )
+            .map((job, index) => {
+              let date = job.date.split("T");
+              console.log("what is date", date[0]);
+              return (
+                <Card sx={{ mb: 5 }} key={index}>
+                  <Typography
+                    sx={{ mb: 2, backgroundColor: "#fcb900" }}
+                    color="primary"
+                  >
+                    Job#{job.job_id}
+                  </Typography>
+                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    Date: {date[0]}
+                  </Typography>
+                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    Cleaner: {job.cleaner_first_name}{" "}
+                    {job.cleaner_last_name}
+                  </Typography>
+                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    Estimation: {job.estimation}
+                  </Typography>
+                  <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
+                    <CardActions>
+                      <Button>
+                        <Link
+                          key={id}
+                          to={{ pathname: `/fullJobHistory` }}
+                          onClick={() => handleFullJobHistory(job)}
+                          size="small"
+                        >
+                          See Details
+                        </Link>
+                      </Button>
+                    </CardActions>
+                    <IconButton
+                      variant="contained"
+                      aria-label="chat"
+                      color="success"
+                      fontSize="inherit"
+                      onClick={() => toChat(job)}
+                    >
+                      Chat
+                      <SmsIcon />
+                    </IconButton>
+                  </Box>
+                </Card>
+              );
+            })}
+        </Box>      
         ) : (
-          <Card>
-            <CardContent>
+        <Box>
               <Typography
-                sx={{ fontSize: 14, justifyContent: "center" }}
-                color="blue"
+                sx={{fontWeight: 500 }}
+                variant='h4'
+                color="primary"
+                align="center"
                 gutterBottom
               >
                 Past Jobs
@@ -186,7 +173,7 @@ function JobHistory() {
                     <Card sx={{ mb: 5 }} key={index}>
                       <Typography
                         sx={{ mb: 2, backgroundColor: "#fcb900" }}
-                        color="blue"
+                        color="primary"
                       >
                         Job#{job.job_id}
                       </Typography>
@@ -200,23 +187,34 @@ function JobHistory() {
                       <Typography sx={{ mb: 1.5 }} color="text.secondary">
                         Estimation: {job.estimation}
                       </Typography>
-                      <CardActions>
-                        <Button>
-                          <Link
-                            key={id}
-                            to={{ pathname: `/fullJobHistory`, state: jobs }}
-                            onClick={() => handleFullJobHistory(job)}
-                            size="small"
-                          >
-                            See Full Job Description
-                          </Link>
-                        </Button>
-                      </CardActions>
+                      <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
+                        <CardActions>
+                          <Button>
+                            <Link
+                              key={id}
+                              to={{ pathname: `/fullJobHistory` }}
+                              onClick={() => handleFullJobHistory(job)}
+                              size="small"
+                            >
+                              See Details
+                            </Link>
+                          </Button>
+                        </CardActions>
+                        <IconButton
+                          variant="contained"
+                          aria-label="chat"
+                          color="success"
+                          fontSize="inherit"
+                          onClick={() => toChat(job)}
+                        >
+                          Chat
+                          <SmsIcon />
+                        </IconButton>
+                      </Box>
                     </Card>
                   );
                 })}
-            </CardContent>
-          </Card>
+        </Box>
         )}
       </div>
     </Container>
