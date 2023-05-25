@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, TextField, Box } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
+import UserPage from "../UserPage/UserPage";
 
 // pass job_id through props
 function Chat() {
@@ -10,6 +11,7 @@ function Chat() {
     const dispatch = useDispatch();
     const chat = useSelector(store => store.chat);
     const jobDetails = useSelector(store => store.jobDetailChatReducer);
+    const user = useSelector(store => store.user)
 
     const [refreshChat, setRefreshChat] = useState(false);
 
@@ -74,7 +76,8 @@ function Chat() {
                 </Box>
             </Box>
             {/* if job is in any of these statuses, the chat is usable, if not, the submit will be disabled */}
-            {jobDetails.job_status === 'approved' ||
+            {user.role === 'admin' ||
+             jobDetails.job_status === 'approved' ||
              jobDetails.job_status === 'request' ||
              jobDetails.job_status === 'active' ?
             
