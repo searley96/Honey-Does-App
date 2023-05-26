@@ -17,9 +17,9 @@ function Chat() {
 
     const divRef = useRef(null);
 
-    useEffect(() => {
-        divRef.current.scrollIntoView({behavior: 'smooth' });
-    });
+    // useEffect(() => {
+    //     divRef.current.scrollIntoView({behavior: 'smooth' });
+    // });
     console.log('this is jobDetails', jobDetails);
 
     // const userId = useSelector(store => store.user.id)
@@ -51,12 +51,15 @@ function Chat() {
             }
         })
         setNewMessage('');
+        divRef.current.scrollIntoView({behavior: 'smooth' });
     }
-    // console.log('chat:', chat);
+    console.log('chat:', chat);
 
     const handleChatRefresh = () => {
+        divRef.current.scrollIntoView({behavior: 'smooth' });
         setRefreshChat(!refreshChat);
     }
+
 
     return (
         <>
