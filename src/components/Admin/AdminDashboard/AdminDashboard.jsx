@@ -43,13 +43,13 @@ function AdminDashboard() {
   allJobs.allJobs.map((job, i) => (
     <Card key={i} sx={{ mt: 2, pt: 1, marginLeft: 2, marginRight: 2, backgroundColor: "whitesmoke" }}>
       <CardContent sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <Button sx={{ marginLeft: -1}}variant="outlined" onClick={() => handleOnClick(job)}>
+        <Button sx={{ fontWeight: "bold", marginLeft: -1}}variant="outlined" onClick={() => handleOnClick(job)}>
           {job.job_id}
         </Button>
-        <Typography sx={{ fontWeight: "bold", flex: 1, marginLeft: 6 }}>
+        <Typography sx={{ fontWeight: "bold", flex: 1, marginLeft: 6}}> 
           {job.client_first_name} {job.client_last_name}
         </Typography>
-        <Typography sx={{  marginRight: .8 }}>
+        <Typography sx={{  marginRight: .8 , color: job.job_status === "active" ? "green" : job.job_status === "rejected" || job.job_status === "canceled" ? "red" :  "inherit"}}>
           {job.job_status}
         </Typography>
       </CardContent>
