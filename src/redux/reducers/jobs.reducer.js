@@ -1,4 +1,4 @@
-//reducer function for storing All Jobs
+//reducer function for storing All Client Jobs
 const clientJobsReducer = (state = [], action) => {
   switch (action.type) {
     case "SET_CLIENT_JOBS_REDUCER":

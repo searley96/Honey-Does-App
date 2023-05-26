@@ -3,6 +3,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 
 function* createJobId() {
+
+
     try {
         // generates new job_id
         const jobId = yield axios.get(`/api/job/jobid`);
@@ -32,6 +34,7 @@ function* createJobId() {
     } catch(error) {
         console.log('ERROR retrieving new jobID', error);
     }
+
 }
 
 function* fetchClientJobs(action) {
@@ -46,6 +49,21 @@ function* fetchClientJobs(action) {
     });
   } catch (error) {
     console.log("ERROR retrieving new client Jobs", error);
+  }
+}
+
+function* fetchCleanerJobs(action) {
+  try {
+    console.log("fetch cleaner jobs", action.payload);
+    const cleanerJobs = yield axios.get(`/api/job/cleaner/${action.payload}`);
+    console.log("this is cleanerJobs.data", cleanerJobs.data);
+
+    yield put({
+      type: "SET_CLEANER_JOBS_REDUCER",
+      payload: cleanerJobs.data,
+    });
+  } catch (error) {
+    console.log("ERROR retrieving cleaner Jobs", error);
   }
 }
 
@@ -97,11 +115,15 @@ function* getSearchedJobs(action) {
 }
 
 function* jobSaga() {
+
+  yield takeLatest("FETCH_CLEANER_JOB", fetchCleanerJobs);
+
     yield takeLatest('CREATE_JOB_ID', createJobId);
     yield takeLatest('FETCH_JOBS', fetchJobs);
     yield takeLatest('ADMIN_UPDATE_JOB', adminUpdateJob);
     yield takeLatest("FETCH_CLIENT_JOB", fetchClientJobs);
     yield takeLatest("GET_SEARCHED_JOBS", getSearchedJobs);
+
 }
 
 export default jobSaga;

@@ -13,7 +13,7 @@ import Nav from "../Nav/Nav";
 import NewNav from "../Nav/NewNav";
 import Footer from "../Footer/Footer";
 import BottomNav from "../Footer/BottomNav";
-import JobHistory from "../JobHistory/JobHistory";
+import ClientJobHistory from "../ClientJobHistory/ClientJobHistory";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import AboutPage from "../AboutPage/AboutPage";
 import UserPage from "../UserPage/UserPage";
@@ -24,10 +24,14 @@ import RegisterPage from "../RegisterPage/RegisterPage";
 import ProfilePage from "../ProfilePage/ProfilePage";
 import AdminDashboard from "../Admin/AdminDashboard/AdminDashboard";
 import JobDetails from "../Admin/AdminDashboard/JobDetails";
-import FullJobHistory from "../JobHistory/FullJobHistory";
+import ClientFullJobHistory from "../ClientJobHistory/ClientFullJobHistory";
 import "./App.css";
 import KitchenForm from "../Client/Kitchen/KitchenForm";
 import BathroomForm from "../Client/Bathroom/BathroomForm";
+
+import CleanerJobHistory from "../CleanerView/CleanerJobHistory";
+import CleanerFullJobHistory from "../CleanerView/CleanerFullJobHistory";
+
 import WipeDustForm from '../Client/WipeDust/WipeDustForm';
 import OtherRoomForm from '../Client/OtherRoom/OtherRoomForm';
 import GuestBathroomForm from '../Client/Bathroom/GuestBathroomForm.jsx';
@@ -36,6 +40,7 @@ import GuestOtherRoomForm from "../Client/OtherRoom/GuestOtherRoomForm";
 import GuestWipeDustForm from "../Client/WipeDust/GuestWipeDustForm";
 import Chat from "../Chat/Chat";
 import EstimatePage from "../EstimatePage/EstimatePage";
+
 
 
 function App() {
@@ -106,7 +111,7 @@ function App() {
 
           {/* <Route exact path="/jobHistory">
             {user.id ? (
-              <JobHistory />
+              <ClientJobHistory />
             ) : (
               // Otherwise, show the login page
               <LoginPage />
@@ -115,7 +120,22 @@ function App() {
 
           <Route exact path="/fullJobHistory">
             {user.id ? (
-              <FullJobHistory />
+              <>
+                <ClientFullJobHistory />
+                <BottomNav />
+              </>
+            ) : (
+              // Otherwise, show the login page
+              <LoginPage />
+            )}
+          </Route>
+
+          <Route exact path="/cleanerJobHistory">
+            {user.id ? (
+              <>
+                <CleanerJobHistory />
+                <BottomNav />
+              </>
             ) : (
               // Otherwise, show the login page
               <LoginPage />
@@ -133,6 +153,10 @@ function App() {
 
           <Route exact path="/jobDetails">
             {user.id ? <JobDetails /> : <LoginPage />}
+          </Route>
+
+          <Route exact path="/cleanerFullHistory">
+            {user.id ? <CleanerFullJobHistory /> : <LoginPage />}
           </Route>
 
           <Route exact path="/login">

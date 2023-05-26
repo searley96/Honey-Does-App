@@ -1,7 +1,9 @@
+
 const express = require('express');
 const constants = require('../constants/constants.json');
 const calculateLowEstimate = require('../modules/lowEstimate');
 const calculateHighEstimate = require('../modules/highEstimate');
+
 const pool = require("../modules/pool");
 
 const {
@@ -104,10 +106,10 @@ router.get("/client/:id", rejectUnauthenticated, (req, res) => {
     });
 });
 
-// CLIENT VIEW
-// GET FULL JOB HISTORY
-router.get("/fullJobHistory/:job_id", rejectUnauthenticated, (req, res) => {
-  console.log("inside fulljobhistory", req.params.job_id);
+// CLEANER VIEW
+// GET  JOB HISTORY
+router.get("/cleaner/:id", rejectUnauthenticated, (req, res) => {
+  console.log("inside fulljobhistory", req.params.id);
   const queryText = `
     SELECT job_id, client.first_name as client_first_name, client.last_name as client_last_name,
 	    cleaner.first_name as cleaner_first_name, cleaner.last_name as cleaner_last_name,
@@ -124,7 +126,7 @@ router.get("/fullJobHistory/:job_id", rejectUnauthenticated, (req, res) => {
     WHERE "cleaner_id" = $1;
     `;
   pool
-    .query(queryText, [req.params.job_id])
+    .query(queryText, [req.params.id])
     .then((result) => {
       console.log("result.row ", result.rows);
       res.send(result.rows);
@@ -185,6 +187,7 @@ router.get('/:jobId', rejectUnauthenticated, (req, res) => {
 })
 
 // POST new job at start of new request
+
 router.post('/', rejectUnauthenticated, (req, res) => {
     const jobId = req.body.jobId;
     
@@ -219,9 +222,20 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         })
     }
 
-})
+
+  pool
+    .query(queryText, [jobId, userId])
+    .then((result) => {
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
 
 // calculate low and high ends of the job estimate
+
 router.put('/estimate', rejectUnauthenticated, (req, res) => {
     console.log('HOURLY_RATE is:', constants.HOURLY_RATE);
     const formList = req.body.formList;
@@ -253,6 +267,7 @@ router.put('/estimate', rejectUnauthenticated, (req, res) => {
 
     
 })
+
 
 router.post('/guestEstimate', (req, res) => {
     console.log('HOURLY_RATE is:', constants.HOURLY_RATE);

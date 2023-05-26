@@ -12,7 +12,12 @@ import allJobs from "./allJobs.reducer";
 import formList from "./formList.reducer";
 import clientJobsReducer from "./jobs.reducer";
 import clientFullJobsHistoryReducer from "./fullJob.reducer";
+
+import cleanerFullJobsHistoryReducer from "./fullCleanerJobs.reducer";
+import cleanerJobsReducer from "./cleanerJobs.reducer";
+
 import jobDetailChatReducer from "./jobDetailChat.reducer";
+
 
 
 const rootReducer = combineReducers({
@@ -29,7 +34,12 @@ const rootReducer = combineReducers({
   formList,
   clientJobsReducer,
   clientFullJobsHistoryReducer,
+
+  cleanerFullJobsHistoryReducer,
+  cleanerJobsReducer,
+
   jobDetailChatReducer
+
 
 });
 
