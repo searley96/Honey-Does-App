@@ -1,42 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
-import clientFullJobsHistoryReducer from "../../redux/reducers/fullJob.reducer";
-
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  CardActions,
-  Container,
-  Typography,
-} from "@mui/material";
-
-// function showFullDescription({ job_status }) {
-//   if (
-//     job_status === "active" ||
-//     job_status === "approved" ||
-//     job_status === "request" ||
-//     job_status === "submitted"
-//   ) {
-//     return toggleActiveJobs();
-//   } else if (
-//     job_status === "completed" ||
-//     job_status === "cancelled" ||
-//     job_status === "rejected"
-//   ) {
-//     return togglePastJobs();
-//   }
-// }
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { Box, Button, Container, Typography } from "@mui/material";
 
 function FullJobHistory() {
   const job = useSelector((store) => store.clientFullJobsHistoryReducer);
-  const dispatch = useDispatch();
   const history = useHistory();
-  const [showFullDescription, setShowDescription] = useState(true);
+  const [showFullDescription, setShowFullDescription] = useState(true);
+  const jobType = location.state?.jobType || "active";
+  const showAdditionalDetails = location.state?.jobType === "past";
 
-  console.log("fulljobhistory", job.job);
+  const activeStyles = {
+    backgroundColor: "#1976D2",
+    color: "#FCB900",
+  };
+
+  const pastStyles = {
+    backgroundColor: "#FCB900",
+    color: "#1976D2",
+  };
+
+  const jobStyles = jobType === "active" ? activeStyles : pastStyles;
   const handleBack = () => {
     history.push("/jobHistory");
   };
@@ -48,50 +32,113 @@ function FullJobHistory() {
   let date = job.job.date.split("T");
 
   return (
-    <Container
-      maxWidth="sm"
-      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-    >
+    <Container maxWidth="sm">
       <div>
         {showFullDescription ? (
-          <Card sx={{ mb: 5 }}>
-            <CardContent>
-              <Typography
-                sx={{ fontSize: 14, justifyContent: "center" }}
-                color="blue"
-                gutterBottom
-              >
-                Job#{job.job.job_id}
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                Manager: {job.job.manager_first_name}{" "}
-                {job.job.manager_last_name}
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                Cleaner: {job.job.cleaner_first_name}{" "}
-                {job.job.cleaner_last_name}
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                Job Status: {job.job.job_status}
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                Feedback: {job.job.feedback}
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                Date: {date[0]}
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                Start Time: {job.job.start_time}
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                End Time: {job.job.end_time}
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                Estimation: {job.job.estimation}
-              </Typography>
-              <Button onClick={handleBack}>Back</Button>
-            </CardContent>
-          </Card>
+          <Box sx={{ marginTop: "40px" }}>
+            <Button
+              variant="outlined"
+              sx={{
+                fontWeight: "bold",
+                fontSize: 15,
+                outlineStyle: "solid",
+                outlineColor: "#1976D2",
+                outlineWidth: "2px",
+              }}
+              onClick={handleBack}
+            >
+              Back
+            </Button>
+            <Typography
+              sx={{
+                textAlign: "center",
+                py: "20px",
+                fontWeight: "bold",
+                textShadow: "2px 2px 6px rgba(0, 0, 0, 0.5)",
+              }}
+              gutterBottom
+              variant="h5"
+            >
+              Job Details
+            </Typography>
+            {showFullDescription && (
+              <>
+                <Typography
+                  sx={{
+                    mb: 2,
+                    borderRadius: "8px",
+                    marginLeft: 5,
+                    marginRight: 5,
+                    ...jobStyles,
+                  }}
+                  variant="h6"
+                  align="center"
+                  margin="16px"
+                  gutterBottom
+                  fontWeight="bold"
+                  fontSize={20}
+                >
+                  Job#{job.job.job_id}
+                </Typography>
+                <Typography
+                  sx={{ mb: 1.5, ml: 5, marginRight: 5 }}
+                  color="black"
+                >
+                  <span style={{ fontWeight: "bold" }}>Manager: </span>{" "}
+                  {job.job.manager_first_name} {job.job.manager_last_name}
+                </Typography>
+                <Typography
+                  sx={{ mb: 1.5, ml: 5, marginRight: 5 }}
+                  color="black"
+                >
+                  <span style={{ fontWeight: "bold" }}>Cleaner: </span>{" "}
+                  {job.job.cleaner_first_name} {job.job.cleaner_last_name}
+                </Typography>
+                <Typography
+                  sx={{ mb: 1.5, ml: 5, marginRight: 5 }}
+                  color="black"
+                >
+                  <span style={{ fontWeight: "bold" }}>Job Status: </span>{" "}
+                  {job.job.job_status}
+                </Typography>
+                <Typography
+                  sx={{ mb: 1.5, ml: 5, marginRight: 5 }}
+                  color="black"
+                >
+                  <span style={{ fontWeight: "bold" }}>Feedback: </span>{" "}
+                  {job.job.feedback}
+                </Typography>
+                <Typography
+                  sx={{ mb: 1.5, ml: 5, marginRight: 5 }}
+                  color="black"
+                >
+                  <span style={{ fontWeight: "bold" }}>Date: </span>
+                  {date[0]}
+                </Typography>
+                <Typography
+                  sx={{ mb: 1.5, ml: 5, marginRight: 5 }}
+                  color="black"
+                >
+                  <span style={{ fontWeight: "bold" }}>Start Time: </span>{" "}
+                  {job.job.start_time}
+                </Typography>
+                <Typography
+                  sx={{ mb: 1.5, ml: 5, marginRight: 5 }}
+                  color="black"
+                >
+                  <span style={{ fontWeight: "bold" }}>End Time: </span>{" "}
+                  {job.job.end_time}
+                </Typography>
+                <Typography
+                  sx={{ mb: 1.5, ml: 5, marginRight: 5 }}
+                  color="black"
+                >
+                  <span style={{ fontWeight: "bold" }}>Estimation: </span>{" "}
+                  {job.job.estimation}
+                </Typography>
+              </>
+            )}
+          </Box>
         ) : (
           <div>Loading...</div>
         )}
