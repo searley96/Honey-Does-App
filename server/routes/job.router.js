@@ -1,6 +1,7 @@
 const express = require('express');
 const constants = require('../constants/constants.json');
 const calculateLowEstimate = require('../modules/lowEstimate');
+const calculateHighEstimate = require('../modules/highEstimate');
 const pool = require("../modules/pool");
 
 const {
@@ -166,17 +167,35 @@ router.get("/allJobs", rejectUnauthenticated, (req, res) => {
     });
 });
 
+// GET active job
+router.get('/:jobId', rejectUnauthenticated, (req, res) => {
+    const jobId = req.params.jobId;
+    const queryText = `
+        SELECT * FROM job
+        where job_id = $1;
+    `;
+
+    pool.query(queryText, [jobId])
+        .then(result => {
+            res.send(result.rows);
+        }).catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+        })
+})
+
 // POST new job at start of new request
 router.post('/', rejectUnauthenticated, (req, res) => {
     const jobId = req.body.jobId;
-    const userId = req.user.id;
-    const queryText = `
+    
+    // console.log(jobId);
+    if(req.user.id){
+        const userId = req.user.id;
+        const queryText = `
         INSERT INTO "job" (job_id, client_id, job_status)
         VALUES ($1, $2, 'unsubmitted')
     `
-    // console.log(jobId);
-
-    pool.query(queryText, [jobId, userId])
+        pool.query(queryText, [jobId, userId])
         .then(result => {
             res.sendStatus(201);
         })
@@ -184,23 +203,69 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             console.log(err);
             res.sendStatus(500);
         })
+    }
+    else{
+        const queryText = `
+        INSERT INTO "job" (job_id, client_id, job_status)
+        VALUES ($1, 0, 'unsubmitted')
+    `
+        pool.query(queryText, [jobId])
+        .then(result => {
+            res.sendStatus(201);
+        })
+        .catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+        })
+    }
 
 })
 
 // calculate low and high ends of the job estimate
-router.post('/estimate', rejectUnauthenticated, (req, res) => {
+router.put('/estimate', rejectUnauthenticated, (req, res) => {
     console.log('HOURLY_RATE is:', constants.HOURLY_RATE);
     const formList = req.body.formList;
-    formList.push(req.body.wipeDustForm.wipeDust);
+    formList.push(req.body.wipeDust);
 
+    const queryText = `
+        UPDATE job 
+        SET low_estimate = $1, high_estimate = $2
+        WHERE job_id = $3;
+    `
 
 
     console.log('formList in /estimate:', formList);
-    const lowEstimate = calculateLowEstimate(constants, formList);
+    const lowEstimate = Math.round(calculateLowEstimate(constants, formList));
+    const highEstimate = Math.round(calculateHighEstimate(constants, formList));
 
-    res.sendStatus(200);
+    console.log('low estimate is:', lowEstimate);
+    console.log('high estimate is:', highEstimate);
+
+    pool.query(queryText, [lowEstimate, highEstimate, req.body.jobId])
+        .then(result => {
+            res.sendStatus(201);
+        }).catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+        })
+
+    // res.sendStatus(200);
 
     
+})
+
+router.post('/guestEstimate', (req, res) => {
+    console.log('HOURLY_RATE is:', constants.HOURLY_RATE);
+    const formList = req.body.formList;
+    formList.push(req.body.wipeDust);
+
+    console.log('formList in /guestEstimate:', formList);
+    const lowEstimate = calculateLowEstimate(constants, formList);
+    const highEstimate = calculateHighEstimate(constants, formList);
+
+    console.log('low estimate is:', lowEstimate);
+    console.log('high estimate is:', highEstimate);
+    res.send({lowEstimate, highEstimate});
 })
 
 // ADMIN

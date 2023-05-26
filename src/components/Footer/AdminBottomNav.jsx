@@ -4,15 +4,12 @@ import { AppBar, Box, Toolbar, CssBaseline, Fab, IconButton, Menu, MenuItem } fr
 
 import HomeIcon from '@mui/icons-material/Home';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-function BottomNav() {
+function AdminBottomNav() {
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -38,26 +35,15 @@ function BottomNav() {
   };
 
   // navigation
-  const toHome = () => {
-    history.push('/home');
+  const adminDashboard = () => {
+    history.push('/adminDashboard');
   }
 
-  const toProfile = () => {
-    history.push('/profile');
-    setAnchorEl(null);
-  }
+//   const toProfile = () => {
+//     history.push('/profile');
+//     setAnchorEl(null);
+//   }
 
-  const toClientForm = () => {
-    
-    if (user.form_job_id == null) {
-
-      dispatch({
-        type: 'CREATE_JOB_ID'
-      })
-    }
-    
-    history.push('/bathroomForm')
-  }
 
   const logout = () => {
     dispatch({ type: 'LOGOUT' })
@@ -71,26 +57,10 @@ function BottomNav() {
       <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0, px: 3.2 }}>
         <Toolbar>
           <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
-            <IconButton color="inherit" aria-label="open drawer" onClick={toHome}>
+            <IconButton color="inherit" aria-label="open drawer" onClick={adminDashboard}>
               <HomeIcon fontSize='large' />
             </IconButton>
             {/* <StyledFab sx={{backgroundColor: 'rgb(252,228,62)'}} aria-label="new clean request"> */}
-
-            {(!user.form_job_id && user.role ==='client') &&
-              <StyledFab color='secondary' aria-label="new clean request" onClick={toClientForm}>
-                <CleaningServicesIcon />
-              </StyledFab> 
-              // <>
-              //   <IconButton color="inherit" aria-label="open drawer" onClick={editPrevious}>
-              //     <ArrowBackIosNewIcon fontSize='large' />
-              //   </IconButton>
-              //   <IconButton color="inherit" aria-label="open drawer" onClick={toHome}>
-              //     <ArrowForwardIosIcon fontSize='large' />
-              //   </IconButton>
-              // </>
-
-
-            }
             {/* <Box sx={{ flexGrow: 1 }} /> */}
             <IconButton color="inherit" onClick={handleClick}>
               <AccountBoxIcon fontSize='large' />
@@ -111,7 +81,7 @@ function BottomNav() {
               MenuListProps={{
                 'aria-labelledby': 'basic-button',
               }}>
-              <MenuItem onClick={toProfile}>Profile</MenuItem>
+              {/* <MenuItem onClick={toProfile}>Profile</MenuItem> */}
               <MenuItem onClick={logout}>Logout</MenuItem>
             </Menu>
           </Box>
@@ -121,4 +91,4 @@ function BottomNav() {
   );
 }
 
-export default BottomNav;
+export default AdminBottomNav;

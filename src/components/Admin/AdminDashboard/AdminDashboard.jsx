@@ -3,8 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { AppBar, Button, Box, Card, CardActions, CardContent, CardMedia, IconButton, Typography, Toolbar, Link, styled, alpha, InputAdornment, InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useHistory } from "react-router-dom";
+import Chat from "../../Chat/Chat";
 
 function AdminDashboard() {
+
     console.log('Inside Dashboard()!!');
     const dispatch = useDispatch();
     const [searchInput, setSearchInput] = useState('');
@@ -55,29 +57,43 @@ function AdminDashboard() {
                 </AppBar>
             </Box>
 
-            {allJobs.allJobs.length ? (
-                allJobs.allJobs.map((job, i) => (
-                    <Card key={i}>
-                        <CardContent sx={{ display: "flex", justifyContent: "space-between" }}>
-                            <Button style={{ display: 'inline-block' }} variant='outlined' onClick={() => handleOnClick(job)}>
-                                {job.job_id}
-                            </Button>
-                            <Typography style={{ display: 'inline-block' }}>
-                                {job.client_first_name} {job.client_last_name}
-                            </Typography>
-                            <Typography style={{ display: 'inline-block' }}>
-                                {job.job_status}
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                ))
-            ) : (
-                <p>No jobs.</p>
+           <Typography
+                  sx={{ fontWeight: "bold", mt: 3 }}
+                  align="center"
+                  variant="h5"
 
-            )}
-
+                >
+                  All Jobs
+                </Typography>
+                <Card elevation="0">
+                  <CardContent sx={{ display: "flex", justifyContent: "space-between"}}>
+                    <Typography sx={{ marginBottom: -3, marginLeft: 3 }}>Job ID:</Typography>
+                    <Typography sx={{ marginBottom: -3 }}>Client Name:</Typography>
+                    <Typography sx={{ marginBottom: -3 , marginRight:2 }}>Status:</Typography>
+                  </CardContent>
+                </Card>
+           {allJobs.allJobs.length ? (
+  allJobs.allJobs.map((job, i) => (
+    <Card key={i} sx={{ mt: 2, pt: 1, marginLeft: 2, marginRight: 2, backgroundColor: "whitesmoke" }}>
+      <CardContent sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <Button sx={{ fontWeight: "bold", marginLeft: -1}}variant="outlined" onClick={() => handleOnClick(job)}>
+          {job.job_id}
+        </Button>
+        <Typography sx={{ fontWeight: "bold", flex: 1, marginLeft: 6}}> 
+          {job.client_first_name} {job.client_last_name}
+        </Typography>
+        <Typography sx={{  marginRight: .8 , color: job.job_status === "active" ? "green" : job.job_status === "rejected" || job.job_status === "canceled" ? "red" :  "inherit"}}>
+          {job.job_status}
+        </Typography>
+      </CardContent>
+    </Card>
+        ))
+      ) : (
+        <p>No details yet.</p>
+      )}
         </>
     )
+
 }
 
 export default AdminDashboard;
