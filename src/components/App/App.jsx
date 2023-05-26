@@ -28,9 +28,14 @@ import FullJobHistory from "../JobHistory/FullJobHistory";
 import "./App.css";
 import KitchenForm from "../Client/Kitchen/KitchenForm";
 import BathroomForm from "../Client/Bathroom/BathroomForm";
-import WipeDustForm from "../Client/WipeDust/WipeDustForm";
-import OtherRoomForm from "../Client/OtherRoom/OtherRoomForm";
+import WipeDustForm from '../Client/WipeDust/WipeDustForm';
+import OtherRoomForm from '../Client/OtherRoom/OtherRoomForm';
+import GuestBathroomForm from '../Client/Bathroom/GuestBathroomForm.jsx';
+import GuestKitchenForm from "../Client/Kitchen/GuestKitchenForm";
+import GuestOtherRoomForm from "../Client/OtherRoom/GuestOtherRoomForm";
+import GuestWipeDustForm from "../Client/WipeDust/GuestWipeDustForm";
 import Chat from "../Chat/Chat";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -228,6 +233,25 @@ function App() {
             )}
           </Route>
 
+          <Route
+            exact path="/guestBathroomForm">
+            <GuestBathroomForm />
+          </Route>
+
+          <Route
+            exact path="/guestKitchenForm">
+            <GuestKitchenForm />
+          </Route>
+
+          <Route
+            exact path="/guestOtherRoomForm">
+            <GuestOtherRoomForm />
+          </Route>
+
+          <Route
+            exact path="/guestWipeDustForm">
+            <GuestWipeDustForm />
+          </Route>
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>

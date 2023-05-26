@@ -12,15 +12,15 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-function BathroomForm() {
+function GuestBathroomForm() {
 
   const dispatch = useDispatch();
   const history = useHistory();
   // jobId is taken from the active job that was set on the add clean button press
   // stored in activeJobReducer
-  const jobId = useSelector(store => store.activeJobReducer.job_id);
+  const jobId = useSelector(store => store.jobidReducer);
   // used as an alternative to jobId if it is not available in useEffect
-  const formJobId = useSelector(store => store.jobid);
+  //const formJobId = useSelector(store => store.jobid);
   // the list of forms that have a job_id that match user.form_job_id
   const formList = useSelector(store => store.formList);
   // the state of the current bathroom form
@@ -42,15 +42,11 @@ function BathroomForm() {
     //  -result of this specific dispatch will be to initialize formList = []
 
     // if active job exists and is available, update reducer
-    if(jobId){
-      console.log('using jobId', jobId);
-      dispatch({ type: 'FETCH_FORM_LIST', payload: {jobId} })
-    }
-    else if(formJobId){
-      console.log('using formJobId', formJobId);
-      dispatch({ type: 'FETCH_FORM_LIST', payload: {formJobId} })
-
-    }
+    // if(jobId){
+    //   console.log('using jobId', jobId);
+    //   dispatch({ type: 'FETCH_FORM_LIST', payload: {jobId} })
+    // }
+    
   }, [])
 
   function addBathroom() {
@@ -58,7 +54,7 @@ function BathroomForm() {
     // dispatch to room.saga that triggers post request to form.router ('/bathroom/)
     console.log('inside bathroom form', jobId);
     
-      dispatch({ type: 'ADD_BATHROOM', payload: { bathroom, jobId, order } });
+      dispatch({ type: 'ADD_GUEST_FORM', payload: { bathroom, order } });
     
     // else{
     //   dispatch({type: 'ADD_BATHROOM', payload: { bathroom, jobId, order }})
@@ -68,10 +64,10 @@ function BathroomForm() {
     const order = formList.length + 1;
     // dispatch to room.saga that triggers post request to form.router ('/bathroom/)
     
-    dispatch({ type: 'ADD_BATHROOM', payload: { bathroom, jobId, order } })
+    dispatch({ type: 'ADD_GUEST_FORM', payload: { bathroom, order } })
     
     
-    history.push('/kitchenForm') // directs user to the kitchen form 
+    history.push('/guestKitchenForm') // directs user to the kitchen form 
   }
 
   return (
@@ -106,4 +102,4 @@ function BathroomForm() {
   );
 }
 
-export default BathroomForm;
+export default GuestBathroomForm;

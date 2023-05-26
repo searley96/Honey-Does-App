@@ -82,7 +82,7 @@ const clientKitchenReducer = (state =
             return { ...state, specialty_flooring_instructions: action.payload };
         case 'SET_MOP_LOCATION':
             return { ...state, mop_location: action.payload };
-            case 'CLEAR_ROOM':
+            case 'CLEAR_FORM':
             return { 
                 order: null,
                 form_type: 'kitchen',

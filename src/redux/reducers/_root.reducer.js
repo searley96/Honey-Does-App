@@ -1,3 +1,4 @@
+import activeJobReducer from './activeJob.reducer';
 import { combineReducers } from "redux";
 import errors from "./errors.reducer";
 import user from "./user.reducer";
@@ -13,6 +14,7 @@ import clientJobsReducer from "./jobs.reducer";
 import clientFullJobsHistoryReducer from "./fullJob.reducer";
 import jobDetailChatReducer from "./jobDetailChat.reducer";
 
+
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user,
@@ -22,11 +24,13 @@ const rootReducer = combineReducers({
   jobidReducer,
   clientWipeDust,
   clientBathroomReducer,
+  activeJobReducer,
   allJobs,
   formList,
   clientJobsReducer,
   clientFullJobsHistoryReducer,
   jobDetailChatReducer
+
 });
 
 export default rootReducer;
