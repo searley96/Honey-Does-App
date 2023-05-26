@@ -28,9 +28,15 @@ import FullJobHistory from "../JobHistory/FullJobHistory";
 import "./App.css";
 import KitchenForm from "../Client/Kitchen/KitchenForm";
 import BathroomForm from "../Client/Bathroom/BathroomForm";
-import WipeDustForm from "../Client/WipeDust/WipeDustForm";
-import OtherRoomForm from "../Client/OtherRoom/OtherRoomForm";
+import WipeDustForm from '../Client/WipeDust/WipeDustForm';
+import OtherRoomForm from '../Client/OtherRoom/OtherRoomForm';
+import GuestBathroomForm from '../Client/Bathroom/GuestBathroomForm.jsx';
+import GuestKitchenForm from "../Client/Kitchen/GuestKitchenForm";
+import GuestOtherRoomForm from "../Client/OtherRoom/GuestOtherRoomForm";
+import GuestWipeDustForm from "../Client/WipeDust/GuestWipeDustForm";
 import Chat from "../Chat/Chat";
+import EstimatePage from "../EstimatePage/EstimatePage";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -188,7 +194,7 @@ function App() {
                 <BottomNav />
               </>
             ) : (
-              <LoginPage />
+                <BathroomForm />
             )}
           </Route>
 
@@ -199,7 +205,7 @@ function App() {
                 <BottomNav />
               </>
             ) : (
-              <LoginPage />
+              <KitchenForm />
             )}
           </Route>
 
@@ -214,7 +220,7 @@ function App() {
                 <BottomNav />
               </>
             ) : (
-              <LoginPage />
+                <OtherRoomForm />
             )}
           </Route>
 
@@ -225,10 +231,42 @@ function App() {
                 <BottomNav />
               </>
             ) : (
-              <LoginPage />
+                <WipeDustForm />
             )}
           </Route>
 
+          <Route exact path="/estimate">
+            {user.id ? (
+              <>
+                <EstimatePage />
+                <BottomNav />
+              </>
+            ) : (
+              <>
+                <EstimatePage />
+              </>
+            )}
+          </Route>
+
+          <Route
+            exact path="/guestBathroomForm">
+            <GuestBathroomForm />
+          </Route>
+
+          <Route
+            exact path="/guestKitchenForm">
+            <GuestKitchenForm />
+          </Route>
+
+          <Route
+            exact path="/guestOtherRoomForm">
+            <GuestOtherRoomForm />
+          </Route>
+
+          <Route
+            exact path="/guestWipeDustForm">
+            <GuestWipeDustForm />
+          </Route>
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>

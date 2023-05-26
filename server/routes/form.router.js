@@ -8,8 +8,9 @@ const userStrategy = require('../strategies/user.strategy');
 const router = express.Router();
 
 // GET FORM LIST
-router.get('/form-list', rejectUnauthenticated, (req, res) => {
-    const jobId = req.user.form_job_id;
+router.get('/form-list/:jobId', rejectUnauthenticated, (req, res) => {
+    const jobId = req.params.jobId;
+    console.log(req.params, jobId);
     const querybathrooms = `
         SELECT * FROM user_bathroom
         WHERE job_id = $1
@@ -354,7 +355,7 @@ router.get('/wipe-dust/:jobid', rejectUnauthenticated, (req, res) => {
 // WIPE / DUST POST
 router.post('/wipe-dust/', rejectUnauthenticated, (req, res) => {
     // mind the table name
-    // console.log(req.body);
+    console.log('in wipe-dust router', req.body);
     const queryText = `
     INSERT INTO "user_wipe_dust"( 
        job_id,

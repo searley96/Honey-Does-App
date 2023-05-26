@@ -68,7 +68,7 @@ const clientBathroomReducer = (state = {
             return { ...state, sweep_mop_floor: action.payload };
         case 'SET_SHAKE_RUGS':
             return { ...state, shake_rugs: action.payload };
-        case 'CLEAR_ROOM':
+        case 'CLEAR_FORM':
             return {
                 order: null,
                 form_type: 'bathroom',
