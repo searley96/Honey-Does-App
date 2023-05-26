@@ -48,15 +48,15 @@ function BottomNav() {
   }
 
   const toClientForm = () => {
-    // ADJUST WHEN FORMS ARE READY
-    history.push('/bathroomForm')
-    console.log(user);
+    
     if (user.form_job_id == null) {
 
       dispatch({
         type: 'CREATE_JOB_ID'
       })
     }
+    
+    history.push('/bathroomForm')
   }
 
   const logout = () => {
@@ -64,9 +64,6 @@ function BottomNav() {
     setAnchorEl(null);
   }
 
-  const toBathroomForm = () => {
-    history.push('/bathroomForm');
-  }
 
   return (
     <React.Fragment>

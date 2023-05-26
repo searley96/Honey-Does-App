@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
-function KitchenForm() {
+function GuestKitchenForm() {
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -28,14 +28,14 @@ function KitchenForm() {
     const addKitchen = () => {
         const order = formList.length + 1;
         // dispatch to room.saga that triggers post request to form.router ('/kitchen/')
-        dispatch({ type: 'ADD_KITCHEN', payload: { kitchen, jobId, order } });
+        dispatch({ type: 'ADD_GUEST_FORM', payload: { kitchen } });
     }
 
     const moveToOtherRooms = () => {
         const order = formList.length + 1;
         // dispatch to room.saga that triggers post request to form.router ('/bathroom/)
-        dispatch({ type: 'ADD_KITCHEN', payload: { kitchen, jobId, order } });
-        history.push('/otherRoomForm'); // directs user to the other room form 
+        dispatch({ type: 'ADD_GUEST_FORM', payload: { kitchen } });
+        history.push('/guestOtherRoomForm'); // directs user to the other room form 
     }
 
     return (
@@ -72,4 +72,4 @@ function KitchenForm() {
 
 }
 
-export default KitchenForm;
+export default GuestKitchenForm;
