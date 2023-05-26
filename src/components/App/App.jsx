@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+
 import {
   HashRouter as Router,
   Redirect,
@@ -7,23 +8,24 @@ import {
 } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-
+// import Container from "../DashBoard/Container";
 import Nav from "../Nav/Nav";
 import NewNav from "../Nav/NewNav";
 import Footer from "../Footer/Footer";
 import BottomNav from "../Footer/BottomNav";
-
+import JobHistory from "../JobHistory/JobHistory";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-
 import AboutPage from "../AboutPage/AboutPage";
 import UserPage from "../UserPage/UserPage";
 import InfoPage from "../InfoPage/InfoPage";
 import LandingPage from "../LandingPage/LandingPage";
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
-import ProfilePage from '../ProfilePage/ProfilePage';
-
-import './App.css';
+import ProfilePage from "../ProfilePage/ProfilePage";
+import AdminDashboard from "../Admin/AdminDashboard/AdminDashboard";
+import JobDetails from "../Admin/AdminDashboard/JobDetails";
+import FullJobHistory from "../JobHistory/FullJobHistory";
+import "./App.css";
 import KitchenForm from "../Client/Kitchen/KitchenForm";
 import BathroomForm from "../Client/Bathroom/BathroomForm";
 import WipeDustForm from '../Client/WipeDust/WipeDustForm';
@@ -32,6 +34,8 @@ import GuestBathroomForm from '../Client/Bathroom/GuestBathroomForm.jsx';
 import GuestKitchenForm from "../Client/Kitchen/GuestKitchenForm";
 import GuestOtherRoomForm from "../Client/OtherRoom/GuestOtherRoomForm";
 import GuestWipeDustForm from "../Client/WipeDust/GuestWipeDustForm";
+import Chat from "../Chat/Chat";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -70,8 +74,25 @@ function App() {
             exact
             path="/user"
           >
-            <UserPage />
-            <BottomNav />
+            {user.role === 'admin' &&
+              <>
+                <AdminDashboard />
+                <BottomNav />
+              </>
+            }
+            {user.role === 'client' &&
+              <>
+                <JobHistory />
+                <BottomNav />
+              </>
+            }
+            {user.role === 'cleaner' &&
+              <>
+
+                {/* Cleaner Dashboard Will Go Here */}
+                <BottomNav />
+              </>
+            }
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -82,10 +103,40 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
 
-          <Route
-            exact path="/login">
+          {/* <Route exact path="/jobHistory">
             {user.id ? (
-              // If the user is already logged in, 
+              <JobHistory />
+            ) : (
+              // Otherwise, show the login page
+              <LoginPage />
+            )}
+          </Route> */}
+
+          <Route exact path="/fullJobHistory">
+            {user.id ? (
+              <FullJobHistory />
+            ) : (
+              // Otherwise, show the login page
+              <LoginPage />
+            )}
+          </Route>
+
+          {/* <Route exact path="/adminDashboard">
+            {user.role === 'admin' ? (
+              <AdminDashboard />
+            ) : (
+              // Otherwise, show the login page
+              <LoginPage />
+            )}
+          </Route> */}
+
+          <Route exact path="/jobDetails">
+            {user.id ? <JobDetails /> : <LoginPage />}
+          </Route>
+
+          <Route exact path="/login">
+            {user.id ? (
+              // If the user is already logged in,
               // redirect to the /user page
               <Redirect to="/user" />
             ) : (
@@ -116,63 +167,70 @@ function App() {
             )}
           </Route>
 
-          <Route
-            exact path="/profile">
-              {user.id ?
+          <Route exact path='/chat'>
+            <>
+              <Chat />
+              <BottomNav />
+            </>
+          </Route>
+
+          <Route exact path="/profile">
+            {user.id ? (
               <>
                 <ProfilePage />
                 <BottomNav />
               </>
-              :
-                <LoginPage />
-              }
+            ) : (
+              <LoginPage />
+            )}
           </Route>
 
           <Route exact path="/bathroomForm">
-            {user.id ?
-            <>
-              <BathroomForm/>
-              <BottomNav />
-            </>
-            :
+            {user.id ? (
+              <>
+                <BathroomForm />
+                <BottomNav />
+              </>
+            ) : (
               <LoginPage />
-            }
+            )}
           </Route>
 
           <Route exact path="/kitchenForm">
-            {user.id ?
-            <>
-              <KitchenForm />
-              <BottomNav />
-            </>
-            :
+            {user.id ? (
+              <>
+                <KitchenForm />
+                <BottomNav />
+              </>
+            ) : (
               <LoginPage />
-            }
+            )}
           </Route>
 
           <Route
             // logged in shows OtherRoomForm else shows LoginPage
-            exact path="/otherRoomForm">
-              {user.id ?
+            exact
+            path="/otherRoomForm"
+          >
+            {user.id ? (
               <>
                 <OtherRoomForm />
                 <BottomNav />
               </>
-              :
-                <LoginPage />
-              }
+            ) : (
+              <LoginPage />
+            )}
           </Route>
 
-          <Route
-            exact path="/wipeDustForm">
-              {user.id ?
+          <Route exact path="/wipeDustForm">
+            {user.id ? (
               <>
                 <WipeDustForm />
                 <BottomNav />
               </>
-              :
-                <LoginPage />
-              }
+            ) : (
+              <LoginPage />
+            )}
           </Route>
 
           <Route
@@ -199,6 +257,9 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
+        {/* <Menu />
+        <Container /> */}
+
         <Footer />
       </div>
     </Router>
