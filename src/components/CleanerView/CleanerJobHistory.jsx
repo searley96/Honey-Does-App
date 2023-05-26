@@ -137,7 +137,12 @@ function CleanerJobHistory() {
           <Card>
             <CardContent>
               <Typography
-                sx={{ textAlign: "center", py: "20px", fontWeight: "bold" }}
+                sx={{
+                  textShadow: "2px 2px 6px rgba(0, 0, 0, 0.5)",
+                  textAlign: "center",
+                  py: "20px",
+                  fontWeight: "bold",
+                }}
                 gutterBottom
                 variant="h5"
               >
@@ -235,7 +240,12 @@ function CleanerJobHistory() {
           <Card>
             <CardContent>
               <Typography
-                sx={{ textAlign: "center", py: "20px", fontWeight: "bold" }}
+                sx={{
+                  textShadow: "2px 2px 6px rgba(0, 0, 0, 0.5)",
+                  textAlign: "center",
+                  py: "20px",
+                  fontWeight: "bold",
+                }}
                 gutterBottom
                 variant="h5"
               >
