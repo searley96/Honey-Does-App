@@ -73,11 +73,28 @@ function* adminUpdateJob(action) {
     }
 }
 
+// ADMIN DASHBOARD - GET SEARCHED JOBS
+function* getSearchedJobs(action) {
+    try {
+        const response = yield axios.get(`/api/job/search/${action.payload}`);
+        console.log('getSearchedJobs() response.data:', response.data);
+
+        // store searched jobs in the allJobs reducer
+        yield put({
+            type: 'SET_ALL_JOBS', 
+            payload: response.data
+        });
+    } catch (error) {
+        console.log("Error retrieving searched jobs", error);
+    }
+}
+
 function* jobSaga() {
     yield takeLatest('CREATE_JOB_ID', createJobId);
     yield takeLatest('FETCH_JOBS', fetchJobs);
     yield takeLatest('ADMIN_UPDATE_JOB', adminUpdateJob);
     yield takeLatest("FETCH_CLIENT_JOB", fetchClientJobs);
+    yield takeLatest("GET_SEARCHED_JOBS", getSearchedJobs);
 }
 
 export default jobSaga;
