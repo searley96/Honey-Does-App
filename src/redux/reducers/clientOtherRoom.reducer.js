@@ -17,7 +17,7 @@ const clientOtherRoomReducer = (state = {
             return { ...state, clean_floor: action.payload };
         case 'SET_FLOOR_TYPE':
             return { ...state, floor_type: action.payload };
-        case 'CLEAR_ROOM':
+        case 'CLEAR_FORM':
             return {
                 
                 order: null,

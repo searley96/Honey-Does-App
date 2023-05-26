@@ -8,12 +8,12 @@ import { Button, Stack, Box, FormGroup, FormControl, FormControlLabel, FormLabel
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-function WipeDustForm() {
+function GuestWipeDustForm() {
 
     const dispatch = useDispatch();
     // jobId is taken from the active job that was set on the add clean button press
   // stored in activeJobReducer
-    const jobId = useSelector(store => store.activeJobReducer.job_id)
+    const jobId = useSelector(store => store.jobidReducer)
     // the list of forms that have a job_id that match user.form_job_id
     const history = useHistory();
     // the state of the current kitchen form
@@ -25,7 +25,7 @@ function WipeDustForm() {
         const order = formList.length + 1;
         // dispatch to room.saga that triggers post request to form.router ('/kitchen/')
         dispatch({
-            type: 'ADD_WIPE_DUST',
+            type: 'ADD_GUEST_WIPE_DUST',
             payload: {
                 
                     wipeDust,
@@ -35,7 +35,8 @@ function WipeDustForm() {
             }
         })
 
-        history.push('/estimate')
+        // history.push('/estimate')
+        history.push('/profile'); // TEMP
     }
 
     return (
@@ -96,4 +97,4 @@ function WipeDustForm() {
     )
 }
 
-export default WipeDustForm;
+export default GuestWipeDustForm;
