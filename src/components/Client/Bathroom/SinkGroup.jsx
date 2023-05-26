@@ -63,7 +63,7 @@ function SinkGroup() {
           }
         >
           <FormControlLabel
-            value="Pedistal"
+            value="Pedestal"
             control={<Radio />}
             label="Pedistal"
           />

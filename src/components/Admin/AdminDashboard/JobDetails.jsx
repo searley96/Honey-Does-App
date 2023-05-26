@@ -134,7 +134,7 @@ function JobDetails() {
         <>
             <h3>Job #{allJobs.jobDetails.job_id}</h3>
             {allJobs.jobDetails ? (
-                <Grid item xs={4}>
+                <Grid item xs={4} sx={{mb: 5}}>
 
                     {/* JOB STATUS INPUT */}
                     <Card sx={{ width: 400, height: 70 }}>
@@ -448,13 +448,13 @@ function JobDetails() {
                         </CardContent>
                     </Card>
 
-                </Grid >
+                </Grid>
                 // *** END GRID *** //
             ) : (
                 <p>Job Details</p>
             )
             }
-            <h2>Chat Box Goes here</h2>
+            <Chat />
         </>
     )
 }

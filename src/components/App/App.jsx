@@ -35,6 +35,7 @@ import GuestKitchenForm from "../Client/Kitchen/GuestKitchenForm";
 import GuestOtherRoomForm from "../Client/OtherRoom/GuestOtherRoomForm";
 import GuestWipeDustForm from "../Client/WipeDust/GuestWipeDustForm";
 import Chat from "../Chat/Chat";
+import EstimatePage from "../EstimatePage/EstimatePage";
 
 
 function App() {
@@ -192,7 +193,7 @@ function App() {
                 <BottomNav />
               </>
             ) : (
-              <LoginPage />
+                <BathroomForm />
             )}
           </Route>
 
@@ -203,7 +204,7 @@ function App() {
                 <BottomNav />
               </>
             ) : (
-              <LoginPage />
+              <KitchenForm />
             )}
           </Route>
 
@@ -218,7 +219,7 @@ function App() {
                 <BottomNav />
               </>
             ) : (
-              <LoginPage />
+                <OtherRoomForm />
             )}
           </Route>
 
@@ -229,7 +230,20 @@ function App() {
                 <BottomNav />
               </>
             ) : (
-              <LoginPage />
+                <WipeDustForm />
+            )}
+          </Route>
+
+          <Route exact path="/estimate">
+            {user.id ? (
+              <>
+                <EstimatePage />
+                <BottomNav />
+              </>
+            ) : (
+              <>
+                <EstimatePage />
+              </>
             )}
           </Route>
 
