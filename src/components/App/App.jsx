@@ -144,6 +144,7 @@ function App() {
               // Otherwise, show the login page
               <LoginPage />
             )}
+            
           </Route>
 
           <Route exact path="/registration">
