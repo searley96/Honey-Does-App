@@ -167,6 +167,23 @@ router.get("/allJobs", rejectUnauthenticated, (req, res) => {
     });
 });
 
+// GET active job
+router.get('/:jobId', rejectUnauthenticated, (req, res) => {
+    const jobId = req.params.jobId;
+    const queryText = `
+        SELECT * FROM job
+        where job_id = $1;
+    `;
+
+    pool.query(queryText, [jobId])
+        .then(result => {
+            res.send(result.rows);
+        }).catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+        })
+})
+
 // POST new job at start of new request
 router.post('/', rejectUnauthenticated, (req, res) => {
     const jobId = req.body.jobId;
