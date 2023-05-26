@@ -7,7 +7,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function Message({ message }) {
 
-    const user = 1;
+    const user = useSelector(store => store.user);
 
 
     // console.log(user, message.sender_id)
@@ -16,7 +16,7 @@ function Message({ message }) {
         // <Box sx={{ backgroundColor: '#f5f5f5'}}>
         <>
             {
-                message.sender_id == user ?
+                message.sender_id == user.id ?
                     <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                         <Paper className="message" variant='elevation' elevation={3}
                             sx={{
