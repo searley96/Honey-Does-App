@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Card, CardActions, CardContent, CardMedia, IconButton, Typography, Link } from '@mui/material';
 import { useHistory } from "react-router-dom";
+import Chat from "../../Chat/Chat";
 
 function AdminDashboard() {
   console.log("Inside Dashboard()!!");

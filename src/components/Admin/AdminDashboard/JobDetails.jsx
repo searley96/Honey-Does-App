@@ -624,12 +624,13 @@ function JobDetails() {
               </Typography>
             </CardContent>
           </Card>
+
         </Grid>
       ) : (
         // *** END GRID *** //
         <p>Job Details</p>
       )}
-      <h2>Chat Box Goes here</h2>
+        <Chat />
     </>
   );
 }
