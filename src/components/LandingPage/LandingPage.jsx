@@ -17,7 +17,7 @@ function LandingPage() {
   };
 
   const toForm = (event) => {
-    // history.push('/form');
+    history.push('/bathroomForm');
     
     
     dispatch({
