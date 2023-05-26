@@ -188,7 +188,7 @@ function App() {
                 <BottomNav />
               </>
             ) : (
-              <LoginPage />
+                <BathroomForm />
             )}
           </Route>
 
@@ -199,7 +199,7 @@ function App() {
                 <BottomNav />
               </>
             ) : (
-              <LoginPage />
+              <KitchenForm />
             )}
           </Route>
 
@@ -214,7 +214,7 @@ function App() {
                 <BottomNav />
               </>
             ) : (
-              <LoginPage />
+                <OtherRoomForm />
             )}
           </Route>
 
@@ -225,7 +225,7 @@ function App() {
                 <BottomNav />
               </>
             ) : (
-              <LoginPage />
+                <WipeDustForm />
             )}
           </Route>
 
