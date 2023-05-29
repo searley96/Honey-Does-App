@@ -233,7 +233,9 @@ function JobHistory() {
                             </Typography>
                           </Link>
                         </Button>
-                        <Button>Chat with Team</Button>
+                        <Button>
+                          Chat with Team
+                        </Button>
                       </CardActions>
                     </Box>
                   </Card>
@@ -305,13 +307,13 @@ function JobHistory() {
                       <span style={{ fontWeight: "bold" }}>Cleaner: </span>
                       {job.cleaner_first_name} {job.cleaner_last_name}
                     </Typography>
-                    <Typography sx={{ mb: 1.5, ml: 2 }} color="black">
+                    {/* <Typography sx={{ mb: 1.5, ml: 2 }} color="black">
                       <span style={{ fontWeight: "bold" }}>
                         {" "}
                         Estimation:{" "}
                       </span>
                       {job.estimation}
-                    </Typography>
+                    </Typography> */}
                     <Box
                       sx={{
                         display: "flex",
