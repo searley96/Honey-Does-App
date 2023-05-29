@@ -56,7 +56,7 @@ function OtherRoom() {
 
                     {/* SQ FT */}
                     <FormLabel>What is the square footage of the room?</FormLabel>
-                    <TextField size='small' sx={{ width: 150 }} value={otherRoom.sq_ft}
+                    <TextField required size='small' placeholder="*Required" sx={{ width: 150 }} value={otherRoom.sq_ft}
                         onChange={e => dispatch({ type: 'SET_SQ_FT', payload: e.target.value })} />
 
                     {/* WIPE SURFACES? */}

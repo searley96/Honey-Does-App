@@ -130,7 +130,7 @@ function App() {
             )}
           </Route>
 
-          <Route exact path="/cleanerJobHistory">
+          {/* <Route exact path="/cleanerJobHistory">
             {user.id ? (
               <>
                 <CleanerJobHistory />
@@ -140,7 +140,7 @@ function App() {
               // Otherwise, show the login page
               <LoginPage />
             )}
-          </Route>
+          </Route> */}
 
           {/* <Route exact path="/adminDashboard">
             {user.role === 'admin' ? (
