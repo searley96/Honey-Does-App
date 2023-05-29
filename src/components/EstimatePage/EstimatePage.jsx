@@ -67,7 +67,7 @@ function EstimatePage() {
             </Box>
             :
             <Card sx={{mx: '32px', height: '200px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-                <Button sx={{width: '80%', height: '50%'}} variant='contained' onClick={{toRegister}}>Create Account and Submit Request</Button>
+                <Button sx={{width: '80%', height: '50%'}} variant='contained' onClick={toRegister}>Create Account and Submit Request</Button>
             </Card>
             }
         </>
