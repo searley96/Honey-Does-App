@@ -95,7 +95,7 @@ function App() {
             {user.role === 'cleaner' &&
               <>
 
-                {/* Cleaner Dashboard Will Go Here */}
+                <CleanerJobHistory />
                 <BottomNav />
               </>
             }
@@ -130,7 +130,7 @@ function App() {
             )}
           </Route>
 
-          <Route exact path="/cleanerJobHistory">
+          {/* <Route exact path="/cleanerJobHistory">
             {user.id ? (
               <>
                 <CleanerJobHistory />
@@ -140,7 +140,7 @@ function App() {
               // Otherwise, show the login page
               <LoginPage />
             )}
-          </Route>
+          </Route> */}
 
           {/* <Route exact path="/adminDashboard">
             {user.role === 'admin' ? (
@@ -194,10 +194,14 @@ function App() {
           </Route>
 
           <Route exact path='/chat'>
+            {user.id ?
             <>
               <Chat />
               <BottomNav />
             </>
+            :
+              <LandingPage />
+            }
           </Route>
 
           <Route exact path="/profile">

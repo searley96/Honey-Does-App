@@ -75,6 +75,14 @@ function JobHistory() {
     setShowJobs(true), setIsClicked(!isClicked);
   };
 
+  const toChat = (jobObj) => {
+    dispatch({
+      type: 'SET_JOB_DETAIL_CHAT',
+      payload: jobObj
+    })
+    history.push('chat')
+  }
+
   //console.log("date", clientJobsData[2].date);
   return (
     <Container
@@ -233,9 +241,7 @@ function JobHistory() {
                             </Typography>
                           </Link>
                         </Button>
-                        <Button>
-                          Chat with Team
-                        </Button>
+                        <Button onClick={() => toChat(job)}>Chat with Team</Button>
                       </CardActions>
                     </Box>
                   </Card>
@@ -342,6 +348,7 @@ function JobHistory() {
                           </Typography>
                         </Link>
                       </Button>
+                      <Button onClick={() => toChat(job)}>Chat with Team</Button>
                     </CardActions>
                   </Card>
                 );
