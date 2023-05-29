@@ -35,8 +35,7 @@ function GuestWipeDustForm() {
             }
         })
 
-        // history.push('/estimate')
-        history.push('/profile'); // TEMP
+        history.push('/estimate');
     }
 
     return (

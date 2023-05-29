@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Button, Container, Typography, Card } from "@mui/material";
 
 function FullJobHistory() {
   const job = useSelector((store) => store.clientFullJobsHistoryReducer);
@@ -43,7 +43,7 @@ let date;
 
   return (
     <Container maxWidth="sm">
-      <div>
+      
         {showFullDescription ? (
           <Box sx={{ marginTop: "40px" }}>
             <Button
@@ -72,7 +72,7 @@ let date;
               Job Details
             </Typography>
             {showFullDescription && (
-              <>
+              <Card sx={{boxShadow: 7}}>
                 <Typography
                   sx={{
                     mb: 2,
@@ -123,36 +123,35 @@ let date;
                   color="black"
                 >
                   <span style={{ fontWeight: "bold" }}>Date: </span>
-                  {date[0]}
+                  {date}
                 </Typography>
                 <Typography
                   sx={{ mb: 1.5, ml: 5, marginRight: 5 }}
                   color="black"
                 >
                   <span style={{ fontWeight: "bold" }}>Start Time: </span>{" "}
-                  {job.start_time}
+                  {job.start_time != null ? job.start_time : "Yet to be scheduled"}
                 </Typography>
                 <Typography
                   sx={{ mb: 1.5, ml: 5, marginRight: 5 }}
                   color="black"
                 >
-                  <span style={{ fontWeight: "bold" }}>End Time: </span>{" "}
-                  {job.end_time}
+                  <span style={{ fontWeight: "bold" }}>End Time: </span>
+                  {job.end_time != null ? job.end_time : "Yet to be scheduled"}
                 </Typography>
                 <Typography
                   sx={{ mb: 1.5, ml: 5, marginRight: 5 }}
                   color="black"
                 >
-                  <span style={{ fontWeight: "bold" }}>Estimation: </span>{" "}
-                  {job.estimation}
+                  <span style={{ fontWeight: "bold" }}>Estimation: </span>
+                  {job.low_estimate != null ? ('$' + job.low_estimate + " - $" + job.high_estimate) : "unsubmitted"}
                 </Typography>
-              </>
+              </Card>
             )}
           </Box>
         ) : (
           <div>Loading...</div>
         )}
-      </div>
     </Container>
   );
 }

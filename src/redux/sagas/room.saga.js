@@ -76,11 +76,22 @@ function* createWipeDust(action) {
         // GET THE JOB FROM THE DB
         const job = yield axios.get(`/api/job/${action.payload.jobId}`)
 
-        // UPDATE ACTIVE JOB REDUCER
-        yield put({
-            type: 'SET_ACTIVE_JOB',
-            payload: job
-        })
+        console.log('job', job);
+
+
+       const jobReducer = {
+           low_estimate: job.data[0].low_estimate,
+           high_estimate: job.data[0].high_estimate
+       }
+
+
+       console.log('jobReducer', jobReducer);
+       // UPDATE ACTIVE JOB REDUCER
+       yield put({
+           type: 'SET_ACTIVE_JOB',
+           payload: jobReducer
+       })
+
 
         // SEND DISPATCH TO USER SAGA TO RESET THE FORM_JOB_ID TO NULL
         yield put({ type: 'FINISH_FORM_JOB' });
