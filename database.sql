@@ -23,14 +23,16 @@ CREATE TABLE "user" (
 CREATE TABLE "job" (
 	"id" SERIAL PRIMARY KEY,
 	"job_id" INT UNIQUE NOT NULL,
-    "client_id" INT NOT NULL REFERENCES "user",
-    "manager_id" INT REFERENCES "user",
-    "cleaner_id" INT REFERENCES "user",
-    "job_status" VARCHAR(50) NOT NULL,
-    "feedback" VARCHAR(500),
-    "date" DATE,
-    "start_time" VARCHAR(20),
-    "end_time" VARCHAR(50)
+  "client_id" INT NOT NULL,
+  "manager_id" INT REFERENCES "user",
+  "cleaner_id" INT REFERENCES "user",
+  "job_status" VARCHAR(50) NOT NULL,
+  "feedback" VARCHAR(500),
+  "date" DATE,
+  "start_time" VARCHAR(20),
+  "end_time" VARCHAR(50),
+  "low_estimate" INT,
+  "high_estimate" INT
 );
 
 CREATE TABLE "message_log"(
@@ -47,8 +49,9 @@ CREATE TABLE "message_log"(
 -- query rooms by job_id
 CREATE TABLE "user_kitchen"(
 	"id" SERIAL PRIMARY KEY,
-	"job_id" INT NOT NULL REFERENCES "job",
-	"room_type" VARCHAR(50) NOT NULL,
+	"job_id" INT NOT NULL,
+	"order" INT NOT NULL,
+	"form_type" VARCHAR(50) NOT NULL,
 	"wipe_cabinets" BOOLEAN NOT NULL,
 	"cabinet_spot_full_clean" VARCHAR(50),
 	"cabinet_orange_glo" BOOLEAN,
@@ -78,30 +81,41 @@ CREATE TABLE "user_kitchen"(
 
 CREATE TABLE "user_bathroom" (
 	"id" SERIAL PRIMARY KEY,
-	"job_id" INT NOT NULL REFERENCES "job",
-	"room_type" VARCHAR(50) NOT NULL,
+	"job_id" INT NOT NULL,
+	"order" INT NOT NULL,
+	"form_type" VARCHAR(50) NOT NULL,
 	"bathroom_type" VARCHAR(50) NOT NULL,
-	"bath_shower_type" VARCHAR(50),
-	"threshold_type" VARCHAR(50),
+	"regular_type" VARCHAR(20),
+	
+	"ceramic_porcelain_type" VARCHAR(20),
+	"walk_in_type" VARCHAR(20),
+	"specialty_type" VARCHAR(20),
+	"jacuzzi_type" VARCHAR(20),
+	"other_type" VARCHAR(500),
+	
+	"clean_jacuzzi" BOOLEAN NOT NULL,
 	"clean_mirror" BOOLEAN NOT NULL,
 	"number_mirrors_clean" INT,
 	"clean_sink_counter" BOOLEAN NOT NULL,
 	"granite_counter_tops" BOOLEAN,
+	
 	"sink_type" VARCHAR(50) NOT NULL,
 	"clean_front_cabinets" BOOLEAN,
 	"cabinet_spot_full_clean" VARCHAR(50),
 	"cabinet_orange_glo" BOOLEAN,
 	"clean_toilet" BOOLEAN NOT NULL,
+	
 	"take_out_trash" BOOLEAN NOT NULL,
 	"take_out_trash_instructions" VARCHAR(500),
 	"sweep_mop_floor" BOOLEAN NOT NULL,
 	"shake_rugs" BOOLEAN
 );
-    
+
 CREATE TABLE "user_other_room"(
 	"id" SERIAL PRIMARY KEY,
-	"job_id" INT NOT NULL REFERENCES "job",
-	"room_type" VARCHAR(50) NOT NULL,
+	"job_id" INT NOT NULL,
+	"order" INT NOT NULL,
+	"form_type" VARCHAR(50) NOT NULL,
 	"floor_type" VARCHAR(50) NOT NULL,
 	"wipe_surfaces" BOOLEAN NOT NULL,
 	"clean_floor" BOOLEAN NOT NULL,
@@ -110,35 +124,41 @@ CREATE TABLE "user_other_room"(
 
 CREATE TABLE "user_wipe_dust"(
 	"id" SERIAL PRIMARY KEY,
-	"job_id" INT NOT NULL REFERENCES "job",
+	"job_id" INT NOT NULL,
+	
+	"order" INT NOT NULL,
+	"form_type" VARCHAR(50) NOT NULL,
 	"wipe_clean_glass" BOOLEAN NOT NULL,
 	"glass_door" BOOLEAN,
 	"glass_door_number" INT,
+	
 	"inside_glass_door" BOOLEAN,
 	"outside_glass_door" BOOLEAN,
 	"glass_door_location" VARCHAR(500),
 	"other_mirrors" BOOLEAN,
 	"other_mirrors_number" INT,
+	
 	"other_mirrors_location" VARCHAR(500),
 	"dust" BOOLEAN NOT NULL,
 	"ceiling_lines_wall_lines_baseboards" BOOLEAN,
 	"ceiling_fixtures" BOOLEAN,
 	"swiffer_feather" VARCHAR(50),
+	
 	"window_blinds" BOOLEAN,
 	"window_ledges" BOOLEAN,
 	"window_sills" BOOLEAN,
 	"picture_frames_wall_decor" BOOLEAN,
 	"tops_decor_items" BOOLEAN,
+	
 	"pick_up_get_under" BOOLEAN,
 	"electronics" BOOLEAN,
 	"dust_other" BOOLEAN,
 	"dust_other_instructions" VARCHAR(500),
 	"dust_bed_living_furniture" BOOLEAN,
+	
 	"bed_living_furniture_duster" VARCHAR(50),
 	"orange_glo_applicable" BOOLEAN
 );
-
-
 
 -- Job Table Mock Data
 INSERT INTO "job" ("job_id", "client_id", "manager_id", "cleaner_id", "job_status", "feedback", "date", "start_time", "end_time")

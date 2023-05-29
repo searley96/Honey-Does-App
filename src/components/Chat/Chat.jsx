@@ -40,6 +40,7 @@ function Chat() {
     }, [refreshChat])
 
     const handleSubmit = e => {
+        console.log('in handleSubmit', newMessage);
         // setMessages(...messages, {text: newMessage, userId: 1});
         // setNewMessage('');
         dispatch({

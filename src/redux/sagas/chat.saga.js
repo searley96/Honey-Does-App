@@ -20,6 +20,7 @@ function* fetchChat(action) {
 
 function* addMessage(action){
     try{
+        console.log('in addMessage', action.payload);
         yield axios.post('/api/message-log/', action.payload);
         console.log('PAST POST')
         yield put({type: 'FETCH_CHAT', payload: action.payload})
