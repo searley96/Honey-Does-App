@@ -126,6 +126,25 @@ router.get("/client/:id", rejectUnauthenticated, (req, res) => {
     });
 });
 
+// CLIENT SUBMIT REQUEST EDIT
+router.put(`/client/submitRequest/:jobId`, rejectUnauthenticated, (req, res) => {
+  console.log("inside submit request", req.params.jobId);
+  const jobId = req.params.jobId;
+  const queryText = `
+    UPDATE job
+    SET job_status = 'request'
+    WHERE job_id = $1;
+  `;
+
+  pool.query(queryText, [jobId])
+    .then(result => {
+      res.sendStatus(200);
+    }).catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    })
+
+})
 // CLEANER VIEW
 // GET  JOB HISTORY
 router.get("/cleaner/:id", rejectUnauthenticated, (req, res) => {

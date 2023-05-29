@@ -23,25 +23,25 @@ CREATE TABLE "user" (
 CREATE TABLE "job" (
 	"id" SERIAL PRIMARY KEY,
 	"job_id" INT UNIQUE NOT NULL,
-  "client_id" INT NOT NULL,
-  "manager_id" INT REFERENCES "user",
-  "cleaner_id" INT REFERENCES "user",
-  "job_status" VARCHAR(50) NOT NULL,
-  "feedback" VARCHAR(500),
-  "date" DATE,
-  "start_time" VARCHAR(20),
-  "end_time" VARCHAR(50),
-  "low_estimate" INT,
-  "high_estimate" INT
+    "client_id" INT NOT NULL,
+    "manager_id" INT REFERENCES "user",
+    "cleaner_id" INT REFERENCES "user",
+    "job_status" VARCHAR(50) NOT NULL,
+    "feedback" VARCHAR(500),
+    "date" DATE,
+    "start_time" VARCHAR(20),
+    "end_time" VARCHAR(50),
+    "low_estimate" INT,
+    "high_estimate" INT
 );
 
 CREATE TABLE "message_log"(
 	"id" SERIAL PRIMARY KEY,
 	"job_id" INT NOT NULL,
-  "timestamp" TIMESTAMP NOT NULL,
-  "image_url" VARCHAR(100),
-  "text" VARCHAR(500) NOT NULL,
-  "sender_id" INT NOT NULL
+    "timestamp" TIMESTAMP NOT NULL,
+    "image_url" VARCHAR(100),
+    "text" VARCHAR(500) NOT NULL,
+    "sender_id" INT NOT NULL
 );
 
 -- schema fix
@@ -110,7 +110,7 @@ CREATE TABLE "user_bathroom" (
 	"sweep_mop_floor" BOOLEAN NOT NULL,
 	"shake_rugs" BOOLEAN
 );
-
+    
 CREATE TABLE "user_other_room"(
 	"id" SERIAL PRIMARY KEY,
 	"job_id" INT NOT NULL,
@@ -121,6 +121,7 @@ CREATE TABLE "user_other_room"(
 	"clean_floor" BOOLEAN NOT NULL,
 	"sq_ft" INT NOT NULL
 );
+
 
 CREATE TABLE "user_wipe_dust"(
 	"id" SERIAL PRIMARY KEY,

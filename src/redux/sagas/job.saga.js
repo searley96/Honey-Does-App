@@ -114,6 +114,16 @@ function* getSearchedJobs(action) {
     }
 }
 
+function* submitRequest(action){
+  console.log('inside submitRequest', action.payload);
+  try{
+    yield axios.put(`/api/job/client/submitRequest/${action.payload}`);
+  }
+  catch{
+    console.log('error submitting request', err);
+  }
+}
+
 function* jobSaga() {
 
   yield takeLatest("FETCH_CLEANER_JOB", fetchCleanerJobs);
@@ -123,6 +133,7 @@ function* jobSaga() {
     yield takeLatest('ADMIN_UPDATE_JOB', adminUpdateJob);
     yield takeLatest("FETCH_CLIENT_JOB", fetchClientJobs);
     yield takeLatest("GET_SEARCHED_JOBS", getSearchedJobs);
+    yield takeLatest("SUBMIT_REQUEST", submitRequest);
 
 }
 
