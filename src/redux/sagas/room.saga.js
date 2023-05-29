@@ -94,7 +94,7 @@ function* createWipeDust(action) {
 
 
         // SEND DISPATCH TO USER SAGA TO RESET THE FORM_JOB_ID TO NULL
-        yield put({ type: 'FINISH_FORM_JOB' });
+        // yield put({ type: 'FINISH_FORM_JOB' });
     } catch (error) {
         console.log('ERROR updating wipe-dust and clearing forms', error);
     }
