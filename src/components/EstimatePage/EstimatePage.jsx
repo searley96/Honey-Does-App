@@ -40,25 +40,25 @@ function EstimatePage() {
                     <Typography variant="h6" align="center" sx={{my: 2, fontWeight: 'bold'}}>Review Section</Typography>
                     <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1}}>
                         <Typography sx={{ml: 1}}>Bathroom Section</Typography>
-                        <Button onClick={toBathroomForm}>
+                        <Button onClick={toBathroomForm} disabled>
                             Edit <EditIcon fontSize="small" />
                         </Button>
                     </Box>
                     <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
                         <Typography sx={{ml: 1}}>Kitchen Section</Typography>
-                        <Button onClick={toKitchenForm}>
+                        <Button onClick={toKitchenForm} disabled>
                             Edit <EditIcon fontSize="small"/>
                         </Button>
                     </Box>
                     <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1}}>
                         <Typography sx={{ml: 1}}>Other Rooms Section</Typography>
-                        <Button onClick={toOtherRoomsForm}>
+                        <Button onClick={toOtherRoomsForm} disabled>
                             Edit <EditIcon fontSize="small"/>
                         </Button>
                     </Box>
                     <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2}}>
                         <Typography sx={{ml: 1}}>Wipe Dust Section</Typography>
-                        <Button onClick={toWipeDustForm}>
+                        <Button onClick={toWipeDustForm} disabled>
                             Edit <EditIcon fontSize="small"/>
                         </Button>
                     </Box>
