@@ -79,6 +79,14 @@ function CleanerJobHistory() {
     setShowJobs(true), setIsClicked(!isClicked);
   };
 
+  const toChat = (jobObj) => {
+    dispatch({
+      type: 'SET_JOB_DETAIL_CHAT',
+      payload: jobObj
+    })
+    history.push('chat')
+  }
+
   //console.log("date", clientJobsData[2].date);
   return (
     <Container
@@ -228,7 +236,7 @@ function CleanerJobHistory() {
                               </Typography>
                             </Link>
                           </Button>
-                          <Button>Chat W/ Client</Button>
+                          <Button onClick={() => toChat(job)}>Chat W/ Client</Button>
                         </CardActions>
                       </Box>
                     </Card>
@@ -329,7 +337,7 @@ function CleanerJobHistory() {
                               </Typography>
                             </Link>
                           </Button>
-                          <Button>Chat W/ Client</Button>
+                          <Button onClick={() => toChat(job)}>Chat W/ Client</Button>
                         </CardActions>
                       </Box>
                     </Card>
