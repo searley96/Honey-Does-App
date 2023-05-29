@@ -95,7 +95,7 @@ function App() {
             {user.role === 'cleaner' &&
               <>
 
-                {/* Cleaner Dashboard Will Go Here */}
+                <CleanerJobHistory />
                 <BottomNav />
               </>
             }
