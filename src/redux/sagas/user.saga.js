@@ -53,17 +53,17 @@ function* addFormId(action){
 
 // sends a request to the server to update the user
 // job_form_id to null and updates the user reducer
-function* resetFormJob(){
-  console.log('inside resetFormId saga');
-  yield axios.put('/api/user/client/resetFormId');
-  yield put({type: 'FETCH_USER'});
-}
+// function* resetFormJob(){
+//   console.log('inside resetFormId saga');
+//   yield axios.put('/api/user/client/resetFormId');
+//   yield put({type: 'FETCH_USER'});
+// }
 
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeLatest('UPDATE_CLIENT_INFO', updateClientInfo);
   yield takeLatest('ADD_FORM_ID', addFormId);
-  yield takeLatest("FINISH_FORM_JOB", resetFormJob);
+  // yield takeLatest("FINISH_FORM_JOB", resetFormJob);
 }
 
 export default userSaga;
