@@ -101,7 +101,7 @@ function JobHistory() {
               marginTop: "40px",
               outline: "none",
               "&:focus": {
-                outlineWidth: isClicked ? "1px" : "1px",
+                outlineWidth: isClicked ? "2px" : "1px",
                 outlineStyle: "solid",
                 outlineColor: "#1976D2",
               },
@@ -192,22 +192,18 @@ function JobHistory() {
                     </Typography>
                     <Typography sx={{ mb: 1.5, ml: 2 }} color="black">
                       {" "}
-                      <span style={{ fontWeight: "bold" }}>Date: </span>{" "}
-                      {date}
+                      <span style={{ fontWeight: "bold" }}>Date: </span> {date}
                     </Typography>
                     <Typography sx={{ mb: 1.5, ml: 2 }} color="black">
                       {" "}
-                      <span style={{ fontWeight: "bold" }}>
-                        Cleaner:{" "}
-                      </span>{" "}
-                      {job.cleaner_first_name} {job.cleaner_last_name}
+                      <span style={{ fontWeight: "bold" }}>Cleaner: </span>
+                      {job.cleaner_first_name != null ? (job.cleaner_first_name + " " + job.cleaner_last_name) : "unassigned"}
+                      {/* {job.cleaner_first_name} {job.cleaner_last_name} */}
                     </Typography>
                     <Typography sx={{ mb: 1.5, ml: 2 }} color="black">
                       {" "}
-                      <span style={{ fontWeight: "bold" }}>
-                        Estimation:{" "}
-                      </span>{" "}
-                      {job.estimation}
+                      <span style={{ fontWeight: "bold" }}>Estimation: </span>
+                      {job.low_estimate != null ? ('$' + job.low_estimate + " - $" + job.high_estimate) : "unsubmitted"}
                     </Typography>
                     <Box
                       sx={{

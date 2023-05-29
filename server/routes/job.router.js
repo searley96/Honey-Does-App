@@ -87,7 +87,9 @@ router.get("/client/:id", rejectUnauthenticated, (req, res) => {
 	    feedback, 
 	    date,
 	    start_time,
-	    end_time
+	    end_time,
+      low_estimate,
+      high_estimate
     FROM "job"
     JOIN "user" AS client ON client.id = "job".client_id
     LEFT OUTER JOIN "user" AS cleaner ON cleaner.id = "job".cleaner_id

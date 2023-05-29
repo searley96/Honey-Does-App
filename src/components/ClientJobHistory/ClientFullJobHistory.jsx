@@ -22,14 +22,24 @@ function FullJobHistory() {
 
   const jobStyles = jobType === "active" ? activeStyles : pastStyles;
   const handleBack = () => {
-    history.push("/jobHistory");
+    history.push("/user");
   };
 
   if (!job) {
     return <div>Loading...</div>;
   }
 
-  let date = job.job.date.split("T");
+let date;
+
+  if (job.date != null) {
+    const split = job.date.split("T")
+    date = split[0];
+    console.log("what is date", date[0]);
+  }
+  else {
+    date = 'yet to be scheduled'
+  }
+  // let date = job.job.date.split("T");
 
   return (
     <Container maxWidth="sm">
@@ -54,7 +64,7 @@ function FullJobHistory() {
                 textAlign: "center",
                 py: "20px",
                 fontWeight: "bold",
-                textShadow: "2px 2px 6px rgba(0, 0, 0, 0.5)",
+                // textShadow: "2px 2px 6px rgba(0, 0, 0, 0.5)",
               }}
               gutterBottom
               variant="h5"
@@ -78,35 +88,35 @@ function FullJobHistory() {
                   fontWeight="bold"
                   fontSize={20}
                 >
-                  Job#{job.job.job_id}
+                  Job# {job.job_id}
                 </Typography>
                 <Typography
                   sx={{ mb: 1.5, ml: 5, marginRight: 5 }}
                   color="black"
                 >
                   <span style={{ fontWeight: "bold" }}>Manager: </span>{" "}
-                  {job.job.manager_first_name} {job.job.manager_last_name}
+                  {job.manager_first_name} {job.manager_last_name}
                 </Typography>
                 <Typography
                   sx={{ mb: 1.5, ml: 5, marginRight: 5 }}
                   color="black"
                 >
                   <span style={{ fontWeight: "bold" }}>Cleaner: </span>{" "}
-                  {job.job.cleaner_first_name} {job.job.cleaner_last_name}
+                  {job.cleaner_first_name} {job.cleaner_last_name}
                 </Typography>
                 <Typography
                   sx={{ mb: 1.5, ml: 5, marginRight: 5 }}
                   color="black"
                 >
                   <span style={{ fontWeight: "bold" }}>Job Status: </span>{" "}
-                  {job.job.job_status}
+                  {job.job_status}
                 </Typography>
                 <Typography
                   sx={{ mb: 1.5, ml: 5, marginRight: 5 }}
                   color="black"
                 >
                   <span style={{ fontWeight: "bold" }}>Feedback: </span>{" "}
-                  {job.job.feedback}
+                  {job.feedback}
                 </Typography>
                 <Typography
                   sx={{ mb: 1.5, ml: 5, marginRight: 5 }}
@@ -120,21 +130,21 @@ function FullJobHistory() {
                   color="black"
                 >
                   <span style={{ fontWeight: "bold" }}>Start Time: </span>{" "}
-                  {job.job.start_time}
+                  {job.start_time}
                 </Typography>
                 <Typography
                   sx={{ mb: 1.5, ml: 5, marginRight: 5 }}
                   color="black"
                 >
                   <span style={{ fontWeight: "bold" }}>End Time: </span>{" "}
-                  {job.job.end_time}
+                  {job.end_time}
                 </Typography>
                 <Typography
                   sx={{ mb: 1.5, ml: 5, marginRight: 5 }}
                   color="black"
                 >
                   <span style={{ fontWeight: "bold" }}>Estimation: </span>{" "}
-                  {job.job.estimation}
+                  {job.estimation}
                 </Typography>
               </>
             )}
