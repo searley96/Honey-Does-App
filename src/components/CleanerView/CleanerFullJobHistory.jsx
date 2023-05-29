@@ -12,7 +12,7 @@ function CleanerFullJobHistory() {
 
   console.log("cleanerFullHistory", job);
   const handleBack = () => {
-    history.push("/cleanerJobHistory");
+    history.push("/user");
   };
 
   if (!job) {

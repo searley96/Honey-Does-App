@@ -194,10 +194,14 @@ function App() {
           </Route>
 
           <Route exact path='/chat'>
+            {user.id ?
             <>
               <Chat />
               <BottomNav />
             </>
+            :
+              <LandingPage />
+            }
           </Route>
 
           <Route exact path="/profile">
