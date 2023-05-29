@@ -88,7 +88,7 @@ function App() {
             }
             {user.role === 'client' &&
               <>
-                <JobHistory />
+                <ClientJobHistory />
                 <BottomNav />
               </>
             }

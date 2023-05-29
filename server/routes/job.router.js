@@ -78,7 +78,7 @@ router.get("/jobid", (req, res) => {
 // CLIENT VIEW
 // GET JOB HISTORY
 router.get("/client/:id", rejectUnauthenticated, (req, res) => {
-  console.log("inside client job history");
+  console.log("inside client job history", req.params.id);
   const queryText = `
           SELECT job_id, client.first_name as client_first_name, client.last_name as client_last_name,
 	    cleaner.first_name as cleaner_first_name, cleaner.last_name as cleaner_last_name,
@@ -90,8 +90,8 @@ router.get("/client/:id", rejectUnauthenticated, (req, res) => {
 	    end_time
     FROM "job"
     JOIN "user" AS client ON client.id = "job".client_id
-    JOIN "user" AS cleaner ON cleaner.id = "job".cleaner_id
-    JOIN "user" AS manager ON manager.id = "job".manager_id
+    LEFT OUTER JOIN "user" AS cleaner ON cleaner.id = "job".cleaner_id
+    LEFT OUTER JOIN "user" AS manager ON manager.id = "job".manager_id
     WHERE "client_id" = $1;
     `;
   pool
@@ -222,16 +222,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         })
     }
 
-
-  pool
-    .query(queryText, [jobId, userId])
-    .then((result) => {
-      res.sendStatus(201);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.sendStatus(500);
-    });
 });
 
 // calculate low and high ends of the job estimate
