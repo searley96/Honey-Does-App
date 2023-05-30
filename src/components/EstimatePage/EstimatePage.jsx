@@ -78,24 +78,8 @@ function EstimatePage() {
                 <Card sx={{ mx: '32px', height: '200px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                     <Button sx={{ width: '80%', height: '50%' }} variant='contained' onClick={toRegister}>Create Account and Submit Request</Button>
                 </Card>
-
-                <Button
-                        sx={{ my: 3, p: 3, width: '311px' }} variant="contained"
-                        onClick={() => {
-                            dispatch({type: 'SUBMIT_REQUEST', payload: activeJob})
-                            history.push('/user');
-                        }}>
-                        Submit New Clean Request
-                    </Button>
-            </Box>
-            :
-            <Card sx={{mx: '32px', height: '200px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-                <Button sx={{width: '80%', height: '50%'}} variant='contained' onClick={toRegister}>Create Account and Submit Request</Button>
-            </Card>
-
             }
         </>
     )
 }
-
 export default EstimatePage;

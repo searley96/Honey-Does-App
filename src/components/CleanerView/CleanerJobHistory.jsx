@@ -87,6 +87,8 @@ function CleanerJobHistory() {
     history.push('chat')
   }
 
+  console.log();
+
   //console.log("date", clientJobsData[2].date);
   return (
     <Container
@@ -203,7 +205,7 @@ function CleanerJobHistory() {
                           {" "}
                           Estimation:{" "}
                         </span>
-                        {job.estimation}
+                        {job.low_estimate != null ? ('$' + job.low_estimate + " - $" + job.high_estimate) : "unsubmitted"}
                       </Typography>
                       <Box
                         sx={{
@@ -304,7 +306,7 @@ function CleanerJobHistory() {
                           {" "}
                           Estimation:{" "}
                         </span>
-                        {job.estimation}
+                        {job.low_estimate != null ? ('$' + job.low_estimate + " - $" + job.high_estimate) : "unsubmitted"}
                       </Typography>
                       <Box
                         sx={{

@@ -109,7 +109,7 @@ function CleanerFullJobHistory() {
         </Typography>
         <Typography sx={{ mb: 1.5, ml: 5, marginRight: 5 }} color="black">
           <span style={{ fontWeight: "bold" }}>Estimation: </span>{" "}
-          {job.job.estimation}
+          {job.job.low_estimate != null ? ('$' + job.job.low_estimate + " - $" + job.job.high_estimate) : "unsubmitted"}
         </Typography>
         {showAdditionalDetails && (
           <>

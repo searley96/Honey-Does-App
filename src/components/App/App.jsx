@@ -152,7 +152,13 @@ function App() {
           </Route> */}
 
           <Route exact path="/jobDetails">
-            {user.id ? <JobDetails /> : <LoginPage />}
+            {user.id ?
+              <>
+                <JobDetails />
+                <BottomNav />
+              </>
+              :
+              <LoginPage />}
           </Route>
 
           <Route exact path="/cleanerFullHistory">

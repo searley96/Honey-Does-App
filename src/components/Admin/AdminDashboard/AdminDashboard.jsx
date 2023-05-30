@@ -38,10 +38,18 @@ function AdminDashboard() {
 
     return (
         <>
-            <h3>Jobs</h3>
+            {/* <h3>Jobs</h3> */}
+            <Typography
+                  sx={{ fontWeight: "bold", mt: 3 }}
+                  align="center"
+                  variant="h5"
+
+                >
+                  All Jobs
+                </Typography>
 
             {/* SEARCH INPUT */}
-            <Box component="form" onSubmit={onSearch} sx={{ flexGrow: 1 }}>
+            <Box component="form" onSubmit={onSearch} sx={{ flexGrow: 1, my: 2 }}>
                 <AppBar position="static">
                     <Toolbar>
                         <InputBase
@@ -57,14 +65,7 @@ function AdminDashboard() {
                 </AppBar>
             </Box>
 
-           <Typography
-                  sx={{ fontWeight: "bold", mt: 3 }}
-                  align="center"
-                  variant="h5"
 
-                >
-                  All Jobs
-                </Typography>
                 <Card elevation="0">
                   <CardContent sx={{ display: "flex", justifyContent: "space-between"}}>
                     <Typography sx={{ marginBottom: -3, marginLeft: 3 }}>Job ID:</Typography>
