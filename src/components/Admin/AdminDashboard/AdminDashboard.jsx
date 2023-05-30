@@ -49,7 +49,7 @@ function AdminDashboard() {
                 </Typography>
 
             {/* SEARCH INPUT */}
-            <Box component="form" onSubmit={onSearch} sx={{ flexGrow: 1, my: 2 }}>
+            <Box component="form" onSubmit={onSearch} sx={{ flexGrow: 1, my: 2}}>
                 <AppBar position="static">
                     <Toolbar>
                         <InputBase
