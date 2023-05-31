@@ -9,7 +9,6 @@ import {
 
 import { useDispatch, useSelector } from "react-redux";
 // import Container from "../DashBoard/Container";
-import Nav from "../Nav/Nav";
 import NewNav from "../Nav/NewNav";
 import Footer from "../Footer/Footer";
 import BottomNav from "../Footer/BottomNav";
