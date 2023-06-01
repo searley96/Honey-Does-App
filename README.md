@@ -43,6 +43,6 @@ Before you get started, make sure you have the following software installed on y
 
 Once everything is installed and running it should open in your default browser - if not, navigate to http://localhost:3000/#/.
 
-Video walkthrough of application usage:
+Video walkthrough of application usage: https://vimeo.com/manage/videos/832362777
 
 ### Deployment
