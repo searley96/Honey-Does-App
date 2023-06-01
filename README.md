@@ -2,7 +2,7 @@
 
 ## Description
 
-The HoneyDoes App was created by Fue Lee, Ia Vue, James Jacobsen, Sean Kimbrough, and Siv Earley. This mobile app was created for Melissa Weed at HoneyDoes LLC. It is intended for use by customers, cleaners, and admin of HoneyDoes, and contains different views for each of these roles. The main features within this app are user-friendly forms, which consolidate and organize vital clean information, and a chat that allows admin, cleaners, and clients to communicate with one another.  
+The HoneyDoes App was created by Fue Lee, Ia Vue, James Jacobsen, Sean Kimbrough, and Siv Earley. This mobile app was created for Melissa Weed at HoneyDoes LLC. It is intended for use by customers, cleaners, and admin of HoneyDoes, and contains different views for each of these roles. The main features within this app are user-friendly forms, which consolidate and organize vital clean information, provide customers an estimate for the clean, and a chat that allows admin, cleaners, and clients to communicate with one another.  
 
 ## Built With
 <a href="https://www.w3schools.com/w3css/defaulT.asp"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" height="40px" width="40px" /></a>
